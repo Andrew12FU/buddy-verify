@@ -1,0 +1,115 @@
+{
+  "clang_version": "clang version 18.1.8 (https://github.com/conda-forge/clangdev-feedstock 3c15221e001c9fe87fcc807876aa06d599616b01)",
+  "edits": [
+    {
+      "after": "namespace SimplifyTosaReshape_anonymousNamespace_01",
+      "before": "namespace",
+      "column": 1,
+      "dependency_change": "Changes internal linkage; single-TU compatibility workaround",
+      "insertion_order": -1,
+      "length": 9,
+      "line": 29,
+      "offset": 1163,
+      "reason": "Name an anonymous namespace; reopened declarations share one name",
+      "rule": "namespace"
+    },
+    {
+      "after": "while (true) {\n      auto inner = base.getDefiningOp<tosa::ReshapeOp>();\n      if (!static_cast<bool>(inner))\n        break;\n      {\n        base = inner.getInput1();\n        changed = true;\n      }\n    }",
+      "before": "while (auto inner = base.getDefiningOp<tosa::ReshapeOp>()) {\n      base = inner.getInput1();\n      changed = true;\n    }",
+      "column": 5,
+      "dependency_change": "No new library API; explicit bool conversion",
+      "insertion_order": -1,
+      "length": 120,
+      "line": 42,
+      "offset": 1729,
+      "reason": "Reevaluate each iteration; preserve body scope and contextual bool",
+      "rule": "while"
+    },
+    {
+      "after": "auto *opPtr = &op;\n    auto *basePtr = &base;\n    ",
+      "before": "",
+      "column": 5,
+      "dependency_change": "Pointer locals; callback lifetime assumptions remain unchanged",
+      "insertion_order": 20,
+      "length": 0,
+      "line": 49,
+      "offset": 1897,
+      "reason": "Take the addresses of the original captured objects",
+      "rule": "capture-pointers"
+    },
+    {
+      "after": "[opPtr, basePtr]() { (*opPtr).getInput1Mutable().assign((*basePtr)); }",
+      "before": "[&]() { op.getInput1Mutable().assign(base); }",
+      "column": 34,
+      "dependency_change": "none",
+      "insertion_order": -1,
+      "length": 45,
+      "line": 49,
+      "offset": 1926,
+      "reason": "Capture pointers by value; rewrite references by declaration identity",
+      "rule": "capture"
+    },
+    {
+      "after": "{\n      if (!inTy || !outTy)\n        return failure();\n    }",
+      "before": "if (!inTy || !outTy)\n      return failure();",
+      "column": 5,
+      "dependency_change": "none",
+      "insertion_order": -1,
+      "length": 44,
+      "line": 63,
+      "offset": 2543,
+      "reason": "Isolate the complete known class-valued short-circuit guard",
+      "rule": "guard"
+    },
+    {
+      "after": "auto *reshapeOpsPtr = &reshapeOps;\n    ",
+      "before": "",
+      "column": 5,
+      "dependency_change": "Pointer locals; callback lifetime assumptions remain unchanged",
+      "insertion_order": 20,
+      "length": 0,
+      "line": 106,
+      "offset": 3975,
+      "reason": "Take the addresses of the original captured objects",
+      "rule": "capture-pointers"
+    },
+    {
+      "after": "[reshapeOpsPtr](tosa::ReshapeOp rop) { (*reshapeOpsPtr).push_back(rop.getOperation()); }",
+      "before": "[&](tosa::ReshapeOp rop) { reshapeOps.push_back(rop.getOperation()); }",
+      "column": 9,
+      "dependency_change": "none",
+      "insertion_order": -1,
+      "length": 70,
+      "line": 107,
+      "offset": 3994,
+      "reason": "Capture pointers by value; rewrite references by declaration identity",
+      "rule": "capture"
+    },
+    {
+      "after": "SimplifyTosaReshape_anonymousNamespace_01::SimplifyTosaReshapePass",
+      "before": "SimplifyTosaReshapePass",
+      "column": 20,
+      "dependency_change": "none",
+      "insertion_order": -1,
+      "length": 23,
+      "line": 129,
+      "offset": 4772,
+      "reason": "Preserve the bound class reference outside the renamed namespace",
+      "rule": "namespace-reference"
+    }
+  ],
+  "input": "/home/ce/Desktop/buddy-verify/midend/lib/Conversion/GraphRedundancyElimination/SimplifyTosaReshape.cpp",
+  "output": "/home/ce/Desktop/buddy-verify/local-adaptation/reshape/result/rewritten.cpp",
+  "parsed": true,
+  "profile": "reshape",
+  "rejections": [],
+  "rules": [
+    "capture",
+    "guard",
+    "namespace",
+    "while"
+  ],
+  "schema_version": 1,
+  "scope": "Audited pass compatibility rules; no general equivalence claim",
+  "status": "rewritten"
+}

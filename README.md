@@ -8,6 +8,7 @@
 - [架构说明](midend/lib/Conversion/FramaClangFrontend/ARCHITECTURE.md)
 - [共享 MiniMLIR 抽象库](midend/lib/Conversion/MiniMLIR/README.md)
 - [九个 pass 的验证记录](midend/lib/Conversion/MiniMLIR/current/verification.json)
+- [桌面下载与 Reshape 本地适配命令](local-adaptation/README.md)
 
 ## 内容与结果
 
@@ -27,8 +28,9 @@ Frama-C 33.0。九个完整 pass 均完成 C++→C 转换及生成 C 的 Frama-C
 
 ## 使用前提
 
-查看改写及生成结果可以直接浏览本仓库。重新运行完整前端时，需要将目录覆盖到匹配的
-完整 Buddy 源码树，另行准备 LLVM/MLIR 真实源码、生成头文件、本机编译数据库和工具链。
+查看改写及生成结果可以直接浏览本仓库。重新运行完整前端时，需要匹配的完整 Buddy/LLVM/MLIR
+源码、生成头文件、本机编译数据库和工具链。可以按本地适配说明，在本仓库中运行并引用
+外部完整工程的真实头文件；也可以将相关目录覆盖到完整 Buddy 源码树。
 来源版本见 `provenance.json`。本仓库不包含完整 Buddy、LLVM 或工具链二进制。
 
 当前 Python 默认路径属于开发机，标准库配置采用已审计的 Conda 布局；其他机器需按

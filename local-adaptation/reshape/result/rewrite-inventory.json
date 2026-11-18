@@ -1,0 +1,269 @@
+{
+  "schema_version": 1,
+  "pass": "reshape",
+  "run_state": "converted",
+  "source_rewrites": {
+    "applied": true,
+    "input": "/home/ce/Desktop/buddy-verify/midend/lib/Conversion/GraphRedundancyElimination/SimplifyTosaReshape.cpp",
+    "original_snapshot": {
+      "path": "original.cpp",
+      "sha256": "9c6383f0ad144df9a4b0dde927d052a48087d97caeb984cf1af540437a124af4"
+    },
+    "rewritten_source": {
+      "path": "rewritten.cpp",
+      "sha256": "8f71462a0899b9379626479150451a6aff47636c93dfe033b00324fe2c17ccb2"
+    },
+    "report": {
+      "path": "rewrite.json",
+      "sha256": "00b896f70a284f58185761fd9944356e5b9e06d70b7eeafe2dd4110b6263b368"
+    },
+    "offset_basis": "UTF-8 bytes against the original source, before all edits",
+    "rounds": [],
+    "edit_count": 8,
+    "rule_counts": {
+      "namespace": 1,
+      "while": 1,
+      "capture-pointers": 2,
+      "capture": 2,
+      "guard": 1,
+      "namespace-reference": 1
+    },
+    "edits": [
+      {
+        "after": "namespace SimplifyTosaReshape_anonymousNamespace_01",
+        "before": "namespace",
+        "column": 1,
+        "dependency_change": "Changes internal linkage; single-TU compatibility workaround",
+        "insertion_order": -1,
+        "length": 9,
+        "line": 29,
+        "offset": 1163,
+        "reason": "Name an anonymous namespace; reopened declarations share one name",
+        "rule": "namespace"
+      },
+      {
+        "after": "while (true) {\n      auto inner = base.getDefiningOp<tosa::ReshapeOp>();\n      if (!static_cast<bool>(inner))\n        break;\n      {\n        base = inner.getInput1();\n        changed = true;\n      }\n    }",
+        "before": "while (auto inner = base.getDefiningOp<tosa::ReshapeOp>()) {\n      base = inner.getInput1();\n      changed = true;\n    }",
+        "column": 5,
+        "dependency_change": "No new library API; explicit bool conversion",
+        "insertion_order": -1,
+        "length": 120,
+        "line": 42,
+        "offset": 1729,
+        "reason": "Reevaluate each iteration; preserve body scope and contextual bool",
+        "rule": "while"
+      },
+      {
+        "after": "auto *opPtr = &op;\n    auto *basePtr = &base;\n    ",
+        "before": "",
+        "column": 5,
+        "dependency_change": "Pointer locals; callback lifetime assumptions remain unchanged",
+        "insertion_order": 20,
+        "length": 0,
+        "line": 49,
+        "offset": 1897,
+        "reason": "Take the addresses of the original captured objects",
+        "rule": "capture-pointers"
+      },
+      {
+        "after": "[opPtr, basePtr]() { (*opPtr).getInput1Mutable().assign((*basePtr)); }",
+        "before": "[&]() { op.getInput1Mutable().assign(base); }",
+        "column": 34,
+        "dependency_change": "none",
+        "insertion_order": -1,
+        "length": 45,
+        "line": 49,
+        "offset": 1926,
+        "reason": "Capture pointers by value; rewrite references by declaration identity",
+        "rule": "capture"
+      },
+      {
+        "after": "{\n      if (!inTy || !outTy)\n        return failure();\n    }",
+        "before": "if (!inTy || !outTy)\n      return failure();",
+        "column": 5,
+        "dependency_change": "none",
+        "insertion_order": -1,
+        "length": 44,
+        "line": 63,
+        "offset": 2543,
+        "reason": "Isolate the complete known class-valued short-circuit guard",
+        "rule": "guard"
+      },
+      {
+        "after": "auto *reshapeOpsPtr = &reshapeOps;\n    ",
+        "before": "",
+        "column": 5,
+        "dependency_change": "Pointer locals; callback lifetime assumptions remain unchanged",
+        "insertion_order": 20,
+        "length": 0,
+        "line": 106,
+        "offset": 3975,
+        "reason": "Take the addresses of the original captured objects",
+        "rule": "capture-pointers"
+      },
+      {
+        "after": "[reshapeOpsPtr](tosa::ReshapeOp rop) { (*reshapeOpsPtr).push_back(rop.getOperation()); }",
+        "before": "[&](tosa::ReshapeOp rop) { reshapeOps.push_back(rop.getOperation()); }",
+        "column": 9,
+        "dependency_change": "none",
+        "insertion_order": -1,
+        "length": 70,
+        "line": 107,
+        "offset": 3994,
+        "reason": "Capture pointers by value; rewrite references by declaration identity",
+        "rule": "capture"
+      },
+      {
+        "after": "SimplifyTosaReshape_anonymousNamespace_01::SimplifyTosaReshapePass",
+        "before": "SimplifyTosaReshapePass",
+        "column": 20,
+        "dependency_change": "none",
+        "insertion_order": -1,
+        "length": 23,
+        "line": 129,
+        "offset": 4772,
+        "reason": "Preserve the bound class reference outside the renamed namespace",
+        "rule": "namespace-reference"
+      }
+    ]
+  },
+  "header_rewrites": {
+    "applied": true,
+    "report": {
+      "path": "header-rewrite.json",
+      "sha256": "9b360a7be0dcdc57dc893b798e15556700c3ea05c241c76ff467e2023461e73c"
+    },
+    "patch": {
+      "path": "header-rewrite.patch",
+      "sha256": "d4f919406881e1d261d8b9c0a4ca49eb91ff9482d7475aa1fb924f96be90b989"
+    },
+    "input_root": "include",
+    "conversion_root": "conversion-include",
+    "offset_basis": "UTF-8 bytes after preceding edits in sequence order",
+    "edit_count": 7,
+    "rule_counts": {
+      "indexed-range-concrete-expansion": 2,
+      "nested-use-iterator-relocation": 2,
+      "walk-void-return-expansion": 3
+    },
+    "changed_headers": [
+      "mlir/IR/OpDefinition.h",
+      "mlir/IR/Operation.h",
+      "mlir/IR/ValueRange.h",
+      "mlir/IR/Visitors.h"
+    ],
+    "edits": [
+      {
+        "rule": "indexed-range-concrete-expansion",
+        "file": "mlir/IR/ValueRange.h",
+        "offset": 1122,
+        "length": 0,
+        "before": "",
+        "after": "// Concrete indexed range: ValueRange\nclass ValueRange;\n} // namespace mlir\nnamespace llvm { namespace detail {\ntemplate<>\nclass indexed_accessor_range_base<::mlir::ValueRange, llvm::PointerUnion<const ::mlir::Value *, ::mlir::OpOperand *, ::mlir::detail::OpResultImpl *, const llvm::Repeated<::mlir::Value> *>, ::mlir::Value, ::mlir::Value, ::mlir::Value> {\npublic:\n  using RangeBaseT = indexed_accessor_range_base;\n   \n   \n  class iterator : public indexed_accessor_iterator<iterator,llvm::PointerUnion<const ::mlir::Value *, ::mlir::OpOperand *, ::mlir::detail::OpResultImpl *, const llvm::Repeated<::mlir::Value> *>,::mlir::Value,::mlir::Value,::mlir::Value> {\n  public:\n     \n  private:\n    iterator(llvm::PointerUnion<const ::mlir::Value *, ::mlir::OpOperand *, ::mlir::detail::OpResultImpl *, const llvm::Repeated<::mlir::Value> *> owner,std::ptrdiff_t curIndex);\n    friend indexed_accessor_range_base<::mlir::ValueRange,llvm::PointerUnion<const ::mlir::Value *, ::mlir::OpOperand *, ::mlir::detail::OpResultImpl *, const llvm::Repeated<::mlir::Value> *>,::mlir::Value,::mlir::Value,::mlir::Value>;\n  };\n   \n   \n  inline indexed_accessor_range_base(iterator begin, iterator end);\n  inline indexed_accessor_range_base(const iterator_range<iterator> &range);\n  inline indexed_accessor_range_base(llvm::PointerUnion<const ::mlir::Value *, ::mlir::OpOperand *, ::mlir::detail::OpResultImpl *, const llvm::Repeated<::mlir::Value> *> base, long count);\n\nprotected:\n  indexed_accessor_range_base(const indexed_accessor_range_base &) = default;\n  indexed_accessor_range_base(indexed_accessor_range_base &&) = default;\n  indexed_accessor_range_base &\n  operator=(const indexed_accessor_range_base &) = default;\n  llvm::PointerUnion<const ::mlir::Value *, ::mlir::OpOperand *, ::mlir::detail::OpResultImpl *, const llvm::Repeated<::mlir::Value> *> base;\n  long count;\n};\n} }\nnamespace mlir {\n",
+        "template_source": "llvm/ADT/STLExtras.h",
+        "template_sha256": "d4b865a3403f5a395df97e355422fd506456ca0938da3e1b39279fb56e969a46",
+        "arguments": {
+          "DerivedT": "::mlir::ValueRange",
+          "BaseT": "llvm::PointerUnion<const ::mlir::Value *, ::mlir::OpOperand *, ::mlir::detail::OpResultImpl *, const llvm::Repeated<::mlir::Value> *>",
+          "T": "::mlir::Value",
+          "PointerT": "::mlir::Value",
+          "ReferenceT": "::mlir::Value"
+        },
+        "reason": "Emit the same concrete nested iterator before iterator_range stores it by value",
+        "sequence": 0
+      },
+      {
+        "rule": "indexed-range-concrete-expansion",
+        "file": "mlir/IR/ValueRange.h",
+        "offset": 4276,
+        "length": 0,
+        "before": "",
+        "after": "// Concrete indexed range: ResultRange\nclass ResultRange;\n} // namespace mlir\nnamespace llvm { namespace detail {\ntemplate<>\nclass indexed_accessor_range_base<::mlir::ResultRange, ::mlir::detail::OpResultImpl *, ::mlir::OpResult, ::mlir::OpResult, ::mlir::OpResult> {\npublic:\n  using RangeBaseT = indexed_accessor_range_base;\n   \n   \n  class iterator : public indexed_accessor_iterator<iterator,::mlir::detail::OpResultImpl *,::mlir::OpResult,::mlir::OpResult,::mlir::OpResult> {\n  public:\n     \n  private:\n    iterator(::mlir::detail::OpResultImpl * owner,std::ptrdiff_t curIndex);\n    friend indexed_accessor_range_base<::mlir::ResultRange,::mlir::detail::OpResultImpl *,::mlir::OpResult,::mlir::OpResult,::mlir::OpResult>;\n  };\n   \n   \n  inline indexed_accessor_range_base(iterator begin, iterator end);\n  inline indexed_accessor_range_base(const iterator_range<iterator> &range);\n  inline indexed_accessor_range_base(::mlir::detail::OpResultImpl * base, long count);\n\nprotected:\n  indexed_accessor_range_base(const indexed_accessor_range_base &) = default;\n  indexed_accessor_range_base(indexed_accessor_range_base &&) = default;\n  indexed_accessor_range_base &\n  operator=(const indexed_accessor_range_base &) = default;\n  ::mlir::detail::OpResultImpl * base;\n  long count;\n};\n} }\nnamespace mlir {\n",
+        "template_source": "llvm/ADT/STLExtras.h",
+        "template_sha256": "d4b865a3403f5a395df97e355422fd506456ca0938da3e1b39279fb56e969a46",
+        "arguments": {
+          "DerivedT": "::mlir::ResultRange",
+          "BaseT": "::mlir::detail::OpResultImpl *",
+          "T": "::mlir::OpResult",
+          "PointerT": "::mlir::OpResult",
+          "ReferenceT": "::mlir::OpResult"
+        },
+        "reason": "Emit the same concrete nested iterator before iterator_range stores it by value",
+        "sequence": 1
+      },
+      {
+        "rule": "nested-use-iterator-relocation",
+        "file": "mlir/IR/ValueRange.h",
+        "offset": 5899,
+        "length": 286,
+        "before": "class ResultRange::UseIterator final\n    : public llvm::iterator_facade_base<UseIterator, std::forward_iterator_tag, OpOperand> {\npublic:\n  explicit UseIterator(ResultRange results, bool end = false);\n   \n   \n   \nprivate:\n  ResultRange::iterator it, endIt;\n  Value::use_iterator use;\n};",
+        "after": "",
+        "reason": "Remove the out-of-line nested definition that triggers ClangVisitor.cpp:8370",
+        "sequence": 2
+      },
+      {
+        "rule": "nested-use-iterator-relocation",
+        "file": "mlir/IR/ValueRange.h",
+        "offset": 5763,
+        "length": 20,
+        "before": "  class UseIterator;",
+        "after": "  class UseIterator final\n      : public llvm::iterator_facade_base<UseIterator, std::forward_iterator_tag, OpOperand> {\n  public:\n    explicit UseIterator(ResultRange results, bool end = false);\n     \n     \n     \n  private:\n    ResultRange::iterator it, endIt;\n    Value::use_iterator use;\n  };",
+        "reason": "Define the same nested type inside its original owner without changing layout or members",
+        "sequence": 3
+      },
+      {
+        "rule": "walk-void-return-expansion",
+        "file": "mlir/IR/Visitors.h",
+        "offset": 2680,
+        "length": 499,
+        "before": "template <\n    WalkOrder Order = WalkOrder::PostOrder, typename Iterator = ForwardIterator,\n    typename FuncTy, typename ArgT = detail::first_argument<FuncTy>,\n    typename RetT = decltype(std::declval<FuncTy>()(std::declval<ArgT>()))>\nstd::enable_if_t<llvm::is_one_of<ArgT, Operation *, Region *, Block *>::value,\n                 RetT>\nwalk(Operation *op, FuncTy &&callback) {\n  return detail::walk<Iterator>(op, llvm::function_ref<RetT(ArgT)>(callback),\n                                Order);\n}",
+        "after": "template <\n    WalkOrder Order = WalkOrder::PostOrder, typename Iterator = ForwardIterator,\n    typename FuncTy, typename ArgT = detail::first_argument<FuncTy>,\n    typename RetT = decltype(std::declval<FuncTy>()(std::declval<ArgT>()))>\nstd::enable_if_t<llvm::is_one_of<ArgT, Operation *, Region *, Block *>::value && std::is_same<RetT, void>::value,\n                 RetT>\nwalk(Operation *op, FuncTy &&callback) {\n  detail::walk<Iterator>(op, llvm::function_ref<RetT(ArgT)>(callback),\n                                Order);\n  return;\n}\ntemplate <\n    WalkOrder Order = WalkOrder::PostOrder, typename Iterator = ForwardIterator,\n    typename FuncTy, typename ArgT = detail::first_argument<FuncTy>,\n    typename RetT = decltype(std::declval<FuncTy>()(std::declval<ArgT>()))>\nstd::enable_if_t<llvm::is_one_of<ArgT, Operation *, Region *, Block *>::value && !std::is_same<RetT, void>::value,\n                 RetT>\nwalk(Operation *op, FuncTy &&callback) {\n  return detail::walk<Iterator>(op, llvm::function_ref<RetT(ArgT)>(callback),\n                                Order);\n}",
+        "reason": "Sequence void traversal and preserve the exact nonvoid return; original overload predicate remains",
+        "sequence": 4
+      },
+      {
+        "rule": "walk-void-return-expansion",
+        "file": "mlir/IR/Operation.h",
+        "offset": 960,
+        "length": 378,
+        "before": "  template <WalkOrder Order = WalkOrder::PostOrder,\n            typename Iterator = ForwardIterator, typename FnT,\n            typename RetT = detail::walkResultType<FnT>>\n  std::enable_if_t<llvm::function_traits<std::decay_t<FnT>>::num_args == 1,\n                   RetT>\n  walk(FnT &&callback) {\n    return detail::walk<Order, Iterator>(this, std::forward<FnT>(callback));\n  }",
+        "after": "  template <WalkOrder Order = WalkOrder::PostOrder,\n            typename Iterator = ForwardIterator, typename FnT,\n            typename RetT = detail::walkResultType<FnT>>\n  std::enable_if_t<llvm::function_traits<std::decay_t<FnT>>::num_args == 1 && std::is_same<RetT, void>::value,\n                   RetT>\n  walk(FnT &&callback) {\n    detail::walk<Order, Iterator>(this, std::forward<FnT>(callback));\n    return;\n  }\n  template <WalkOrder Order = WalkOrder::PostOrder,\n            typename Iterator = ForwardIterator, typename FnT,\n            typename RetT = detail::walkResultType<FnT>>\n  std::enable_if_t<llvm::function_traits<std::decay_t<FnT>>::num_args == 1 && !std::is_same<RetT, void>::value,\n                   RetT>\n  walk(FnT &&callback) {\n    return detail::walk<Order, Iterator>(this, std::forward<FnT>(callback));\n  }",
+        "reason": "Sequence void traversal and preserve the exact nonvoid return; original overload predicate remains",
+        "sequence": 5
+      },
+      {
+        "rule": "walk-void-return-expansion",
+        "file": "mlir/IR/OpDefinition.h",
+        "offset": 637,
+        "length": 371,
+        "before": "  template <WalkOrder Order = WalkOrder::PostOrder,\n            typename Iterator = ForwardIterator, typename FnT,\n            typename RetT = detail::walkResultType<FnT>>\n  std::enable_if_t<llvm::function_traits<std::decay_t<FnT>>::num_args == 1,\n                   RetT>\n  walk(FnT &&callback) {\n    return state->walk<Order, Iterator>(std::forward<FnT>(callback));\n  }",
+        "after": "  template <WalkOrder Order = WalkOrder::PostOrder,\n            typename Iterator = ForwardIterator, typename FnT,\n            typename RetT = detail::walkResultType<FnT>>\n  std::enable_if_t<llvm::function_traits<std::decay_t<FnT>>::num_args == 1 && std::is_same<RetT, void>::value,\n                   RetT>\n  walk(FnT &&callback) {\n    state->walk<Order, Iterator>(std::forward<FnT>(callback));\n    return;\n  }\n  template <WalkOrder Order = WalkOrder::PostOrder,\n            typename Iterator = ForwardIterator, typename FnT,\n            typename RetT = detail::walkResultType<FnT>>\n  std::enable_if_t<llvm::function_traits<std::decay_t<FnT>>::num_args == 1 && !std::is_same<RetT, void>::value,\n                   RetT>\n  walk(FnT &&callback) {\n    return state->walk<Order, Iterator>(std::forward<FnT>(callback));\n  }",
+        "reason": "Sequence void traversal and preserve the exact nonvoid return; original overload predicate remains",
+        "sequence": 6
+      }
+    ]
+  },
+  "extraction_inputs": {
+    "rewritten_pass": {
+      "path": "rewritten.cpp",
+      "sha256": "8f71462a0899b9379626479150451a6aff47636c93dfe033b00324fe2c17ccb2"
+    },
+    "declaration_dependency_plan": {
+      "path": "interface-plan.json",
+      "sha256": "c574b79758691a169a51c6ab69c2838c6c037189c4fa2cc60b73d06eb05e7db1"
+    },
+    "canonical_to_extracted_manifest": {
+      "path": "interface-manifest.json",
+      "sha256": "4585d5f6a2f7a4a22136b49a831f021a71b5bfb8021c7aa85e9f3e39a382c5d9"
+    },
+    "canonical_interface_abstractions": {
+      "path": "interface-abstractions.json",
+      "sha256": "2b2a813ee55385fe88de05f6367c3ca36a1a108fcfe4209d8967319841452175"
+    },
+    "extracted_to_conversion_rewrites": {
+      "path": "header-rewrite.json",
+      "sha256": "9b360a7be0dcdc57dc893b798e15556700c3ea05c241c76ff467e2023461e73c"
+    },
+    "boundary": "Canonical interface abstraction and converter compatibility are separate stages; this ledger is not an arbitrary real-MLIR extractor"
+  }
+}
