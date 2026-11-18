@@ -1,0 +1,31 @@
+{
+  "archive": "/home/ce/Desktop/four_pass(2).zip",
+  "archive_sha256": "59e8cd6ec991daff7df2424b57beef971db0314dfd1d112dc22b0aa37b694b55",
+  "passes": [
+    {
+      "pass": "AssumeTightMemRefLayout",
+      "original_sha256": "59d4d574b78b8d740fd3d57051cdc3c3f59e6e0ae73c095a5186d5f06ad20fe9",
+      "rewritten_sha256": "bdd93d45c15fb7e61dc7050585501f736ad6bdddad2571d96155249b2f5a1f13",
+      "comparison": "tests/references/four_pass/AssumeTightMemRefLayout/comparison.patch"
+    },
+    {
+      "pass": "ConvertMemcpyToGPU",
+      "original_sha256": "9ec27a7c56878415133040a583ac925554f496946cb187263d75f9dcaf08548e",
+      "rewritten_sha256": "df95c38d7b3b45364480408a19897a56a2a8073cbc5f12689ff1bb91a5c3894f",
+      "comparison": "tests/references/four_pass/ConvertMemcpyToGPU/comparison.patch"
+    },
+    {
+      "pass": "DepthwiseConvNhwcHwc",
+      "original_sha256": "bfc4d3e6f1c271b1752d9dfe2575ee168820842c8e7512482fb00c2bd2dcedb2",
+      "rewritten_sha256": "4486230c269e265afc9d907915cf5afbc40ba48efdc5b53c8d86d4fb3841b7a7",
+      "comparison": "tests/references/four_pass/DepthwiseConvNhwcHwc/comparison.patch"
+    },
+    {
+      "pass": "EliminateMemRefCopy",
+      "original_sha256": "29f6387c245e8293abba517f8728cda54f1fc658a8385b36cb09f87446f91ec1",
+      "rewritten_sha256": "ee14fcd81f83e9e285a5e801373c88ac20e3931e36b963228ba9be2fd443f41a",
+      "comparison": "tests/references/four_pass/EliminateMemRefCopy/comparison.patch"
+    }
+  ],
+  "role": "Immutable external evidence; bundled mini headers are not the canonical MiniMLIR library"
+}

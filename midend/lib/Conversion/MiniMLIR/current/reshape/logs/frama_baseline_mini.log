@@ -1,0 +1,392 @@
+$ /home/ce/.opam/framac-study/bin/frama-c /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp -cxx-nostdinc -machdep gcc_x86_64 -cxx-clang-command=/home/ce/.opam/framac-study/bin/framaCIRGen '-fclang-cpp-extra-args=-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include -D_DEBUG -D_GLIBCXX_ASSERTIONS -D_GLIBCXX_USE_CXX11_ABI=1 -D_LIBCPP_HARDENING_MODE=_LIBCPP_HARDENING_MODE_EXTENSIVE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Werror=unguarded-availability-new -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wmissing-field-initializers -Wimplicit-fallthrough -Wcovered-switch-default -Wno-noexcept-type -Wnon-virtual-dtor -Wdelete-non-virtual-dtor -Wsuggest-override -Wstring-conversion -Wno-pass-failed -Wmisleading-indentation -Wctad-maybe-unsupported -fdiagnostics-color -Xclang -fno-pch-timestamp -g -std=gnu++17 -fno-exceptions -funwind-tables -fno-rtti -target x86_64-conda-linux-gnu -fno-color-diagnostics --sysroot=/home/ce/Desktop/framaclang/environment/llvm18/x86_64-conda-linux-gnu/sysroot -nostdinc++ -resource-dir=/home/ce/Desktop/framaclang/environment/llvm18/lib/clang/18' -cxx-parseable-output -print -ocode /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline.c
+cwd: /home/ce/Desktop/BuddyCompiler/build-v0.0.4/buddy
+exit_code: 4
+--- stdout ---
+[kernel] Parsing /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp (external front-end)
+[fclang] Warning: framaCIRGen emitted messages on stderr:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:24:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Pass/Pass.h:7:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/DialectRegistry.h:7:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Support/TypeID.h:21:24: warning: inline function 'mlir::TypeID::getFromOpaquePointer' is not defined [-Wundefined-inline]
+     21 |   inline static TypeID getFromOpaquePointer(const void *pointer);
+        |                        ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Support/TypeID.h:38:45: note: used here
+     38 |   TypeID getTypeID() const { return TypeID::getFromOpaquePointer(this); }
+        |                                             ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:22:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Dialect/Tosa/IR/TosaOps.h:164:57: warning: inline function 'mlir::tosa::ReshapeOp::getInput1' is not defined [-Wundefined-inline]
+    164 |   inline ::mlir::detail::TypedValue<::mlir::TensorType> getInput1();
+        |                                                         ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:40:21: note: used here
+     40 |     Value base = op.getInput1();
+        |                     ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:21:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Dialect/Func/IR/FuncOps.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/OpDefinition.h:7:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/Operation.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/OperationSupport.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/ValueRange.h:6:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/Value.h:37:40: warning: inline function 'mlir::Value::getDefiningOp<mlir::tosa::ReshapeOp>' is not defined [-Wundefined-inline]
+     37 |   template <typename OpTy> inline OpTy getDefiningOp() const;
+        |                                        ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:42:30: note: used here
+     42 |     while (auto inner = base.getDefiningOp<tosa::ReshapeOp>()) {
+        |                              ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:21:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Dialect/Func/IR/FuncOps.h:6:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/OpDefinition.h:13:19: warning: inline function 'mlir::OpState::operator bool' is not defined [-Wundefined-inline]
+     13 |   inline explicit operator bool();
+        |                   ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:42:17: note: used here
+     42 |     while (auto inner = base.getDefiningOp<tosa::ReshapeOp>()) {
+        |                 ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:21:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Dialect/Func/IR/FuncOps.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/OpDefinition.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/BuiltinTypes.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/Attributes.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/Types.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Support/InterfaceSupport.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Support/LLVM.h:11:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/llvm/Support/LogicalResult.h:26:22: warning: inline function 'llvm::failure' is not defined [-Wundefined-inline]
+     26 | inline LogicalResult failure(bool IsFailure = true);
+        |                      ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:47:14: note: used here
+     47 |       return failure();
+        |              ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:22:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Dialect/Tosa/IR/TosaOps.h:165:29: warning: inline function 'mlir::tosa::ReshapeOp::getInput1Mutable' is not defined [-Wundefined-inline]
+    165 |   inline ::mlir::OpOperand &getInput1Mutable();
+        |                             ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:49:45: note: used here
+     49 |     rewriter.modifyOpInPlace(op, [&]() { op.getInput1Mutable().assign(base); });
+        |                                             ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:21:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Dialect/Func/IR/FuncOps.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/OpDefinition.h:7:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/Operation.h:6:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/OperationSupport.h:49:15: warning: inline function 'mlir::OpOperand::assign' is not defined [-Wundefined-inline]
+     49 |   inline void assign(Value value);
+        |               ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:49:64: note: used here
+     49 |     rewriter.modifyOpInPlace(op, [&]() { op.getInput1Mutable().assign(base); });
+        |                                                                ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:21:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Dialect/Func/IR/FuncOps.h:6:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/OpDefinition.h:14:10: warning: inline function 'mlir::OpState::operator mlir::Operation *' is not defined [-Wundefined-inline]
+     14 |   inline operator Operation *() const;
+        |          ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:49:30: note: used here
+     49 |     rewriter.modifyOpInPlace(op, [&]() { op.getInput1Mutable().assign(base); });
+        |                              ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:21:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Dialect/Func/IR/FuncOps.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/OpDefinition.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/BuiltinTypes.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/Attributes.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/Types.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Support/InterfaceSupport.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Support/LLVM.h:11:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/llvm/Support/LogicalResult.h:22:22: warning: inline function 'llvm::success' is not defined [-Wundefined-inline]
+     22 | inline LogicalResult success(bool IsSuccess = true);
+        |                      ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:50:12: note: used here
+     50 |     return success();
+        |            ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:21:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Dialect/Func/IR/FuncOps.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/OpDefinition.h:7:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/Operation.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/OperationSupport.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/ValueRange.h:6:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/Value.h:58:13: warning: inline function 'mlir::detail::TypedValue<mlir::TensorType>::getType' is not defined [-Wundefined-inline]
+     58 |   inline Ty getType() const;
+        |             ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:61:59: note: used here
+     61 |     auto inTy = dyn_cast<RankedTensorType>(op.getInput1().getType());
+        |                                                           ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:21:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Dialect/Func/IR/FuncOps.h:6:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/OpDefinition.h:57:23: warning: inline function 'mlir::OpTrait::OneTypedResult<mlir::TensorType>::Impl<mlir::tosa::ReshapeOp>::getType' is not defined [-Wundefined-inline]
+     57 |     inline ResultType getType();
+        |                       ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:62:48: note: used here
+     62 |     auto outTy = dyn_cast<RankedTensorType>(op.getType());
+        |                                                ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:21:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Dialect/Func/IR/FuncOps.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/OpDefinition.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/BuiltinTypes.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/Attributes.h:6:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/Types.h:44:15: warning: inline function 'mlir::Type::operator!' is not defined [-Wundefined-inline]
+     44 |   inline bool operator!() const;
+        |               ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:63:9: note: used here
+     63 |     if (!inTy || !outTy)
+        |         ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:21:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Dialect/Func/IR/FuncOps.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/OpDefinition.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/BuiltinTypes.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/Attributes.h:6:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/Types.h:45:15: warning: inline function 'mlir::Type::operator!=' is not defined [-Wundefined-inline]
+     45 |   inline bool operator!=(Type other) const;
+        |               ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:65:14: note: used here
+     65 |     if (inTy != outTy)
+        |              ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:21:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Dialect/Func/IR/FuncOps.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/OpDefinition.h:6:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/BuiltinTypes.h:48:17: warning: inline function 'mlir::detail::ShapedTypeTrait<mlir::RankedTensorType>::getNumDynamicDims' is not defined [-Wundefined-inline]
+     48 |   inline size_t getNumDynamicDims() const;
+        |                 ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:67:14: note: used here
+     67 |     if (inTy.getNumDynamicDims() >= 2)
+        |              ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:21:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Dialect/Func/IR/FuncOps.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/OpDefinition.h:7:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/Operation.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/OperationSupport.h:6:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/ValueRange.h:85:10: warning: inline function 'mlir::ValueRange::ValueRange' is not defined [-Wundefined-inline]
+     85 |   inline ValueRange(const Value &value [[clang::lifetimebound]]);
+        |          ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:70:28: note: used here
+     70 |     rewriter.replaceOp(op, op.getInput1());
+        |                            ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:21:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Dialect/Func/IR/FuncOps.h:6:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/OpDefinition.h:15:21: warning: inline function 'mlir::OpState::operator->' is not defined [-Wundefined-inline]
+     15 |   inline Operation *operator->() const;
+        |                     ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:80:12: note: used here
+     80 |     if (!op->use_empty())
+        |            ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:21:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Dialect/Func/IR/FuncOps.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/OpDefinition.h:7:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/Operation.h:21:15: warning: inline function 'mlir::Operation::use_empty' is not defined [-Wundefined-inline]
+     21 |   inline bool use_empty();
+        |               ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:80:14: note: used here
+     80 |     if (!op->use_empty())
+        |              ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:21:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Dialect/Func/IR/FuncOps.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/OpDefinition.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/BuiltinTypes.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/Attributes.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/Types.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Support/InterfaceSupport.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Support/LLVM.h:9:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/llvm/ADT/StringRef.h:21:13: warning: inline function 'llvm::StringRef::StringRef' is not defined [-Wundefined-inline]
+     21 |   constexpr StringRef(const char *Str [[clang::lifetimebound]]);
+        |             ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:91:48: note: used here
+     91 |   StringRef getArgument() const final { return "simplify-tosa-reshape"; }
+        |                                                ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:24:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Pass/Pass.h:58:14: warning: inline function 'mlir::OperationPass<mlir::func::FuncOp>::getOperation' is not defined [-Wundefined-inline]
+     58 |   inline OpT getOperation();
+        |              ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:97:25: note: used here
+     97 |     func::FuncOp func = getOperation();
+        |                         ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:21:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Dialect/Func/IR/FuncOps.h:6:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/OpDefinition.h:17:23: warning: inline function 'mlir::OpState::getContext' is not defined [-Wundefined-inline]
+     17 |   inline MLIRContext *getContext();
+        |                       ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:98:29: note: used here
+     98 |     MLIRContext *ctx = func.getContext();
+        |                             ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:23:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/PatternMatch.h:167:10: warning: inline function 'mlir::RewritePatternSet::RewritePatternSet' is not defined [-Wundefined-inline]
+    167 |   inline RewritePatternSet(MLIRContext *context);
+        |          ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:99:23: note: used here
+     99 |     RewritePatternSet patterns(ctx);
+        |                       ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:23:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/PatternMatch.h:173:29: warning: function 'mlir::RewritePatternSet::add<(anonymous namespace)::CollapseReshapeChain, (anonymous namespace)::RemoveIdentityReshape, (anonymous namespace)::EraseUnusedReshape, mlir::MLIRContext *&, void>' has internal linkage but is not defined [-Wundefined-internal]
+    173 |   inline RewritePatternSet &add(ConstructorArg &&arg,
+        |                             ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:101:10: note: used here
+    101 |         .add<CollapseReshapeChain, RemoveIdentityReshape, EraseUnusedReshape>(
+        |          ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:21:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Dialect/Func/IR/FuncOps.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/OpDefinition.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/BuiltinTypes.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/Attributes.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/Types.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Support/InterfaceSupport.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Support/LLVM.h:8:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/llvm/ADT/SmallVector.h:147:10: warning: inline function 'llvm::SmallVector<mlir::Operation *>::SmallVector' is not defined [-Wundefined-inline]
+    147 |   inline SmallVector();
+        |          ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:105:30: note: used here
+    105 |     SmallVector<Operation *> reshapeOps;
+        |                              ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:21:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Dialect/Func/IR/FuncOps.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/OpDefinition.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/BuiltinTypes.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/Attributes.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/Types.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Support/InterfaceSupport.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Support/LLVM.h:8:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/llvm/ADT/SmallVector.h:148:10: warning: inline function 'llvm::SmallVector<mlir::Operation *>::~SmallVector' is not defined [-Wundefined-inline]
+    148 |   inline ~SmallVector();
+        |          ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:105:30: note: used here
+    105 |     SmallVector<Operation *> reshapeOps;
+        |                              ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:21:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Dialect/Func/IR/FuncOps.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/OpDefinition.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/BuiltinTypes.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/Attributes.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/Types.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Support/InterfaceSupport.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Support/LLVM.h:8:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/llvm/ADT/SmallVector.h:84:15: warning: inline function 'llvm::SmallVectorTemplateBase<mlir::Operation *>::push_back' is not defined [-Wundefined-inline]
+     84 |   inline void push_back(ValueParamT Elt);
+        |               ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:107:47: note: used here
+    107 |         [&](tosa::ReshapeOp rop) { reshapeOps.push_back(rop.getOperation()); });
+        |                                               ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:21:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Dialect/Func/IR/FuncOps.h:6:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/OpDefinition.h:16:21: warning: inline function 'mlir::OpState::getOperation' is not defined [-Wundefined-inline]
+     16 |   inline Operation *getOperation();
+        |                     ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:107:61: note: used here
+    107 |         [&](tosa::ReshapeOp rop) { reshapeOps.push_back(rop.getOperation()); });
+        |                                                             ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:21:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Dialect/Func/IR/FuncOps.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/OpDefinition.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/BuiltinTypes.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/Attributes.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/Types.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Support/InterfaceSupport.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Support/LLVM.h:6:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/llvm/ADT/ArrayRef.h:40:13: warning: inline function 'llvm::ArrayRef<mlir::Operation *>::ArrayRef<llvm::SmallVector<mlir::Operation *>, void>' is not defined [-Wundefined-inline]
+     40 |   constexpr ArrayRef(const C &V);
+        |             ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:116:35: note: used here
+    116 |     (void)applyOpPatternsGreedily(reshapeOps, std::move(patterns), config,
+        |                                   ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:24:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Pass/Pass.h:7:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/DialectRegistry.h:26:51: warning: inline function 'mlir::DialectRegistry::insert<mlir::tosa::TosaDialect>' is not defined [-Wundefined-inline]
+     26 |   template <typename ConcreteDialect> inline void insert();
+        |                                                   ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:121:14: note: used here
+    121 |     registry.insert<tosa::TosaDialect>();
+        |              ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:24:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Pass/Pass.h:22:10: warning: function 'mlir::PassRegistration<(anonymous namespace)::SimplifyTosaReshapePass>::PassRegistration' has internal linkage but is not defined [-Wundefined-internal]
+     22 |   inline PassRegistration();
+        |          ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:129:3: note: used here
+    129 |   PassRegistration<SimplifyTosaReshapePass>();
+        |   ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:23:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/PatternMatch.h:24:23: warning: inline function 'mlir::RewriterBase::startOpModification' is not defined [-Wundefined-inline]
+     24 |   inline virtual void startOpModification(Operation *op);
+        |                       ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/PatternMatch.h:32:5: note: used here
+     32 |     startOpModification(root);
+        |     ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:21:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Dialect/Func/IR/FuncOps.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/OpDefinition.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/BuiltinTypes.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/Attributes.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/Types.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Support/InterfaceSupport.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Support/LLVM.h:10:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/llvm/Support/Casting.h:42:35: warning: inline function 'llvm::detail::isPresent<mlir::TensorType>' is not defined [-Wundefined-inline]
+     42 | template <typename T> inline bool isPresent(const T &t);
+        |                                   ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/llvm/Support/Casting.h:91:28: note: used here
+     91 |   MINI_LLVM_ASSERT(detail::isPresent(Val) &&
+        |                            ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/llvm/Support/Casting.h:42:35: warning: inline function 'llvm::detail::isPresent<mlir::Operation *>' is not defined [-Wundefined-inline]
+     42 | template <typename T> inline bool isPresent(const T &t);
+        |                                   ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/llvm/Support/Casting.h:110:28: note: used here
+    110 |   MINI_LLVM_ASSERT(detail::isPresent(Val) &&
+        |                            ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:21:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Dialect/Func/IR/FuncOps.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/OpDefinition.h:7:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/Operation.h:10:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/IR/Visitors.h:7:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Support/WalkResult.h:9:9: warning: private field 'result' is not used [-Wunused-private-field]
+      9 |  Result result;
+        |         ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/baseline_mini.cpp:25:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Transforms/GreedyPatternRewriteDriver.h:40:11: warning: private field 'scope' is not used [-Wunused-private-field]
+     40 |   Region *scope = nullptr;
+        |           ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Transforms/GreedyPatternRewriteDriver.h:41:8: warning: private field 'useTopDownTraversal' is not used [-Wunused-private-field]
+     41 |   bool useTopDownTraversal = false;
+        |        ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Transforms/GreedyPatternRewriteDriver.h:44:8: warning: private field 'maxIterations' is not used [-Wunused-private-field]
+     44 |   long maxIterations = 10;
+        |        ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Transforms/GreedyPatternRewriteDriver.h:45:8: warning: private field 'maxNumRewrites' is not used [-Wunused-private-field]
+     45 |   long maxNumRewrites = kNoLimit;
+        |        ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Transforms/GreedyPatternRewriteDriver.h:47:27: warning: private field 'listener' is not used [-Wunused-private-field]
+     47 |   RewriterBase::Listener *listener = nullptr;
+        |                           ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/reshape/conversion-include/mlir/Transforms/GreedyPatternRewriteDriver.h:50:8: warning: private field 'cseBetweenIterations' is not used [-Wunused-private-field]
+     50 |   bool cseBetweenIterations = false;
+        |        ^
+  39 warnings generated.
+[fclang] Failure: could not find all needed definitions:
+   _ZN21anonymous_namespace_123SimplifyTosaReshapePassED1 (id -1, defined: false)
+   _ZNK21anonymous_namespace_118EraseUnusedReshapeE15matchAndRewriteN4mlir4tosaE9ReshapeOpRN4mlirE15PatternRewriter (id -1, defined: false)
+   _ZNK21anonymous_namespace_123SimplifyTosaReshapePassE20getDependentDialectsRN4mlirE15DialectRegistry (id -1, defined: false)
+   _ZNK21anonymous_namespace_123SimplifyTosaReshapePassE14getDescription (id -1, defined: false)
+   _ZN21anonymous_namespace_123SimplifyTosaReshapePassE14runOnOperation (id -1, defined: false)
+   _ZN21anonymous_namespace_120CollapseReshapeChainED1 (id -1, defined: false)
+   _ZN21anonymous_namespace_121RemoveIdentityReshapeED1 (id -1, defined: false)
+   _ZNK21anonymous_namespace_120CollapseReshapeChainE15matchAndRewriteN4mlir4tosaE9ReshapeOpRN4mlirE15PatternRewriter (id -1, defined: false)
+   _ZNK21anonymous_namespace_123SimplifyTosaReshapePassE11getArgument (id -1, defined: false)
+   _ZNK21anonymous_namespace_121RemoveIdentityReshapeE15matchAndRewriteN4mlir4tosaE9ReshapeOpRN4mlirE15PatternRewriter (id -1, defined: false)
+   _ZN21anonymous_namespace_118EraseUnusedReshapeED1 (id -1, defined: false)
+[kernel] Current source was: <unknown location>
+  The full backtrace is:
+  Raised at Frama_c_kernel__Log.finally_raise in file "src/libraries/utils/log.ml" (inlined), line 529, characters 24-31
+  Called from Frama_c_kernel__Log.Register.fatal in file "src/libraries/utils/log.ml", line 1160, characters 17-55
+  Called from Frama_c_kernel__Log.logwithfinal.(fun) in file "src/libraries/utils/log.ml", line 522, characters 9-23
+  Re-raised at Frama_c_kernel__Log.logwithfinal.(fun) in file "src/libraries/utils/log.ml", line 525, characters 9-16
+  Called from Clang__Reorder_defs.reorder in file "reorder_defs.ml", line 459, characters 4-107
+  Called from Clang__Frama_Clang_register.parse_cxx in file "frama_Clang_register.ml", line 221, characters 13-36
+  Called from Frama_c_kernel__File.to_cil_cabs in file "src/kernel_services/ast_queries/file.ml", line 666, characters 12-36
+  Called from Frama_c_kernel__File.files_to_cabs_cil.(fun) in file "src/kernel_services/ast_queries/file.ml", line 743, characters 46-72
+  Called from Stdlib__List.fold_left in file "list.ml", line 121, characters 24-34
+  Called from Frama_c_kernel__File.files_to_cabs_cil in file "src/kernel_services/ast_queries/file.ml", line 743, characters 17-89
+  Called from Frama_c_kernel__File.prepare_from_c_files in file "src/kernel_services/ast_queries/file.ml", line 1863, characters 24-60
+  Called from Frama_c_kernel__File.init_from_cmdline in file "src/kernel_services/ast_queries/file.ml", line 1941, characters 4-27
+  Called from Frama_c_kernel__Ast.force_compute in file "src/kernel_services/ast_data/ast.ml", line 98, characters 2-28
+  Called from Frama_c_kernel__Ast.compute in file "src/kernel_services/ast_data/ast.ml", line 106, characters 53-71
+  Called from Frama_c_kernel__Boot.play_analysis in file "src/kernel_internals/runtime/boot.ml", line 17, characters 6-20
+  Called from Frama_c_kernel__Cmdline.play_in_toplevel_one_shot in file "src/kernel_services/cmdline_parameters/cmdline.ml", line 951, characters 2-9
+  Called from Frama_c_kernel__Cmdline.play_in_toplevel in file "src/kernel_services/cmdline_parameters/cmdline.ml", line 1005, characters 18-64
+  Called from Frama_c_kernel__Cmdline.catch_toplevel_run in file "src/kernel_services/cmdline_parameters/cmdline.ml", line 192, characters 4-8
+  
+  Plug-in fclang aborted: internal error.
+  Please report as 'crash' at https://git.frama-c.com/pub/frama-c/issues
+  Your Frama-C version is 33.0 (Arsenic).
+  Note that a version and a backtrace alone often do not contain enough
+  information to understand the bug. Guidelines for reporting bugs are at:
+  https://git.frama-c.com/pub/frama-c/-/wikis/Guidelines-for-reporting-bugs
+
+--- stderr ---

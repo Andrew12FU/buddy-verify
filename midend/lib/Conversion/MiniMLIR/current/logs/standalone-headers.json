@@ -1,0 +1,1294 @@
+[
+  {
+    "header": "Dialect/IME/IMEDialect.h",
+    "header_sha256": "b30070020c6e4a212aa58d09ce420bbf075bbfe0382ca0edec59f54eec743377",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"Dialect/IME/IMEDialect.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "Dialect/IME/IMEOps.h",
+    "header_sha256": "8b039f273f84025660351c50c07f62f357173465b35f122b2c2e157071da08f4",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"Dialect/IME/IMEOps.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "Dialect/IME/Transform.h",
+    "header_sha256": "64d9bc1c0dcd2a293e829a044fcb255fea80b60de5e79b4460121db28a8f56bd",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"Dialect/IME/Transform.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "cstdint",
+    "header_sha256": "15e668fb4c6d58772c83396f1a53bb55a7b24c003f2512cf0133256a8b677761",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"cstdint\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "llvm/ADT/ArrayRef.h",
+    "header_sha256": "99b4bf67814bc2456a433f97d00dee876f4aa1b6cbff1e3ef2a69fd15c1e19a0",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"llvm/ADT/ArrayRef.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "llvm/ADT/PointerIntPair.h",
+    "header_sha256": "e7d30e00e696ebc3d7b4eb52a8c338e4aef626f650ffd92ac6b1145c6a83afaa",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"llvm/ADT/PointerIntPair.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "llvm/ADT/PointerUnion.h",
+    "header_sha256": "24696ade3c411bd811a4a3a67823b385afce58648b9d7dbebab8019b33a98584",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"llvm/ADT/PointerUnion.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "llvm/ADT/STLExtras.h",
+    "header_sha256": "8d388d74d523bf40aa994d77a625ac8cd64926932e502a89f491832b5a3c7c4b",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"llvm/ADT/STLExtras.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "llvm/ADT/STLFunctionalExtras.h",
+    "header_sha256": "593a16e30a0e73169c51ca9c09a67c0c7efbd15438a50512c47d73c336cba2af",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"llvm/ADT/STLFunctionalExtras.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "llvm/ADT/SmallVector.h",
+    "header_sha256": "e269eec39369f61937251ba284c5e2a0258acdaf961982bdafbb484aea3b8799",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"llvm/ADT/SmallVector.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "llvm/ADT/StringRef.h",
+    "header_sha256": "7e15c8f809d45a33feb64b50efdf46d8235cb97f3d354972bd3a40d6ba91e82c",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"llvm/ADT/StringRef.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "llvm/ADT/Twine.h",
+    "header_sha256": "9edf449fd337fabc9a3bbb244e96794c98ccf5927e4619e91757a36f85f6e353",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"llvm/ADT/Twine.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "llvm/ADT/ilist.h",
+    "header_sha256": "7fdeae3074c23534f5b370e6e24cf4c47a4e51aba9c0a483001fb234451632fb",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"llvm/ADT/ilist.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "llvm/ADT/ilist_node.h",
+    "header_sha256": "3611599c22230cebd3563eccd48fd963b7ecc0595c26a418bcd70ef04d959c3b",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"llvm/ADT/ilist_node.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "llvm/ADT/iterator.h",
+    "header_sha256": "ed21f684affa6a3841e3278c1d6f1ea9892a93075ce0db1a7f740358fda6cfc7",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"llvm/ADT/iterator.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "llvm/ADT/iterator_range.h",
+    "header_sha256": "93ee4477c25a98367596ed6de272cb74b0a92052a44e0a9b69038bc5192a17db",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"llvm/ADT/iterator_range.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "llvm/Support/Casting.h",
+    "header_sha256": "46518e3dd9358f1eb3cacbf3cad440f25a8fd683a906627af9379f3279285c95",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"llvm/Support/Casting.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "llvm/Support/CommandLine.h",
+    "header_sha256": "d664d35769ef472d717f741debc30866c335fc6429d9d2d92285ed28aa418051",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"llvm/Support/CommandLine.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "llvm/Support/ErrorHandling.h",
+    "header_sha256": "493040ad43cb6121c70465b44167adf03a28b37d8854f4cb441c65bd65ca76fe",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"llvm/Support/ErrorHandling.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "llvm/Support/LogicalResult.h",
+    "header_sha256": "54f21bfa1ecd3c68169554461678e3145091c3dd52454459d451cb7cfbcbf59a",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"llvm/Support/LogicalResult.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "llvm/Support/TrailingObjects.h",
+    "header_sha256": "bf89b3405e55542f7fa61e3dcdd11dc368dbb18e9008e6296909bd9936ede5ea",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"llvm/Support/TrailingObjects.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "header_sha256": "10728ae286dd832ac2aeb639ceb41fa100f0211ee222324ca56743493a6ab281",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mini/Support/Standard.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/Conversion/LLVMCommon/ConversionTarget.h",
+    "header_sha256": "dcedb640aeb23e128941e1b34e2c32b8a9f6db46856edf0f175e4f0a1dbc24ab",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/Conversion/LLVMCommon/ConversionTarget.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/Conversion/LLVMCommon/TypeConverter.h",
+    "header_sha256": "f7e3184f6f89d320fd21fdd1875025baf83fa1bc21313a0c27d24911ed59b66e",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/Conversion/LLVMCommon/TypeConverter.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/Dialect/Affine/Analysis/AffineAnalysis.h",
+    "header_sha256": "6ae6f283b0dd058007b43166cfb05041d93d384e1a6f888131383f14d7c50cea",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/Dialect/Affine/Analysis/AffineAnalysis.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/Dialect/Affine/IR/AffineOps.h",
+    "header_sha256": "f1b08c27519db3d6171054c067d20c0fe982714923ba35e7992e99d010b668ed",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/Dialect/Affine/IR/AffineOps.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/Dialect/Arith/IR/Arith.h",
+    "header_sha256": "e641db78bcc3c3b645de5c350de6da3f7688663c89ec5faa25d64528f639dff3",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/Dialect/Arith/IR/Arith.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/Dialect/Func/IR/FuncOps.h",
+    "header_sha256": "a3c823a729ebce5a2d9439defaf401fbc877f49dea7736270e4cb596bd4e40f6",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/Dialect/Func/IR/FuncOps.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/Dialect/GPU/IR/GPUDialect.h",
+    "header_sha256": "dca8eb3bcc7133a5adce3271dbc3d62aa31af615af3f88f51e0200574aaec3dc",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/Dialect/GPU/IR/GPUDialect.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/Dialect/LLVMIR/LLVMDialect.h",
+    "header_sha256": "fe783461245a0eaabd795f9d4d8966089df2fd7656941c06b0c81ccd764dbe48",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/Dialect/LLVMIR/LLVMDialect.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/Dialect/Linalg/IR/Linalg.h",
+    "header_sha256": "65e9584306b8d442f7bdafcccb2cd10cf08e2c3c404198bf880b79232b9ffb3f",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/Dialect/Linalg/IR/Linalg.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/Dialect/Linalg/Transforms/Transforms.h",
+    "header_sha256": "1c4c8eef1b47ae170c44ebbd1ce5dde1238e65dabfd6f208a8ca2dda84e3aeeb",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/Dialect/Linalg/Transforms/Transforms.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/Dialect/Math/IR/Math.h",
+    "header_sha256": "474130b3e61e9ee9654ab2a47bf6191ae7f67260074b7166b592c75cb16ddc10",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/Dialect/Math/IR/Math.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/Dialect/MemRef/IR/MemRef.h",
+    "header_sha256": "c5af4290b33f76f8b76b21c3455e93c06077c6ca2b8cdbc7f5054208ac072ca0",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/Dialect/MemRef/IR/MemRef.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/Dialect/SCF/IR/SCF.h",
+    "header_sha256": "dcd8441d845a0c506af91056f08755bdf470e58ea9eb514a4fad4648e1ad7b58",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/Dialect/SCF/IR/SCF.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/Dialect/Tensor/IR/Tensor.h",
+    "header_sha256": "cfa4d1fe1b077ddc515412498134490144bc7337cc472b5861ea63bcaf1441fe",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/Dialect/Tensor/IR/Tensor.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/Dialect/Tosa/IR/TosaOps.h",
+    "header_sha256": "0415d0f7b0f84bac9149c0a62e929e674fed64ef0fa933714b3f315bb5aaee3d",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/Dialect/Tosa/IR/TosaOps.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/Dialect/Vector/IR/VectorOps.h",
+    "header_sha256": "9ec6248b2677b926ecc2a2eb4aac551dec2317c2b39acc17d27eed45a5cfecc3",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/Dialect/Vector/IR/VectorOps.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/IR/AffineExpr.h",
+    "header_sha256": "6d8de6c55cb2e402eb16a3232b63670a90e9011cfcd3ecc3fda3f6ca18bd4727",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/IR/AffineExpr.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/IR/AffineMap.h",
+    "header_sha256": "e6d5de00dfc51c2853f41889b38e06fef79b556f20ea2c9ab25966c368511746",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/IR/AffineMap.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/IR/Attributes.h",
+    "header_sha256": "f3f6b61b2835666fc9021d075774f50cc70879d26efac2fdb26a679bc2e49d7d",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/IR/Attributes.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/IR/Block.h",
+    "header_sha256": "11a2dcbfb9b304cdd545b3a8af1e31821ee0790f577831cd1a837a1f1a99c4b8",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/IR/Block.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/IR/Builders.h",
+    "header_sha256": "63a67c7d4ce58cb25b3e7097e472f5906223c489291a384f0516703901ed7557",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/IR/Builders.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/IR/BuiltinAttributes.h",
+    "header_sha256": "378ac5c9805a374001c1c9277437c4100fa06b80f035956bfe17f84f6f59f08f",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/IR/BuiltinAttributes.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/IR/BuiltinOps.h",
+    "header_sha256": "d4933c2c1aeeebc42096f9c780e50350e35b387c45d9c5acb4f69a4e7c7a51f1",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/IR/BuiltinOps.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/IR/BuiltinTypes.h",
+    "header_sha256": "f27726e84c1cf9e393294e9f261fd2512ebea5a7486ccb32d319fbdec8a8f105",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/IR/BuiltinTypes.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/IR/Diagnostics.h",
+    "header_sha256": "a9779bca4e312d2d4cafa97fbe10633adf974e96ebda66f98aa25ebbd887e0b1",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/IR/Diagnostics.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/IR/Dialect.h",
+    "header_sha256": "2e8a686a723eeb7f998f6d2c685e7a666f138a7f0a3e8597056d76dceb192560",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/IR/Dialect.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/IR/DialectRegistry.h",
+    "header_sha256": "8f999fb7133ea46df51495b4e2480f67420330fbf1014998b6cadc75c2b393f3",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/IR/DialectRegistry.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/IR/IntegerSet.h",
+    "header_sha256": "e21db3c5538bb89bbcf67f3ae989dce7ab729f40f531aaacd29f80274dc6abae",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/IR/IntegerSet.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/IR/Location.h",
+    "header_sha256": "c0f88b90b4e9f1838dc13235aab617536bd948c306e61f2738c8c3c79457e78d",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/IR/Location.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "header_sha256": "20dba204a59db0c7cc79376fc9931590bb0a33fdf91c81b99240a737ebc4c3d6",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/IR/OpDefinition.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/IR/Operation.h",
+    "header_sha256": "6161bebddd0cbdcf90bca045df1deb679ef13966624944fb356f1dff46810f4a",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/IR/Operation.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/IR/OperationSupport.h",
+    "header_sha256": "49bda8c798fbf468d853d5d8a26a19214beda574259bdcd4849858d5299a8b40",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/IR/OperationSupport.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/IR/PatternMatch.h",
+    "header_sha256": "49f1a61ab7aaeb70da3df703cf45909c1026ccac23e8f1f99c8d554d3677b6e7",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/IR/PatternMatch.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/IR/Region.h",
+    "header_sha256": "c18db7e67b758d7a60df680a8e20871c117c0576a0871306cb4d5958be935837",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/IR/Region.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/IR/TypeRange.h",
+    "header_sha256": "f6fd7a103bdaa30793b2ae02fa26cb72c88b44a9201baac7c735bc14c81f6fa8",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/IR/TypeRange.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/IR/TypeUtilities.h",
+    "header_sha256": "189f66bec2aa8854fde0b015936548894c9a8c66130ca7482aea136aff03e44e",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/IR/TypeUtilities.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/IR/Types.h",
+    "header_sha256": "74d30e157cc2721f33b0d2f8d56eadf08e04079c9e9c87cd6cfac01cd3873b6d",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/IR/Types.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/IR/Value.h",
+    "header_sha256": "84cecfa4f9201930289c74f917cbb96c632603045c96fb6bad4dad34d4f00b7c",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/IR/Value.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/IR/ValueRange.h",
+    "header_sha256": "281b77ee8e85e949cc8d79441fefd5f2050567e2a419fe1b44faa41dbd90916f",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/IR/ValueRange.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/IR/Visitors.h",
+    "header_sha256": "659efe615cbaeff2ff3a14c08325557a36f15faf20e062f1b713d74091eff6c1",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/IR/Visitors.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/Interfaces/CallInterfaces.h",
+    "header_sha256": "f0e0c4981a0cd8c1c3bf7fe98ff324f7e36e0a97db636525fbb7f9b4adba84a0",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/Interfaces/CallInterfaces.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/Interfaces/ControlFlowInterfaces.h",
+    "header_sha256": "0ebe684c1bd31e8554a3ce49f45013b5e0fb62dc71a8c7dda948cbd04409a32b",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/Interfaces/ControlFlowInterfaces.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/Pass/Pass.h",
+    "header_sha256": "29f9833e8ecf112ce30a97e0a5fde1dd16d69d9a843480648cb33fb209a0714a",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/Pass/Pass.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/Pass/PassOptions.h",
+    "header_sha256": "171d5b98cc56f958ee52851eacf525b7bf3584a0877c84c47c5fd2dc06f57201",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/Pass/PassOptions.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/Rewrite/FrozenRewritePatternSet.h",
+    "header_sha256": "5fe09754393733e1fd0fb7729adb8b4ae364d7fb7a896e42a7da0433fecb6a89",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/Rewrite/FrozenRewritePatternSet.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/Support/Forward.h",
+    "header_sha256": "c0383c2d583adf34ba261458d52c8ea96d64f31311878ad9ca13f3df845b2e65",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/Support/Forward.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/Support/InterfaceSupport.h",
+    "header_sha256": "e60d49ca13d653ae845a28395c4edc572a3d14823d32d860c0135e3a6c81d72c",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/Support/InterfaceSupport.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/Support/LLVM.h",
+    "header_sha256": "22df7f6ca8d2d9270c5dc603de546fdae694e081ce5a711f31fb9075be4ce0c7",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/Support/LLVM.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/Support/LogicalResult.h",
+    "header_sha256": "372b0309a2e17a22c7b757f867b466ffc78005cd16aeec31bfcf591c3276f26a",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/Support/LogicalResult.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/Support/TypeID.h",
+    "header_sha256": "afd98fa167c680c1e1b1afb0c13d4345a08e1eeeb118cab660b626ba4933b981",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/Support/TypeID.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/Support/WalkResult.h",
+    "header_sha256": "bc913a338392ca1c5fc596d2facd547f262a8f9fb0203a92ffda905841bd8d67",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/Support/WalkResult.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/Transforms/DialectConversion.h",
+    "header_sha256": "c65980d496f906aad80cedc6720d8748b364fcdff71898aeee37da8a30ff0209",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/Transforms/DialectConversion.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "mlir/Transforms/GreedyPatternRewriteDriver.h",
+    "header_sha256": "f65b5816bfd909e6aaff801d5502b732f61c8709a995a78776c55883a865dee2",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"mlir/Transforms/GreedyPatternRewriteDriver.h\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  },
+  {
+    "header": "vector",
+    "header_sha256": "20bf7fb0667be55a3781fc59cd9c6904c6307ee796566e262b9e8c976629c05b",
+    "command": [
+      "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+      "-std=c++17",
+      "-nostdinc++",
+      "-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/include",
+      "-x",
+      "c++",
+      "-fsyntax-only",
+      "-"
+    ],
+    "stdin": "#include \"vector\"\n",
+    "exit_code": 0,
+    "diagnostics": ""
+  }
+]

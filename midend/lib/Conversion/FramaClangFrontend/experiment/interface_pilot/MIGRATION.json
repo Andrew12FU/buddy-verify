@@ -1,0 +1,1080 @@
+{
+  "scope": "Layout-only relocation before subsequent path edits; historical results remain byte-identical",
+  "previous_root": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot",
+  "frontend_root": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend",
+  "pilot_root": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot",
+  "files_verified_at_move": 214,
+  "history_files_verified": 171,
+  "files": [
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/CMakeLists.txt",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/legacy_build/OriginalCMakeLists.txt",
+      "sha256_at_move": "63e51e40a44fc1119515a3599d9a594ea3fbba046835287ee3dc778d534e51b8"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/.gitignore",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/.gitignore",
+      "sha256_at_move": "ab6d1d77e6adc9701ed1f3c688ee1ba17d927c5f65da8d1bc10906f414c4ad46"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/run.py",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/run.py",
+      "sha256_at_move": "07dd79ce1e7092a140c2dfd9f3b3392337acb5511e3c8b457a9b3bde2e92be8b"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/README.md",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/README.md",
+      "sha256_at_move": "7180b56daa0ed9789b9bcd50f1fb5b1989972ee1dc1c36bd4edba8a06b234a43"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/python/experiments.py",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/python/experiments.py",
+      "sha256_at_move": "ad9a008e7920813575de2afe3bac8525028019141867da8e94577e699d3ccb59"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/python/emission.py",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/python/emission.py",
+      "sha256_at_move": "2104f8720da0d8bc91d2ddb1c5b887a66a1c2873bd9941afeee0a275643216cd"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/python/environment.py",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/python/environment.py",
+      "sha256_at_move": "c7c26e60945f10d6c14acda12e25662f0af9135848d02ddee21449695b7b39ee"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/__pycache__/run.cpython-312.pyc",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/__pycache__/run.cpython-312.pyc",
+      "sha256_at_move": "6eb5c329c7a6d0be083ea67312bed0cde05986087086608784c1337a011a87dc"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/include/Analysis.h",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/include/interface/Analysis.h",
+      "sha256_at_move": "41cf33df58198256170c324198fef428c8a6c426c58e47c53a99a754d81ea334"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/include/Probe.h",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/include/interface/Probe.h",
+      "sha256_at_move": "ac85fa6faa770676b55b5dc22e32a4e2b621e879d61f101de3e41333516ece55"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/fixtures/library_input.cpp",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/fixtures/library_input.cpp",
+      "sha256_at_move": "26395c027f8dab4578a58c28d42a1740b6ec4c344f8c851c7e751608252b2bf0"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/docs/EXPERIMENT_DESIGN.md",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/docs/EXPERIMENT_DESIGN.md",
+      "sha256_at_move": "215b237c614d0b4b6010cfd87dae460bdf97317874af7812fa43cd8efe7cb242"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/docs/FINDINGS.md",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/docs/FINDINGS.md",
+      "sha256_at_move": "ba740b58679c6e667b1fc6e17be82e8d3ce1ef2423d5ba476820ad271a393589"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/build/CMakeCache.txt",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/legacy_build/CMakeCache.txt",
+      "sha256_at_move": "c3ce4724c6514603e7e0a1db73f844dec2245ae83811c3e59d1632750757a020"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/build/.ninja_log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/legacy_build/.ninja_log",
+      "sha256_at_move": "344f3ff080264ccff6ab8a65786bb3b2082bd6247fccbd283f052e91254e5e71"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/build/build.ninja",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/legacy_build/build.ninja",
+      "sha256_at_move": "a1f5e3d7f1799918540361e1284bf9206e85b524cd0df09dc5ec40326cfd83a7"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/build/.ninja_deps",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/legacy_build/.ninja_deps",
+      "sha256_at_move": "f709b1f44f50d623cf124694442f8333c5f81f5e8406c4ded3b58e7056336b72"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/build/cmake_install.cmake",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/legacy_build/cmake_install.cmake",
+      "sha256_at_move": "6bd5f7b95217ca5f00ba850e1074081a19255c2e850729156c270731c63b67ac"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/build/header-extraction-probe",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/legacy_build/header-extraction-probe",
+      "sha256_at_move": "5c6d8f91c0d50debf8d05e83c6c90ca6773df67b6dbb272a562e487715c111cc"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/src/LibrarySlice.cpp",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/src/interface/LibrarySlice.cpp",
+      "sha256_at_move": "575f2d1b09eb5e249a65112647aa14389f323a4cfc6db6e97a19d1b6ada570b5"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/src/Inventory.cpp",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/src/interface/Inventory.cpp",
+      "sha256_at_move": "e764d675cb60d79766dde1d0df032a3c38e2e7b50fb9d3b4926e1b42d870a4f9"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/src/Probe.cpp",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/src/interface/Probe.cpp",
+      "sha256_at_move": "e7a92a1acabc93a35181c337eef177708001bcbcc045686f85dcac59a0018ba9"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/src/Main.cpp",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/src/interface/ProbeMain.cpp",
+      "sha256_at_move": "eeecd207aa29229c1211dab27d01e070c7f771604588d2d7608b714b9a2f44ea"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/python/__pycache__/experiments.cpython-312.pyc",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/python/__pycache__/experiments.cpython-312.pyc",
+      "sha256_at_move": "91f265a25f6324ab34e11bf10907b635bdf127596ea0af950e8043dda52e4ce4"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/python/__pycache__/emission.cpython-312.pyc",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/python/__pycache__/emission.cpython-312.pyc",
+      "sha256_at_move": "c452edfb47d28a66fc43c770f5ec39cb62179bbe66e9559da76ae4d8ac678758"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/python/__pycache__/environment.cpython-312.pyc",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/python/__pycache__/environment.cpython-312.pyc",
+      "sha256_at_move": "1ed5768baf4499ddff7163e6f19ea5288cfac15b7702d7414c8c9efdcfab7143"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/array_bindings.json",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/array_bindings.json",
+      "sha256_at_move": "cea3b43c632b421d41842ba8b207f8e536a2a366d1d3f6a7b181d25daf99832b"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/pass_comparison.json",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/pass_comparison.json",
+      "sha256_at_move": "bc01c0bbc7afc83cedfb9e50072f35f29776939dc71cfff7bc4d7318230c7c85"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/commands.json",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/commands.json",
+      "sha256_at_move": "c35d03e1e9d9401c682428417c5f14c6cc62ca17c7c77f5cee51e12cc120da48"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/extraction_manifest.json",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/extraction_manifest.json",
+      "sha256_at_move": "da27321da392f0883c409b3f94ce275ff0daa601946bd24c0808e279048b1adb"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/summary.json",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/summary.json",
+      "sha256_at_move": "8079eed9497ca625181c9c94f2ab3147cd42e841df4ed2a073d8560cd0cc1953"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/array_bindings.json",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/array_bindings.json",
+      "sha256_at_move": "cea3b43c632b421d41842ba8b207f8e536a2a366d1d3f6a7b181d25daf99832b"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/pass_comparison.json",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/pass_comparison.json",
+      "sha256_at_move": "bc01c0bbc7afc83cedfb9e50072f35f29776939dc71cfff7bc4d7318230c7c85"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/commands.json",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/commands.json",
+      "sha256_at_move": "28bcf3350aa9dbbe95fd8bc3333f4dab2c86d0f24b95d25f4e6a6467d8935a16"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/extraction_manifest.json",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/extraction_manifest.json",
+      "sha256_at_move": "2f025d433fcd755cba214c98fa020c9964a5e451a018cc3f19c1cd400dd6371b"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/summary.json",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/summary.json",
+      "sha256_at_move": "336977b991981cb32f7214350f6e656b2f2f6abcaf8b285ffc04722c72102d38"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/observations/matmul_existing_mini.json",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/observations/matmul_existing_mini.json",
+      "sha256_at_move": "f3a130822f2984852911eae679a8141190b9286c2d95885bf337698cae48fb42"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/observations/array_constrained_binding.json",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/observations/array_constrained_binding.json",
+      "sha256_at_move": "407e652853d70393bd5bd902160ddbd54806c655b3f3ba581cef12c43e278e0b"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/observations/matmul_real.json",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/observations/matmul_real.json",
+      "sha256_at_move": "f0c7d1107d11db1d7bcc3ae039a83d9e3f6b84a8590d0d5d14cbecf077b31f53"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/observations/array_unconstrained_binding.json",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/observations/array_unconstrained_binding.json",
+      "sha256_at_move": "53add386f3e0e884038adc551ccbac6696ffc159d29b0fee06c1e0a5b0adaa9c"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/observations/ime_real.json",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/observations/ime_real.json",
+      "sha256_at_move": "4a3891da3d4ad9867fd2d45fcb39531a66c86eed1deb679b1f5e39e9d67563d9"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/observations/library_real.json",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/observations/library_real.json",
+      "sha256_at_move": "f4666a986b6270c4e508ad0b87d1dea6676fd0e2d723026dd8c2f7f534671000"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/observations/array_real_binding.json",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/observations/array_real_binding.json",
+      "sha256_at_move": "5003472f1ec544c03878fa1dd98c4207a64bea49e6b1c824432c37fbaf371613"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/cases/logical_surface.cpp",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/cases/logical_surface.cpp",
+      "sha256_at_move": "fa24b3c447cd09a3404984e638e6cfdbc3254e8d5d360a2670e8f654ab0407a9"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/cases/array_unconstrained_negative.cpp",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/cases/array_unconstrained_negative.cpp",
+      "sha256_at_move": "30ad53e588a786af31b96e53cc7063d8d71da3949126637cdde1afc5ea114519"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/cases/array_real_negative.cpp",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/cases/array_real_negative.cpp",
+      "sha256_at_move": "dac9d281e952d10554db9c291b8c7a02b1f8e96cfc74b3b62a85b3f80736aaf3"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/cases/array_raw.cpp",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/cases/array_raw.cpp",
+      "sha256_at_move": "26bb7d0337da19922c303a8e55c40585473da15a691dcf2cd8f030aefec3340c"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/cases/array_declarations.cpp",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/cases/array_declarations.cpp",
+      "sha256_at_move": "ea3623ff53e3ac0b95f4ce3f816e294a632ad7f54ed5157bcef4003676e7f930"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/cases/array_closed.cpp",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/cases/array_closed.cpp",
+      "sha256_at_move": "9982f5396252dd199515595754ab46ef1a0892041e20e8d0d566c47463c2b92f"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/cases/array_closed_constexpr.cpp",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/cases/array_closed_constexpr.cpp",
+      "sha256_at_move": "21d903d4a17f100cee701c3a73b89e68d61e356a5da0b2def10db0a2964f817f"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/cases/array_unconstrained_scalar.cpp",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/cases/array_unconstrained_scalar.cpp",
+      "sha256_at_move": "e134a7a11e88906351ff45041aeb4f0e473b6861a4367aa4204a84740eee1d79"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/cases/array_constrained_scalar.cpp",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/cases/array_constrained_scalar.cpp",
+      "sha256_at_move": "bc513a765e3e02689817908c7c5c89579b436cacbe874868e76eb3866d1f9c4f"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/cases/array_no_fields.cpp",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/cases/array_no_fields.cpp",
+      "sha256_at_move": "895903cb6b9b6fe3762b9a75e775c4728c8d88a244b3ce5dbb1c778e3ed2e076"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/cases/array_constrained_negative.cpp",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/cases/array_constrained_negative.cpp",
+      "sha256_at_move": "2c370a44f476e900e9bf5db03d17f4141124cc04d92226710a7b40f2965eff2e"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/cases/array_real_scalar.cpp",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/cases/array_real_scalar.cpp",
+      "sha256_at_move": "40f58a455413ffdf0b88852f77897190a7bfddc6cd50ca18e685b6c76615e135"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/cases/logical_declarations_trait.cpp",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/cases/logical_declarations_trait.cpp",
+      "sha256_at_move": "3a3d5d4b86991753b570b9a96ccad6086e278eab1f6a7d47b6d9dc2cb7133ede"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/cases/logical_closure.cpp",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/cases/logical_closure.cpp",
+      "sha256_at_move": "2fd8a14fcd9814566044049c6e3fdc1850fe75cbead00af5dbe4dce1107c711d"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/cases/logical_real.cpp",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/cases/logical_real.cpp",
+      "sha256_at_move": "0fda7cff36a9c38c6b7693d607ea41369597ac932b68ecf0d163a2dbd9b83209"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/cases/array_declarations_constexpr.cpp",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/cases/array_declarations_constexpr.cpp",
+      "sha256_at_move": "933de5c492586cd041725d19119c2b13d5a1ce02f6e455a24fb2cde3cace2945"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/cases/logical_real_trait.cpp",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/cases/logical_real_trait.cpp",
+      "sha256_at_move": "58d9b19e30d3576ab67eb52bc1e5f125577e0fdc5b031f9dd8dd1574e58fec6b"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/cases/logical_declarations.cpp",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/cases/logical_declarations.cpp",
+      "sha256_at_move": "97a2786784c1cb55d4db00ee0832070cb6480af3d08ab5fff3aa70b442be1b3c"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/cases/array_real.cpp",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/cases/array_real.cpp",
+      "sha256_at_move": "9655bf109a3829f65320903c3dffbce015fab551a1515a83e4aabaef3fdc6832"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/cases/array_real_constexpr.cpp",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/cases/array_real_constexpr.cpp",
+      "sha256_at_move": "b1774c6ad03e2be71ce5cf9d4ef9cb74c80975bc685d3867925eb71b628fb780"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/cases/logical_closure_trait.cpp",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/cases/logical_closure_trait.cpp",
+      "sha256_at_move": "479221070957f083e8a35c0050d2ce80c7d5084577dd686574177770f30a091c"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/cases/matmul_existing_mini.cpp",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/cases/matmul_existing_mini.cpp",
+      "sha256_at_move": "6daf80059eb1b128797773b8c9a67c6101ab827696ad69438dbf21b3d9d38178"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/extracted/array_closed.h",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/extracted/array_closed.h",
+      "sha256_at_move": "781fd329cf57e8edffce0877643e88c3a0b703076124d5970fabd7e9d0af3aa6"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/extracted/logical_closure_bodies.h",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/extracted/logical_closure_bodies.h",
+      "sha256_at_move": "4a6b2b85b84d65c58d1eb79a8d2228c6bfe848b6baaa7427c32db47bc045626c"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/extracted/array_no_fields.h",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/extracted/array_no_fields.h",
+      "sha256_at_move": "3bd829a7c757d1a7c9fb2e89ccd272a2a244b5dfe979ced93483ca1bb91bca90"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/extracted/logical_surface_bodies.h",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/extracted/logical_surface_bodies.h",
+      "sha256_at_move": "416968e3d336cdb79b1a3c4f441b8e0fab9c7bae6b759f961353baca2f6f932a"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/extracted/array_raw.h",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/extracted/array_raw.h",
+      "sha256_at_move": "42b29939fd0c70607eb928d81292f9e41810d3fdf5867a383534ce475275d227"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/extracted/array_declarations.h",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/extracted/array_declarations.h",
+      "sha256_at_move": "ceffbbdcf4ecc4b2d6c922e4dae9ca73da5f4080cfb694c987f5af580c9cbeb6"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/extracted/logical_declarations.h",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/extracted/logical_declarations.h",
+      "sha256_at_move": "31fe782a130726f7d2961a4c8b4221e49954093b49c8847671d8eac40790f4f7"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/extracted/array_unconstrained_declarations.h",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/extracted/array_unconstrained_declarations.h",
+      "sha256_at_move": "1494ffdac7a85d17162081685ffb87c4f533e917d702ecd152a36715b76bd964"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/logs/array_unconstrained_binding.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/logs/array_unconstrained_binding.log",
+      "sha256_at_move": "4568f731092e48cdd761ccb8226608155ea50e39cff2eb8660274537ac0eed7f"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/logs/array_real_negative.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/logs/array_real_negative.log",
+      "sha256_at_move": "8c4c01f14118193047abebbd309434ec76696d2c6733e3f9c1379e3689c9a1e7"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/logs/array_real_constexpr.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/logs/array_real_constexpr.log",
+      "sha256_at_move": "8931f336b4daf80d0026c73afa2f9e3b878d8d2d68bbc56550c5e2022b24de71"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/logs/logical_closure_syntax.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/logs/logical_closure_syntax.log",
+      "sha256_at_move": "511acb1a873be489ff96f35492198cebbcb865ab0c92ed42d54480e41953ee09"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/logs/frama_logical_closure.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/logs/frama_logical_closure.log",
+      "sha256_at_move": "682c22d8a368859ef8c4c56666dbec7e6df1ff41423d46dc6b7bb1c25a4e7ea4"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/logs/logical_real_link.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/logs/logical_real_link.log",
+      "sha256_at_move": "87237858a1ded75efe87462f6de8681acd307026ef525b407af704a490e79771"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/logs/array_closed_execute.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/logs/array_closed_execute.log",
+      "sha256_at_move": "77eeb898d3ea3e66f64f3eed31bf4afba508a081ea553c06cfda43f4aa5b7ec7"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/logs/logical_declarations_link.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/logs/logical_declarations_link.log",
+      "sha256_at_move": "4b465955427abe35596bf81ba61b03688e7184309afb1f367d0bebe6a744db5a"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/logs/array_no_fields_syntax.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/logs/array_no_fields_syntax.log",
+      "sha256_at_move": "269ca70d3ccd7a9f2cb95ccd313d30f0da790f7b41715854b582b510a8af1ad5"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/logs/array_real_binding.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/logs/array_real_binding.log",
+      "sha256_at_move": "6550d7280b05d7a5fc9a4891266fd3a9efb612d1df405acf25296e1caca29fd6"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/logs/ime_real.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/logs/ime_real.log",
+      "sha256_at_move": "129ac8062b0bf3d9890205a2dfa1f3315b161d9a7626490a206b7e1619781430"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/logs/logical_closure_trait.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/logs/logical_closure_trait.log",
+      "sha256_at_move": "6eb8aefa41dd9359286e6fc4719b126a3ccabcfb4eba07a1f542b74a37341f93"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/logs/logical_declarations_trait.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/logs/logical_declarations_trait.log",
+      "sha256_at_move": "7fdcec2f3e87c3b179cfd9ddbc6b9b33720b32053de5cdc2f3a1a1586e44a4e2"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/logs/array_declarations_syntax.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/logs/array_declarations_syntax.log",
+      "sha256_at_move": "0af55ca3de380695a07e0399a7b288da4ac795b24667b5321c469ca456fb2132"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/logs/frama_version.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/logs/frama_version.log",
+      "sha256_at_move": "161812111475ded7867aec4b18c71262843cddf25dd1d718a8de30e18ed9d7be"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/logs/logical_real_trait.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/logs/logical_real_trait.log",
+      "sha256_at_move": "31d3af9211b7176836755208715e664be8080e9cc8a1720a34d1f331c7467b79"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/logs/array_raw_syntax.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/logs/array_raw_syntax.log",
+      "sha256_at_move": "65dec890411c452a57d4b32293d1cd9eeb42ab9de4261b7fdd3c57665c41fab0"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/logs/array_closed_syntax.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/logs/array_closed_syntax.log",
+      "sha256_at_move": "9a66b515533c86dcd4700c5f9ed14c7988261d0caf5a6438ee2044287e1a1e72"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/logs/array_constrained_negative.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/logs/array_constrained_negative.log",
+      "sha256_at_move": "ea8af4c22715fd93b1785ae76cb875dcb48f909ed8df8b664fd4e15d7c12d7cb"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/logs/library_real.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/logs/library_real.log",
+      "sha256_at_move": "4a75848cdb4d2278bb76883785c767e506c3cf43d29221d071583c18d5af302f"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/logs/array_real_link.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/logs/array_real_link.log",
+      "sha256_at_move": "fb7008e4e448f58d4496c3dca495284b9485c19e671ac212db73c5e22efa370c"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/logs/matmul_real.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/logs/matmul_real.log",
+      "sha256_at_move": "dc5008c6ea22b9a74f324fdb45da2a75bd7d3209f0d72599bf304101f3c81139"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/logs/logical_surface_syntax.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/logs/logical_surface_syntax.log",
+      "sha256_at_move": "cd4bd25b61d954544082dcb0653f8a8aca1731e713bef2b1d0fc3ba983577d3f"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/logs/logical_closure_execute.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/logs/logical_closure_execute.log",
+      "sha256_at_move": "266a04deef5bc47c017ab6d17ea641cc01ea376ea10c24d95c9a2c9e2fb7e980"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/logs/logical_closure_link.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/logs/logical_closure_link.log",
+      "sha256_at_move": "39dc62edc6375b201b9c1465b33c65a04a3cc91b41d711cc39698082e9cddc0b"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/logs/array_closed_link.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/logs/array_closed_link.log",
+      "sha256_at_move": "1fd7e075627f5a062fa668da8adbbe8cd755fee4ef3b5d9b64407f33dfde4425"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/logs/clang_version.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/logs/clang_version.log",
+      "sha256_at_move": "81adc11c3e828624c67e3506d363253651a53b1ce59eba756bf2df4a36f49513"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/logs/array_declarations_constexpr.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/logs/array_declarations_constexpr.log",
+      "sha256_at_move": "8e89dfe46c642185496a60909bd4f67742f4a32f178cd2992e152ad2192560b5"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/logs/array_real_syntax.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/logs/array_real_syntax.log",
+      "sha256_at_move": "9956c25042c8045213c13c46c947d2bb66dc0b8fc4a6e1c63ff33c68c7284602"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/logs/matmul_existing_mini.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/logs/matmul_existing_mini.log",
+      "sha256_at_move": "0d0d6625fe47d8c6f2536237535cdeab6ad297347b0b74cdb764a19c430d3e40"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/logs/array_unconstrained_negative.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/logs/array_unconstrained_negative.log",
+      "sha256_at_move": "4ccbd97ce881981dcf6b54182d8d9fb37fc479bd4a467829974f9bcaaf45dd49"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/logs/array_constrained_binding.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/logs/array_constrained_binding.log",
+      "sha256_at_move": "65b12dd7253c55acc0056f1f144cea8b217b722144d7ba9c0d9d60c3fd0bbd3b"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/logs/frama_logical_declarations.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/logs/frama_logical_declarations.log",
+      "sha256_at_move": "deb02a09a4c3e79c76f54013f45b2ee921130fa7186349a4f15c63871f3e6e80"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/logs/logical_real_execute.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/logs/logical_real_execute.log",
+      "sha256_at_move": "f14e1613419d4d71824a467ea11d40dd207124b629af34017fb747b94b12f7f1"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/logs/logical_real_syntax.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/logs/logical_real_syntax.log",
+      "sha256_at_move": "e065ac408414df0efa4c33d1e7aed8bc94be17f496cd2c9bcd5bcce69e11ff61"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/logs/array_closed_constexpr.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/logs/array_closed_constexpr.log",
+      "sha256_at_move": "5da575cddeb43670977658f0fb63d255904fb180365f454ba57ad0a415f3956e"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/logs/logical_declarations_syntax.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/logs/logical_declarations_syntax.log",
+      "sha256_at_move": "97b84a99fc68acd4a224216aaf78b1c29308b0f79b7e9aa435c008a57d934434"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/executables/logical_closure",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/executables/logical_closure",
+      "sha256_at_move": "636fe9fe0c315d27ce2f75daa67ebd98287bc4c98c3a6f32c8dcf46fca812fde"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/executables/logical_real",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/executables/logical_real",
+      "sha256_at_move": "c36292b8035b9bad4d7c4e1893d0520de74156cc2519e629317c0ffadb9a7300"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/executables/array_closed",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/executables/array_closed",
+      "sha256_at_move": "1cbe7a819042d7da7bea057b5339481d15d8e4c767c82f0f72a062bd15d6ffb1"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/converted/logical_declarations.c",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/converted/logical_declarations.c",
+      "sha256_at_move": "99be1a8dcc2b42184af930fa3a65435d3c4b4e57b02066c228308b1b56fa6e04"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211457-375388/converted/logical_closure.c",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211457-375388/converted/logical_closure.c",
+      "sha256_at_move": "11de41a47147917baa89b1d12cd45a0a3aad164ce3555198d3dd3b9315ab3d29"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/observations/matmul_existing_mini.json",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/observations/matmul_existing_mini.json",
+      "sha256_at_move": "7d85a5e3f36c0bfe41921271597c6d027e84233e671b84de2b1f4b973d5e09f6"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/observations/array_constrained_binding.json",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/observations/array_constrained_binding.json",
+      "sha256_at_move": "babe40a2854bb8386a724a8c4c2c53b64bd7eed6b882cfe02b4985d711f5d921"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/observations/matmul_real.json",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/observations/matmul_real.json",
+      "sha256_at_move": "a4867d5c1dd39a8d55aa6bc236f0f560361348a9a3875960936dd398a050aa98"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/observations/array_unconstrained_binding.json",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/observations/array_unconstrained_binding.json",
+      "sha256_at_move": "995da84e4d837e14e8f00b035ea509209cb8155358ce4e4b68210f52595043e2"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/observations/ime_real.json",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/observations/ime_real.json",
+      "sha256_at_move": "2def209ffa1d183a2039849bec716967d26404ae962d03c0a3bdd740902133f6"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/observations/library_real.json",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/observations/library_real.json",
+      "sha256_at_move": "e1186d5b24d138677ba1f8ca3470879b7ecc3f6996ec5ab85a307c9577d29a3f"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/observations/array_real_binding.json",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/observations/array_real_binding.json",
+      "sha256_at_move": "e0177f086b20f2e7691fe9de05ee5909ee9fb1adcc5a5759b06be1cb22800f67"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/cases/logical_surface.cpp",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/cases/logical_surface.cpp",
+      "sha256_at_move": "c0cacd115c51609e2ba8f7604d2c8de9755b53f02ca76da5965472736471c2b9"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/cases/array_unconstrained_negative.cpp",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/cases/array_unconstrained_negative.cpp",
+      "sha256_at_move": "4901ccbda3776402a196e3375596732b859d236b6ce6e1ddf7b19ee98387cdc5"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/cases/array_real_negative.cpp",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/cases/array_real_negative.cpp",
+      "sha256_at_move": "dac9d281e952d10554db9c291b8c7a02b1f8e96cfc74b3b62a85b3f80736aaf3"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/cases/array_raw.cpp",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/cases/array_raw.cpp",
+      "sha256_at_move": "63393023731def9fd03537e2025bd925bf89aeae8b6bef0fd48b2679cfc25149"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/cases/array_declarations.cpp",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/cases/array_declarations.cpp",
+      "sha256_at_move": "0dd79b0216a286c586ee750dec26c4620e60b066b2d35d3ca5f4ab13b31ca36a"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/cases/array_closed.cpp",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/cases/array_closed.cpp",
+      "sha256_at_move": "852a51e05b972e692bd5fbdf6ea3fc54763cb25e21ffca36875db0451455bb1c"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/cases/array_closed_constexpr.cpp",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/cases/array_closed_constexpr.cpp",
+      "sha256_at_move": "2bcd50d64d85b0faf60589e94c7747c526a593ca5c2318f619abffb2d98bcab1"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/cases/array_unconstrained_scalar.cpp",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/cases/array_unconstrained_scalar.cpp",
+      "sha256_at_move": "e4334886aa7652b860a2ee40e8c6aaaebf6d99d9340a39763c5c33fe9f4cae36"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/cases/array_constrained_scalar.cpp",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/cases/array_constrained_scalar.cpp",
+      "sha256_at_move": "3def2dcc850b04103b681f21649360f62fed3007e65ecec0c73f7ee93a2142aa"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/cases/array_no_fields.cpp",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/cases/array_no_fields.cpp",
+      "sha256_at_move": "22b484298baeb484640cbf967996215cf28e3d32d801a5bfbf84da94e34e7ed8"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/cases/array_constrained_negative.cpp",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/cases/array_constrained_negative.cpp",
+      "sha256_at_move": "ff4ebb8699b5e14cc65f43b98c26649884180768ac245dc3496aa4ec281b39ae"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/cases/array_real_scalar.cpp",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/cases/array_real_scalar.cpp",
+      "sha256_at_move": "40f58a455413ffdf0b88852f77897190a7bfddc6cd50ca18e685b6c76615e135"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/cases/logical_declarations_trait.cpp",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/cases/logical_declarations_trait.cpp",
+      "sha256_at_move": "4bda9f4e0ea61cdb947e522d4d77f9407cb8485806e7f53cfb79bacbd310c87f"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/cases/logical_closure.cpp",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/cases/logical_closure.cpp",
+      "sha256_at_move": "5b63a725e91300dcdc90958f2ede624e97a11f909a50f6840d133c3b019825b5"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/cases/logical_real.cpp",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/cases/logical_real.cpp",
+      "sha256_at_move": "0fda7cff36a9c38c6b7693d607ea41369597ac932b68ecf0d163a2dbd9b83209"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/cases/array_declarations_constexpr.cpp",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/cases/array_declarations_constexpr.cpp",
+      "sha256_at_move": "c4130399c0a19f786464ef214e34d7d3d6b7036181f4e616fa357ff77435dc92"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/cases/logical_real_trait.cpp",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/cases/logical_real_trait.cpp",
+      "sha256_at_move": "58d9b19e30d3576ab67eb52bc1e5f125577e0fdc5b031f9dd8dd1574e58fec6b"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/cases/logical_declarations.cpp",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/cases/logical_declarations.cpp",
+      "sha256_at_move": "66f6be192fc4c38b7e487604e122450ad0b3b3dda03be7a9988998676f806190"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/cases/array_real.cpp",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/cases/array_real.cpp",
+      "sha256_at_move": "9655bf109a3829f65320903c3dffbce015fab551a1515a83e4aabaef3fdc6832"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/cases/array_real_constexpr.cpp",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/cases/array_real_constexpr.cpp",
+      "sha256_at_move": "b1774c6ad03e2be71ce5cf9d4ef9cb74c80975bc685d3867925eb71b628fb780"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/cases/logical_closure_trait.cpp",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/cases/logical_closure_trait.cpp",
+      "sha256_at_move": "800bae1ebc104bd13b8e150e4fef716dda94cbc23058826f63cb4f16ccac1350"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/cases/matmul_existing_mini.cpp",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/cases/matmul_existing_mini.cpp",
+      "sha256_at_move": "6daf80059eb1b128797773b8c9a67c6101ab827696ad69438dbf21b3d9d38178"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/extracted/array_closed.h",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/extracted/array_closed.h",
+      "sha256_at_move": "1465f356ad72d7fa8d41830e1a4882316128280634309c9a3f5095482e9e8e98"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/extracted/logical_closure_bodies.h",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/extracted/logical_closure_bodies.h",
+      "sha256_at_move": "4a6b2b85b84d65c58d1eb79a8d2228c6bfe848b6baaa7427c32db47bc045626c"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/extracted/array_no_fields.h",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/extracted/array_no_fields.h",
+      "sha256_at_move": "9df74357cf311f899bae224fa975677ec40728675911c1d5c1c64e0017687d6b"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/extracted/logical_surface_bodies.h",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/extracted/logical_surface_bodies.h",
+      "sha256_at_move": "416968e3d336cdb79b1a3c4f441b8e0fab9c7bae6b759f961353baca2f6f932a"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/extracted/array_raw.h",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/extracted/array_raw.h",
+      "sha256_at_move": "65976509dd94ddc37bfe9cd79196edd43f6f296b3456488a705d50fd9b44355f"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/extracted/array_declarations.h",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/extracted/array_declarations.h",
+      "sha256_at_move": "10c2ab7ab4a5010b6d908c3b66a3879638f2497b855e1f493da7f0f17d0def80"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/extracted/logical_declarations.h",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/extracted/logical_declarations.h",
+      "sha256_at_move": "31fe782a130726f7d2961a4c8b4221e49954093b49c8847671d8eac40790f4f7"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/extracted/array_unconstrained_declarations.h",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/extracted/array_unconstrained_declarations.h",
+      "sha256_at_move": "95439d4fe3223aab109b6a121e9d9154f94b7b737acde2aab43e1d3b93ab03a5"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/logs/array_unconstrained_binding.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/logs/array_unconstrained_binding.log",
+      "sha256_at_move": "42df5c83bd9aa631b5897b6292999182d52187c9b615046b9c180760e3263b9c"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/logs/array_real_negative.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/logs/array_real_negative.log",
+      "sha256_at_move": "97d966b82de3762031b33260d5cccc229e018976af5b76857d2cf83797f91cb2"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/logs/array_real_constexpr.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/logs/array_real_constexpr.log",
+      "sha256_at_move": "20bed8d039129b60c43637251fe8328e5d1c10229891cb51f3d67add0b75faac"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/logs/logical_closure_syntax.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/logs/logical_closure_syntax.log",
+      "sha256_at_move": "9282286c0c89138acfa8353954faaf34e5156672dbae839213264ab111e6657d"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/logs/frama_logical_closure.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/logs/frama_logical_closure.log",
+      "sha256_at_move": "f168858d17a233d2a1feeaae977524f00c7122a362b9569d69bc2eaeb82390fe"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/logs/logical_real_link.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/logs/logical_real_link.log",
+      "sha256_at_move": "22992b86deb746c1f0aff546096bbbb23a0169f4e1d6eb9ca6d2de09b6ddebf0"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/logs/array_closed_execute.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/logs/array_closed_execute.log",
+      "sha256_at_move": "ecd03c71eb8876a03b26bf2ae134993101e2e3f7ff08c81673be853c068d4477"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/logs/logical_declarations_link.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/logs/logical_declarations_link.log",
+      "sha256_at_move": "d3abd5a660ed489d4db6add0605a34cd79278d6761077f16b668464f2dfd27a4"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/logs/array_no_fields_syntax.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/logs/array_no_fields_syntax.log",
+      "sha256_at_move": "7dd609ed9da3c2d3b9df79f99fc59ff608832f1af0d7de63d795271be74cf98f"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/logs/array_real_binding.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/logs/array_real_binding.log",
+      "sha256_at_move": "e83c882eb904f3525741e9f9b221edb25a6dd2982fcb5702fadd4f8602ff7b32"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/logs/ime_real.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/logs/ime_real.log",
+      "sha256_at_move": "d0c3c7ab8cae8665ba1c3f1a942f40c62f21d3361a951cfaf5098d1808b49d9d"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/logs/logical_closure_trait.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/logs/logical_closure_trait.log",
+      "sha256_at_move": "7ec8abc9423bf436f8d81c8ebd2a5a93dea77b32543ce821d976b02e9a2009c6"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/logs/logical_declarations_trait.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/logs/logical_declarations_trait.log",
+      "sha256_at_move": "f77ad1ef183443eb9c70d211ee189eb508a8bfb179a05007bd824cc11bb9cf8d"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/logs/array_declarations_syntax.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/logs/array_declarations_syntax.log",
+      "sha256_at_move": "3f1f0f8be5e1f615e2f7b01143266bc4d6637a19d8b07170e46250f64d3352ba"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/logs/frama_version.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/logs/frama_version.log",
+      "sha256_at_move": "161812111475ded7867aec4b18c71262843cddf25dd1d718a8de30e18ed9d7be"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/logs/logical_real_trait.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/logs/logical_real_trait.log",
+      "sha256_at_move": "f13bc12eab2457a5253f43f9665c57cf28a4e307ca91e5f9d4f1ec9dc0ebb636"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/logs/array_raw_syntax.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/logs/array_raw_syntax.log",
+      "sha256_at_move": "30755b3443e0727b1a0968b71cfa9ef40fd29961c65229a416e1e67170005e46"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/logs/array_closed_syntax.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/logs/array_closed_syntax.log",
+      "sha256_at_move": "f6f0e9bd3ea7d1b316473cfdc891ba7e90ac600cad6f72e754b99488fab9e14a"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/logs/array_constrained_negative.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/logs/array_constrained_negative.log",
+      "sha256_at_move": "0c6a1573a78344d6f88cc9a4acd35702283c77ae24e9161f70b5f736dff559dc"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/logs/library_real.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/logs/library_real.log",
+      "sha256_at_move": "77eee8a400973c297f7c0e21db3078cca6fd7e9b598ac818507561a70b63b65f"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/logs/array_real_link.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/logs/array_real_link.log",
+      "sha256_at_move": "991bf94f9eddd19ca25d1777773752176f49e4ed47d1131567f05f4a776f0086"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/logs/matmul_real.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/logs/matmul_real.log",
+      "sha256_at_move": "ab99d47edcce2122e007c804f27e4b630908734f9d62e16e2b4030b7eb3442a5"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/logs/logical_surface_syntax.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/logs/logical_surface_syntax.log",
+      "sha256_at_move": "60e1ffabd7b8851e2fffdae4be20e7a5ba6832e7de38d0603f5f9cce409321db"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/logs/logical_closure_execute.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/logs/logical_closure_execute.log",
+      "sha256_at_move": "836c69ec6641f1e6e6e35c005410fda0454ca648024492855dcc6561ad657b17"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/logs/logical_closure_link.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/logs/logical_closure_link.log",
+      "sha256_at_move": "b6b8423e91b9538098c6747d2ed0fc83b8bd5b53ba4edcb2b97cfb1175346714"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/logs/array_closed_link.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/logs/array_closed_link.log",
+      "sha256_at_move": "48e60e187efd2d7940532c50872932c72323085e653211295670e7ca115566b0"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/logs/clang_version.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/logs/clang_version.log",
+      "sha256_at_move": "81adc11c3e828624c67e3506d363253651a53b1ce59eba756bf2df4a36f49513"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/logs/array_declarations_constexpr.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/logs/array_declarations_constexpr.log",
+      "sha256_at_move": "2289aa5e71d16e531aad2d8118eae85114f3fd1d43f7fa0c29abaee04cbe975b"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/logs/array_real_syntax.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/logs/array_real_syntax.log",
+      "sha256_at_move": "bfcb14c7e65576689ca4d7130ecd460ed9b301e59daff221874e91671797d845"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/logs/matmul_existing_mini.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/logs/matmul_existing_mini.log",
+      "sha256_at_move": "b967ade5e6720658b48bb7115d8e8a5362f7807df12bd62f1ea5c07d0615a257"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/logs/array_unconstrained_negative.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/logs/array_unconstrained_negative.log",
+      "sha256_at_move": "a36cc253795bc594292ec640ca8b51b2a4382109fa859fb9c7b509ae0fa5bd2d"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/logs/array_real_link_support.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/logs/array_real_link_support.log",
+      "sha256_at_move": "71d1c8e6b9cc73f96a699e52fc8aaeab710658184be4b9c4566f0e0c4b89e752"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/logs/array_constrained_binding.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/logs/array_constrained_binding.log",
+      "sha256_at_move": "2fd80ff9974b599647cefc1850f4e489abdf10f791c0bff0dcbfa8e264726dde"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/logs/frama_logical_declarations.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/logs/frama_logical_declarations.log",
+      "sha256_at_move": "9a33174400866c85e2536f6d10ff803f0db514b683aba2516b32c5f135693396"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/logs/array_real_execute.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/logs/array_real_execute.log",
+      "sha256_at_move": "22219a1795f2b52e9b928fd7645d66b58a4d94a8880d33342a8ecc64f5356c9f"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/logs/logical_real_execute.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/logs/logical_real_execute.log",
+      "sha256_at_move": "daf1e274e3fb618724d623fb8631776081e4e5f2f0936ceceaa89e474ea8a7f7"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/logs/logical_real_syntax.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/logs/logical_real_syntax.log",
+      "sha256_at_move": "6fa0814de57041aeac17234a1bd49e8a9ce80600f746d8eb600f94269fe41b71"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/logs/array_closed_constexpr.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/logs/array_closed_constexpr.log",
+      "sha256_at_move": "80d71de99f414c0ca27e02365ae3113e302c46a2e84d76b5790d01a7149df405"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/logs/logical_declarations_syntax.log",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/logs/logical_declarations_syntax.log",
+      "sha256_at_move": "1b5c194355a5989c65286208551da23f438c32fff30bc7a77e8601bf9dbdc8fc"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/executables/logical_closure",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/executables/logical_closure",
+      "sha256_at_move": "8e562bfb486fecc318d863e5f6712bdec2a4ee8ee6fbec6463eac81a530423f5"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/executables/array_real",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/executables/array_real",
+      "sha256_at_move": "133da9b5a943ddce30133bac3f85cf04de717fa1691c88fe2d13eb3d09581a4e"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/executables/logical_real",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/executables/logical_real",
+      "sha256_at_move": "8bb13f40f0f732f238788667de85184f011df2d1dad2beea77ac26218bad5ffe"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/executables/array_closed",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/executables/array_closed",
+      "sha256_at_move": "c7589a0e022dcb2fa8905b4f6ec1cd897eeb400bfcff0352dc51b672600ac651"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/converted/logical_declarations.c",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/converted/logical_declarations.c",
+      "sha256_at_move": "99be1a8dcc2b42184af930fa3a65435d3c4b4e57b02066c228308b1b56fa6e04"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/results/20261116-211749-088826/converted/logical_closure.c",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/results/20261116-211749-088826/converted/logical_closure.c",
+      "sha256_at_move": "11de41a47147917baa89b1d12cd45a0a3aad164ce3555198d3dd3b9315ab3d29"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/build/CMakeFiles/cmake.check_cache",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/legacy_build/CMakeFiles/cmake.check_cache",
+      "sha256_at_move": "a26189e394421da57f45706a07713c5720acd200a41711b0c0c590c3c63371c4"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/build/CMakeFiles/rules.ninja",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/legacy_build/CMakeFiles/rules.ninja",
+      "sha256_at_move": "2afcc7585f36d817e7b49baadd9b2f55b2d488060ce17f29ebf969e65687d371"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/build/CMakeFiles/TargetDirectories.txt",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/legacy_build/CMakeFiles/TargetDirectories.txt",
+      "sha256_at_move": "b3417b37fe0329f1a7e8dc057b1842952780b6be81de27794cfed9edabe8cc11"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/build/CMakeFiles/CMakeConfigureLog.yaml",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/legacy_build/CMakeFiles/CMakeConfigureLog.yaml",
+      "sha256_at_move": "ba7e99a522cb2a9687aceddf54a30ae20bb8cc3e96034c5d7d7469d625b04df0"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/build/CMakeFiles/3.31.8/CMakeDetermineCompilerABI_C.bin",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/legacy_build/CMakeFiles/3.31.8/CMakeDetermineCompilerABI_C.bin",
+      "sha256_at_move": "a1e1e6afea2954beb766f4e5024239f3c73b8f13410dff93f54dc4b72bc4aeab"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/build/CMakeFiles/3.31.8/CMakeSystem.cmake",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/legacy_build/CMakeFiles/3.31.8/CMakeSystem.cmake",
+      "sha256_at_move": "d924ac64762355b3acbd4a9c808b7925575252f8e5111b53c9e9d09efbc658b6"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/build/CMakeFiles/3.31.8/CMakeCXXCompiler.cmake",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/legacy_build/CMakeFiles/3.31.8/CMakeCXXCompiler.cmake",
+      "sha256_at_move": "a03c9e84016593787d7f491e5ae24d0ac9b185587f9d2742e49ab22a0613e649"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/build/CMakeFiles/3.31.8/CMakeCCompiler.cmake",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/legacy_build/CMakeFiles/3.31.8/CMakeCCompiler.cmake",
+      "sha256_at_move": "c77d66e71b789b00582d10a2311fa679f3932b00fd71721e6ce95c74e1439df3"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/build/CMakeFiles/3.31.8/CMakeDetermineCompilerABI_CXX.bin",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/legacy_build/CMakeFiles/3.31.8/CMakeDetermineCompilerABI_CXX.bin",
+      "sha256_at_move": "e9aa8da434198affb6ce0ac067683f2adc17733c805b7ca453db9fd61285b085"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/build/CMakeFiles/3.31.8/CompilerIdC/a.out",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/legacy_build/CMakeFiles/3.31.8/CompilerIdC/a.out",
+      "sha256_at_move": "661371a963ec1f857566298ed58599160209a5ea4ed6e8be9145a5037d501db7"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/build/CMakeFiles/3.31.8/CompilerIdC/CMakeCCompilerId.c",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/legacy_build/CMakeFiles/3.31.8/CompilerIdC/CMakeCCompilerId.c",
+      "sha256_at_move": "60d0dc2f177f0317302cef41d454988d9d49759ad3e011365bd6f6c544dfd126"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/build/CMakeFiles/3.31.8/CompilerIdCXX/a.out",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/legacy_build/CMakeFiles/3.31.8/CompilerIdCXX/a.out",
+      "sha256_at_move": "0c42c5eb83cd7502c8ec2c987afd4165807f7141a22099ceec44897ed2dd7345"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/build/CMakeFiles/3.31.8/CompilerIdCXX/CMakeCXXCompilerId.cpp",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/legacy_build/CMakeFiles/3.31.8/CompilerIdCXX/CMakeCXXCompilerId.cpp",
+      "sha256_at_move": "911d6deb85661272b2ddc7a8e26810febd726944c61e1d9495e6a1abb11d9eff"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/build/CMakeFiles/header-extraction-probe.dir/src/Probe.cpp.o",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/legacy_build/CMakeFiles/header-extraction-probe.dir/src/Probe.cpp.o",
+      "sha256_at_move": "3da015e53221d338574c4477cad8aac0652d853f1020126a8088de108311d32c"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/build/CMakeFiles/header-extraction-probe.dir/src/LibrarySlice.cpp.o",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/legacy_build/CMakeFiles/header-extraction-probe.dir/src/LibrarySlice.cpp.o",
+      "sha256_at_move": "96ce64f150be12be5e3fc611081e7967a139897535ce0f5034b6ff3ff633febf"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/build/CMakeFiles/header-extraction-probe.dir/src/Inventory.cpp.o",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/legacy_build/CMakeFiles/header-extraction-probe.dir/src/Inventory.cpp.o",
+      "sha256_at_move": "b2f7e5bbea43b996c5c27fb7aec671c3395513a0e6132eb5fc9d9a7be1989785"
+    },
+    {
+      "previous": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/HeaderExtractionPilot/build/CMakeFiles/header-extraction-probe.dir/src/Main.cpp.o",
+      "current": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/legacy_build/CMakeFiles/header-extraction-probe.dir/src/Main.cpp.o",
+      "sha256_at_move": "73b29356105fc6945b11d93cdb2bf1501019ccf7e0b3705cb6e7a844c53db845"
+    }
+  ]
+}

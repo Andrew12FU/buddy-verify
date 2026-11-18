@@ -1,0 +1,503 @@
+--- include/mlir/IR/Attributes.h
++++ conversion-include/mlir/IR/Attributes.h
+@@ -44,9 +44,44 @@
+ struct MemRefLayoutAttrInterfaceInterfaceTraits { struct Concept; template<typename T> class Model; template<typename T> class FallbackModel; template<typename T, typename U> class ExternalModel; };
+ template<typename T> struct MemRefLayoutAttrInterfaceTrait;
+ }
++class MemRefLayoutAttrInterface;
++namespace detail {
++template <>
++class Interface<::mlir::MemRefLayoutAttrInterface, ::mlir::Attribute, ::mlir::detail::MemRefLayoutAttrInterfaceInterfaceTraits, ::mlir::Attribute, ::mlir::AttributeTrait::TraitBase> : public ::mlir::Attribute {
++public:
++  using Concept = typename ::mlir::detail::MemRefLayoutAttrInterfaceInterfaceTraits::Concept;
++  template <typename T> using Model = typename ::mlir::detail::MemRefLayoutAttrInterfaceInterfaceTraits::template Model<T>;
++  template <typename T>
++  using FallbackModel = typename ::mlir::detail::MemRefLayoutAttrInterfaceInterfaceTraits::template FallbackModel<T>;
++  template <typename T, typename U>
++  using ExternalModel = typename ::mlir::detail::MemRefLayoutAttrInterfaceInterfaceTraits::template ExternalModel<T, U>;
++  using InterfaceBase =
++      Interface<::mlir::MemRefLayoutAttrInterface, ::mlir::Attribute, ::mlir::detail::MemRefLayoutAttrInterfaceInterfaceTraits, ::mlir::Attribute, ::mlir::AttributeTrait::TraitBase>;
++  using ValueType = ::mlir::Attribute;
++  template <typename ConcreteT>
++  struct Trait : public ::mlir::AttributeTrait::TraitBase<ConcreteT, Trait> {
++    using ModelT = Model<ConcreteT>;
++  };
++  explicit Interface(::mlir::Attribute t = ::mlir::Attribute());
++  Interface(std::nullptr_t);
++  template <typename T,
++            std::enable_if_t<std::is_base_of<Trait<T>, T>::value> * = nullptr>
++  Interface(T t);
++  Interface(::mlir::Attribute t, const Concept *conceptImpl);
++  Interface(::mlir::Attribute t, std::nullptr_t);
++
++private:
++  Concept *conceptImpl;
++};
++}
++template class AttributeInterface<MemRefLayoutAttrInterface, detail::MemRefLayoutAttrInterfaceInterfaceTraits>;
+ class MemRefLayoutAttrInterface : public AttributeInterface<MemRefLayoutAttrInterface, detail::MemRefLayoutAttrInterfaceInterfaceTraits> {
+ public:
+   using AttributeInterface<MemRefLayoutAttrInterface, detail::MemRefLayoutAttrInterfaceInterfaceTraits>::AttributeInterface;
++  MemRefLayoutAttrInterface() = default;
++  template<typename T, std::enable_if_t<std::is_base_of<InterfaceBase::template Trait<T>, T>::value> * = nullptr>
++  MemRefLayoutAttrInterface(T t);
++
+   template<typename T> struct Trait : detail::MemRefLayoutAttrInterfaceTrait<T> {};
+ };
+ namespace detail { template<typename T> struct MemRefLayoutAttrInterfaceTrait : AttributeInterface<MemRefLayoutAttrInterface, MemRefLayoutAttrInterfaceInterfaceTraits>::template Trait<T> {}; }
+--- include/mlir/IR/BuiltinAttributes.h
++++ conversion-include/mlir/IR/BuiltinAttributes.h
+@@ -21,11 +21,50 @@
+   template <typename T, typename U> class ExternalModel;
+ };
+ } // namespace detail
++// Converter compatibility: exact specialization of the retained template.
++// See header-rewrite.json for source and parameter substitutions.
++class TypedAttr;
++namespace detail {
++template <>
++class Interface<::mlir::TypedAttr, ::mlir::Attribute, ::mlir::detail::TypedAttrInterfaceTraits, ::mlir::Attribute, ::mlir::AttributeTrait::TraitBase> : public ::mlir::Attribute {
++public:
++  using Concept = typename ::mlir::detail::TypedAttrInterfaceTraits::Concept;
++  template <typename T> using Model = typename ::mlir::detail::TypedAttrInterfaceTraits::template Model<T>;
++  template <typename T>
++  using FallbackModel = typename ::mlir::detail::TypedAttrInterfaceTraits::template FallbackModel<T>;
++  template <typename T, typename U>
++  using ExternalModel = typename ::mlir::detail::TypedAttrInterfaceTraits::template ExternalModel<T, U>;
++  using InterfaceBase =
++      Interface<::mlir::TypedAttr, ::mlir::Attribute, ::mlir::detail::TypedAttrInterfaceTraits, ::mlir::Attribute, ::mlir::AttributeTrait::TraitBase>;
++  using ValueType = ::mlir::Attribute;
++  template <typename ConcreteT>
++  struct Trait : public ::mlir::AttributeTrait::TraitBase<ConcreteT, Trait> {
++    using ModelT = Model<ConcreteT>;
++  };
++  explicit Interface(::mlir::Attribute t = ::mlir::Attribute());
++  Interface(std::nullptr_t);
++  template <typename T,
++            std::enable_if_t<std::is_base_of<Trait<T>, T>::value> * = nullptr>
++  Interface(T t);
++  Interface(::mlir::Attribute t, const Concept *conceptImpl);
++  Interface(::mlir::Attribute t, std::nullptr_t);
++
++private:
++  Concept *conceptImpl;
++};
++} // namespace detail
++template class AttributeInterface<TypedAttr, detail::TypedAttrInterfaceTraits>;
+ class TypedAttr
+     : public AttributeInterface<TypedAttr, detail::TypedAttrInterfaceTraits> {
+ public:
+   using AttributeInterface<
+       TypedAttr, detail::TypedAttrInterfaceTraits>::AttributeInterface;
++  // Conversion view: preserve the inherited availability constraint.
++  TypedAttr() = default;
++  template <typename T,
++            std::enable_if_t<std::is_base_of<InterfaceBase::template Trait<T>, T>::value> * = nullptr>
++  TypedAttr(T t);
++
+   template <typename T> struct Trait : detail::TypedAttrTrait<T> {};
+ };
+ namespace detail {
+@@ -60,6 +99,37 @@
+   using Base::Base;
+    
+ };
++class ElementsAttr;
++namespace detail {
++template <>
++class Interface<::mlir::ElementsAttr, ::mlir::Attribute, ::mlir::detail::ElementsAttrInterfaceTraits, ::mlir::Attribute, ::mlir::AttributeTrait::TraitBase> : public ::mlir::Attribute {
++public:
++  using Concept = typename ::mlir::detail::ElementsAttrInterfaceTraits::Concept;
++  template <typename T> using Model = typename ::mlir::detail::ElementsAttrInterfaceTraits::template Model<T>;
++  template <typename T>
++  using FallbackModel = typename ::mlir::detail::ElementsAttrInterfaceTraits::template FallbackModel<T>;
++  template <typename T, typename U>
++  using ExternalModel = typename ::mlir::detail::ElementsAttrInterfaceTraits::template ExternalModel<T, U>;
++  using InterfaceBase =
++      Interface<::mlir::ElementsAttr, ::mlir::Attribute, ::mlir::detail::ElementsAttrInterfaceTraits, ::mlir::Attribute, ::mlir::AttributeTrait::TraitBase>;
++  using ValueType = ::mlir::Attribute;
++  template <typename ConcreteT>
++  struct Trait : public ::mlir::AttributeTrait::TraitBase<ConcreteT, Trait> {
++    using ModelT = Model<ConcreteT>;
++  };
++  explicit Interface(::mlir::Attribute t = ::mlir::Attribute());
++  Interface(std::nullptr_t);
++  template <typename T,
++            std::enable_if_t<std::is_base_of<Trait<T>, T>::value> * = nullptr>
++  Interface(T t);
++  Interface(::mlir::Attribute t, const Concept *conceptImpl);
++  Interface(::mlir::Attribute t, std::nullptr_t);
++
++private:
++  Concept *conceptImpl;
++};
++}
++template class AttributeInterface<ElementsAttr, detail::ElementsAttrInterfaceTraits>;
+ class ElementsAttr : public AttributeInterface<ElementsAttr,
+                                 detail::ElementsAttrInterfaceTraits> {
+ public:
+--- include/mlir/IR/BuiltinTypes.h
++++ conversion-include/mlir/IR/BuiltinTypes.h
+@@ -132,6 +132,37 @@
+ struct PtrLikeTypeInterfaceInterfaceTraits { struct Concept; template<typename T> class Model; template<typename T> class FallbackModel; template<typename T, typename U> class ExternalModel; };
+ template<typename T> struct PtrLikeTypeInterfaceTrait;
+ }
++class PtrLikeTypeInterface;
++namespace detail {
++template <>
++class Interface<::mlir::PtrLikeTypeInterface, ::mlir::Type, ::mlir::detail::PtrLikeTypeInterfaceInterfaceTraits, ::mlir::Type, ::mlir::TypeTrait::TraitBase> : public ::mlir::Type {
++public:
++  using Concept = typename ::mlir::detail::PtrLikeTypeInterfaceInterfaceTraits::Concept;
++  template <typename T> using Model = typename ::mlir::detail::PtrLikeTypeInterfaceInterfaceTraits::template Model<T>;
++  template <typename T>
++  using FallbackModel = typename ::mlir::detail::PtrLikeTypeInterfaceInterfaceTraits::template FallbackModel<T>;
++  template <typename T, typename U>
++  using ExternalModel = typename ::mlir::detail::PtrLikeTypeInterfaceInterfaceTraits::template ExternalModel<T, U>;
++  using InterfaceBase =
++      Interface<::mlir::PtrLikeTypeInterface, ::mlir::Type, ::mlir::detail::PtrLikeTypeInterfaceInterfaceTraits, ::mlir::Type, ::mlir::TypeTrait::TraitBase>;
++  using ValueType = ::mlir::Type;
++  template <typename ConcreteT>
++  struct Trait : public ::mlir::TypeTrait::TraitBase<ConcreteT, Trait> {
++    using ModelT = Model<ConcreteT>;
++  };
++  explicit Interface(::mlir::Type t = ::mlir::Type());
++  Interface(std::nullptr_t);
++  template <typename T,
++            std::enable_if_t<std::is_base_of<Trait<T>, T>::value> * = nullptr>
++  Interface(T t);
++  Interface(::mlir::Type t, const Concept *conceptImpl);
++  Interface(::mlir::Type t, std::nullptr_t);
++
++private:
++  Concept *conceptImpl;
++};
++}
++template class TypeInterface<PtrLikeTypeInterface, detail::PtrLikeTypeInterfaceInterfaceTraits>;
+ class PtrLikeTypeInterface : public TypeInterface<PtrLikeTypeInterface, detail::PtrLikeTypeInterfaceInterfaceTraits> {
+ public:
+   using TypeInterface<PtrLikeTypeInterface, detail::PtrLikeTypeInterfaceInterfaceTraits>::TypeInterface;
+@@ -153,6 +184,8 @@
+ };
+ class MemRefLayoutAttrInterface;
+ class AffineMap;
++class MemRefType;
++template class detail::StorageUserBase<MemRefType, BaseMemRefType, detail::MemRefTypeStorage, detail::TypeUniquer, PtrLikeTypeInterface::Trait, ShapedType::Trait>;
+ class MemRefType : public Type::TypeBase<MemRefType, BaseMemRefType, detail::MemRefTypeStorage, PtrLikeTypeInterface::Trait, ShapedType::Trait> {
+ public:
+   using Base::Base;
+--- include/mlir/IR/OpDefinition.h
++++ conversion-include/mlir/IR/OpDefinition.h
+@@ -687,6 +687,9 @@
+ class OpFoldResult : public llvm::PointerUnion<Attribute, Value> {
+ public:
+   using PointerUnion::PointerUnion;
++  OpFoldResult() = default;
++  OpFoldResult(Attribute attribute);
++  OpFoldResult(Value value);
+ };
+ }
+ 
+@@ -708,6 +711,37 @@
+ struct ViewLikeOpInterfaceInterfaceTraits { struct Concept; template<typename T> class Model; template<typename T> class FallbackModel; template<typename T, typename U> class ExternalModel; };
+ template<typename T> struct ViewLikeOpInterfaceTrait;
+ }
++class ViewLikeOpInterface;
++namespace detail {
++template <>
++class Interface<::mlir::ViewLikeOpInterface, ::mlir::Operation *, ::mlir::detail::ViewLikeOpInterfaceInterfaceTraits, ::mlir::OpState, ::mlir::OpTrait::TraitBase> : public ::mlir::OpState {
++public:
++  using Concept = typename ::mlir::detail::ViewLikeOpInterfaceInterfaceTraits::Concept;
++  template <typename T> using Model = typename ::mlir::detail::ViewLikeOpInterfaceInterfaceTraits::template Model<T>;
++  template <typename T>
++  using FallbackModel = typename ::mlir::detail::ViewLikeOpInterfaceInterfaceTraits::template FallbackModel<T>;
++  template <typename T, typename U>
++  using ExternalModel = typename ::mlir::detail::ViewLikeOpInterfaceInterfaceTraits::template ExternalModel<T, U>;
++  using InterfaceBase =
++      Interface<::mlir::ViewLikeOpInterface, ::mlir::Operation *, ::mlir::detail::ViewLikeOpInterfaceInterfaceTraits, ::mlir::OpState, ::mlir::OpTrait::TraitBase>;
++  using ValueType = ::mlir::Operation *;
++  template <typename ConcreteT>
++  struct Trait : public ::mlir::OpTrait::TraitBase<ConcreteT, Trait> {
++    using ModelT = Model<ConcreteT>;
++  };
++  explicit Interface(::mlir::Operation * t = ValueType());
++  Interface(std::nullptr_t);
++  template <typename T,
++            std::enable_if_t<std::is_base_of<Trait<T>, T>::value> * = nullptr>
++  Interface(T t);
++  Interface(::mlir::Operation * t, const Concept *conceptImpl);
++  Interface(::mlir::Operation * t, std::nullptr_t);
++
++private:
++  Concept *conceptImpl;
++};
++}
++template class OpInterface<ViewLikeOpInterface, detail::ViewLikeOpInterfaceInterfaceTraits>;
+ class ViewLikeOpInterface : public OpInterface<ViewLikeOpInterface, detail::ViewLikeOpInterfaceInterfaceTraits> {
+ public:
+   using OpInterface<ViewLikeOpInterface, detail::ViewLikeOpInterfaceInterfaceTraits>::OpInterface;
+@@ -720,6 +754,37 @@
+ struct MemorySpaceCastConsumerOpInterfaceInterfaceTraits { struct Concept; template<typename T> class Model; template<typename T> class FallbackModel; template<typename T, typename U> class ExternalModel; };
+ template<typename T> struct MemorySpaceCastConsumerOpInterfaceTrait;
+ }
++class MemorySpaceCastConsumerOpInterface;
++namespace detail {
++template <>
++class Interface<::mlir::MemorySpaceCastConsumerOpInterface, ::mlir::Operation *, ::mlir::detail::MemorySpaceCastConsumerOpInterfaceInterfaceTraits, ::mlir::OpState, ::mlir::OpTrait::TraitBase> : public ::mlir::OpState {
++public:
++  using Concept = typename ::mlir::detail::MemorySpaceCastConsumerOpInterfaceInterfaceTraits::Concept;
++  template <typename T> using Model = typename ::mlir::detail::MemorySpaceCastConsumerOpInterfaceInterfaceTraits::template Model<T>;
++  template <typename T>
++  using FallbackModel = typename ::mlir::detail::MemorySpaceCastConsumerOpInterfaceInterfaceTraits::template FallbackModel<T>;
++  template <typename T, typename U>
++  using ExternalModel = typename ::mlir::detail::MemorySpaceCastConsumerOpInterfaceInterfaceTraits::template ExternalModel<T, U>;
++  using InterfaceBase =
++      Interface<::mlir::MemorySpaceCastConsumerOpInterface, ::mlir::Operation *, ::mlir::detail::MemorySpaceCastConsumerOpInterfaceInterfaceTraits, ::mlir::OpState, ::mlir::OpTrait::TraitBase>;
++  using ValueType = ::mlir::Operation *;
++  template <typename ConcreteT>
++  struct Trait : public ::mlir::OpTrait::TraitBase<ConcreteT, Trait> {
++    using ModelT = Model<ConcreteT>;
++  };
++  explicit Interface(::mlir::Operation * t = ValueType());
++  Interface(std::nullptr_t);
++  template <typename T,
++            std::enable_if_t<std::is_base_of<Trait<T>, T>::value> * = nullptr>
++  Interface(T t);
++  Interface(::mlir::Operation * t, const Concept *conceptImpl);
++  Interface(::mlir::Operation * t, std::nullptr_t);
++
++private:
++  Concept *conceptImpl;
++};
++}
++template class OpInterface<MemorySpaceCastConsumerOpInterface, detail::MemorySpaceCastConsumerOpInterfaceInterfaceTraits>;
+ class MemorySpaceCastConsumerOpInterface : public OpInterface<MemorySpaceCastConsumerOpInterface, detail::MemorySpaceCastConsumerOpInterfaceInterfaceTraits> {
+ public:
+   using OpInterface<MemorySpaceCastConsumerOpInterface, detail::MemorySpaceCastConsumerOpInterfaceInterfaceTraits>::OpInterface;
+@@ -732,6 +797,37 @@
+ struct OffsetSizeAndStrideOpInterfaceInterfaceTraits { struct Concept; template<typename T> class Model; template<typename T> class FallbackModel; template<typename T, typename U> class ExternalModel; };
+ template<typename T> struct OffsetSizeAndStrideOpInterfaceTrait;
+ }
++class OffsetSizeAndStrideOpInterface;
++namespace detail {
++template <>
++class Interface<::mlir::OffsetSizeAndStrideOpInterface, ::mlir::Operation *, ::mlir::detail::OffsetSizeAndStrideOpInterfaceInterfaceTraits, ::mlir::OpState, ::mlir::OpTrait::TraitBase> : public ::mlir::OpState {
++public:
++  using Concept = typename ::mlir::detail::OffsetSizeAndStrideOpInterfaceInterfaceTraits::Concept;
++  template <typename T> using Model = typename ::mlir::detail::OffsetSizeAndStrideOpInterfaceInterfaceTraits::template Model<T>;
++  template <typename T>
++  using FallbackModel = typename ::mlir::detail::OffsetSizeAndStrideOpInterfaceInterfaceTraits::template FallbackModel<T>;
++  template <typename T, typename U>
++  using ExternalModel = typename ::mlir::detail::OffsetSizeAndStrideOpInterfaceInterfaceTraits::template ExternalModel<T, U>;
++  using InterfaceBase =
++      Interface<::mlir::OffsetSizeAndStrideOpInterface, ::mlir::Operation *, ::mlir::detail::OffsetSizeAndStrideOpInterfaceInterfaceTraits, ::mlir::OpState, ::mlir::OpTrait::TraitBase>;
++  using ValueType = ::mlir::Operation *;
++  template <typename ConcreteT>
++  struct Trait : public ::mlir::OpTrait::TraitBase<ConcreteT, Trait> {
++    using ModelT = Model<ConcreteT>;
++  };
++  explicit Interface(::mlir::Operation * t = ValueType());
++  Interface(std::nullptr_t);
++  template <typename T,
++            std::enable_if_t<std::is_base_of<Trait<T>, T>::value> * = nullptr>
++  Interface(T t);
++  Interface(::mlir::Operation * t, const Concept *conceptImpl);
++  Interface(::mlir::Operation * t, std::nullptr_t);
++
++private:
++  Concept *conceptImpl;
++};
++}
++template class OpInterface<OffsetSizeAndStrideOpInterface, detail::OffsetSizeAndStrideOpInterfaceInterfaceTraits>;
+ class OffsetSizeAndStrideOpInterface : public OpInterface<OffsetSizeAndStrideOpInterface, detail::OffsetSizeAndStrideOpInterfaceInterfaceTraits> {
+ public:
+   using OpInterface<OffsetSizeAndStrideOpInterface, detail::OffsetSizeAndStrideOpInterfaceInterfaceTraits>::OpInterface;
+@@ -762,6 +858,37 @@
+ struct CastOpInterfaceInterfaceTraits { struct Concept; template<typename T> class Model; template<typename T> class FallbackModel; template<typename T, typename U> class ExternalModel; };
+ template<typename T> struct CastOpInterfaceTrait;
+ }
++class CastOpInterface;
++namespace detail {
++template <>
++class Interface<::mlir::CastOpInterface, ::mlir::Operation *, ::mlir::detail::CastOpInterfaceInterfaceTraits, ::mlir::OpState, ::mlir::OpTrait::TraitBase> : public ::mlir::OpState {
++public:
++  using Concept = typename ::mlir::detail::CastOpInterfaceInterfaceTraits::Concept;
++  template <typename T> using Model = typename ::mlir::detail::CastOpInterfaceInterfaceTraits::template Model<T>;
++  template <typename T>
++  using FallbackModel = typename ::mlir::detail::CastOpInterfaceInterfaceTraits::template FallbackModel<T>;
++  template <typename T, typename U>
++  using ExternalModel = typename ::mlir::detail::CastOpInterfaceInterfaceTraits::template ExternalModel<T, U>;
++  using InterfaceBase =
++      Interface<::mlir::CastOpInterface, ::mlir::Operation *, ::mlir::detail::CastOpInterfaceInterfaceTraits, ::mlir::OpState, ::mlir::OpTrait::TraitBase>;
++  using ValueType = ::mlir::Operation *;
++  template <typename ConcreteT>
++  struct Trait : public ::mlir::OpTrait::TraitBase<ConcreteT, Trait> {
++    using ModelT = Model<ConcreteT>;
++  };
++  explicit Interface(::mlir::Operation * t = ValueType());
++  Interface(std::nullptr_t);
++  template <typename T,
++            std::enable_if_t<std::is_base_of<Trait<T>, T>::value> * = nullptr>
++  Interface(T t);
++  Interface(::mlir::Operation * t, const Concept *conceptImpl);
++  Interface(::mlir::Operation * t, std::nullptr_t);
++
++private:
++  Concept *conceptImpl;
++};
++}
++template class OpInterface<CastOpInterface, detail::CastOpInterfaceInterfaceTraits>;
+ class CastOpInterface : public OpInterface<CastOpInterface, detail::CastOpInterfaceInterfaceTraits> {
+ public:
+   using OpInterface<CastOpInterface, detail::CastOpInterfaceInterfaceTraits>::OpInterface;
+@@ -774,6 +901,37 @@
+ struct AlignmentAttrOpInterfaceInterfaceTraits { struct Concept; template<typename T> class Model; template<typename T> class FallbackModel; template<typename T, typename U> class ExternalModel; };
+ template<typename T> struct AlignmentAttrOpInterfaceTrait;
+ }
++class AlignmentAttrOpInterface;
++namespace detail {
++template <>
++class Interface<::mlir::AlignmentAttrOpInterface, ::mlir::Operation *, ::mlir::detail::AlignmentAttrOpInterfaceInterfaceTraits, ::mlir::OpState, ::mlir::OpTrait::TraitBase> : public ::mlir::OpState {
++public:
++  using Concept = typename ::mlir::detail::AlignmentAttrOpInterfaceInterfaceTraits::Concept;
++  template <typename T> using Model = typename ::mlir::detail::AlignmentAttrOpInterfaceInterfaceTraits::template Model<T>;
++  template <typename T>
++  using FallbackModel = typename ::mlir::detail::AlignmentAttrOpInterfaceInterfaceTraits::template FallbackModel<T>;
++  template <typename T, typename U>
++  using ExternalModel = typename ::mlir::detail::AlignmentAttrOpInterfaceInterfaceTraits::template ExternalModel<T, U>;
++  using InterfaceBase =
++      Interface<::mlir::AlignmentAttrOpInterface, ::mlir::Operation *, ::mlir::detail::AlignmentAttrOpInterfaceInterfaceTraits, ::mlir::OpState, ::mlir::OpTrait::TraitBase>;
++  using ValueType = ::mlir::Operation *;
++  template <typename ConcreteT>
++  struct Trait : public ::mlir::OpTrait::TraitBase<ConcreteT, Trait> {
++    using ModelT = Model<ConcreteT>;
++  };
++  explicit Interface(::mlir::Operation * t = ValueType());
++  Interface(std::nullptr_t);
++  template <typename T,
++            std::enable_if_t<std::is_base_of<Trait<T>, T>::value> * = nullptr>
++  Interface(T t);
++  Interface(::mlir::Operation * t, const Concept *conceptImpl);
++  Interface(::mlir::Operation * t, std::nullptr_t);
++
++private:
++  Concept *conceptImpl;
++};
++}
++template class OpInterface<AlignmentAttrOpInterface, detail::AlignmentAttrOpInterfaceInterfaceTraits>;
+ class AlignmentAttrOpInterface : public OpInterface<AlignmentAttrOpInterface, detail::AlignmentAttrOpInterfaceInterfaceTraits> {
+ public:
+   using OpInterface<AlignmentAttrOpInterface, detail::AlignmentAttrOpInterfaceInterfaceTraits>::OpInterface;
+--- include/mlir/IR/ValueRange.h
++++ conversion-include/mlir/IR/ValueRange.h
+@@ -31,6 +31,39 @@
+ // Provenance: audited Reshape V2 mini, line 1027; see docs/PROVENANCE.md.
+ namespace mlir {
+ template<typename ValueRangeT> class ValueTypeRange;
++// Concrete indexed range: ValueRange
++class ValueRange;
++} // namespace mlir
++namespace llvm { namespace detail {
++template<>
++class indexed_accessor_range_base<::mlir::ValueRange, llvm::PointerUnion<const ::mlir::Value *, ::mlir::OpOperand *, ::mlir::detail::OpResultImpl *, const llvm::Repeated<::mlir::Value> *>, ::mlir::Value, ::mlir::Value, ::mlir::Value> {
++public:
++  using RangeBaseT = indexed_accessor_range_base;
++  ::mlir::Value operator[](long index) const;
++   
++  class iterator : public indexed_accessor_iterator<iterator,llvm::PointerUnion<const ::mlir::Value *, ::mlir::OpOperand *, ::mlir::detail::OpResultImpl *, const llvm::Repeated<::mlir::Value> *>,::mlir::Value,::mlir::Value,::mlir::Value> {
++  public:
++    ::mlir::Value operator*() const;
++  private:
++    iterator(llvm::PointerUnion<const ::mlir::Value *, ::mlir::OpOperand *, ::mlir::detail::OpResultImpl *, const llvm::Repeated<::mlir::Value> *> owner,std::ptrdiff_t curIndex);
++    friend indexed_accessor_range_base<::mlir::ValueRange,llvm::PointerUnion<const ::mlir::Value *, ::mlir::OpOperand *, ::mlir::detail::OpResultImpl *, const llvm::Repeated<::mlir::Value> *>,::mlir::Value,::mlir::Value,::mlir::Value>;
++  };
++  iterator begin() const;
++   
++  inline indexed_accessor_range_base(iterator begin, iterator end);
++  inline indexed_accessor_range_base(const iterator_range<iterator> &range);
++  inline indexed_accessor_range_base(llvm::PointerUnion<const ::mlir::Value *, ::mlir::OpOperand *, ::mlir::detail::OpResultImpl *, const llvm::Repeated<::mlir::Value> *> base, long count);
++
++protected:
++  indexed_accessor_range_base(const indexed_accessor_range_base &) = default;
++  indexed_accessor_range_base(indexed_accessor_range_base &&) = default;
++  indexed_accessor_range_base &
++  operator=(const indexed_accessor_range_base &) = default;
++  llvm::PointerUnion<const ::mlir::Value *, ::mlir::OpOperand *, ::mlir::detail::OpResultImpl *, const llvm::Repeated<::mlir::Value> *> base;
++  long count;
++};
++} }
++namespace mlir {
+ class ValueRange final
+     : public llvm::detail::indexed_accessor_range_base<
+           ValueRange,
+@@ -62,26 +95,59 @@
+ } // namespace mlir
+ 
+ namespace mlir {
++// Concrete indexed range: ResultRange
++class ResultRange;
++} // namespace mlir
++namespace llvm { namespace detail {
++template<>
++class indexed_accessor_range_base<::mlir::ResultRange, ::mlir::detail::OpResultImpl *, ::mlir::OpResult, ::mlir::OpResult, ::mlir::OpResult> {
++public:
++  using RangeBaseT = indexed_accessor_range_base;
++  ::mlir::OpResult operator[](long index) const;
++   
++  class iterator : public indexed_accessor_iterator<iterator,::mlir::detail::OpResultImpl *,::mlir::OpResult,::mlir::OpResult,::mlir::OpResult> {
++  public:
++    ::mlir::OpResult operator*() const;
++  private:
++    iterator(::mlir::detail::OpResultImpl * owner,std::ptrdiff_t curIndex);
++    friend indexed_accessor_range_base<::mlir::ResultRange,::mlir::detail::OpResultImpl *,::mlir::OpResult,::mlir::OpResult,::mlir::OpResult>;
++  };
++  iterator begin() const;
++   
++  inline indexed_accessor_range_base(iterator begin, iterator end);
++  inline indexed_accessor_range_base(const iterator_range<iterator> &range);
++  inline indexed_accessor_range_base(::mlir::detail::OpResultImpl * base, long count);
++
++protected:
++  indexed_accessor_range_base(const indexed_accessor_range_base &) = default;
++  indexed_accessor_range_base(indexed_accessor_range_base &&) = default;
++  indexed_accessor_range_base &
++  operator=(const indexed_accessor_range_base &) = default;
++  ::mlir::detail::OpResultImpl * base;
++  long count;
++};
++} }
++namespace mlir {
+ class ResultRange final : public llvm::detail::indexed_accessor_range_base<ResultRange, detail::OpResultImpl *, OpResult, OpResult, OpResult> {
+ public:
+   using RangeBaseT::RangeBaseT;
+-  class UseIterator;
++  class UseIterator final
++      : public llvm::iterator_facade_base<UseIterator, std::forward_iterator_tag, OpOperand> {
++  public:
++    explicit UseIterator(ResultRange results, bool end = false);
++    UseIterator &operator++();
++    OpOperand &operator*() const;
++    bool operator!=(const UseIterator &rhs) const;
++  private:
++    ResultRange::iterator it, endIt;
++    Value::use_iterator use;
++  };
+   using use_iterator = UseIterator;
+   using use_range = llvm::iterator_range<use_iterator>;
+ };
+ }
+ 
+ namespace mlir {
+-class ResultRange::UseIterator final
+-    : public llvm::iterator_facade_base<UseIterator, std::forward_iterator_tag, OpOperand> {
+-public:
+-  explicit UseIterator(ResultRange results, bool end = false);
+-  UseIterator &operator++();
+-  OpOperand &operator*() const;
+-  bool operator!=(const UseIterator &rhs) const;
+-private:
+-  ResultRange::iterator it, endIt;
+-  Value::use_iterator use;
+-};
++
+ }
+ #endif

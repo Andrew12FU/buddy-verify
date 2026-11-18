@@ -1,0 +1,334 @@
+{
+  "schema_version": 1,
+  "pass": "silu-fusion",
+  "run_state": "converted",
+  "source_rewrites": {
+    "applied": true,
+    "input": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/TosaElementwiseFusion/SiLUFusion.cpp",
+    "original_snapshot": {
+      "path": "original.cpp",
+      "sha256": "48542532ac27629c2a214cb8ccea059d6d4bf5e6468e8596057a59d752d43c43"
+    },
+    "rewritten_source": {
+      "path": "rewritten.cpp",
+      "sha256": "a663c11e562eccdd3fa39a1ba4cc83e9ebac45da94a9e5801d2f5526a5cc246d"
+    },
+    "report": {
+      "path": "rewrite.json",
+      "sha256": "8c50f29ce6b511093e595f9252673dfadca1c65e40c7528389ddefb9aedb74c8"
+    },
+    "offset_basis": "UTF-8 bytes against the original source, before all edits",
+    "rounds": [],
+    "edit_count": 10,
+    "rule_counts": {
+      "namespace": 2,
+      "if-condition": 1,
+      "guard": 1,
+      "value-range-preamble": 1,
+      "capture-pointers": 1,
+      "value-range": 2,
+      "capture": 1,
+      "namespace-reference": 1
+    },
+    "edits": [
+      {
+        "after": "namespace SiLUFusion_anonymousNamespace_01",
+        "before": "namespace",
+        "column": 1,
+        "dependency_change": "Changes internal linkage; single-TU compatibility workaround",
+        "insertion_order": -1,
+        "length": 9,
+        "line": 41,
+        "offset": 1613,
+        "reason": "Name an anonymous namespace; reopened declarations share one name",
+        "rule": "namespace"
+      },
+      {
+        "after": "{\n      auto lhsSigmoid = lhs.getDefiningOp<tosa::SigmoidOp>();\n      if (static_cast<bool>(lhsSigmoid)) {\n        if (lhsSigmoid.getInput() == rhs) {\n          sigmoidOp = lhsSigmoid;\n          inputValue = rhs;\n        }\n      } else {\n        auto rhsSigmoid = rhs.getDefiningOp<tosa::SigmoidOp>();\n        if (static_cast<bool>(rhsSigmoid)) {\n          if (rhsSigmoid.getInput() == lhs) {\n            sigmoidOp = rhsSigmoid;\n            inputValue = lhs;\n          }\n        }\n      }\n    }",
+        "before": "if (auto lhsSigmoid = lhs.getDefiningOp<tosa::SigmoidOp>()) {\n      if (lhsSigmoid.getInput() == rhs) {\n        sigmoidOp = lhsSigmoid;\n        inputValue = rhs;\n      }\n    } else if (auto rhsSigmoid = rhs.getDefiningOp<tosa::SigmoidOp>()) {\n      if (rhsSigmoid.getInput() == lhs) {\n        sigmoidOp = rhsSigmoid;\n        inputValue = lhs;\n      }\n    }",
+        "column": 5,
+        "dependency_change": "Explicit contextual bool; no new library interface",
+        "insertion_order": -1,
+        "length": 356,
+        "line": 58,
+        "offset": 2124,
+        "reason": "Preserve conditional construction, else priority and body scopes",
+        "rule": "if-condition"
+      },
+      {
+        "after": "{\n      if (!sigmoidOp || !inputValue) {\n        return failure();\n      }\n    }",
+        "before": "if (!sigmoidOp || !inputValue) {\n      return failure();\n    }",
+        "column": 5,
+        "dependency_change": "none",
+        "insertion_order": -1,
+        "length": 62,
+        "line": 70,
+        "offset": 2486,
+        "reason": "Isolate a direct failure guard in the audited method pattern; keep loop guards unchanged",
+        "rule": "guard"
+      },
+      {
+        "after": "mlir::Value siluInputValues[] = {inputValue};\n    llvm::ArrayRef<mlir::Value> siluInputRef(siluInputValues, sizeof(siluInputValues) / sizeof(siluInputValues[0]));\n    mlir::ValueRange siluInputRange(siluInputRef);\n    mlir::Value siluOutputValues[] = {emptyTensor};\n    llvm::ArrayRef<mlir::Value> siluOutputRef(siluOutputValues, sizeof(siluOutputValues) / sizeof(siluOutputValues[0]));\n    mlir::ValueRange siluOutputRange(siluOutputRef);\n    ",
+        "before": "",
+        "column": 5,
+        "dependency_change": "ArrayRef pointer/length and ValueRange(ArrayRef) required",
+        "insertion_order": 10,
+        "length": 0,
+        "line": 103,
+        "offset": 3677,
+        "reason": "Own every Value element until the original call returns",
+        "rule": "value-range-preamble"
+      },
+      {
+        "after": "auto *elementTypePtr = &elementType;\n    ",
+        "before": "",
+        "column": 5,
+        "dependency_change": "Pointer locals; callback lifetime assumptions remain unchanged",
+        "insertion_order": 20,
+        "length": 0,
+        "line": 103,
+        "offset": 3677,
+        "reason": "Take the addresses of the original captured objects",
+        "rule": "capture-pointers"
+      },
+      {
+        "after": "siluInputRange",
+        "before": "ValueRange{inputValue}",
+        "column": 36,
+        "dependency_change": "Selects ValueRange(ArrayRef<Value>), not initializer_list",
+        "insertion_order": -1,
+        "length": 22,
+        "line": 104,
+        "offset": 3767,
+        "reason": "Use an array-backed range for the audited GenericOp argument",
+        "rule": "value-range"
+      },
+      {
+        "after": "siluOutputRange",
+        "before": "ValueRange{emptyTensor}",
+        "column": 9,
+        "dependency_change": "Selects ValueRange(ArrayRef<Value>), not initializer_list",
+        "insertion_order": -1,
+        "length": 23,
+        "line": 105,
+        "offset": 3799,
+        "reason": "Use an array-backed range for the audited GenericOp argument",
+        "rule": "value-range"
+      },
+      {
+        "after": "[elementTypePtr](OpBuilder &b, Location loc, ValueRange args) {\n          Value input = args[0];\n\n          // SiLU: x * sigmoid(x) = x * (1 / (1 + exp(-x)))\n          Value one = arith::ConstantOp::create(\n              b, loc, b.getFloatAttr((*elementTypePtr), 1.0));\n          Value negInput = arith::NegFOp::create(b, loc, input);\n          Value expNegInput = math::ExpOp::create(b, loc, negInput);\n          Value onePlusExp = arith::AddFOp::create(b, loc, one, expNegInput);\n          Value sigmoid = arith::DivFOp::create(b, loc, one, onePlusExp);\n          Value silu = arith::MulFOp::create(b, loc, input, sigmoid);\n\n          linalg::YieldOp::create(b, loc, silu);\n        }",
+        "before": "[&](OpBuilder &b, Location loc, ValueRange args) {\n          Value input = args[0];\n\n          // SiLU: x * sigmoid(x) = x * (1 / (1 + exp(-x)))\n          Value one = arith::ConstantOp::create(\n              b, loc, b.getFloatAttr(elementType, 1.0));\n          Value negInput = arith::NegFOp::create(b, loc, input);\n          Value expNegInput = math::ExpOp::create(b, loc, negInput);\n          Value onePlusExp = arith::AddFOp::create(b, loc, one, expNegInput);\n          Value sigmoid = arith::DivFOp::create(b, loc, one, onePlusExp);\n          Value silu = arith::MulFOp::create(b, loc, input, sigmoid);\n\n          linalg::YieldOp::create(b, loc, silu);\n        }",
+        "column": 9,
+        "dependency_change": "none",
+        "insertion_order": -1,
+        "length": 666,
+        "line": 106,
+        "offset": 3861,
+        "reason": "Capture pointers by value; rewrite references by declaration identity",
+        "rule": "capture"
+      },
+      {
+        "after": "namespace SiLUFusion_anonymousNamespace_01",
+        "before": "namespace",
+        "column": 1,
+        "dependency_change": "Changes internal linkage; single-TU compatibility workaround",
+        "insertion_order": -1,
+        "length": 9,
+        "line": 137,
+        "offset": 4986,
+        "reason": "Name an anonymous namespace; reopened declarations share one name",
+        "rule": "namespace"
+      },
+      {
+        "after": "SiLUFusion_anonymousNamespace_01::SiLUFusionPass",
+        "before": "SiLUFusionPass",
+        "column": 50,
+        "dependency_change": "none",
+        "insertion_order": -1,
+        "length": 14,
+        "line": 168,
+        "offset": 5969,
+        "reason": "Preserve the bound class reference outside the renamed namespace",
+        "rule": "namespace-reference"
+      }
+    ]
+  },
+  "header_rewrites": {
+    "applied": true,
+    "report": {
+      "path": "header-rewrite.json",
+      "sha256": "eab3146c2722d5887f07b79e1cbaeb6101842550f2aa7d873210dea52bcbe799"
+    },
+    "patch": {
+      "path": "header-rewrite.patch",
+      "sha256": "c98f20f0124dc0e2462b865d562082b3ab505d04faf7797b4ead6f20113b7c72"
+    },
+    "input_root": "include",
+    "conversion_root": "conversion-include",
+    "offset_basis": "UTF-8 bytes after preceding edits in sequence order",
+    "edit_count": 8,
+    "rule_counts": {
+      "typed-attr-interface-specialization": 1,
+      "typed-attr-constructor-expansion": 1,
+      "op-nullptr-constructor-expansion": 1,
+      "indexed-range-concrete-expansion": 3,
+      "nested-use-iterator-relocation": 2
+    },
+    "changed_headers": [
+      "mlir/Dialect/Tosa/IR/TosaOps.h",
+      "mlir/IR/BuiltinAttributes.h",
+      "mlir/IR/TypeRange.h",
+      "mlir/IR/ValueRange.h"
+    ],
+    "edits": [
+      {
+        "rule": "typed-attr-interface-specialization",
+        "file": "mlir/IR/BuiltinAttributes.h",
+        "offset": 582,
+        "length": 0,
+        "before": "",
+        "after": "// Converter compatibility: exact specialization of the retained template.\n// See header-rewrite.json for source and parameter substitutions.\nclass TypedAttr;\nnamespace detail {\ntemplate <>\nclass Interface<::mlir::TypedAttr, ::mlir::Attribute, ::mlir::detail::TypedAttrInterfaceTraits, ::mlir::Attribute, ::mlir::AttributeTrait::TraitBase> : public ::mlir::Attribute {\npublic:\n  using Concept = typename ::mlir::detail::TypedAttrInterfaceTraits::Concept;\n  template <typename T> using Model = typename ::mlir::detail::TypedAttrInterfaceTraits::template Model<T>;\n  template <typename T>\n  using FallbackModel = typename ::mlir::detail::TypedAttrInterfaceTraits::template FallbackModel<T>;\n  template <typename T, typename U>\n  using ExternalModel = typename ::mlir::detail::TypedAttrInterfaceTraits::template ExternalModel<T, U>;\n  using InterfaceBase =\n      Interface<::mlir::TypedAttr, ::mlir::Attribute, ::mlir::detail::TypedAttrInterfaceTraits, ::mlir::Attribute, ::mlir::AttributeTrait::TraitBase>;\n  using ValueType = ::mlir::Attribute;\n  template <typename ConcreteT>\n  struct Trait : public ::mlir::AttributeTrait::TraitBase<ConcreteT, Trait> {\n    using ModelT = Model<ConcreteT>;\n  };\n  explicit Interface(::mlir::Attribute t = ::mlir::Attribute());\n  Interface(std::nullptr_t);\n  template <typename T,\n            std::enable_if_t<std::is_base_of<Trait<T>, T>::value> * = nullptr>\n  Interface(T t);\n  Interface(::mlir::Attribute t, const Concept *conceptImpl);\n  Interface(::mlir::Attribute t, std::nullptr_t);\n\nprivate:\n  Concept *conceptImpl;\n};\n} // namespace detail\ntemplate class AttributeInterface<TypedAttr, detail::TypedAttrInterfaceTraits>;\n",
+        "template_source": "mlir/Support/InterfaceSupport.h",
+        "template_begin": 810,
+        "template_end": 1738,
+        "arguments": {
+          "ConcreteType": "::mlir::TypedAttr",
+          "ValueT": "::mlir::Attribute",
+          "Traits": "::mlir::detail::TypedAttrInterfaceTraits",
+          "BaseType": "::mlir::Attribute",
+          "BaseTrait": "::mlir::AttributeTrait::TraitBase"
+        },
+        "reason": "Expose nested Trait definitions to Frama-Clang 0.0.20（Clang 18.1.8） without changing their qualified type identity",
+        "sequence": 0
+      },
+      {
+        "rule": "typed-attr-constructor-expansion",
+        "file": "mlir/IR/BuiltinAttributes.h",
+        "offset": 2446,
+        "length": 0,
+        "before": "",
+        "after": "\n  // Conversion view: preserve the inherited availability constraint.\n  TypedAttr() = default;\n  template <typename T,\n            std::enable_if_t<std::is_base_of<InterfaceBase::template Trait<T>, T>::value> * = nullptr>\n  TypedAttr(T t);\n",
+        "prototype_source": "mlir/Support/InterfaceSupport.h",
+        "prototype": "  template <typename T,\n            std::enable_if_t<std::is_base_of<Trait<T>, T>::value> * = nullptr>\n  Interface(T t);",
+        "owner": "mlir::TypedAttr",
+        "reason": "Explicit constructor declaration avoids CXXInheritedCtorInitExpr in the conversion model",
+        "abstraction_effect": "Construction remains externally declared; no implementation or IR behavior is synthesized",
+        "sequence": 1
+      },
+      {
+        "rule": "op-nullptr-constructor-expansion",
+        "file": "mlir/Dialect/Tosa/IR/TosaOps.h",
+        "offset": 2972,
+        "length": 0,
+        "before": "",
+        "after": "\n  // Conversion view: inherited nullptr constructor with its default restored.\n  SigmoidOp() = default;\n  inline SigmoidOp(std::nullptr_t);\n",
+        "prototype_source": "mlir/IR/OpDefinition.h",
+        "prototype": "  inline Op(std::nullptr_t);",
+        "owner": "mlir::tosa::SigmoidOp",
+        "reason": "Explicit constructor declaration avoids CXXInheritedCtorInitExpr in the conversion model",
+        "abstraction_effect": "Construction remains externally declared; no implementation or IR behavior is synthesized",
+        "sequence": 2
+      },
+      {
+        "rule": "indexed-range-concrete-expansion",
+        "file": "mlir/IR/ValueRange.h",
+        "offset": 1122,
+        "length": 0,
+        "before": "",
+        "after": "// Concrete indexed range: ValueRange\nclass ValueRange;\n} // namespace mlir\nnamespace llvm { namespace detail {\ntemplate<>\nclass indexed_accessor_range_base<::mlir::ValueRange, llvm::PointerUnion<const ::mlir::Value *, ::mlir::OpOperand *, ::mlir::detail::OpResultImpl *, const llvm::Repeated<::mlir::Value> *>, ::mlir::Value, ::mlir::Value, ::mlir::Value> {\npublic:\n  using RangeBaseT = indexed_accessor_range_base;\n  ::mlir::Value operator[](long index) const;\n   \n  class iterator : public indexed_accessor_iterator<iterator,llvm::PointerUnion<const ::mlir::Value *, ::mlir::OpOperand *, ::mlir::detail::OpResultImpl *, const llvm::Repeated<::mlir::Value> *>,::mlir::Value,::mlir::Value,::mlir::Value> {\n  public:\n     \n  private:\n    iterator(llvm::PointerUnion<const ::mlir::Value *, ::mlir::OpOperand *, ::mlir::detail::OpResultImpl *, const llvm::Repeated<::mlir::Value> *> owner,std::ptrdiff_t curIndex);\n    friend indexed_accessor_range_base<::mlir::ValueRange,llvm::PointerUnion<const ::mlir::Value *, ::mlir::OpOperand *, ::mlir::detail::OpResultImpl *, const llvm::Repeated<::mlir::Value> *>,::mlir::Value,::mlir::Value,::mlir::Value>;\n  };\n   \n   \n  inline indexed_accessor_range_base(iterator begin, iterator end);\n  inline indexed_accessor_range_base(const iterator_range<iterator> &range);\n  inline indexed_accessor_range_base(llvm::PointerUnion<const ::mlir::Value *, ::mlir::OpOperand *, ::mlir::detail::OpResultImpl *, const llvm::Repeated<::mlir::Value> *> base, long count);\n\nprotected:\n  indexed_accessor_range_base(const indexed_accessor_range_base &) = default;\n  indexed_accessor_range_base(indexed_accessor_range_base &&) = default;\n  indexed_accessor_range_base &\n  operator=(const indexed_accessor_range_base &) = default;\n  llvm::PointerUnion<const ::mlir::Value *, ::mlir::OpOperand *, ::mlir::detail::OpResultImpl *, const llvm::Repeated<::mlir::Value> *> base;\n  long count;\n};\n} }\nnamespace mlir {\n",
+        "template_source": "llvm/ADT/STLExtras.h",
+        "template_sha256": "bd3c934a28e66a43ca92c2179a9be190bfb711ace3378aa84fc8f25c8cf27218",
+        "arguments": {
+          "DerivedT": "::mlir::ValueRange",
+          "BaseT": "llvm::PointerUnion<const ::mlir::Value *, ::mlir::OpOperand *, ::mlir::detail::OpResultImpl *, const llvm::Repeated<::mlir::Value> *>",
+          "T": "::mlir::Value",
+          "PointerT": "::mlir::Value",
+          "ReferenceT": "::mlir::Value"
+        },
+        "reason": "Emit the same concrete nested iterator before iterator_range stores it by value",
+        "sequence": 3
+      },
+      {
+        "rule": "indexed-range-concrete-expansion",
+        "file": "mlir/IR/TypeRange.h",
+        "offset": 254,
+        "length": 0,
+        "before": "",
+        "after": "// Concrete indexed range: TypeRange\nclass TypeRange;\n} // namespace mlir\nnamespace llvm { namespace detail {\ntemplate<>\nclass indexed_accessor_range_base<::mlir::TypeRange, llvm::PointerUnion<const ::mlir::Value *, const ::mlir::Type *, ::mlir::OpOperand *, ::mlir::detail::OpResultImpl *, const llvm::Repeated<::mlir::Type> *, const llvm::Repeated<::mlir::Value> *>, ::mlir::Type, ::mlir::Type, ::mlir::Type> {\npublic:\n  using RangeBaseT = indexed_accessor_range_base;\n  ::mlir::Type operator[](long index) const;\n   \n  class iterator : public indexed_accessor_iterator<iterator,llvm::PointerUnion<const ::mlir::Value *, const ::mlir::Type *, ::mlir::OpOperand *, ::mlir::detail::OpResultImpl *, const llvm::Repeated<::mlir::Type> *, const llvm::Repeated<::mlir::Value> *>,::mlir::Type,::mlir::Type,::mlir::Type> {\n  public:\n     \n  private:\n    iterator(llvm::PointerUnion<const ::mlir::Value *, const ::mlir::Type *, ::mlir::OpOperand *, ::mlir::detail::OpResultImpl *, const llvm::Repeated<::mlir::Type> *, const llvm::Repeated<::mlir::Value> *> owner,std::ptrdiff_t curIndex);\n    friend indexed_accessor_range_base<::mlir::TypeRange,llvm::PointerUnion<const ::mlir::Value *, const ::mlir::Type *, ::mlir::OpOperand *, ::mlir::detail::OpResultImpl *, const llvm::Repeated<::mlir::Type> *, const llvm::Repeated<::mlir::Value> *>,::mlir::Type,::mlir::Type,::mlir::Type>;\n  };\n   \n   \n  inline indexed_accessor_range_base(iterator begin, iterator end);\n  inline indexed_accessor_range_base(const iterator_range<iterator> &range);\n  inline indexed_accessor_range_base(llvm::PointerUnion<const ::mlir::Value *, const ::mlir::Type *, ::mlir::OpOperand *, ::mlir::detail::OpResultImpl *, const llvm::Repeated<::mlir::Type> *, const llvm::Repeated<::mlir::Value> *> base, long count);\n\nprotected:\n  indexed_accessor_range_base(const indexed_accessor_range_base &) = default;\n  indexed_accessor_range_base(indexed_accessor_range_base &&) = default;\n  indexed_accessor_range_base &\n  operator=(const indexed_accessor_range_base &) = default;\n  llvm::PointerUnion<const ::mlir::Value *, const ::mlir::Type *, ::mlir::OpOperand *, ::mlir::detail::OpResultImpl *, const llvm::Repeated<::mlir::Type> *, const llvm::Repeated<::mlir::Value> *> base;\n  long count;\n};\n} }\nnamespace mlir {\n",
+        "template_source": "llvm/ADT/STLExtras.h",
+        "template_sha256": "bd3c934a28e66a43ca92c2179a9be190bfb711ace3378aa84fc8f25c8cf27218",
+        "arguments": {
+          "DerivedT": "::mlir::TypeRange",
+          "BaseT": "llvm::PointerUnion<const ::mlir::Value *, const ::mlir::Type *, ::mlir::OpOperand *, ::mlir::detail::OpResultImpl *, const llvm::Repeated<::mlir::Type> *, const llvm::Repeated<::mlir::Value> *>",
+          "T": "::mlir::Type",
+          "PointerT": "::mlir::Type",
+          "ReferenceT": "::mlir::Type"
+        },
+        "reason": "Emit the same concrete nested iterator before iterator_range stores it by value",
+        "sequence": 4
+      },
+      {
+        "rule": "indexed-range-concrete-expansion",
+        "file": "mlir/IR/ValueRange.h",
+        "offset": 4318,
+        "length": 0,
+        "before": "",
+        "after": "// Concrete indexed range: ResultRange\nclass ResultRange;\n} // namespace mlir\nnamespace llvm { namespace detail {\ntemplate<>\nclass indexed_accessor_range_base<::mlir::ResultRange, ::mlir::detail::OpResultImpl *, ::mlir::OpResult, ::mlir::OpResult, ::mlir::OpResult> {\npublic:\n  using RangeBaseT = indexed_accessor_range_base;\n  ::mlir::OpResult operator[](long index) const;\n   \n  class iterator : public indexed_accessor_iterator<iterator,::mlir::detail::OpResultImpl *,::mlir::OpResult,::mlir::OpResult,::mlir::OpResult> {\n  public:\n     \n  private:\n    iterator(::mlir::detail::OpResultImpl * owner,std::ptrdiff_t curIndex);\n    friend indexed_accessor_range_base<::mlir::ResultRange,::mlir::detail::OpResultImpl *,::mlir::OpResult,::mlir::OpResult,::mlir::OpResult>;\n  };\n   \n   \n  inline indexed_accessor_range_base(iterator begin, iterator end);\n  inline indexed_accessor_range_base(const iterator_range<iterator> &range);\n  inline indexed_accessor_range_base(::mlir::detail::OpResultImpl * base, long count);\n\nprotected:\n  indexed_accessor_range_base(const indexed_accessor_range_base &) = default;\n  indexed_accessor_range_base(indexed_accessor_range_base &&) = default;\n  indexed_accessor_range_base &\n  operator=(const indexed_accessor_range_base &) = default;\n  ::mlir::detail::OpResultImpl * base;\n  long count;\n};\n} }\nnamespace mlir {\n",
+        "template_source": "llvm/ADT/STLExtras.h",
+        "template_sha256": "bd3c934a28e66a43ca92c2179a9be190bfb711ace3378aa84fc8f25c8cf27218",
+        "arguments": {
+          "DerivedT": "::mlir::ResultRange",
+          "BaseT": "::mlir::detail::OpResultImpl *",
+          "T": "::mlir::OpResult",
+          "PointerT": "::mlir::OpResult",
+          "ReferenceT": "::mlir::OpResult"
+        },
+        "reason": "Emit the same concrete nested iterator before iterator_range stores it by value",
+        "sequence": 5
+      },
+      {
+        "rule": "nested-use-iterator-relocation",
+        "file": "mlir/IR/ValueRange.h",
+        "offset": 5986,
+        "length": 286,
+        "before": "class ResultRange::UseIterator final\n    : public llvm::iterator_facade_base<UseIterator, std::forward_iterator_tag, OpOperand> {\npublic:\n  explicit UseIterator(ResultRange results, bool end = false);\n   \n   \n   \nprivate:\n  ResultRange::iterator it, endIt;\n  Value::use_iterator use;\n};",
+        "after": "",
+        "reason": "Remove the out-of-line nested definition that triggers ClangVisitor.cpp:8370",
+        "sequence": 6
+      },
+      {
+        "rule": "nested-use-iterator-relocation",
+        "file": "mlir/IR/ValueRange.h",
+        "offset": 5850,
+        "length": 20,
+        "before": "  class UseIterator;",
+        "after": "  class UseIterator final\n      : public llvm::iterator_facade_base<UseIterator, std::forward_iterator_tag, OpOperand> {\n  public:\n    explicit UseIterator(ResultRange results, bool end = false);\n     \n     \n     \n  private:\n    ResultRange::iterator it, endIt;\n    Value::use_iterator use;\n  };",
+        "reason": "Define the same nested type inside its original owner without changing layout or members",
+        "sequence": 7
+      }
+    ]
+  },
+  "extraction_inputs": {
+    "rewritten_pass": {
+      "path": "rewritten.cpp",
+      "sha256": "a663c11e562eccdd3fa39a1ba4cc83e9ebac45da94a9e5801d2f5526a5cc246d"
+    },
+    "declaration_dependency_plan": {
+      "path": "interface-plan.json",
+      "sha256": "3cc9f395d1ed0a019c7ef7b592888fb4f003023af46161af64d205ecac961f3e"
+    },
+    "canonical_to_extracted_manifest": {
+      "path": "interface-manifest.json",
+      "sha256": "9ffd5cfecf7be25bb7748261bdb1e57ceb00ebc614b5c0858a43fdd6bfbcdf0d"
+    },
+    "canonical_interface_abstractions": {
+      "path": "interface-abstractions.json",
+      "sha256": "5b97d299a849e2b35dfd83c8c7ab1a99a85a90a4abe58f2930d9e4254d61c02b"
+    },
+    "extracted_to_conversion_rewrites": {
+      "path": "header-rewrite.json",
+      "sha256": "eab3146c2722d5887f07b79e1cbaeb6101842550f2aa7d873210dea52bcbe799"
+    },
+    "boundary": "Canonical interface abstraction and converter compatibility are separate stages; this ledger is not an arbitrary real-MLIR extractor"
+  }
+}

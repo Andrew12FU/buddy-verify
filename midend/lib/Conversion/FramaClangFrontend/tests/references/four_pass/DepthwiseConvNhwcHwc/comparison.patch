@@ -1,0 +1,458 @@
+--- DepthwiseConvNhwcHwc/original.cpp
++++ DepthwiseConvNhwcHwc/rewritten.cpp
+@@ -17,6 +17,14 @@
+ //
+ // This file implements the DepthwiseConvNhwcHwc optimize.
+ //
++// NOTE: syntactically adapted for Frama-Clang 0.0.20; the lambda structure
++//       is preserved.  Only two capture rules are applied:
++//         * a nested lambda may only capture variables of its immediately
++//           enclosing lambda, so every level copies the environment into a
++//           local (e1/e2/e3) before creating the next builder;
++//         * class-typed objects are captured by value (never by reference),
++//           which is what the front-end can represent.
++//
+ //===----------------------------------------------------------------------===//
+ 
+ #include <mlir/Dialect/Affine/IR/AffineOps.h>
+@@ -32,7 +40,38 @@
+ // Rewrite Pattern
+ //===----------------------------------------------------------------------===//
+ 
+-namespace {
++namespace depthwise_conv_detail {
++
++/* Everything the nested builders capture from `matchAndRewrite`.  Frama-Clang
++ * only lets a nested lambda capture variables declared in its immediately
++ * enclosing lambda, so each level copies this struct into a local (`e1`, `e2`,
++ * `e3`) before creating the next builder. */
++struct DepthwiseEnv {
++  Value c0;
++  Value c1;
++  Value vecSizeValue;
++  AffineExpr d0;
++  AffineExpr d1;
++
++  Value input;
++  Value filter;
++  Value output;
++
++  Value FH;
++  Value FW;
++  Value applyOC;
++  Value tailLength;
++  Value maskVector;
++  Value zeroElementTypeVec;
++
++  VectorType vecTy;
++  Type elemTy;
++
++  int strHeight;
++  int strWidth;
++  int dilHeight;
++  int dilWidth;
++};
+ 
+ class DepthwiseConv2DNhwcHwcOptimizePattern : public ConversionPattern {
+ public:
+@@ -50,15 +89,20 @@
+     auto loc = op->getLoc();
+ 
+     // Some constant we need.
+-    const Value c0 =
++    Value c0Init =
+         arith::ConstantOp::create(rewriter, loc, rewriter.getIndexAttr(0));
+-    const Value c1 =
++    const Value c0 = c0Init;
++    Value c1Init =
+         arith::ConstantOp::create(rewriter, loc, rewriter.getIndexAttr(1));
+-
+-    const Value vecSizeValue = arith::ConstantOp::create(
++    const Value c1 = c1Init;
++
++    Value vecSizeValueInit = arith::ConstantOp::create(
+         rewriter, loc, rewriter.getIndexAttr(vecSize));
+-    const AffineExpr d0 = rewriter.getAffineDimExpr(0);
+-    const AffineExpr d1 = rewriter.getAffineDimExpr(1);
++    const Value vecSizeValue = vecSizeValueInit;
++    AffineExpr d0Init = rewriter.getAffineDimExpr(0);
++    const AffineExpr d0 = d0Init;
++    AffineExpr d1Init = rewriter.getAffineDimExpr(1);
++    const AffineExpr d1 = d1Init;
+     // TODO: remove s0?
+     // const AffineExpr s0 = rewriter.getAffineSymbolExpr(0);
+ 
+@@ -73,9 +117,11 @@
+       strHeight = 1;
+       strWidth = 1;
+     } else {
+-      strHeight = convOp.getStrides().getValues<int64_t>()[0];
+-      strWidth = convOp.getStrides().getValues<int64_t>()
+-                     [convOp.getStrides().getValues<int64_t>().size() - 1];
++      auto strideVals = convOp.getStrides().getValues<int64_t>();
++      auto strideIt = strideVals.begin();
++      strHeight = *strideIt;
++      ++strideIt;
++      strWidth = *strideIt;
+     }
+ 
+     // Dilations.
+@@ -83,17 +129,20 @@
+       dilHeight = 1;
+       dilWidth = 1;
+     } else {
+-      dilHeight = convOp.getDilations().getValues<int64_t>()[0];
+-      dilWidth = convOp.getDilations().getValues<int64_t>()
+-                     [convOp.getDilations().getValues<int64_t>().size() - 1];
++      auto dilationVals = convOp.getDilations().getValues<int64_t>();
++      auto dilationIt = dilationVals.begin();
++      dilHeight = *dilationIt;
++      ++dilationIt;
++      dilWidth = *dilationIt;
+     }
+ 
+     ShapedType inputTy = mlir::cast<mlir::ShapedType>(input.getType());
+     Type elemTy = inputTy.getElementType();
+-    VectorType vecTy = VectorType::get(vecSize, elemTy);
+-
+-    const Value zeroElementType =
++    VectorType vecTy = VectorType::get(llvm::ArrayRef<int64_t>(&vecSize, 1), elemTy);
++
++    Value zeroElementTypeInit =
+         arith::ConstantOp::create(rewriter, loc, rewriter.getZeroAttr(elemTy));
++    const Value zeroElementType = zeroElementTypeInit;
+ 
+     Value zeroElementTypeVec;
+     if (isa<IntegerType>(elemTy)) {
+@@ -113,147 +162,213 @@
+         rewriter, loc, AffineMap::get(1, 0, d0.floorDiv(vecSize) * vecSize),
+         OC);
+     Value tailLength = affine::AffineApplyOp::create(
+-        rewriter, loc, AffineMap::get(1, 0, d0 % vecSize), ValueRange{OC});
++        rewriter, loc, AffineMap::get(1, 0, d0 % vecSize), ValueRange(OC));
+     Value maskVector = vector::CreateMaskOp::create(
+-        rewriter, loc, VectorType::get({vecSize}, rewriter.getI1Type()),
+-        ValueRange{tailLength});
++        rewriter, loc, VectorType::get(llvm::ArrayRef<int64_t>(&vecSize, 1), rewriter.getI1Type()),
++        ValueRange(tailLength));
+ 
+     Value FH = memref::DimOp::create(rewriter, loc, filter, 0); // FH
+     Value FW = memref::DimOp::create(rewriter, loc, filter, 1); // FW
++
++    // Fill the environment once; the lambdas below copy it per level.
++    DepthwiseEnv env;
++    env.c0 = c0;
++    env.c1 = c1;
++    env.vecSizeValue = vecSizeValue;
++    env.d0 = d0;
++    env.d1 = d1;
++    env.input = input;
++    env.filter = filter;
++    env.output = output;
++    env.FH = FH;
++    env.FW = FW;
++    env.applyOC = applyOC;
++    env.tailLength = tailLength;
++    env.maskVector = maskVector;
++    env.zeroElementTypeVec = zeroElementTypeVec;
++    env.vecTy = vecTy;
++    env.elemTy = elemTy;
++    env.strHeight = strHeight;
++    env.strWidth = strWidth;
++    env.dilHeight = dilHeight;
++    env.dilWidth = dilWidth;
++
++    SmallVector<OpFoldResult, 3> lowerBounds;
++    lowerBounds.push_back(N);
++    lowerBounds.push_back(OH);
++    lowerBounds.push_back(OW);
+ 
+     // clang format off
+     //  Step 1: Create outer most loops.
+     // Create the scf::ForallOp operation For N,OH,OW
+     scf::ForallOp::create(
+-        rewriter, loc, SmallVector<OpFoldResult, 3>({N, OH, OW}), ValueRange{},
++        rewriter, loc, lowerBounds, ValueRange(),
+         std::nullopt, // No mapping specified in this example
+-        [&](OpBuilder &nestedBuilder, Location nestedLoc,
+-            ValueRange loopIndices) {
++        [env, loc](OpBuilder &nestedBuilder, Location nestedLoc,
++              ValueRange loopIndices) {
+           Value ivN = loopIndices[0];  // Index for the first dimension N
+           Value ivOH = loopIndices[1]; // Index for the second dimension OH
+           Value ivOW = loopIndices[2]; // Index for the third dimension OW
++          DepthwiseEnv e1 = env;
+           // OC
+           scf::ForOp::create(
+-              nestedBuilder, nestedLoc, c0, applyOC, vecSizeValue, ValueRange{},
+-              [&](OpBuilder &builder, Location loc, Value ivOC,
+-                  ValueRange iargs) {
+-                Value tVec =
+-                    vector::LoadOp::create(builder, loc, vecTy, output,
+-                                           ValueRange{ivN, ivOH, ivOW, ivOC});
++              nestedBuilder, nestedLoc, e1.c0, e1.applyOC, e1.vecSizeValue,
++              ValueRange(),
++              [e1, ivN, ivOH, ivOW](OpBuilder &builder, Location loc,
++                                    Value ivOC, ValueRange iargs) {
++                Value tVec = vector::LoadOp::create(
++                    builder, loc, e1.vecTy, e1.output,
++                    ValueRange(ivN, ivOH, ivOW, ivOC));
++
++                DepthwiseEnv e2 = e1;
++                Value vN = ivN;
++                Value vOH = ivOH;
++                Value vOW = ivOW;
+ 
+                 // FH
+                 auto forOp = scf::ForOp::create(
+-                    builder, loc, c0, FH, c1, ValueRange{tVec},
+-                    [&](OpBuilder &builder, Location loc, Value ivFH,
+-                        ValueRange iargs) {
++                    builder, loc, e2.c0, e2.FH, e2.c1, ValueRange(tVec),
++                    [e2, vN, vOH, vOW, ivOC](OpBuilder &builder, Location loc,
++                                             Value ivFH, ValueRange iargs) {
+                       Value rowInput = affine::AffineApplyOp::create(
+                           builder, loc,
+-                          AffineMap::get(2, 0, d0 * strHeight + d1 * dilHeight),
+-                          ValueRange{ivOH, ivFH});
++                          AffineMap::get(
++                              2, 0, e2.d0 * e2.strHeight + e2.d1 * e2.dilHeight),
++                          ValueRange(vOH, ivFH));
+                       Value rowFilter = ivFH;
++
++                      DepthwiseEnv e3 = e2;
++                      Value wN = vN;
++                      Value wOW = vOW;
++                      Value wOC = ivOC;
++
+                       // FW
+                       auto forOp = scf::ForOp::create(
+-                          builder, loc, c0, FW, c1, ValueRange{iargs[0]},
+-                          [&](OpBuilder &builder, Location loc, Value ivFW,
+-                              ValueRange iargs) {
++                          builder, loc, e3.c0, e3.FW, e3.c1,
++                          ValueRange(iargs[0]),
++                          [e3, wN, wOW, wOC, rowInput,
++                           rowFilter](OpBuilder &builder, Location loc,
++                                      Value ivFW, ValueRange iargs) {
+                             Value columnInput = affine::AffineApplyOp::create(
+                                 builder, loc,
+                                 AffineMap::get(2, 0,
+-                                               d0 * strWidth + d1 * dilWidth),
+-                                ValueRange{ivOW, ivFW});
++                                               e3.d0 * e3.strWidth +
++                                                   e3.d1 * e3.dilWidth),
++                                ValueRange(wOW, ivFW));
+                             Value columnFilter = affine::AffineApplyOp::create(
+-                                builder, loc, AffineMap::get(1, 0, d0), ivFW);
++                                builder, loc, AffineMap::get(1, 0, e3.d0),
++                                ivFW);
+                             Value iVec = vector::LoadOp::create(
+-                                builder, loc, vecTy, input,
+-                                ValueRange{ivN, rowInput, columnInput, ivOC});
++                                builder, loc, e3.vecTy, e3.input,
++                                ValueRange(wN, rowInput, columnInput, wOC));
+                             Value fVec = vector::LoadOp::create(
+-                                builder, loc, vecTy, filter,
+-                                ValueRange{rowFilter, columnFilter, ivOC});
++                                builder, loc, e3.vecTy, e3.filter,
++                                ValueRange(rowFilter, columnFilter, wOC));
+                             Value tVecNext;
+-                            if (isa<IntegerType>(elemTy)) {
+-                              Value mulVec = arith::MulIOp::create(builder, loc,
+-                                                                   iVec, fVec);
++                            if (isa<IntegerType>(e3.elemTy)) {
++                              Value mulVec = arith::MulIOp::create(
++                                  builder, loc, iVec, fVec);
+                               tVecNext = arith::AddIOp::create(
+                                   builder, loc, mulVec, iargs[0]);
+                             } else {
+                               tVecNext = vector::FMAOp::create(
+-                                  builder, loc, vecTy, iVec, fVec, iargs[0]);
++                                  builder, loc, e3.vecTy, iVec, fVec, iargs[0]);
+                             }
+ 
+                             scf::YieldOp::create(builder, loc,
+-                                                 ValueRange{tVecNext});
++                                                 ValueRange(tVecNext));
+                           });
+                       scf::YieldOp::create(builder, loc,
+-                                           ValueRange{forOp.getResult(0)});
++                                           ValueRange(forOp->getResult(0)));
+                     });
+-                vector::StoreOp::create(builder, loc, forOp.getResult(0),
+-                                        output,
+-                                        ValueRange{ivN, ivOH, ivOW, ivOC});
+-
+-                scf::YieldOp::create(builder, loc, ValueRange{});
++                vector::StoreOp::create(builder, loc, forOp->getResult(0),
++                                        e1.output,
++                                        ValueRange(ivN, ivOH, ivOW, ivOC));
++
++                scf::YieldOp::create(builder, loc, ValueRange());
+               });
+ 
+           // applyOC
+           Value condition = arith::CmpIOp::create(
+-              nestedBuilder, loc, arith::CmpIPredicate::sgt, tailLength, c0);
++              nestedBuilder, loc, arith::CmpIPredicate::sgt, e1.tailLength,
++              e1.c0);
+           scf::IfOp::create(
+               nestedBuilder, loc, condition,
+-              [&](OpBuilder &builder, Location loc) {
++              [e1, ivN, ivOH, ivOW](OpBuilder &builder, Location loc) {
+                 Value tVec = vector::MaskedLoadOp::create(
+-                    builder, loc, vecTy, output,
+-                    ValueRange{ivN, ivOH, ivOW, applyOC}, maskVector,
+-                    zeroElementTypeVec);
++                    builder, loc, e1.vecTy, e1.output,
++                    ValueRange(ivN, ivOH, ivOW, e1.applyOC), e1.maskVector,
++                    e1.zeroElementTypeVec);
++
++                DepthwiseEnv e2 = e1;
++                Value tN = ivN;
++                Value tOH = ivOH;
++                Value tOW = ivOW;
++
+                 // FH
+                 auto forOp = scf::ForOp::create(
+-                    builder, loc, c0, FH, c1, ValueRange{tVec},
+-                    [&](OpBuilder &builder, Location loc, Value ivFH,
+-                        ValueRange iargs) {
++                    builder, loc, e2.c0, e2.FH, e2.c1, ValueRange(tVec),
++                    [e2, tN, tOH, tOW](OpBuilder &builder, Location loc,
++                                       Value ivFH, ValueRange iargs) {
+                       Value rowInput = affine::AffineApplyOp::create(
+                           builder, loc,
+-                          AffineMap::get(2, 0, d0 * strHeight + d1 * dilHeight),
+-                          ValueRange{ivOH, ivFH});
++                          AffineMap::get(
++                              2, 0, e2.d0 * e2.strHeight + e2.d1 * e2.dilHeight),
++                          ValueRange(tOH, ivFH));
+                       Value rowFilter = ivFH;
++
++                      DepthwiseEnv e3 = e2;
++                      Value uN = tN;
++                      Value uOW = tOW;
++
+                       // FW
+                       auto forOp = scf::ForOp::create(
+-                          builder, loc, c0, FW, c1, ValueRange{iargs[0]},
+-                          [&](OpBuilder &builder, Location loc, Value ivFW,
+-                              ValueRange iargs) {
++                          builder, loc, e3.c0, e3.FW, e3.c1,
++                          ValueRange(iargs[0]),
++                          [e3, uN, uOW, rowInput,
++                           rowFilter](OpBuilder &builder, Location loc,
++                                      Value ivFW, ValueRange iargs) {
+                             Value columnInput = affine::AffineApplyOp::create(
+                                 builder, loc,
+                                 AffineMap::get(2, 0,
+-                                               d0 * strWidth + d1 * dilWidth),
+-                                ValueRange{ivOW, ivFW});
++                                               e3.d0 * e3.strWidth +
++                                                   e3.d1 * e3.dilWidth),
++                                ValueRange(uOW, ivFW));
+                             Value columnFilter = affine::AffineApplyOp::create(
+-                                builder, loc, AffineMap::get(1, 0, d0), ivFW);
++                                builder, loc, AffineMap::get(1, 0, e3.d0),
++                                ivFW);
+                             Value iVec = vector::MaskedLoadOp::create(
+-                                builder, loc, vecTy, input,
+-                                ValueRange{ivN, rowInput, columnInput, applyOC},
+-                                maskVector, zeroElementTypeVec);
++                                builder, loc, e3.vecTy, e3.input,
++                                ValueRange(uN, rowInput, columnInput,
++                                           e3.applyOC),
++                                e3.maskVector, e3.zeroElementTypeVec);
+                             Value fVec = vector::MaskedLoadOp::create(
+-                                builder, loc, vecTy, filter,
+-                                ValueRange{rowFilter, columnFilter, applyOC},
+-                                maskVector, zeroElementTypeVec);
++                                builder, loc, e3.vecTy, e3.filter,
++                                ValueRange(rowFilter, columnFilter,
++                                           e3.applyOC),
++                                e3.maskVector, e3.zeroElementTypeVec);
+                             Value tVecNext;
+-                            if (isa<IntegerType>(elemTy)) {
+-                              Value mulVec = arith::MulIOp::create(builder, loc,
+-                                                                   iVec, fVec);
++                            if (isa<IntegerType>(e3.elemTy)) {
++                              Value mulVec = arith::MulIOp::create(
++                                  builder, loc, iVec, fVec);
+                               tVecNext = arith::AddIOp::create(
+                                   builder, loc, mulVec, iargs[0]);
+                             } else {
+                               tVecNext = vector::FMAOp::create(
+-                                  builder, loc, vecTy, iVec, fVec, iargs[0]);
++                                  builder, loc, e3.vecTy, iVec, fVec, iargs[0]);
+                             }
+ 
+                             scf::YieldOp::create(builder, loc,
+-                                                 ValueRange{tVecNext});
++                                                 ValueRange(tVecNext));
+                           });
+                       scf::YieldOp::create(builder, loc,
+-                                           ValueRange{forOp.getResult(0)});
++                                           ValueRange(forOp->getResult(0)));
+                     });
+                 vector::MaskedStoreOp::create(
+-                    builder, loc, output, ValueRange{ivN, ivOH, ivOW, applyOC},
+-                    maskVector, forOp.getResult(0));
+-                scf::YieldOp::create(builder, loc, ValueRange{});
++                    builder, loc, e1.output,
++                    ValueRange(ivN, ivOH, ivOW, e1.applyOC), e1.maskVector,
++                    forOp->getResult(0));
++                scf::YieldOp::create(builder, loc, ValueRange());
+               });
+ 
+           scf::InParallelOp::create(nestedBuilder, nestedLoc);
+@@ -267,13 +382,14 @@
+ private:
+   int64_t vecSize;
+ };
+-} // end anonymous namespace
++} // namespace depthwise_conv_detail
+ 
+ //===----------------------------------------------------------------------===//
+ // DepthwiseConv2DNhwcHwcOptimizePass
+ //===----------------------------------------------------------------------===//
+ 
+-namespace {
++namespace depthwise_pass_detail {
++
+ class DepthwiseConv2DNhwcHwcOptimizePass
+     : public PassWrapper<DepthwiseConv2DNhwcHwcOptimizePass,
+                          OperationPass<ModuleOp>> {
+@@ -303,9 +419,10 @@
+   Option<int64_t> vecSize{*this, "vec-size", llvm::cl::desc("Vector size."),
+                           llvm::cl::init(16)};
+ };
+-} // end anonymous namespace.
+-
+-void DepthwiseConv2DNhwcHwcOptimizePass::runOnOperation() {
++} // namespace depthwise_pass_detail
++
++void depthwise_pass_detail::DepthwiseConv2DNhwcHwcOptimizePass::
++    runOnOperation() {
+   MLIRContext *context = &getContext();
+   ModuleOp module = getOperation();
+ 
+@@ -317,7 +434,7 @@
+   target.addLegalOp<linalg::FillOp>();
+ 
+   RewritePatternSet patterns(context);
+-  patterns.add<DepthwiseConv2DNhwcHwcOptimizePattern>(context, vecSize);
++  patterns.add<depthwise_conv_detail::DepthwiseConv2DNhwcHwcOptimizePattern>(context, vecSize);
+ 
+   if (failed(applyPartialConversion(module, target, std::move(patterns))))
+     signalPassFailure();
+@@ -326,7 +443,7 @@
+ namespace mlir {
+ namespace buddy {
+ void registerDepthwiseConv2DNhwcHwcOptimizePass() {
+-  PassRegistration<DepthwiseConv2DNhwcHwcOptimizePass>();
++  PassRegistration<depthwise_pass_detail::DepthwiseConv2DNhwcHwcOptimizePass>();
+ }
+ } // namespace buddy
+ } // namespace mlir

@@ -1,0 +1,76 @@
+// SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+// Shared bounded declarations; see docs/PROVENANCE.md for retained and omitted
+// parts.
+#ifndef BUDDY_MINI_MLIR_DIALECT_LINALG_IR_LINALG_H
+#define BUDDY_MINI_MLIR_DIALECT_LINALG_IR_LINALG_H
+#include "mlir/IR/AffineMap.h"
+#include "mlir/IR/Dialect.h"
+#include "mlir/IR/Builders.h"
+#include "mlir/IR/OpDefinition.h"
+#include "mlir/IR/TypeRange.h"
+
+namespace mlir {
+namespace utils {
+enum class IteratorType : unsigned { parallel, reduction };
+}
+namespace linalg {
+class GenericOp : public Op<GenericOp, OpTrait::VariadicResults> {
+public:
+  using Op::Op;
+  static GenericOp create(
+      OpBuilder &builder, Location location, TypeRange resultTensorTypes,
+      ValueRange inputs, ValueRange outputs, ArrayRef<AffineMap> indexingMaps,
+      ArrayRef<utils::IteratorType> iteratorTypes,
+      function_ref<void(OpBuilder &, Location, ValueRange)> bodyBuild = nullptr,
+      ArrayRef<NamedAttribute> attributes = {});
+};
+class YieldOp : public Op<YieldOp> {
+public:
+  using Op::Op;
+  static YieldOp create(OpBuilder &, Location, ValueRange);
+};
+} // namespace linalg
+} // namespace mlir
+namespace mlir { namespace linalg {   } }
+namespace mlir { namespace linalg { namespace detail {
+ 
+}
+ 
+namespace detail {   }
+} }
+namespace mlir { namespace linalg { namespace detail {
+ 
+}
+ 
+namespace detail {   }
+} }
+namespace mlir { namespace linalg { namespace detail {
+ 
+}
+ 
+namespace detail {   }
+} }
+namespace mlir { namespace linalg {
+ 
+
+
+
+
+} }
+namespace mlir { namespace linalg {
+ 
+
+
+
+
+} }
+
+
+namespace mlir { namespace linalg {
+ 
+
+
+
+} }
+
+#endif

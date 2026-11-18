@@ -1,0 +1,222 @@
+--- include/mlir/Dialect/Tosa/IR/TosaOps.h
++++ conversion-include/mlir/Dialect/Tosa/IR/TosaOps.h
+@@ -193,6 +193,10 @@
+     : public Op<SigmoidOp, OpTrait::OneTypedResult<TensorType>::Impl> {
+ public:
+   using Op::Op;
++  // Conversion view: inherited nullptr constructor with its default restored.
++  SigmoidOp() = default;
++  inline SigmoidOp(std::nullptr_t);
++
+   ::mlir::detail::TypedValue<TensorType> getInput();
+ };
+ } // namespace tosa
+--- include/mlir/IR/BuiltinAttributes.h
++++ conversion-include/mlir/IR/BuiltinAttributes.h
+@@ -21,11 +21,50 @@
+ 
+ 
+ } // namespace detail
++// Converter compatibility: exact specialization of the retained template.
++// See header-rewrite.json for source and parameter substitutions.
++class TypedAttr;
++namespace detail {
++template <>
++class Interface<::mlir::TypedAttr, ::mlir::Attribute, ::mlir::detail::TypedAttrInterfaceTraits, ::mlir::Attribute, ::mlir::AttributeTrait::TraitBase> : public ::mlir::Attribute {
++public:
++  using Concept = typename ::mlir::detail::TypedAttrInterfaceTraits::Concept;
++  template <typename T> using Model = typename ::mlir::detail::TypedAttrInterfaceTraits::template Model<T>;
++  template <typename T>
++  using FallbackModel = typename ::mlir::detail::TypedAttrInterfaceTraits::template FallbackModel<T>;
++  template <typename T, typename U>
++  using ExternalModel = typename ::mlir::detail::TypedAttrInterfaceTraits::template ExternalModel<T, U>;
++  using InterfaceBase =
++      Interface<::mlir::TypedAttr, ::mlir::Attribute, ::mlir::detail::TypedAttrInterfaceTraits, ::mlir::Attribute, ::mlir::AttributeTrait::TraitBase>;
++  using ValueType = ::mlir::Attribute;
++  template <typename ConcreteT>
++  struct Trait : public ::mlir::AttributeTrait::TraitBase<ConcreteT, Trait> {
++    using ModelT = Model<ConcreteT>;
++  };
++  explicit Interface(::mlir::Attribute t = ::mlir::Attribute());
++  Interface(std::nullptr_t);
++  template <typename T,
++            std::enable_if_t<std::is_base_of<Trait<T>, T>::value> * = nullptr>
++  Interface(T t);
++  Interface(::mlir::Attribute t, const Concept *conceptImpl);
++  Interface(::mlir::Attribute t, std::nullptr_t);
++
++private:
++  Concept *conceptImpl;
++};
++} // namespace detail
++template class AttributeInterface<TypedAttr, detail::TypedAttrInterfaceTraits>;
+ class TypedAttr
+     : public AttributeInterface<TypedAttr, detail::TypedAttrInterfaceTraits> {
+ public:
+   using AttributeInterface<
+       TypedAttr, detail::TypedAttrInterfaceTraits>::AttributeInterface;
++  // Conversion view: preserve the inherited availability constraint.
++  TypedAttr() = default;
++  template <typename T,
++            std::enable_if_t<std::is_base_of<InterfaceBase::template Trait<T>, T>::value> * = nullptr>
++  TypedAttr(T t);
++
+   template <typename T> struct Trait : detail::TypedAttrTrait<T> {};
+ };
+ namespace detail {
+--- include/mlir/IR/TypeRange.h
++++ conversion-include/mlir/IR/TypeRange.h
+@@ -3,6 +3,39 @@
+ #ifndef BUDDY_MINI_MLIR_IR_TYPERANGE_H
+ #define BUDDY_MINI_MLIR_IR_TYPERANGE_H
+ #include "mlir/IR/ValueRange.h"
++namespace mlir {
++// Concrete indexed range: TypeRange
++class TypeRange;
++} // namespace mlir
++namespace llvm { namespace detail {
++template<>
++class indexed_accessor_range_base<::mlir::TypeRange, llvm::PointerUnion<const ::mlir::Value *, const ::mlir::Type *, ::mlir::OpOperand *, ::mlir::detail::OpResultImpl *, const llvm::Repeated<::mlir::Type> *, const llvm::Repeated<::mlir::Value> *>, ::mlir::Type, ::mlir::Type, ::mlir::Type> {
++public:
++  using RangeBaseT = indexed_accessor_range_base;
++  ::mlir::Type operator[](long index) const;
++   
++  class iterator : public indexed_accessor_iterator<iterator,llvm::PointerUnion<const ::mlir::Value *, const ::mlir::Type *, ::mlir::OpOperand *, ::mlir::detail::OpResultImpl *, const llvm::Repeated<::mlir::Type> *, const llvm::Repeated<::mlir::Value> *>,::mlir::Type,::mlir::Type,::mlir::Type> {
++  public:
++     
++  private:
++    iterator(llvm::PointerUnion<const ::mlir::Value *, const ::mlir::Type *, ::mlir::OpOperand *, ::mlir::detail::OpResultImpl *, const llvm::Repeated<::mlir::Type> *, const llvm::Repeated<::mlir::Value> *> owner,std::ptrdiff_t curIndex);
++    friend indexed_accessor_range_base<::mlir::TypeRange,llvm::PointerUnion<const ::mlir::Value *, const ::mlir::Type *, ::mlir::OpOperand *, ::mlir::detail::OpResultImpl *, const llvm::Repeated<::mlir::Type> *, const llvm::Repeated<::mlir::Value> *>,::mlir::Type,::mlir::Type,::mlir::Type>;
++  };
++   
++   
++  inline indexed_accessor_range_base(iterator begin, iterator end);
++  inline indexed_accessor_range_base(const iterator_range<iterator> &range);
++  inline indexed_accessor_range_base(llvm::PointerUnion<const ::mlir::Value *, const ::mlir::Type *, ::mlir::OpOperand *, ::mlir::detail::OpResultImpl *, const llvm::Repeated<::mlir::Type> *, const llvm::Repeated<::mlir::Value> *> base, long count);
++
++protected:
++  indexed_accessor_range_base(const indexed_accessor_range_base &) = default;
++  indexed_accessor_range_base(indexed_accessor_range_base &&) = default;
++  indexed_accessor_range_base &
++  operator=(const indexed_accessor_range_base &) = default;
++  llvm::PointerUnion<const ::mlir::Value *, const ::mlir::Type *, ::mlir::OpOperand *, ::mlir::detail::OpResultImpl *, const llvm::Repeated<::mlir::Type> *, const llvm::Repeated<::mlir::Value> *> base;
++  long count;
++};
++} }
+ namespace mlir {
+ class TypeRange : public llvm::detail::indexed_accessor_range_base<TypeRange,llvm::PointerUnion<const Value *,const Type *,OpOperand *,detail::OpResultImpl *,const llvm::Repeated<Type> *,const llvm::Repeated<Value> *>,Type,Type,Type> {
+ public:
+--- include/mlir/IR/ValueRange.h
++++ conversion-include/mlir/IR/ValueRange.h
+@@ -31,6 +31,39 @@
+ // Provenance: audited Reshape V2 mini, line 1027; see docs/PROVENANCE.md.
+ namespace mlir {
+ template<typename ValueRangeT> class ValueTypeRange;
++// Concrete indexed range: ValueRange
++class ValueRange;
++} // namespace mlir
++namespace llvm { namespace detail {
++template<>
++class indexed_accessor_range_base<::mlir::ValueRange, llvm::PointerUnion<const ::mlir::Value *, ::mlir::OpOperand *, ::mlir::detail::OpResultImpl *, const llvm::Repeated<::mlir::Value> *>, ::mlir::Value, ::mlir::Value, ::mlir::Value> {
++public:
++  using RangeBaseT = indexed_accessor_range_base;
++  ::mlir::Value operator[](long index) const;
++   
++  class iterator : public indexed_accessor_iterator<iterator,llvm::PointerUnion<const ::mlir::Value *, ::mlir::OpOperand *, ::mlir::detail::OpResultImpl *, const llvm::Repeated<::mlir::Value> *>,::mlir::Value,::mlir::Value,::mlir::Value> {
++  public:
++     
++  private:
++    iterator(llvm::PointerUnion<const ::mlir::Value *, ::mlir::OpOperand *, ::mlir::detail::OpResultImpl *, const llvm::Repeated<::mlir::Value> *> owner,std::ptrdiff_t curIndex);
++    friend indexed_accessor_range_base<::mlir::ValueRange,llvm::PointerUnion<const ::mlir::Value *, ::mlir::OpOperand *, ::mlir::detail::OpResultImpl *, const llvm::Repeated<::mlir::Value> *>,::mlir::Value,::mlir::Value,::mlir::Value>;
++  };
++   
++   
++  inline indexed_accessor_range_base(iterator begin, iterator end);
++  inline indexed_accessor_range_base(const iterator_range<iterator> &range);
++  inline indexed_accessor_range_base(llvm::PointerUnion<const ::mlir::Value *, ::mlir::OpOperand *, ::mlir::detail::OpResultImpl *, const llvm::Repeated<::mlir::Value> *> base, long count);
++
++protected:
++  indexed_accessor_range_base(const indexed_accessor_range_base &) = default;
++  indexed_accessor_range_base(indexed_accessor_range_base &&) = default;
++  indexed_accessor_range_base &
++  operator=(const indexed_accessor_range_base &) = default;
++  llvm::PointerUnion<const ::mlir::Value *, ::mlir::OpOperand *, ::mlir::detail::OpResultImpl *, const llvm::Repeated<::mlir::Value> *> base;
++  long count;
++};
++} }
++namespace mlir {
+ class ValueRange final
+     : public llvm::detail::indexed_accessor_range_base<
+           ValueRange,
+@@ -62,26 +95,59 @@
+ } // namespace mlir
+ 
+ namespace mlir {
++// Concrete indexed range: ResultRange
++class ResultRange;
++} // namespace mlir
++namespace llvm { namespace detail {
++template<>
++class indexed_accessor_range_base<::mlir::ResultRange, ::mlir::detail::OpResultImpl *, ::mlir::OpResult, ::mlir::OpResult, ::mlir::OpResult> {
++public:
++  using RangeBaseT = indexed_accessor_range_base;
++  ::mlir::OpResult operator[](long index) const;
++   
++  class iterator : public indexed_accessor_iterator<iterator,::mlir::detail::OpResultImpl *,::mlir::OpResult,::mlir::OpResult,::mlir::OpResult> {
++  public:
++     
++  private:
++    iterator(::mlir::detail::OpResultImpl * owner,std::ptrdiff_t curIndex);
++    friend indexed_accessor_range_base<::mlir::ResultRange,::mlir::detail::OpResultImpl *,::mlir::OpResult,::mlir::OpResult,::mlir::OpResult>;
++  };
++   
++   
++  inline indexed_accessor_range_base(iterator begin, iterator end);
++  inline indexed_accessor_range_base(const iterator_range<iterator> &range);
++  inline indexed_accessor_range_base(::mlir::detail::OpResultImpl * base, long count);
++
++protected:
++  indexed_accessor_range_base(const indexed_accessor_range_base &) = default;
++  indexed_accessor_range_base(indexed_accessor_range_base &&) = default;
++  indexed_accessor_range_base &
++  operator=(const indexed_accessor_range_base &) = default;
++  ::mlir::detail::OpResultImpl * base;
++  long count;
++};
++} }
++namespace mlir {
+ class ResultRange final : public llvm::detail::indexed_accessor_range_base<ResultRange, detail::OpResultImpl *, OpResult, OpResult, OpResult> {
+ public:
+   using RangeBaseT::RangeBaseT;
+-  class UseIterator;
++  class UseIterator final
++      : public llvm::iterator_facade_base<UseIterator, std::forward_iterator_tag, OpOperand> {
++  public:
++    explicit UseIterator(ResultRange results, bool end = false);
++     
++     
++     
++  private:
++    ResultRange::iterator it, endIt;
++    Value::use_iterator use;
++  };
+   using use_iterator = UseIterator;
+   using use_range = llvm::iterator_range<use_iterator>;
+ };
+ }
+ 
+ namespace mlir {
+-class ResultRange::UseIterator final
+-    : public llvm::iterator_facade_base<UseIterator, std::forward_iterator_tag, OpOperand> {
+-public:
+-  explicit UseIterator(ResultRange results, bool end = false);
+-   
+-   
+-   
+-private:
+-  ResultRange::iterator it, endIt;
+-  Value::use_iterator use;
+-};
++
+ }
+ #endif

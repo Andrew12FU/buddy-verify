@@ -1,0 +1,4 @@
+/build/
+/build-*/
+/results/
+__pycache__/

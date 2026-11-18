@@ -1,0 +1,2360 @@
+[
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "size_t",
+    "namespace": "",
+    "line": 11
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "char_traits",
+    "namespace": "std",
+    "line": 18
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "allocator",
+    "namespace": "std",
+    "line": 19
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "basic_string",
+    "namespace": "std::__cxx11",
+    "line": 21
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "string",
+    "namespace": "std",
+    "line": 23
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "basic_string_view",
+    "namespace": "std",
+    "line": 24
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "string_view",
+    "namespace": "std",
+    "line": 25
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "nullptr_t",
+    "namespace": "std",
+    "line": 26
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "initializer_list",
+    "namespace": "std",
+    "line": 27
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "integral_constant",
+    "namespace": "std",
+    "line": 46
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "true_type",
+    "namespace": "std",
+    "line": 53
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "false_type",
+    "namespace": "std",
+    "line": 54
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "bool_constant",
+    "namespace": "std",
+    "line": 55
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "remove_reference",
+    "namespace": "std",
+    "line": 56
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "remove_reference",
+    "namespace": "std",
+    "line": 57
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "remove_reference",
+    "namespace": "std",
+    "line": 58
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "remove_reference_t",
+    "namespace": "std",
+    "line": 59
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "remove_const",
+    "namespace": "std",
+    "line": 60
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "remove_const",
+    "namespace": "std",
+    "line": 61
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "remove_volatile",
+    "namespace": "std",
+    "line": 62
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "remove_volatile",
+    "namespace": "std",
+    "line": 63
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "remove_cv",
+    "namespace": "std",
+    "line": 64
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "remove_cv_t",
+    "namespace": "std",
+    "line": 65
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "enable_if",
+    "namespace": "std",
+    "line": 66
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "enable_if",
+    "namespace": "std",
+    "line": 67
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "enable_if_t",
+    "namespace": "std",
+    "line": 68
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "conditional",
+    "namespace": "std",
+    "line": 69
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "conditional",
+    "namespace": "std",
+    "line": 70
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "conditional_t",
+    "namespace": "std",
+    "line": 71
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "void_t",
+    "namespace": "std",
+    "line": 72
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "is_constructible",
+    "namespace": "std",
+    "line": 73
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "is_class",
+    "namespace": "std",
+    "line": 74
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "is_base_of",
+    "namespace": "std",
+    "line": 75
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "is_same",
+    "namespace": "std",
+    "line": 76
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "is_same",
+    "namespace": "std",
+    "line": 77
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "is_void",
+    "namespace": "std",
+    "line": 78
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "is_integral",
+    "namespace": "std",
+    "line": 79
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "is_convertible",
+    "namespace": "std",
+    "line": 80
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "is_assignable",
+    "namespace": "std",
+    "line": 81
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "is_trivially_copy_constructible",
+    "namespace": "std",
+    "line": 82
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "is_trivially_move_constructible",
+    "namespace": "std",
+    "line": 83
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "is_trivially_destructible",
+    "namespace": "std",
+    "line": 84
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "conjunction",
+    "namespace": "std",
+    "line": 85
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "conjunction",
+    "namespace": "std",
+    "line": 86
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "conjunction",
+    "namespace": "std",
+    "line": 87
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "decay",
+    "namespace": "std",
+    "line": 88
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "decay_t",
+    "namespace": "std",
+    "line": 91
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "declval",
+    "namespace": "std",
+    "line": 92
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "move",
+    "namespace": "std",
+    "line": 93
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "forward",
+    "namespace": "std",
+    "line": 95
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "forward",
+    "namespace": "std",
+    "line": 97
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "tuple",
+    "namespace": "std",
+    "line": 101
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "tuple_element",
+    "namespace": "std",
+    "line": 102
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "tuple_element",
+    "namespace": "std",
+    "line": 103
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "tuple_element",
+    "namespace": "std",
+    "line": 105
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "tuple_element_t",
+    "namespace": "std",
+    "line": 106
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "negation",
+    "namespace": "std",
+    "line": 107
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "disjunction",
+    "namespace": "std",
+    "line": 108
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "disjunction",
+    "namespace": "std",
+    "line": 109
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "disjunction",
+    "namespace": "std",
+    "line": 110
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "__new_allocator",
+    "namespace": "std",
+    "line": 117
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "allocator",
+    "namespace": "std",
+    "line": 118
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "default_delete",
+    "namespace": "std",
+    "line": 125
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "__uniq_ptr_impl",
+    "namespace": "std",
+    "line": 129
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "__uniq_ptr_data",
+    "namespace": "std",
+    "line": 137
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "unique_ptr",
+    "namespace": "std",
+    "line": 144
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "_Vector_base",
+    "namespace": "std",
+    "line": 158
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "vector",
+    "namespace": "std",
+    "line": 164
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "_Lock_policy",
+    "namespace": "__gnu_cxx",
+    "line": 175
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "is_array",
+    "namespace": "std",
+    "line": 177
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "remove_extent",
+    "namespace": "std",
+    "line": 178
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "remove_extent",
+    "namespace": "std",
+    "line": 179
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "remove_extent",
+    "namespace": "std",
+    "line": 180
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "_Sp_counted_base",
+    "namespace": "std",
+    "line": 181
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "__shared_count",
+    "namespace": "std",
+    "line": 182
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "__shared_ptr_access",
+    "namespace": "std",
+    "line": 191
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "__shared_ptr",
+    "namespace": "std",
+    "line": 194
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "shared_ptr",
+    "namespace": "std",
+    "line": 208
+  },
+  {
+    "header": "mlir/Support/Forward.h",
+    "name": "Type",
+    "namespace": "mlir",
+    "line": 219
+  },
+  {
+    "header": "mlir/Support/Forward.h",
+    "name": "Operation",
+    "namespace": "mlir",
+    "line": 219
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "",
+    "namespace": "",
+    "line": 221
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "pair",
+    "namespace": "std",
+    "line": 224
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "less",
+    "namespace": "std",
+    "line": 225
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "function",
+    "namespace": "std",
+    "line": 226
+  },
+  {
+    "header": "mini/Support/Standard.h",
+    "name": "map",
+    "namespace": "std",
+    "line": 227
+  },
+  {
+    "header": "llvm/ADT/STLExtras.h",
+    "name": "function_traits",
+    "namespace": "llvm",
+    "line": 243
+  },
+  {
+    "header": "llvm/ADT/STLExtras.h",
+    "name": "function_traits",
+    "namespace": "llvm",
+    "line": 245
+  },
+  {
+    "header": "llvm/ADT/STLExtras.h",
+    "name": "function_traits",
+    "namespace": "llvm",
+    "line": 251
+  },
+  {
+    "header": "llvm/ADT/STLExtras.h",
+    "name": "function_traits",
+    "namespace": "llvm",
+    "line": 253
+  },
+  {
+    "header": "llvm/ADT/STLExtras.h",
+    "name": "function_traits",
+    "namespace": "llvm",
+    "line": 259
+  },
+  {
+    "header": "llvm/ADT/STLExtras.h",
+    "name": "function_traits",
+    "namespace": "llvm",
+    "line": 261
+  },
+  {
+    "header": "llvm/ADT/STLExtras.h",
+    "name": "is_one_of",
+    "namespace": "llvm",
+    "line": 263
+  },
+  {
+    "header": "llvm/ADT/STLExtras.h",
+    "name": "remove_cvref_t",
+    "namespace": "llvm",
+    "line": 265
+  },
+  {
+    "header": "llvm/ADT/STLFunctionalExtras.h",
+    "name": "function_ref",
+    "namespace": "llvm",
+    "line": 267
+  },
+  {
+    "header": "llvm/ADT/STLFunctionalExtras.h",
+    "name": "function_ref",
+    "namespace": "llvm",
+    "line": 268
+  },
+  {
+    "header": "llvm/ADT/STLExtras.h",
+    "name": "detector",
+    "namespace": "llvm::detail",
+    "line": 292
+  },
+  {
+    "header": "llvm/ADT/STLExtras.h",
+    "name": "detector",
+    "namespace": "llvm::detail",
+    "line": 293
+  },
+  {
+    "header": "llvm/ADT/STLExtras.h",
+    "name": "is_detected",
+    "namespace": "llvm",
+    "line": 296
+  },
+  {
+    "header": "llvm/ADT/PointerIntPair.h",
+    "name": "PointerLikeTypeTraits",
+    "namespace": "llvm",
+    "line": 299
+  },
+  {
+    "header": "llvm/ADT/PointerIntPair.h",
+    "name": "PointerIntPairInfo",
+    "namespace": "llvm",
+    "line": 300
+  },
+  {
+    "header": "llvm/ADT/PointerIntPair.h",
+    "name": "PunnedPointer",
+    "namespace": "llvm::detail",
+    "line": 302
+  },
+  {
+    "header": "llvm/ADT/PointerIntPair.h",
+    "name": "PointerIntPair",
+    "namespace": "llvm",
+    "line": 312
+  },
+  {
+    "header": "llvm/Support/Casting.h",
+    "name": "CastInfo",
+    "namespace": "llvm",
+    "line": 325
+  },
+  {
+    "header": "llvm/Support/Casting.h",
+    "name": "CastIsPossible",
+    "namespace": "llvm",
+    "line": 326
+  },
+  {
+    "header": "llvm/Support/Casting.h",
+    "name": "NullableValueCastFailed",
+    "namespace": "llvm",
+    "line": 327
+  },
+  {
+    "header": "llvm/Support/Casting.h",
+    "name": "DefaultDoCastIfPossible",
+    "namespace": "llvm",
+    "line": 328
+  },
+  {
+    "header": "llvm/Support/Casting.h",
+    "name": "SelfType",
+    "namespace": "llvm::detail",
+    "line": 331
+  },
+  {
+    "header": "llvm/Support/Casting.h",
+    "name": "isPresent",
+    "namespace": "llvm::detail",
+    "line": 333
+  },
+  {
+    "header": "llvm/Support/Casting.h",
+    "name": "ValueFromPointerCast",
+    "namespace": "llvm",
+    "line": 335
+  },
+  {
+    "header": "llvm/Support/Casting.h",
+    "name": "CastIsPossible",
+    "namespace": "llvm",
+    "line": 342
+  },
+  {
+    "header": "llvm/Support/Casting.h",
+    "name": "CastInfo",
+    "namespace": "llvm",
+    "line": 345
+  },
+  {
+    "header": "llvm/Support/Casting.h",
+    "name": "CastInfo",
+    "namespace": "llvm",
+    "line": 353
+  },
+  {
+    "header": "llvm/Support/Casting.h",
+    "name": "dyn_cast",
+    "namespace": "llvm",
+    "line": 357
+  },
+  {
+    "header": "llvm/Support/Casting.h",
+    "name": "dyn_cast",
+    "namespace": "llvm",
+    "line": 362
+  },
+  {
+    "header": "llvm/Support/Casting.h",
+    "name": "dyn_cast",
+    "namespace": "llvm",
+    "line": 367
+  },
+  {
+    "header": "llvm/Support/Casting.h",
+    "name": "dyn_cast",
+    "namespace": "llvm",
+    "line": 372
+  },
+  {
+    "header": "llvm/ADT/ilist_node.h",
+    "name": "ilist_node_base",
+    "namespace": "llvm",
+    "line": 381
+  },
+  {
+    "header": "llvm/ADT/ilist_node.h",
+    "name": "ilist_base",
+    "namespace": "llvm",
+    "line": 382
+  },
+  {
+    "header": "llvm/ADT/ilist_node.h",
+    "name": "ilist_sentinel_tracking",
+    "namespace": "llvm",
+    "line": 389
+  },
+  {
+    "header": "llvm/ADT/ilist_node.h",
+    "name": "ilist_tag",
+    "namespace": "llvm",
+    "line": 395
+  },
+  {
+    "header": "llvm/ADT/ilist_node.h",
+    "name": "ilist_iterator_bits",
+    "namespace": "llvm",
+    "line": 403
+  },
+  {
+    "header": "llvm/ADT/ilist_node.h",
+    "name": "ilist_parent",
+    "namespace": "llvm",
+    "line": 416
+  },
+  {
+    "header": "llvm/ADT/ilist_node.h",
+    "name": "explicitness",
+    "namespace": "llvm::ilist_detail",
+    "line": 421
+  },
+  {
+    "header": "llvm/ADT/ilist_node.h",
+    "name": "is_explicit",
+    "namespace": "llvm::ilist_detail",
+    "line": 424
+  },
+  {
+    "header": "llvm/ADT/ilist_node.h",
+    "name": "is_implicit",
+    "namespace": "llvm::ilist_detail",
+    "line": 425
+  },
+  {
+    "header": "llvm/ADT/ilist_node.h",
+    "name": "is_valid_option",
+    "namespace": "llvm::ilist_detail",
+    "line": 438
+  },
+  {
+    "header": "llvm/ADT/ilist_node.h",
+    "name": "extract_sentinel_tracking",
+    "namespace": "llvm::ilist_detail",
+    "line": 444
+  },
+  {
+    "header": "llvm/ADT/ilist_node.h",
+    "name": "extract_sentinel_tracking",
+    "namespace": "llvm::ilist_detail",
+    "line": 445
+  },
+  {
+    "header": "llvm/ADT/ilist_node.h",
+    "name": "extract_sentinel_tracking",
+    "namespace": "llvm::ilist_detail",
+    "line": 449
+  },
+  {
+    "header": "llvm/ADT/ilist_node.h",
+    "name": "extract_sentinel_tracking",
+    "namespace": "llvm::ilist_detail",
+    "line": 453
+  },
+  {
+    "header": "llvm/ADT/ilist_node.h",
+    "name": "is_valid_option",
+    "namespace": "llvm::ilist_detail",
+    "line": 458
+  },
+  {
+    "header": "llvm/ADT/ilist_node.h",
+    "name": "extract_tag",
+    "namespace": "llvm::ilist_detail",
+    "line": 466
+  },
+  {
+    "header": "llvm/ADT/ilist_node.h",
+    "name": "extract_tag",
+    "namespace": "llvm::ilist_detail",
+    "line": 467
+  },
+  {
+    "header": "llvm/ADT/ilist_node.h",
+    "name": "extract_tag",
+    "namespace": "llvm::ilist_detail",
+    "line": 471
+  },
+  {
+    "header": "llvm/ADT/ilist_node.h",
+    "name": "extract_tag",
+    "namespace": "llvm::ilist_detail",
+    "line": 473
+  },
+  {
+    "header": "llvm/ADT/ilist_node.h",
+    "name": "is_valid_option",
+    "namespace": "llvm::ilist_detail",
+    "line": 476
+  },
+  {
+    "header": "llvm/ADT/ilist_node.h",
+    "name": "extract_iterator_bits",
+    "namespace": "llvm::ilist_detail",
+    "line": 482
+  },
+  {
+    "header": "llvm/ADT/ilist_node.h",
+    "name": "extract_iterator_bits",
+    "namespace": "llvm::ilist_detail",
+    "line": 483
+  },
+  {
+    "header": "llvm/ADT/ilist_node.h",
+    "name": "extract_iterator_bits",
+    "namespace": "llvm::ilist_detail",
+    "line": 486
+  },
+  {
+    "header": "llvm/ADT/ilist_node.h",
+    "name": "extract_iterator_bits",
+    "namespace": "llvm::ilist_detail",
+    "line": 489
+  },
+  {
+    "header": "llvm/ADT/ilist_node.h",
+    "name": "is_valid_option",
+    "namespace": "llvm::ilist_detail",
+    "line": 490
+  },
+  {
+    "header": "llvm/ADT/ilist_node.h",
+    "name": "extract_parent",
+    "namespace": "llvm::ilist_detail",
+    "line": 497
+  },
+  {
+    "header": "llvm/ADT/ilist_node.h",
+    "name": "extract_parent",
+    "namespace": "llvm::ilist_detail",
+    "line": 498
+  },
+  {
+    "header": "llvm/ADT/ilist_node.h",
+    "name": "extract_parent",
+    "namespace": "llvm::ilist_detail",
+    "line": 502
+  },
+  {
+    "header": "llvm/ADT/ilist_node.h",
+    "name": "extract_parent",
+    "namespace": "llvm::ilist_detail",
+    "line": 504
+  },
+  {
+    "header": "llvm/ADT/ilist_node.h",
+    "name": "is_valid_option",
+    "namespace": "llvm::ilist_detail",
+    "line": 507
+  },
+  {
+    "header": "llvm/ADT/ilist_node.h",
+    "name": "check_options",
+    "namespace": "llvm::ilist_detail",
+    "line": 513
+  },
+  {
+    "header": "llvm/ADT/ilist_node.h",
+    "name": "node_options",
+    "namespace": "llvm::ilist_detail",
+    "line": 519
+  },
+  {
+    "header": "llvm/ADT/ilist_node.h",
+    "name": "compute_node_options",
+    "namespace": "llvm::ilist_detail",
+    "line": 537
+  },
+  {
+    "header": "llvm/ADT/ilist_node.h",
+    "name": "node_base_prevnext",
+    "namespace": "llvm::ilist_detail",
+    "line": 547
+  },
+  {
+    "header": "llvm/ADT/ilist_node.h",
+    "name": "node_base_prevnext",
+    "namespace": "llvm::ilist_detail",
+    "line": 548
+  },
+  {
+    "header": "llvm/ADT/ilist_node.h",
+    "name": "node_base_prevnext",
+    "namespace": "llvm::ilist_detail",
+    "line": 552
+  },
+  {
+    "header": "llvm/ADT/ilist_node.h",
+    "name": "node_base_parent",
+    "namespace": "llvm::ilist_detail",
+    "line": 556
+  },
+  {
+    "header": "llvm/ADT/ilist_node.h",
+    "name": "node_base_parent",
+    "namespace": "llvm::ilist_detail",
+    "line": 557
+  },
+  {
+    "header": "llvm/ADT/ilist_node.h",
+    "name": "node_parent_access",
+    "namespace": "llvm::ilist_detail",
+    "line": 558
+  },
+  {
+    "header": "llvm/ADT/ilist_node.h",
+    "name": "node_parent_access",
+    "namespace": "llvm::ilist_detail",
+    "line": 559
+  },
+  {
+    "header": "llvm/ADT/ilist_node.h",
+    "name": "ilist_node_base",
+    "namespace": "llvm",
+    "line": 561
+  },
+  {
+    "header": "llvm/ADT/ilist_node.h",
+    "name": "ilist_node_impl",
+    "namespace": "llvm",
+    "line": 565
+  },
+  {
+    "header": "llvm/ADT/ilist_node.h",
+    "name": "ilist_node",
+    "namespace": "llvm",
+    "line": 571
+  },
+  {
+    "header": "llvm/ADT/ilist_node.h",
+    "name": "ilist_node_with_parent",
+    "namespace": "llvm",
+    "line": 575
+  },
+  {
+    "header": "llvm/Support/TrailingObjects.h",
+    "name": "MaxAlignmentDecl",
+    "namespace": "llvm::trailing_objects_internal",
+    "line": 583
+  },
+  {
+    "header": "llvm/Support/TrailingObjects.h",
+    "name": "MaxAlignmentDecl",
+    "namespace": "llvm::trailing_objects_internal",
+    "line": 584
+  },
+  {
+    "header": "llvm/Support/TrailingObjects.h",
+    "name": "MaxAlignmentDecl",
+    "namespace": "llvm::trailing_objects_internal",
+    "line": 585
+  },
+  {
+    "header": "llvm/Support/TrailingObjects.h",
+    "name": "TrailingObjectsBase",
+    "namespace": "llvm::trailing_objects_internal",
+    "line": 589
+  },
+  {
+    "header": "llvm/Support/TrailingObjects.h",
+    "name": "TrailingObjectsImpl",
+    "namespace": "llvm::trailing_objects_internal",
+    "line": 593
+  },
+  {
+    "header": "llvm/Support/TrailingObjects.h",
+    "name": "TrailingObjectsImpl",
+    "namespace": "llvm::trailing_objects_internal",
+    "line": 595
+  },
+  {
+    "header": "llvm/Support/TrailingObjects.h",
+    "name": "TrailingObjectsImpl",
+    "namespace": "llvm::trailing_objects_internal",
+    "line": 598
+  },
+  {
+    "header": "llvm/Support/TrailingObjects.h",
+    "name": "TrailingObjects",
+    "namespace": "llvm",
+    "line": 601
+  },
+  {
+    "header": "llvm/ADT/STLExtras.h",
+    "name": "Repeated",
+    "namespace": "llvm",
+    "line": 612
+  },
+  {
+    "header": "llvm/ADT/STLExtras.h",
+    "name": "iterator_range",
+    "namespace": "llvm",
+    "line": 613
+  },
+  {
+    "header": "llvm/ADT/STLExtras.h",
+    "name": "TypesAreDistinct",
+    "namespace": "llvm",
+    "line": 615
+  },
+  {
+    "header": "llvm/ADT/STLExtras.h",
+    "name": "TypesAreDistinct",
+    "namespace": "llvm",
+    "line": 616
+  },
+  {
+    "header": "llvm/ADT/STLExtras.h",
+    "name": "TypesAreDistinct",
+    "namespace": "llvm",
+    "line": 617
+  },
+  {
+    "header": "llvm/ADT/PointerUnion.h",
+    "name": "PointerUnionMembers",
+    "namespace": "llvm::pointer_union_detail",
+    "line": 620
+  },
+  {
+    "header": "llvm/ADT/PointerUnion.h",
+    "name": "PointerUnionMembers",
+    "namespace": "llvm::pointer_union_detail",
+    "line": 621
+  },
+  {
+    "header": "llvm/ADT/PointerUnion.h",
+    "name": "PointerUnionMembers",
+    "namespace": "llvm::pointer_union_detail",
+    "line": 626
+  },
+  {
+    "header": "llvm/ADT/PointerUnion.h",
+    "name": "PointerUnion",
+    "namespace": "llvm",
+    "line": 638
+  },
+  {
+    "header": "llvm/ADT/STLExtras.h",
+    "name": "indexed_accessor_range_base",
+    "namespace": "llvm::detail",
+    "line": 652
+  },
+  {
+    "header": "llvm/ADT/SmallVector.h",
+    "name": "SmallVectorBase",
+    "namespace": "llvm",
+    "line": 671
+  },
+  {
+    "header": "llvm/ADT/SmallVector.h",
+    "name": "SmallVectorSizeType",
+    "namespace": "llvm",
+    "line": 682
+  },
+  {
+    "header": "llvm/ADT/SmallVector.h",
+    "name": "SmallVectorTemplateCommon",
+    "namespace": "llvm",
+    "line": 685
+  },
+  {
+    "header": "llvm/ADT/SmallVector.h",
+    "name": "SmallVectorTemplateBase",
+    "namespace": "llvm",
+    "line": 706
+  },
+  {
+    "header": "llvm/ADT/SmallVector.h",
+    "name": "SmallVectorTemplateBase",
+    "namespace": "llvm",
+    "line": 710
+  },
+  {
+    "header": "llvm/ADT/SmallVector.h",
+    "name": "SmallVectorImpl",
+    "namespace": "llvm",
+    "line": 720
+  },
+  {
+    "header": "llvm/ADT/SmallVector.h",
+    "name": "SmallVectorStorage",
+    "namespace": "llvm",
+    "line": 738
+  },
+  {
+    "header": "llvm/ADT/SmallVector.h",
+    "name": "SmallVectorStorage",
+    "namespace": "llvm",
+    "line": 741
+  },
+  {
+    "header": "llvm/ADT/SmallVector.h",
+    "name": "SmallVector",
+    "namespace": "llvm",
+    "line": 742
+  },
+  {
+    "header": "llvm/ADT/SmallVector.h",
+    "name": "CalculateSmallVectorDefaultInlinedElements",
+    "namespace": "llvm",
+    "line": 743
+  },
+  {
+    "header": "llvm/ADT/SmallVector.h",
+    "name": "SmallVector",
+    "namespace": "llvm",
+    "line": 750
+  },
+  {
+    "header": "llvm/ADT/StringRef.h",
+    "name": "StringRef",
+    "namespace": "llvm",
+    "line": 764
+  },
+  {
+    "header": "llvm/Support/LogicalResult.h",
+    "name": "LogicalResult",
+    "namespace": "llvm",
+    "line": 779
+  },
+  {
+    "header": "llvm/Support/LogicalResult.h",
+    "name": "success",
+    "namespace": "llvm",
+    "line": 789
+  },
+  {
+    "header": "llvm/Support/LogicalResult.h",
+    "name": "failure",
+    "namespace": "llvm",
+    "line": 790
+  },
+  {
+    "header": "llvm/ADT/ArrayRef.h",
+    "name": "ArrayRef",
+    "namespace": "llvm",
+    "line": 794
+  },
+  {
+    "header": "mlir/Support/LLVM.h",
+    "name": "llvm::ArrayRef",
+    "namespace": "mlir",
+    "line": 827
+  },
+  {
+    "header": "mlir/Support/LLVM.h",
+    "name": "llvm::SmallVector",
+    "namespace": "mlir",
+    "line": 828
+  },
+  {
+    "header": "mlir/Support/LLVM.h",
+    "name": "llvm::dyn_cast",
+    "namespace": "mlir",
+    "line": 829
+  },
+  {
+    "header": "mlir/Support/LLVM.h",
+    "name": "LogicalResult",
+    "namespace": "mlir",
+    "line": 830
+  },
+  {
+    "header": "mlir/Support/LLVM.h",
+    "name": "StringRef",
+    "namespace": "mlir",
+    "line": 831
+  },
+  {
+    "header": "mlir/Support/LLVM.h",
+    "name": "llvm::success",
+    "namespace": "mlir",
+    "line": 832
+  },
+  {
+    "header": "mlir/Support/LLVM.h",
+    "name": "llvm::failure",
+    "namespace": "mlir",
+    "line": 833
+  },
+  {
+    "header": "mlir/IR/Visitors.h",
+    "name": "WalkOrder",
+    "namespace": "mlir",
+    "line": 837
+  },
+  {
+    "header": "mlir/IR/Visitors.h",
+    "name": "ForwardIterator",
+    "namespace": "mlir",
+    "line": 838
+  },
+  {
+    "header": "mlir/IR/Visitors.h",
+    "name": "Region",
+    "namespace": "mlir",
+    "line": 839
+  },
+  {
+    "header": "mlir/IR/Visitors.h",
+    "name": "Block",
+    "namespace": "mlir",
+    "line": 840
+  },
+  {
+    "header": "mlir/IR/Visitors.h",
+    "name": "first_argument_type",
+    "namespace": "mlir::detail",
+    "line": 842
+  },
+  {
+    "header": "mlir/IR/Visitors.h",
+    "name": "first_argument_type",
+    "namespace": "mlir::detail",
+    "line": 844
+  },
+  {
+    "header": "mlir/IR/Visitors.h",
+    "name": "first_argument_type",
+    "namespace": "mlir::detail",
+    "line": 846
+  },
+  {
+    "header": "mlir/IR/Visitors.h",
+    "name": "first_argument_type",
+    "namespace": "mlir::detail",
+    "line": 848
+  },
+  {
+    "header": "mlir/IR/Visitors.h",
+    "name": "first_argument",
+    "namespace": "mlir::detail",
+    "line": 850
+  },
+  {
+    "header": "mlir/IR/Visitors.h",
+    "name": "walk",
+    "namespace": "mlir::detail",
+    "line": 852
+  },
+  {
+    "header": "mlir/IR/Visitors.h",
+    "name": "walk",
+    "namespace": "mlir::detail",
+    "line": 854
+  },
+  {
+    "header": "mlir/IR/Visitors.h",
+    "name": "walk",
+    "namespace": "mlir::detail",
+    "line": 861
+  },
+  {
+    "header": "mlir/IR/Visitors.h",
+    "name": "walkResultType",
+    "namespace": "mlir::detail",
+    "line": 876
+  },
+  {
+    "header": "mlir/Support/Forward.h",
+    "name": "MLIRContext",
+    "namespace": "mlir",
+    "line": 881
+  },
+  {
+    "header": "mlir/IR/PatternMatch.h",
+    "name": "PatternRewriter",
+    "namespace": "mlir",
+    "line": 883
+  },
+  {
+    "header": "mlir/Support/InterfaceSupport.h",
+    "name": "TraitBase",
+    "namespace": "mlir::OpTrait",
+    "line": 885
+  },
+  {
+    "header": "mlir/Support/InterfaceSupport.h",
+    "name": "Interface",
+    "namespace": "mlir::detail",
+    "line": 893
+  },
+  {
+    "header": "mlir/IR/Types.h",
+    "name": "TypeStorage",
+    "namespace": "mlir",
+    "line": 918
+  },
+  {
+    "header": "mlir/IR/Types.h",
+    "name": "TypeID",
+    "namespace": "mlir",
+    "line": 919
+  },
+  {
+    "header": "mlir/IR/Types.h",
+    "name": "TypeUniquer",
+    "namespace": "mlir::detail",
+    "line": 921
+  },
+  {
+    "header": "mlir/IR/Types.h",
+    "name": "StorageUserBase",
+    "namespace": "mlir::detail",
+    "line": 922
+  },
+  {
+    "header": "mlir/IR/Types.h",
+    "name": "Type",
+    "namespace": "mlir",
+    "line": 925
+  },
+  {
+    "header": "mlir/IR/Types.h",
+    "name": "StorageUserTraitBase",
+    "namespace": "mlir::detail",
+    "line": 944
+  },
+  {
+    "header": "mlir/IR/Types.h",
+    "name": "TraitBase",
+    "namespace": "mlir::TypeTrait",
+    "line": 951
+  },
+  {
+    "header": "mlir/IR/Types.h",
+    "name": "TypeInterface",
+    "namespace": "mlir",
+    "line": 954
+  },
+  {
+    "header": "mlir/IR/BuiltinTypes.h",
+    "name": "ShapedTypeInterfaceTraits",
+    "namespace": "mlir::detail",
+    "line": 963
+  },
+  {
+    "header": "mlir/IR/BuiltinTypes.h",
+    "name": "ShapedTypeTrait",
+    "namespace": "mlir::detail",
+    "line": 969
+  },
+  {
+    "header": "mlir/IR/BuiltinTypes.h",
+    "name": "ShapedType",
+    "namespace": "mlir",
+    "line": 971
+  },
+  {
+    "header": "mlir/IR/BuiltinTypes.h",
+    "name": "ShapedTypeTrait",
+    "namespace": "mlir::detail",
+    "line": 977
+  },
+  {
+    "header": "mlir/IR/BuiltinTypes.h",
+    "name": "TensorType",
+    "namespace": "mlir",
+    "line": 982
+  },
+  {
+    "header": "mlir/IR/BuiltinTypes.h",
+    "name": "ShapedTypeTrait",
+    "namespace": "mlir",
+    "line": 983
+  },
+  {
+    "header": "mlir/IR/BuiltinTypes.h",
+    "name": "TensorType",
+    "namespace": "mlir",
+    "line": 985
+  },
+  {
+    "header": "mlir/IR/BuiltinTypes.h",
+    "name": "ValueSemantics",
+    "namespace": "mlir",
+    "line": 992
+  },
+  {
+    "header": "mlir/IR/BuiltinTypes.h",
+    "name": "RankedTensorTypeStorage",
+    "namespace": "mlir::detail",
+    "line": 995
+  },
+  {
+    "header": "mlir/IR/BuiltinTypes.h",
+    "name": "StorageUserBase",
+    "namespace": "mlir::detail",
+    "line": 996
+  },
+  {
+    "header": "mlir/IR/BuiltinTypes.h",
+    "name": "RankedTensorType",
+    "namespace": "mlir",
+    "line": 1007
+  },
+  {
+    "header": "mlir/IR/Value.h",
+    "name": "ValueImpl",
+    "namespace": "mlir::detail",
+    "line": 1014
+  },
+  {
+    "header": "mlir/IR/Value.h",
+    "name": "Value",
+    "namespace": "mlir",
+    "line": 1015
+  },
+  {
+    "header": "mlir/IR/ValueRange.h",
+    "name": "OpOperand",
+    "namespace": "mlir",
+    "line": 1022
+  },
+  {
+    "header": "mlir/IR/ValueRange.h",
+    "name": "BlockArgument",
+    "namespace": "mlir",
+    "line": 1023
+  },
+  {
+    "header": "mlir/IR/ValueRange.h",
+    "name": "OperandRange",
+    "namespace": "mlir",
+    "line": 1024
+  },
+  {
+    "header": "mlir/IR/ValueRange.h",
+    "name": "ResultRange",
+    "namespace": "mlir",
+    "line": 1025
+  },
+  {
+    "header": "mlir/IR/ValueRange.h",
+    "name": "OpResultImpl",
+    "namespace": "mlir::detail",
+    "line": 1026
+  },
+  {
+    "header": "mlir/IR/ValueRange.h",
+    "name": "ValueRange",
+    "namespace": "mlir",
+    "line": 1027
+  },
+  {
+    "header": "mlir/IR/Value.h",
+    "name": "TypedValue",
+    "namespace": "mlir::detail",
+    "line": 1046
+  },
+  {
+    "header": "mlir/IR/Value.h",
+    "name": "TypedValue",
+    "namespace": "mlir",
+    "line": 1057
+  },
+  {
+    "header": "mlir/IR/OperationSupport.h",
+    "name": "IROperandBase",
+    "namespace": "mlir::detail",
+    "line": 1061
+  },
+  {
+    "header": "mlir/IR/OperationSupport.h",
+    "name": "IROperand",
+    "namespace": "mlir",
+    "line": 1075
+  },
+  {
+    "header": "mlir/IR/OperationSupport.h",
+    "name": "OpOperand",
+    "namespace": "mlir",
+    "line": 1086
+  },
+  {
+    "header": "mlir/IR/OperationSupport.h",
+    "name": "Location",
+    "namespace": "mlir",
+    "line": 1093
+  },
+  {
+    "header": "mlir/IR/OperationSupport.h",
+    "name": "OperationName",
+    "namespace": "mlir",
+    "line": 1094
+  },
+  {
+    "header": "mlir/IR/OperationSupport.h",
+    "name": "DictionaryAttr",
+    "namespace": "mlir",
+    "line": 1095
+  },
+  {
+    "header": "mlir/IR/OperationSupport.h",
+    "name": "PropertyRef",
+    "namespace": "mlir",
+    "line": 1096
+  },
+  {
+    "header": "mlir/IR/OperationSupport.h",
+    "name": "OperandStorage",
+    "namespace": "mlir::detail",
+    "line": 1098
+  },
+  {
+    "header": "mlir/IR/OperationSupport.h",
+    "name": "OpProperties",
+    "namespace": "mlir::detail",
+    "line": 1104
+  },
+  {
+    "header": "mlir/IR/OperationSupport.h",
+    "name": "BlockOperand",
+    "namespace": "mlir",
+    "line": 1106
+  },
+  {
+    "header": "llvm/ADT/ilist.h",
+    "name": "ilist_base",
+    "namespace": "llvm",
+    "line": 1113
+  },
+  {
+    "header": "llvm/ADT/ilist.h",
+    "name": "ilist_iterator",
+    "namespace": "llvm",
+    "line": 1117
+  },
+  {
+    "header": "llvm/ADT/ilist.h",
+    "name": "ilist_iterator_w_bits",
+    "namespace": "llvm",
+    "line": 1118
+  },
+  {
+    "header": "llvm/ADT/ilist.h",
+    "name": "ilist_select_iterator_type",
+    "namespace": "llvm",
+    "line": 1119
+  },
+  {
+    "header": "llvm/ADT/ilist.h",
+    "name": "NodeAccess",
+    "namespace": "llvm::ilist_detail",
+    "line": 1123
+  },
+  {
+    "header": "llvm/ADT/ilist.h",
+    "name": "SpecificNodeAccess",
+    "namespace": "llvm::ilist_detail",
+    "line": 1124
+  },
+  {
+    "header": "llvm/ADT/ilist.h",
+    "name": "ilist_sentinel",
+    "namespace": "llvm",
+    "line": 1135
+  },
+  {
+    "header": "llvm/ADT/ilist.h",
+    "name": "simple_ilist",
+    "namespace": "llvm",
+    "line": 1139
+  },
+  {
+    "header": "llvm/ADT/ilist.h",
+    "name": "ilist_alloc_traits",
+    "namespace": "llvm",
+    "line": 1166
+  },
+  {
+    "header": "llvm/ADT/ilist.h",
+    "name": "ilist_callback_traits",
+    "namespace": "llvm",
+    "line": 1167
+  },
+  {
+    "header": "llvm/ADT/ilist.h",
+    "name": "ilist_node_traits",
+    "namespace": "llvm",
+    "line": 1168
+  },
+  {
+    "header": "llvm/ADT/ilist.h",
+    "name": "ilist_traits",
+    "namespace": "llvm",
+    "line": 1169
+  },
+  {
+    "header": "llvm/ADT/ilist.h",
+    "name": "ilist_traits",
+    "namespace": "llvm",
+    "line": 1170
+  },
+  {
+    "header": "llvm/ADT/ilist.h",
+    "name": "ilist_traits",
+    "namespace": "llvm",
+    "line": 1171
+  },
+  {
+    "header": "llvm/ADT/ilist.h",
+    "name": "iplist_impl",
+    "namespace": "llvm",
+    "line": 1180
+  },
+  {
+    "header": "llvm/ADT/ilist.h",
+    "name": "iplist",
+    "namespace": "llvm",
+    "line": 1191
+  },
+  {
+    "header": "mlir/IR/Region.h",
+    "name": "Region",
+    "namespace": "mlir",
+    "line": 1203
+  },
+  {
+    "header": "mlir/IR/Operation.h",
+    "name": "Operation",
+    "namespace": "mlir",
+    "line": 1214
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "OpState",
+    "namespace": "mlir",
+    "line": 1239
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "OneTypedResult",
+    "namespace": "mlir::OpTrait",
+    "line": 1263
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "MultiOperandTraitBase",
+    "namespace": "mlir::OpTrait::detail",
+    "line": 1274
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "NOperands",
+    "namespace": "mlir::OpTrait",
+    "line": 1277
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "Op",
+    "namespace": "mlir",
+    "line": 1282
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "OpInterface",
+    "namespace": "mlir",
+    "line": 1292
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "ZeroRegions",
+    "namespace": "mlir::OpTrait",
+    "line": 1301
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "OneResult",
+    "namespace": "mlir::OpTrait",
+    "line": 1302
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "ZeroSuccessors",
+    "namespace": "mlir::OpTrait",
+    "line": 1304
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "OpInvariants",
+    "namespace": "mlir::OpTrait",
+    "line": 1305
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "ConditionallySpeculatableInterfaceTraits",
+    "namespace": "mlir::detail",
+    "line": 1306
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "ConditionallySpeculatableTrait",
+    "namespace": "mlir::detail",
+    "line": 1307
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "ConditionallySpeculatable",
+    "namespace": "mlir",
+    "line": 1309
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "ConditionallySpeculatableTrait",
+    "namespace": "mlir::detail",
+    "line": 1314
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "AlwaysSpeculatableImplTrait",
+    "namespace": "mlir::OpTrait",
+    "line": 1315
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "MemoryEffectOpInterfaceInterfaceTraits",
+    "namespace": "mlir::detail",
+    "line": 1316
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "MemoryEffectOpInterfaceTrait",
+    "namespace": "mlir::detail",
+    "line": 1317
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "MemoryEffectOpInterface",
+    "namespace": "mlir",
+    "line": 1319
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "MemoryEffectOpInterfaceTrait",
+    "namespace": "mlir::detail",
+    "line": 1324
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "InferTypeOpInterfaceInterfaceTraits",
+    "namespace": "mlir::detail",
+    "line": 1325
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "InferTypeOpInterfaceTrait",
+    "namespace": "mlir::detail",
+    "line": 1326
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "InferTypeOpInterface",
+    "namespace": "mlir",
+    "line": 1328
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "InferTypeOpInterfaceTrait",
+    "namespace": "mlir::detail",
+    "line": 1333
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "InferShapedTypeOpInterfaceInterfaceTraits",
+    "namespace": "mlir::detail",
+    "line": 1334
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "InferShapedTypeOpInterfaceTrait",
+    "namespace": "mlir::detail",
+    "line": 1335
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "InferShapedTypeOpInterface",
+    "namespace": "mlir",
+    "line": 1337
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "InferShapedTypeOpInterfaceTrait",
+    "namespace": "mlir::detail",
+    "line": 1342
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "InferShapedTypeOpAdaptor",
+    "namespace": "mlir::OpTrait",
+    "line": 1343
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "InferTensorType",
+    "namespace": "mlir::OpTrait",
+    "line": 1344
+  },
+  {
+    "header": "mlir/Dialect/Tosa/IR/TosaOps.h",
+    "name": "TosaOpInterfaceTraits",
+    "namespace": "mlir::tosa::detail",
+    "line": 1346
+  },
+  {
+    "header": "mlir/Dialect/Tosa/IR/TosaOps.h",
+    "name": "TosaOpTrait",
+    "namespace": "mlir::tosa::detail",
+    "line": 1347
+  },
+  {
+    "header": "mlir/Dialect/Tosa/IR/TosaOps.h",
+    "name": "TosaOp",
+    "namespace": "mlir::tosa",
+    "line": 1349
+  },
+  {
+    "header": "mlir/Dialect/Tosa/IR/TosaOps.h",
+    "name": "TosaOpTrait",
+    "namespace": "mlir::tosa::detail",
+    "line": 1354
+  },
+  {
+    "header": "mlir/Dialect/Tosa/IR/TosaOps.h",
+    "name": "QueryProfileInterfaceTraits",
+    "namespace": "mlir::tosa::detail",
+    "line": 1357
+  },
+  {
+    "header": "mlir/Dialect/Tosa/IR/TosaOps.h",
+    "name": "QueryProfileInterface",
+    "namespace": "mlir::tosa",
+    "line": 1359
+  },
+  {
+    "header": "mlir/Dialect/Tosa/IR/TosaOps.h",
+    "name": "QueryExtensionInterfaceTraits",
+    "namespace": "mlir::tosa::detail",
+    "line": 1365
+  },
+  {
+    "header": "mlir/Dialect/Tosa/IR/TosaOps.h",
+    "name": "QueryExtensionInterface",
+    "namespace": "mlir::tosa",
+    "line": 1367
+  },
+  {
+    "header": "mlir/Dialect/Tosa/IR/TosaOps.h",
+    "name": "TosaResolvableShapeOperands",
+    "namespace": "mlir::OpTrait::tosa",
+    "line": 1372
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "OneRegion",
+    "namespace": "mlir::OpTrait",
+    "line": 1373
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "ZeroResults",
+    "namespace": "mlir::OpTrait",
+    "line": 1374
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "ZeroOperands",
+    "namespace": "mlir::OpTrait",
+    "line": 1375
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "BytecodeOpInterfaceInterfaceTraits",
+    "namespace": "mlir::detail",
+    "line": 1376
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "BytecodeOpInterfaceTrait",
+    "namespace": "mlir::detail",
+    "line": 1377
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "BytecodeOpInterface",
+    "namespace": "mlir",
+    "line": 1379
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "BytecodeOpInterfaceTrait",
+    "namespace": "mlir::detail",
+    "line": 1384
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "AffineScope",
+    "namespace": "mlir::OpTrait",
+    "line": 1385
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "AutomaticAllocationScope",
+    "namespace": "mlir::OpTrait",
+    "line": 1386
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "SymbolOpInterfaceInterfaceTraits",
+    "namespace": "mlir::detail",
+    "line": 1387
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "SymbolOpInterfaceTrait",
+    "namespace": "mlir::detail",
+    "line": 1388
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "SymbolOpInterface",
+    "namespace": "mlir",
+    "line": 1390
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "SymbolOpInterfaceTrait",
+    "namespace": "mlir::detail",
+    "line": 1395
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "ArgAndResultAttrsOpInterfaceInterfaceTraits",
+    "namespace": "mlir::detail",
+    "line": 1396
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "ArgAndResultAttrsOpInterfaceTrait",
+    "namespace": "mlir::detail",
+    "line": 1397
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "ArgAndResultAttrsOpInterface",
+    "namespace": "mlir",
+    "line": 1399
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "ArgAndResultAttrsOpInterfaceTrait",
+    "namespace": "mlir::detail",
+    "line": 1404
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "CallableOpInterfaceInterfaceTraits",
+    "namespace": "mlir::detail",
+    "line": 1405
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "CallableOpInterfaceTrait",
+    "namespace": "mlir::detail",
+    "line": 1406
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "CallableOpInterface",
+    "namespace": "mlir",
+    "line": 1408
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "CallableOpInterfaceTrait",
+    "namespace": "mlir::detail",
+    "line": 1413
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "FunctionOpInterfaceInterfaceTraits",
+    "namespace": "mlir::detail",
+    "line": 1414
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "FunctionOpInterfaceTrait",
+    "namespace": "mlir::detail",
+    "line": 1415
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "FunctionOpInterface",
+    "namespace": "mlir",
+    "line": 1417
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "FunctionOpInterfaceTrait",
+    "namespace": "mlir::detail",
+    "line": 1422
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "IsIsolatedFromAbove",
+    "namespace": "mlir::OpTrait",
+    "line": 1423
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "OpAsmOpInterfaceInterfaceTraits",
+    "namespace": "mlir::detail",
+    "line": 1424
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "OpAsmOpInterfaceTrait",
+    "namespace": "mlir::detail",
+    "line": 1425
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "OpAsmOpInterface",
+    "namespace": "mlir",
+    "line": 1427
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "OpAsmOpInterfaceTrait",
+    "namespace": "mlir::detail",
+    "line": 1432
+  },
+  {
+    "header": "mlir/Dialect/Tosa/IR/TosaOps.h",
+    "name": "ReshapeOp",
+    "namespace": "mlir::tosa",
+    "line": 1433
+  },
+  {
+    "header": "mlir/Dialect/Tosa/IR/TosaOps.h",
+    "name": "Op",
+    "namespace": "mlir",
+    "line": 1434
+  },
+  {
+    "header": "mlir/IR/Dialect.h",
+    "name": "Dialect",
+    "namespace": "mlir",
+    "line": 1435
+  },
+  {
+    "header": "mlir/Dialect/Tosa/IR/TosaOps.h",
+    "name": "TosaDialect",
+    "namespace": "mlir::tosa",
+    "line": 1446
+  },
+  {
+    "header": "mlir/Dialect/Tosa/IR/TosaOps.h",
+    "name": "ReshapeOp",
+    "namespace": "mlir::tosa",
+    "line": 1453
+  },
+  {
+    "header": "mlir/IR/Region.h",
+    "name": "Region",
+    "namespace": "mlir",
+    "line": 1463
+  },
+  {
+    "header": "mlir/IR/Builders.h",
+    "name": "Builder",
+    "namespace": "mlir",
+    "line": 1464
+  },
+  {
+    "header": "mlir/IR/Builders.h",
+    "name": "OpBuilder",
+    "namespace": "mlir",
+    "line": 1472
+  },
+  {
+    "header": "mlir/IR/PatternMatch.h",
+    "name": "RewriterBase",
+    "namespace": "mlir",
+    "line": 1484
+  },
+  {
+    "header": "mlir/IR/PatternMatch.h",
+    "name": "PatternRewriter",
+    "namespace": "mlir",
+    "line": 1512
+  },
+  {
+    "header": "mlir/IR/PatternMatch.h",
+    "name": "PatternBenefit",
+    "namespace": "mlir",
+    "line": 1519
+  },
+  {
+    "header": "mlir/IR/OperationSupport.h",
+    "name": "OperationName",
+    "namespace": "mlir",
+    "line": 1530
+  },
+  {
+    "header": "mlir/IR/PatternMatch.h",
+    "name": "SmallVector",
+    "namespace": "",
+    "line": 1540
+  },
+  {
+    "header": "mlir/IR/PatternMatch.h",
+    "name": "Pattern",
+    "namespace": "mlir",
+    "line": 1542
+  },
+  {
+    "header": "mlir/IR/PatternMatch.h",
+    "name": "RewritePattern",
+    "namespace": "mlir",
+    "line": 1558
+  },
+  {
+    "header": "mlir/IR/PatternMatch.h",
+    "name": "OpOrInterfaceRewritePatternBase",
+    "namespace": "mlir::detail",
+    "line": 1571
+  },
+  {
+    "header": "mlir/IR/PatternMatch.h",
+    "name": "OpRewritePattern",
+    "namespace": "mlir",
+    "line": 1581
+  },
+  {
+    "header": "mlir/Transforms/GreedyPatternRewriteDriver.h",
+    "name": "GreedyRewriteStrictness",
+    "namespace": "mlir",
+    "line": 1589
+  },
+  {
+    "header": "mlir/Transforms/GreedyPatternRewriteDriver.h",
+    "name": "GreedySimplifyRegionLevel",
+    "namespace": "mlir",
+    "line": 1590
+  },
+  {
+    "header": "mlir/Transforms/GreedyPatternRewriteDriver.h",
+    "name": "GreedyRewriteConfig",
+    "namespace": "mlir",
+    "line": 1591
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "NoRegionArguments",
+    "namespace": "mlir::OpTrait",
+    "line": 1612
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "NoTerminator",
+    "namespace": "mlir::OpTrait",
+    "line": 1613
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "SingleBlock",
+    "namespace": "mlir::OpTrait",
+    "line": 1614
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "SymbolTable",
+    "namespace": "mlir::OpTrait",
+    "line": 1615
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "HasOnlyGraphRegion",
+    "namespace": "mlir::OpTrait",
+    "line": 1616
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "RegionKindInterfaceInterfaceTraits",
+    "namespace": "mlir::detail",
+    "line": 1617
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "RegionKindInterfaceTrait",
+    "namespace": "mlir::detail",
+    "line": 1618
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "RegionKindInterface",
+    "namespace": "mlir",
+    "line": 1620
+  },
+  {
+    "header": "mlir/IR/OpDefinition.h",
+    "name": "RegionKindInterfaceTrait",
+    "namespace": "mlir::detail",
+    "line": 1625
+  },
+  {
+    "header": "mlir/IR/BuiltinOps.h",
+    "name": "ModuleOp",
+    "namespace": "mlir",
+    "line": 1626
+  },
+  {
+    "header": "mlir/IR/BuiltinOps.h",
+    "name": "Op",
+    "namespace": "mlir",
+    "line": 1627
+  },
+  {
+    "header": "mlir/IR/BuiltinOps.h",
+    "name": "ModuleOp",
+    "namespace": "mlir",
+    "line": 1628
+  },
+  {
+    "header": "mlir/IR/PatternMatch.h",
+    "name": "OwningOpRef",
+    "namespace": "mlir",
+    "line": 1633
+  },
+  {
+    "header": "mlir/IR/PatternMatch.h",
+    "name": "PDLPatternModule",
+    "namespace": "mlir",
+    "line": 1647
+  },
+  {
+    "header": "mlir/IR/PatternMatch.h",
+    "name": "RewritePatternSet",
+    "namespace": "mlir",
+    "line": 1656
+  },
+  {
+    "header": "mlir/Rewrite/FrozenRewritePatternSet.h",
+    "name": "FrozenRewritePatternSet",
+    "namespace": "mlir",
+    "line": 1678
+  },
+  {
+    "header": "mlir/Transforms/GreedyPatternRewriteDriver.h",
+    "name": "applyOpPatternsGreedily",
+    "namespace": "mlir",
+    "line": 1695
+  },
+  {
+    "header": "mlir/Pass/Pass.h",
+    "name": "Pass",
+    "namespace": "mlir",
+    "line": 1701
+  },
+  {
+    "header": "mlir/Pass/Pass.h",
+    "name": "PassAllocatorFunction",
+    "namespace": "mlir",
+    "line": 1702
+  },
+  {
+    "header": "mlir/Pass/Pass.h",
+    "name": "PassRegistration",
+    "namespace": "mlir",
+    "line": 1703
+  },
+  {
+    "header": "mlir/IR/Dialect.h",
+    "name": "Dialect",
+    "namespace": "mlir",
+    "line": 1708
+  },
+  {
+    "header": "mlir/IR/DialectRegistry.h",
+    "name": "DialectAllocatorFunction",
+    "namespace": "mlir",
+    "line": 1709
+  },
+  {
+    "header": "mlir/IR/DialectRegistry.h",
+    "name": "DialectRegistry",
+    "namespace": "mlir",
+    "line": 1710
+  },
+  {
+    "header": "mlir/Support/TypeID.h",
+    "name": "TypeID",
+    "namespace": "mlir",
+    "line": 1725
+  },
+  {
+    "header": "mlir/Support/TypeID.h",
+    "name": "SelfOwningTypeID",
+    "namespace": "mlir",
+    "line": 1740
+  },
+  {
+    "header": "mlir/Support/TypeID.h",
+    "name": "InlineTypeIDResolver",
+    "namespace": "mlir::detail",
+    "line": 1751
+  },
+  {
+    "header": "mlir/Pass/Pass.h",
+    "name": "Pass",
+    "namespace": "mlir",
+    "line": 1757
+  },
+  {
+    "header": "mlir/Dialect/Func/IR/FuncOps.h",
+    "name": "FuncOp",
+    "namespace": "mlir::func",
+    "line": 1773
+  },
+  {
+    "header": "mlir/Pass/Pass.h",
+    "name": "OperationPass",
+    "namespace": "mlir",
+    "line": 1778
+  },
+  {
+    "header": "mlir/Pass/Pass.h",
+    "name": "PassWrapper",
+    "namespace": "mlir",
+    "line": 1790
+  }
+]

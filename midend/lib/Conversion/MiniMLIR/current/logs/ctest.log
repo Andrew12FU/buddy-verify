@@ -1,0 +1,124 @@
+Internal ctest changing into directory: /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/build-llvm18
+UpdateCTestConfiguration  from :/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/build-llvm18/DartConfiguration.tcl
+Parse Config file:/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/build-llvm18/DartConfiguration.tcl
+UpdateCTestConfiguration  from :/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/build-llvm18/DartConfiguration.tcl
+Parse Config file:/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/build-llvm18/DartConfiguration.tcl
+Test project /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/build-llvm18
+Constructing a list of tests
+Done constructing a list of tests
+Updating test list for fixtures
+Added 0 tests to meet fixture requirements
+Checking test dependency graph...
+Checking test dependency graph end
+test 1
+    Start 1: imported-pass-regressions
+
+1: Test command: /home/ce/Desktop/framaclang/environment/llvm18/bin/python3.12 "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/tests/test_imported_passes.py" "--tool" "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/build-llvm18/buddy-framac-rewrite" "--clang" "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++"
+1: Working Directory: /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/build-llvm18
+1: Test timeout computed to be: 1500
+1: ...........
+1: ----------------------------------------------------------------------
+1: Ran 11 tests in 2.296s
+1: 
+1: OK
+1/9 Test #1: imported-pass-regressions ........   Passed    2.41 sec
+test 2
+    Start 2: range-for-regressions
+
+2: Test command: /home/ce/Desktop/framaclang/environment/llvm18/bin/python3.12 "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/tests/test_range_for.py" "--tool" "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/build-llvm18/buddy-framac-rewrite" "--clang" "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++"
+2: Working Directory: /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/build-llvm18
+2: Test timeout computed to be: 1500
+2: ......
+2: ----------------------------------------------------------------------
+2: Ran 6 tests in 1.416s
+2: 
+2: OK
+2/9 Test #2: range-for-regressions ............   Passed    1.53 sec
+test 3
+    Start 3: output-persistence
+
+3: Test command: /home/ce/Desktop/framaclang/environment/llvm18/bin/python3.12 "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/tests/test_output.py"
+3: Working Directory: /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/build-llvm18
+3: Test timeout computed to be: 1500
+3: ....
+3: ----------------------------------------------------------------------
+3: Ran 4 tests in 0.006s
+3: 
+3: OK
+3/9 Test #3: output-persistence ...............   Passed    0.08 sec
+test 4
+    Start 4: mini-header-rewrites
+
+4: Test command: /home/ce/Desktop/framaclang/environment/llvm18/bin/python3.12 "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/tests/test_mini_headers.py" "--clang" "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++"
+4: Working Directory: /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/build-llvm18
+4: Test timeout computed to be: 1500
+4: ...........
+4: ----------------------------------------------------------------------
+4: Ran 11 tests in 1.180s
+4: 
+4: OK
+4/9 Test #4: mini-header-rewrites .............   Passed    1.27 sec
+test 5
+    Start 5: mini-member-extraction
+
+5: Test command: /home/ce/Desktop/framaclang/environment/llvm18/bin/python3.12 "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/tests/test_mini_slice.py" "--tool" "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/build-llvm18/buddy-mini-slice" "--clang" "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++"
+5: Working Directory: /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/build-llvm18
+5: Test timeout computed to be: 1500
+5: ...............
+5: ----------------------------------------------------------------------
+5: Ran 15 tests in 1.149s
+5: 
+5: OK
+5/9 Test #5: mini-member-extraction ...........   Passed    1.27 sec
+test 6
+    Start 6: rewrite-regressions
+
+6: Test command: /home/ce/Desktop/framaclang/environment/llvm18/bin/python3.12 "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/tests/test_rewrite.py" "--tool" "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/build-llvm18/buddy-framac-rewrite" "--clang" "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++"
+6: Working Directory: /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/build-llvm18
+6: Test timeout computed to be: 1500
+6: ....................
+6: ----------------------------------------------------------------------
+6: Ran 20 tests in 2.883s
+6: 
+6: OK
+6/9 Test #6: rewrite-regressions ..............   Passed    3.01 sec
+test 7
+    Start 7: nested-capture-regressions
+
+7: Test command: /home/ce/Desktop/framaclang/environment/llvm18/bin/python3.12 "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/tests/test_nested_capture.py" "--tool" "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/build-llvm18/buddy-framac-rewrite" "--clang" "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++"
+7: Working Directory: /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/build-llvm18
+7: Test timeout computed to be: 1500
+7: .................
+7: ----------------------------------------------------------------------
+7: Ran 17 tests in 3.209s
+7: 
+7: OK
+7/9 Test #7: nested-capture-regressions .......   Passed    3.33 sec
+test 8
+    Start 8: silu-and-ime-regressions
+
+8: Test command: /home/ce/Desktop/framaclang/environment/llvm18/bin/python3.12 "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/tests/test_silu.py" "--tool" "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/build-llvm18/buddy-framac-rewrite" "--clang" "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++"
+8: Working Directory: /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/build-llvm18
+8: Test timeout computed to be: 1500
+8: ..............
+8: ----------------------------------------------------------------------
+8: Ran 14 tests in 1.823s
+8: 
+8: OK
+8/9 Test #8: silu-and-ime-regressions .........   Passed    1.94 sec
+test 9
+    Start 9: parser-version-regressions
+
+9: Test command: /home/ce/Desktop/framaclang/environment/llvm18/bin/python3.12 "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/tests/test_parser_version.py" "--tool" "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/build-llvm18/buddy-framac-rewrite" "--clang" "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++"
+9: Working Directory: /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/build-llvm18
+9: Test timeout computed to be: 1500
+9: .s
+9: ----------------------------------------------------------------------
+9: Ran 2 tests in 0.346s
+9: 
+9: OK (skipped=1)
+9/9 Test #9: parser-version-regressions .......   Passed    0.49 sec
+
+100% tests passed, 0 tests failed out of 9
+
+Total Test time (real) =  15.33 sec

@@ -1,0 +1,156 @@
+[
+  {
+    "file": "cstdint",
+    "before_sha256": null,
+    "after_sha256": "15e668fb4c6d58772c83396f1a53bb55a7b24c003f2512cf0133256a8b677761",
+    "reason": "BuiltinTransposeVectorization bounded external API extension; local type, trait and signature audit in BUILTIN_TRANSPOSE.md",
+    "scope": "declarations only except the recorded local-closure iterator adapters; external IR behavior unspecified"
+  },
+  {
+    "file": "llvm/ADT/STLExtras.h",
+    "before_sha256": "2bd3456ef3262f19ea6b7e3a7a23ecd9cc03ea967ff05e82652254c945650d63",
+    "after_sha256": "8d388d74d523bf40aa994d77a625ac8cd64926932e502a89f491832b5a3c7c4b",
+    "reason": "BuiltinTransposeVectorization bounded external API extension; local type, trait and signature audit in BUILTIN_TRANSPOSE.md",
+    "scope": "declarations only except the recorded local-closure iterator adapters; external IR behavior unspecified"
+  },
+  {
+    "file": "llvm/ADT/SmallVector.h",
+    "before_sha256": "15a0888a18ff886d5464a6b3f2699f641cbdc613117c3d4f344ba2fb599ded43",
+    "after_sha256": "e269eec39369f61937251ba284c5e2a0258acdaf961982bdafbb484aea3b8799",
+    "reason": "BuiltinTransposeVectorization bounded external API extension; local type, trait and signature audit in BUILTIN_TRANSPOSE.md",
+    "scope": "declarations only except the recorded local-closure iterator adapters; external IR behavior unspecified"
+  },
+  {
+    "file": "mini/Support/Standard.h",
+    "before_sha256": "6ef420a2f4d5fd48aed8a78db58986033d3cc3207025713f40f60bf1ef1a3d85",
+    "after_sha256": "10728ae286dd832ac2aeb639ceb41fa100f0211ee222324ca56743493a6ab281",
+    "reason": "BuiltinTransposeVectorization bounded external API extension; local type, trait and signature audit in BUILTIN_TRANSPOSE.md",
+    "scope": "declarations only except the recorded local-closure iterator adapters; external IR behavior unspecified"
+  },
+  {
+    "file": "mlir/Dialect/Affine/Analysis/AffineAnalysis.h",
+    "before_sha256": null,
+    "after_sha256": "6ae6f283b0dd058007b43166cfb05041d93d384e1a6f888131383f14d7c50cea",
+    "reason": "BuiltinTransposeVectorization bounded external API extension; local type, trait and signature audit in BUILTIN_TRANSPOSE.md",
+    "scope": "declarations only except the recorded local-closure iterator adapters; external IR behavior unspecified"
+  },
+  {
+    "file": "mlir/Dialect/Affine/IR/AffineOps.h",
+    "before_sha256": "f0f8b739e3dcc2340181c5cb4b659b109e3a7c1ffd0c1cca43d9c1c0908c279b",
+    "after_sha256": "f1b08c27519db3d6171054c067d20c0fe982714923ba35e7992e99d010b668ed",
+    "reason": "BuiltinTransposeVectorization bounded external API extension; local type, trait and signature audit in BUILTIN_TRANSPOSE.md",
+    "scope": "declarations only except the recorded local-closure iterator adapters; external IR behavior unspecified"
+  },
+  {
+    "file": "mlir/Dialect/Arith/IR/Arith.h",
+    "before_sha256": "4b644b6abe0c24d0661ba4113ef18f3557124cb086f3c687f4b63ee80e8baa3d",
+    "after_sha256": "e641db78bcc3c3b645de5c350de6da3f7688663c89ec5faa25d64528f639dff3",
+    "reason": "BuiltinTransposeVectorization bounded external API extension; local type, trait and signature audit in BUILTIN_TRANSPOSE.md",
+    "scope": "declarations only except the recorded local-closure iterator adapters; external IR behavior unspecified"
+  },
+  {
+    "file": "mlir/Dialect/Linalg/IR/Linalg.h",
+    "before_sha256": "b72ed798c19541039aa514f5d62bbfbf8b4769bf14c45c00b3549914362f5fb7",
+    "after_sha256": "65e9584306b8d442f7bdafcccb2cd10cf08e2c3c404198bf880b79232b9ffb3f",
+    "reason": "BuiltinTransposeVectorization bounded external API extension; local type, trait and signature audit in BUILTIN_TRANSPOSE.md",
+    "scope": "declarations only except the recorded local-closure iterator adapters; external IR behavior unspecified"
+  },
+  {
+    "file": "mlir/Dialect/Vector/IR/VectorOps.h",
+    "before_sha256": "5543f4b93c4c1585bff9c756fd6bcb4820e9703d61066ee63b342abc4fd3da96",
+    "after_sha256": "9ec6248b2677b926ecc2a2eb4aac551dec2317c2b39acc17d27eed45a5cfecc3",
+    "reason": "BuiltinTransposeVectorization bounded external API extension; local type, trait and signature audit in BUILTIN_TRANSPOSE.md",
+    "scope": "declarations only except the recorded local-closure iterator adapters; external IR behavior unspecified"
+  },
+  {
+    "file": "mlir/IR/AffineExpr.h",
+    "before_sha256": "89d158647f0613b3b4994341cb68ead2243e07871c39541a75b45a2c0dd33ca7",
+    "after_sha256": "6d8de6c55cb2e402eb16a3232b63670a90e9011cfcd3ecc3fda3f6ca18bd4727",
+    "reason": "BuiltinTransposeVectorization bounded external API extension; local type, trait and signature audit in BUILTIN_TRANSPOSE.md",
+    "scope": "declarations only except the recorded local-closure iterator adapters; external IR behavior unspecified"
+  },
+  {
+    "file": "mlir/IR/Attributes.h",
+    "before_sha256": "a864cc4f6e5f77a1d62498c04ba9695cc54d49380b3ea1f13c32e3d794c58b18",
+    "after_sha256": "f3f6b61b2835666fc9021d075774f50cc70879d26efac2fdb26a679bc2e49d7d",
+    "reason": "BuiltinTransposeVectorization bounded external API extension; local type, trait and signature audit in BUILTIN_TRANSPOSE.md",
+    "scope": "declarations only except the recorded local-closure iterator adapters; external IR behavior unspecified"
+  },
+  {
+    "file": "mlir/IR/Block.h",
+    "before_sha256": "41bb0d0cf1aa1b6b4f3028ce76869f4ef62bd6abd966d74a8a92c8e8f2a400b3",
+    "after_sha256": "11a2dcbfb9b304cdd545b3a8af1e31821ee0790f577831cd1a837a1f1a99c4b8",
+    "reason": "BuiltinTransposeVectorization bounded external API extension; local type, trait and signature audit in BUILTIN_TRANSPOSE.md",
+    "scope": "declarations only except the recorded local-closure iterator adapters; external IR behavior unspecified"
+  },
+  {
+    "file": "mlir/IR/Builders.h",
+    "before_sha256": "733957470b99bbd116a36e33695541fb5dcf0070d89b15c5acb40964d9422c31",
+    "after_sha256": "63a67c7d4ce58cb25b3e7097e472f5906223c489291a384f0516703901ed7557",
+    "reason": "BuiltinTransposeVectorization bounded external API extension; local type, trait and signature audit in BUILTIN_TRANSPOSE.md",
+    "scope": "declarations only except the recorded local-closure iterator adapters; external IR behavior unspecified"
+  },
+  {
+    "file": "mlir/IR/BuiltinAttributes.h",
+    "before_sha256": "73c77337795dd7829e52ad1f91781cd5f10855d797184ccfd5738f4743a0cc2d",
+    "after_sha256": "378ac5c9805a374001c1c9277437c4100fa06b80f035956bfe17f84f6f59f08f",
+    "reason": "BuiltinTransposeVectorization bounded external API extension; local type, trait and signature audit in BUILTIN_TRANSPOSE.md",
+    "scope": "declarations only except the recorded local-closure iterator adapters; external IR behavior unspecified"
+  },
+  {
+    "file": "mlir/IR/BuiltinTypes.h",
+    "before_sha256": "61af595d07b0873333fa44917612be08312c6b68bb635b992b5494f6d1563f04",
+    "after_sha256": "f27726e84c1cf9e393294e9f261fd2512ebea5a7486ccb32d319fbdec8a8f105",
+    "reason": "BuiltinTransposeVectorization bounded external API extension; local type, trait and signature audit in BUILTIN_TRANSPOSE.md",
+    "scope": "declarations only except the recorded local-closure iterator adapters; external IR behavior unspecified"
+  },
+  {
+    "file": "mlir/IR/IntegerSet.h",
+    "before_sha256": "f250dd52c41f5d8a7c11272ccf65431666ac5ef2046aa17a98d2c08ac276fde1",
+    "after_sha256": "e21db3c5538bb89bbcf67f3ae989dce7ab729f40f531aaacd29f80274dc6abae",
+    "reason": "BuiltinTransposeVectorization bounded external API extension; local type, trait and signature audit in BUILTIN_TRANSPOSE.md",
+    "scope": "declarations only except the recorded local-closure iterator adapters; external IR behavior unspecified"
+  },
+  {
+    "file": "mlir/IR/OpDefinition.h",
+    "before_sha256": "4f786a6b6b9695074b7019255f6435e2ca65f7ab41bb11fa145520fa08ed0ee0",
+    "after_sha256": "20dba204a59db0c7cc79376fc9931590bb0a33fdf91c81b99240a737ebc4c3d6",
+    "reason": "BuiltinTransposeVectorization bounded external API extension; local type, trait and signature audit in BUILTIN_TRANSPOSE.md",
+    "scope": "declarations only except the recorded local-closure iterator adapters; external IR behavior unspecified"
+  },
+  {
+    "file": "mlir/IR/Operation.h",
+    "before_sha256": "31d19e3b52c0a0e2d57f1db599fbe20f07d3f998d4d1fceb7f41a88627b1c864",
+    "after_sha256": "6161bebddd0cbdcf90bca045df1deb679ef13966624944fb356f1dff46810f4a",
+    "reason": "BuiltinTransposeVectorization bounded external API extension; local type, trait and signature audit in BUILTIN_TRANSPOSE.md",
+    "scope": "declarations only except the recorded local-closure iterator adapters; external IR behavior unspecified"
+  },
+  {
+    "file": "mlir/IR/Region.h",
+    "before_sha256": "68a6c0dec264301de73d68754ce8609d68d9c5662cc2b1b945b295f9c8cb07a9",
+    "after_sha256": "c18db7e67b758d7a60df680a8e20871c117c0576a0871306cb4d5958be935837",
+    "reason": "BuiltinTransposeVectorization bounded external API extension; local type, trait and signature audit in BUILTIN_TRANSPOSE.md",
+    "scope": "declarations only except the recorded local-closure iterator adapters; external IR behavior unspecified"
+  },
+  {
+    "file": "mlir/IR/TypeRange.h",
+    "before_sha256": "07b1e094a06895e84dbeec4b2f7be3f34ebecd42ad7666130f62676aa25c189b",
+    "after_sha256": "f6fd7a103bdaa30793b2ae02fa26cb72c88b44a9201baac7c735bc14c81f6fa8",
+    "reason": "BuiltinTransposeVectorization bounded external API extension; local type, trait and signature audit in BUILTIN_TRANSPOSE.md",
+    "scope": "declarations only except the recorded local-closure iterator adapters; external IR behavior unspecified"
+  },
+  {
+    "file": "mlir/IR/ValueRange.h",
+    "before_sha256": "5130f4e66a07f60f591dc4c2e0728fc5a9bd2773b947574f6ce5f8f1bc627f2d",
+    "after_sha256": "281b77ee8e85e949cc8d79441fefd5f2050567e2a419fe1b44faa41dbd90916f",
+    "reason": "BuiltinTransposeVectorization bounded external API extension; local type, trait and signature audit in BUILTIN_TRANSPOSE.md",
+    "scope": "declarations only except the recorded local-closure iterator adapters; external IR behavior unspecified"
+  },
+  {
+    "file": "mlir/Support/LogicalResult.h",
+    "before_sha256": null,
+    "after_sha256": "372b0309a2e17a22c7b757f867b466ffc78005cd16aeec31bfcf591c3276f26a",
+    "reason": "BuiltinTransposeVectorization bounded external API extension; local type, trait and signature audit in BUILTIN_TRANSPOSE.md",
+    "scope": "declarations only except the recorded local-closure iterator adapters; external IR behavior unspecified"
+  }
+]

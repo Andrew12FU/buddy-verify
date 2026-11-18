@@ -1,0 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+// Audited x86_64 integer aliases, backed by the shared standard model.
+#pragma once
+#include "mini/Support/Standard.h"
+namespace std {         }

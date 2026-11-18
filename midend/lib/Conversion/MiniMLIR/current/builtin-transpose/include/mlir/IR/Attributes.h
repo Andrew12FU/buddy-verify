@@ -1,0 +1,79 @@
+// SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+// Shared bounded declarations; see docs/PROVENANCE.md for retained and omitted
+// parts.
+#ifndef BUDDY_MINI_MLIR_IR_ATTRIBUTES_H
+#define BUDDY_MINI_MLIR_IR_ATTRIBUTES_H
+#include "mlir/IR/Types.h"
+
+namespace mlir {
+class AttributeStorage;
+namespace detail {
+class AttributeUniquer;
+}
+class Attribute {
+public:
+  template <typename ConcreteType, typename BaseType, typename StorageType,
+            template <typename> class... Traits>
+  using AttrBase = detail::StorageUserBase<ConcreteType, BaseType, StorageType,
+                                           detail::AttributeUniquer, Traits...>;
+  constexpr Attribute() = default;
+  Attribute(const AttributeStorage *impl);
+  explicit operator bool() const;
+   
+
+protected:
+  AttributeStorage *impl = nullptr;
+};
+namespace AttributeTrait {
+template <typename ConcreteType, template <typename> class TraitType>
+using TraitBase = detail::StorageUserTraitBase<ConcreteType, TraitType>;
+}
+template <typename ConcreteType, typename Traits>
+class AttributeInterface
+    : public detail::Interface<ConcreteType, Attribute, Traits, Attribute,
+                               AttributeTrait::TraitBase> {
+public:
+  using InterfaceBase = detail::Interface<ConcreteType, Attribute, Traits,
+                                          Attribute, AttributeTrait::TraitBase>;
+  using InterfaceBase::InterfaceBase;
+};
+class NamedAttribute;
+class StringAttr;
+} // namespace mlir
+namespace mlir { namespace detail {
+struct MemRefLayoutAttrInterfaceInterfaceTraits { struct Concept; template<typename T> class Model; template<typename T> class FallbackModel; template<typename T, typename U> class ExternalModel; };
+template<typename T> struct MemRefLayoutAttrInterfaceTrait;
+}
+class MemRefLayoutAttrInterface : public AttributeInterface<MemRefLayoutAttrInterface, detail::MemRefLayoutAttrInterfaceInterfaceTraits> {
+public:
+  using AttributeInterface<MemRefLayoutAttrInterface, detail::MemRefLayoutAttrInterfaceInterfaceTraits>::AttributeInterface;
+  template<typename T> struct Trait : detail::MemRefLayoutAttrInterfaceTrait<T> {};
+};
+namespace detail { template<typename T> struct MemRefLayoutAttrInterfaceTrait : AttributeInterface<MemRefLayoutAttrInterface, MemRefLayoutAttrInterfaceInterfaceTraits>::template Trait<T> {}; }
+}
+
+
+namespace mlir { namespace detail {
+struct OpAsmAttrInterfaceInterfaceTraits { struct Concept; template<typename T> class Model; template<typename T> class FallbackModel; template<typename T,typename U> class ExternalModel; };
+template<typename T> struct OpAsmAttrInterfaceTrait;
+}
+class OpAsmAttrInterface : public AttributeInterface<OpAsmAttrInterface,detail::OpAsmAttrInterfaceInterfaceTraits> {
+public: using AttributeInterface<OpAsmAttrInterface,detail::OpAsmAttrInterfaceInterfaceTraits>::AttributeInterface;
+ template<typename T> struct Trait : detail::OpAsmAttrInterfaceTrait<T> {};
+};
+namespace detail { template<typename T> struct OpAsmAttrInterfaceTrait : AttributeInterface<OpAsmAttrInterface,OpAsmAttrInterfaceInterfaceTraits>::template Trait<T> {}; }
+}
+
+
+namespace mlir { namespace detail {
+struct BlobAttrInterfaceTraits { struct Concept; template<typename T> class Model; template<typename T> class FallbackModel; template<typename T,typename U> class ExternalModel; };
+template<typename T> struct BlobAttrTrait;
+}
+class BlobAttr : public AttributeInterface<BlobAttr,detail::BlobAttrInterfaceTraits> {
+public: using AttributeInterface<BlobAttr,detail::BlobAttrInterfaceTraits>::AttributeInterface;
+ template<typename T> struct Trait : detail::BlobAttrTrait<T> {};
+};
+namespace detail { template<typename T> struct BlobAttrTrait : AttributeInterface<BlobAttr,BlobAttrInterfaceTraits>::template Trait<T> {}; }
+}
+
+#endif

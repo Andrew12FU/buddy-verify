@@ -1,0 +1,276 @@
+{
+  "primary_archive_sha256": "2f5c5c0af66ed1492383f2645032b21fd596176ca1b4f400e18505ed16c8ba80",
+  "backup": "/home/ce/Desktop/BuddyCompiler/backups/frontend23-before-llvm18-20261118-051817",
+  "headers": [
+    {
+      "file": "llvm/ADT/STLExtras.h",
+      "before_sha256": "b0802611a040aaae3b6955e55e1585ccfd137d93d0a8401d822a4423f170e5aa",
+      "after_sha256": "2bd3456ef3262f19ea6b7e3a7a23ecd9cc03ea967ff05e82652254c945650d63",
+      "source_headers": [
+        {
+          "path": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/llvm/llvm/include/llvm/ADT/STLExtras.h",
+          "sha256": "e826dbf4afc60d194d254724d7c594e063e26097c0c27abbe6919c1957be3a12"
+        }
+      ]
+    },
+    {
+      "file": "llvm/ADT/iterator.h",
+      "before_sha256": "c540633b17c27078517a86c1e18e202e3b042d33034f7e0a8d6aa6fb0df206cd",
+      "after_sha256": "ed21f684affa6a3841e3278c1d6f1ea9892a93075ce0db1a7f740358fda6cfc7",
+      "source_headers": [
+        {
+          "path": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/llvm/llvm/include/llvm/ADT/iterator.h",
+          "sha256": "e890239b6ef2f6649538e6e43fd1b8bf03bfdaa815a66b09ac60de944e915cf3"
+        }
+      ]
+    },
+    {
+      "file": "llvm/Support/Casting.h",
+      "before_sha256": "0ba6e2b89f0c1719f58c192ac712ad48a7b064b19bd0d9a14c1fdb30709c873f",
+      "after_sha256": "46518e3dd9358f1eb3cacbf3cad440f25a8fd683a906627af9379f3279285c95",
+      "source_headers": [
+        {
+          "path": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/llvm/llvm/include/llvm/Support/Casting.h",
+          "sha256": "3c053f7271501500f7bccf7b93d08c441abf715ef66d377718947e4aef9f8433"
+        }
+      ]
+    },
+    {
+      "file": "llvm/Support/CommandLine.h",
+      "before_sha256": "707b470515334cbdeef0f2f8b8815742d0f569c6b55824cdd88c1233173e7798",
+      "after_sha256": "d664d35769ef472d717f741debc30866c335fc6429d9d2d92285ed28aa418051",
+      "source_headers": [
+        {
+          "path": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/llvm/llvm/include/llvm/Support/CommandLine.h",
+          "sha256": "5e3b453bcff9d334059d7b5dfe37c88cf199ea95bd4aaef4d8eb7d7c4d77e6e4"
+        }
+      ]
+    },
+    {
+      "file": "mini/Support/Standard.h",
+      "before_sha256": "e4d9b82f362d08be1f842d90d54b9ce075250f481b5c344c39ecdfbe7813cc66",
+      "after_sha256": "6ef420a2f4d5fd48aed8a78db58986033d3cc3207025713f40f60bf1ef1a3d85",
+      "source_headers": [
+        {
+          "path": "/home/ce/Desktop/framaclang/environment/llvm18/lib/gcc/x86_64-conda-linux-gnu/13.4.0/include/c++/optional",
+          "sha256": "678ca1f71fcea01c8fb4291b3992c03886a10700f7e310a9890a6d0179981753"
+        },
+        {
+          "path": "/home/ce/Desktop/framaclang/environment/llvm18/lib/gcc/x86_64-conda-linux-gnu/13.4.0/include/c++/utility",
+          "sha256": "b2a30facf387563d902da5fe6a54838055b7d2123185091be2e8446371f0d032"
+        },
+        {
+          "path": "/home/ce/Desktop/framaclang/environment/llvm18/lib/gcc/x86_64-conda-linux-gnu/13.4.0/include/c++/vector",
+          "sha256": "d38b6ba392ac0b484edff90a8df2e01a4c25f010539a103eefdecd0a22d90e56"
+        },
+        {
+          "path": "/home/ce/Desktop/framaclang/environment/llvm18/lib/gcc/x86_64-conda-linux-gnu/13.4.0/include/c++/bits/stl_iterator.h",
+          "sha256": "8b7f46d2933372030adca3cf2c006057495e3e3630afe35121a091606f1befb3"
+        }
+      ]
+    },
+    {
+      "file": "mlir/Dialect/Affine/IR/AffineOps.h",
+      "before_sha256": "adf283625c8fbc983986d5dba850f03f7d34e86dc06af96cc4c10661c262662f",
+      "after_sha256": "f0f8b739e3dcc2340181c5cb4b659b109e3a7c1ffd0c1cca43d9c1c0908c279b",
+      "source_headers": [
+        {
+          "path": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/llvm/mlir/include/mlir/Dialect/Affine/IR/AffineOps.h",
+          "sha256": "9d0cac3584f1b2156104b13f853f372da7ad49cea62d42cf86fdcbc111504f28"
+        }
+      ]
+    },
+    {
+      "file": "mlir/Dialect/Arith/IR/Arith.h",
+      "before_sha256": "d2c96da6aaad1164ee48a49e828855d7053e4566cac2cb91329bf69bdb23e3f3",
+      "after_sha256": "4b644b6abe0c24d0661ba4113ef18f3557124cb086f3c687f4b63ee80e8baa3d",
+      "source_headers": [
+        {
+          "path": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/llvm/mlir/include/mlir/Dialect/Arith/IR/Arith.h",
+          "sha256": "bc1f40354e57142f18be8eaad12abf7beb0d42576730aa2aaf6d9f4001c325ec"
+        }
+      ]
+    },
+    {
+      "file": "mlir/Dialect/Linalg/IR/Linalg.h",
+      "before_sha256": "89a449f1f76c40aba87f39fac660313fe1c248b8a0d6fef268a96be02d7e5877",
+      "after_sha256": "b72ed798c19541039aa514f5d62bbfbf8b4769bf14c45c00b3549914362f5fb7",
+      "source_headers": [
+        {
+          "path": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/llvm/mlir/include/mlir/Dialect/Linalg/IR/Linalg.h",
+          "sha256": "5ec41e05c7bd7091f7255d318b4645fda30add486cd1fe3af9f96730416bb064"
+        }
+      ]
+    },
+    {
+      "file": "mlir/Dialect/Linalg/Transforms/Transforms.h",
+      "before_sha256": "0171fe2b891d424b43528defb5e193582e6eb0456c42c420e6603b061869dd24",
+      "after_sha256": "1c4c8eef1b47ae170c44ebbd1ce5dde1238e65dabfd6f208a8ca2dda84e3aeeb",
+      "source_headers": [
+        {
+          "path": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/llvm/mlir/include/mlir/Dialect/Linalg/Transforms/Transforms.h",
+          "sha256": "a982373908f762a0e591e45beca40ff051e11c749b8377f7cf9c4417423c3ab9"
+        }
+      ]
+    },
+    {
+      "file": "mlir/Dialect/MemRef/IR/MemRef.h",
+      "before_sha256": "71e52c9e9b9e4a6cca13de015d5e744e7f1de3acba32ef7d21d486761577bd68",
+      "after_sha256": "c5af4290b33f76f8b76b21c3455e93c06077c6ca2b8cdbc7f5054208ac072ca0",
+      "source_headers": [
+        {
+          "path": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/llvm/mlir/include/mlir/Dialect/MemRef/IR/MemRef.h",
+          "sha256": "5a9a75c841c7efc3545c9cb98fe1bc5f65bb486cba01669b954ad964038507c7"
+        }
+      ]
+    },
+    {
+      "file": "mlir/Dialect/SCF/IR/SCF.h",
+      "before_sha256": null,
+      "after_sha256": "dcd8441d845a0c506af91056f08755bdf470e58ea9eb514a4fad4648e1ad7b58",
+      "source_headers": [
+        {
+          "path": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/llvm/mlir/include/mlir/Dialect/SCF/IR/SCF.h",
+          "sha256": "36e6f2b518fc364f857ee307eac89a5e56575f74d7719b570d44c40c6d9864fd"
+        }
+      ]
+    },
+    {
+      "file": "mlir/Dialect/Vector/IR/VectorOps.h",
+      "before_sha256": null,
+      "after_sha256": "5543f4b93c4c1585bff9c756fd6bcb4820e9703d61066ee63b342abc4fd3da96",
+      "source_headers": [
+        {
+          "path": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/llvm/mlir/include/mlir/Dialect/Vector/IR/VectorOps.h",
+          "sha256": "f4ea639693d83974e0b0f93c978cc744ea8cc2004e40a30bc4defb75a1a9ad05"
+        }
+      ]
+    },
+    {
+      "file": "mlir/IR/AffineExpr.h",
+      "before_sha256": "e2d62ae837d606275301f909d990c9e7beb0dfa4acda5322e08e66de9c07f05c",
+      "after_sha256": "89d158647f0613b3b4994341cb68ead2243e07871c39541a75b45a2c0dd33ca7",
+      "source_headers": [
+        {
+          "path": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/llvm/mlir/include/mlir/IR/AffineExpr.h",
+          "sha256": "82a4dfa91fd286ead347ea52d8bac00ad7184ee5c2424e773143ff836ea17a5b"
+        }
+      ]
+    },
+    {
+      "file": "mlir/IR/AffineMap.h",
+      "before_sha256": "31bc9333bc97e13353450a637bbafb5e12d085df1344eb46fbd2d5e3b606bbde",
+      "after_sha256": "e6d5de00dfc51c2853f41889b38e06fef79b556f20ea2c9ab25966c368511746",
+      "source_headers": [
+        {
+          "path": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/llvm/mlir/include/mlir/IR/AffineMap.h",
+          "sha256": "7f59fbb44512d7fb9a4223e568b529c7d848b595f4e01313c6691d2d9f38bcda"
+        }
+      ]
+    },
+    {
+      "file": "mlir/IR/Builders.h",
+      "before_sha256": "3aa3b4ff95c6d7654d5ba6e0ab7ce03f9fc43f58a28c9113dc8cc6c852ff8ab3",
+      "after_sha256": "733957470b99bbd116a36e33695541fb5dcf0070d89b15c5acb40964d9422c31",
+      "source_headers": [
+        {
+          "path": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/llvm/mlir/include/mlir/IR/Builders.h",
+          "sha256": "272f2b8ec23c1489f8c2f486c5aac565b6d6ea22eaf4a565ce855bddec2d4c06"
+        }
+      ]
+    },
+    {
+      "file": "mlir/IR/BuiltinAttributes.h",
+      "before_sha256": "ea0fd93c1f736bf1bf9dc5eeebbc527ef3ee82e83d6151ac593b7eec51c200d7",
+      "after_sha256": "73c77337795dd7829e52ad1f91781cd5f10855d797184ccfd5738f4743a0cc2d",
+      "source_headers": [
+        {
+          "path": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/llvm/mlir/include/mlir/IR/BuiltinAttributes.h",
+          "sha256": "73b0c70220b72f24b942abe3553b125c1147b29f94bc6a6d5aacb5848f395189"
+        }
+      ]
+    },
+    {
+      "file": "mlir/IR/BuiltinTypes.h",
+      "before_sha256": "2b8858e43e9d1f70d78a4b9ee9a66fc6ab3eb4bcd081c108894820eab92486aa",
+      "after_sha256": "61af595d07b0873333fa44917612be08312c6b68bb635b992b5494f6d1563f04",
+      "source_headers": [
+        {
+          "path": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/llvm/mlir/include/mlir/IR/BuiltinTypes.h",
+          "sha256": "88d3c35eb3bd7732ae35142c90664646490836f3ee48b37765fcba3a852b4af0"
+        }
+      ]
+    },
+    {
+      "file": "mlir/IR/IntegerSet.h",
+      "before_sha256": null,
+      "after_sha256": "f250dd52c41f5d8a7c11272ccf65431666ac5ef2046aa17a98d2c08ac276fde1",
+      "source_headers": [
+        {
+          "path": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/llvm/mlir/include/mlir/IR/IntegerSet.h",
+          "sha256": "74440a7d9a5582c57e5b00fe8e6bb0bb88d70fb74c58260e6014c2ddc051c58a"
+        }
+      ]
+    },
+    {
+      "file": "mlir/IR/OpDefinition.h",
+      "before_sha256": "b5f98eb216455a1c3d1c6af76fec3db5f00cea0008019a9401b0f8fe44fb5117",
+      "after_sha256": "4f786a6b6b9695074b7019255f6435e2ca65f7ab41bb11fa145520fa08ed0ee0",
+      "source_headers": [
+        {
+          "path": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/llvm/mlir/include/mlir/IR/OpDefinition.h",
+          "sha256": "f214ccd23a10b2b575d6defb74bcf456a069e797d6b99f5bb775be6d31198412"
+        }
+      ]
+    },
+    {
+      "file": "mlir/Pass/Pass.h",
+      "before_sha256": "4370f53d76c231985da6f7e75c91e59ed344133acc99c9b5c85b3aca806ea21a",
+      "after_sha256": "29f9833e8ecf112ce30a97e0a5fde1dd16d69d9a843480648cb33fb209a0714a",
+      "source_headers": [
+        {
+          "path": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/llvm/mlir/include/mlir/Pass/Pass.h",
+          "sha256": "696639a761e8ee42ef49e6e411395825f69993e02d7a7779b0a74f07dd9651e6"
+        }
+      ]
+    },
+    {
+      "file": "mlir/Pass/PassOptions.h",
+      "before_sha256": "d5322341d668bf39430e2d3890eb96cd19ecc5757a3d4c99fec118a28b771d67",
+      "after_sha256": "171d5b98cc56f958ee52851eacf525b7bf3584a0877c84c47c5fd2dc06f57201",
+      "source_headers": [
+        {
+          "path": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/llvm/mlir/include/mlir/Pass/PassOptions.h",
+          "sha256": "df30b5e7bee0c639d88805e2672b13e89123b8c2734f24726dc3c18805bb0825"
+        }
+      ]
+    },
+    {
+      "file": "mlir/Support/LLVM.h",
+      "before_sha256": "5dc6cdfa2510b20c9144ba47486870ef2a539c2d7c34f7c60789d6797e523c7d",
+      "after_sha256": "22df7f6ca8d2d9270c5dc603de546fdae694e081ce5a711f31fb9075be4ce0c7",
+      "source_headers": [
+        {
+          "path": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/llvm/mlir/include/mlir/Support/LLVM.h",
+          "sha256": "3d125057e0a7e9ed88f9ad8092909c94a61d0427925740b6c603ad661f4154df"
+        }
+      ]
+    },
+    {
+      "file": "mlir/Transforms/DialectConversion.h",
+      "before_sha256": "4de244b699f8f80c6c6b46cb82f7ea8c83002ea92b268857ea9d817262cbef3f",
+      "after_sha256": "c65980d496f906aad80cedc6720d8748b364fcdff71898aeee37da8a30ff0209",
+      "source_headers": [
+        {
+          "path": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/llvm/mlir/include/mlir/Transforms/DialectConversion.h",
+          "sha256": "b46257a6a08840d341f517930e39286cf9be310593e5b9439923c98b60d6e9a2"
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "This is a bounded interface abstraction, not real LLVM/MLIR ABI or storage algorithms.",
+    "optional payload uses a bounded union/engagement flag; libstdc++ internal helper inheritance is not modeled.",
+    "Dense scalar access is provided for the audited int64_t path; arbitrary DenseElementsAttr iteration families are not covered."
+  ]
+}

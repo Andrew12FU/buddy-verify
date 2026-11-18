@@ -1,0 +1,590 @@
+{
+  "schema_version": 1,
+  "status": "converted",
+  "cases": {
+    "local_object": {
+      "stages": {
+        "rewrite": {
+          "command": [
+            "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/build-llvm18/buddy-framac-rewrite",
+            "/tmp/builtin-transpose-nested-f7y6sof4/outputs/local_object/original.cpp",
+            "--output",
+            "/tmp/builtin-transpose-nested-f7y6sof4/outputs/local_object/rewritten.cpp",
+            "--report",
+            "/tmp/builtin-transpose-nested-f7y6sof4/outputs/local_object/rewrite.json",
+            "--rules=capture",
+            "--",
+            "-std=c++17",
+            "-target",
+            "x86_64-conda-linux-gnu",
+            "-resource-dir=/home/ce/Desktop/framaclang/environment/llvm18/lib/clang/18",
+            "-nostdinc++"
+          ],
+          "cwd": "/tmp/builtin-transpose-nested-f7y6sof4/outputs/local_object",
+          "exit_code": 0,
+          "log": "/tmp/builtin-transpose-nested-f7y6sof4/outputs/local_object/rewrite.log"
+        },
+        "compile_original": {
+          "command": [
+            "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+            "-std=c++17",
+            "/tmp/builtin-transpose-nested-f7y6sof4/outputs/local_object/original.cpp",
+            "-o",
+            "/tmp/builtin-transpose-nested-f7y6sof4/outputs/local_object/original"
+          ],
+          "cwd": "/tmp/builtin-transpose-nested-f7y6sof4/outputs/local_object",
+          "exit_code": 0,
+          "log": "/tmp/builtin-transpose-nested-f7y6sof4/outputs/local_object/compile_original.log"
+        },
+        "execute_original": {
+          "command": [
+            "/tmp/builtin-transpose-nested-f7y6sof4/outputs/local_object/original"
+          ],
+          "cwd": "/tmp/builtin-transpose-nested-f7y6sof4/outputs/local_object",
+          "exit_code": 0,
+          "log": "/tmp/builtin-transpose-nested-f7y6sof4/outputs/local_object/execute_original.log"
+        },
+        "compile_rewritten": {
+          "command": [
+            "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+            "-std=c++17",
+            "/tmp/builtin-transpose-nested-f7y6sof4/outputs/local_object/rewritten.cpp",
+            "-o",
+            "/tmp/builtin-transpose-nested-f7y6sof4/outputs/local_object/rewritten"
+          ],
+          "cwd": "/tmp/builtin-transpose-nested-f7y6sof4/outputs/local_object",
+          "exit_code": 0,
+          "log": "/tmp/builtin-transpose-nested-f7y6sof4/outputs/local_object/compile_rewritten.log"
+        },
+        "execute_rewritten": {
+          "command": [
+            "/tmp/builtin-transpose-nested-f7y6sof4/outputs/local_object/rewritten"
+          ],
+          "cwd": "/tmp/builtin-transpose-nested-f7y6sof4/outputs/local_object",
+          "exit_code": 0,
+          "log": "/tmp/builtin-transpose-nested-f7y6sof4/outputs/local_object/execute_rewritten.log"
+        },
+        "idempotence": {
+          "command": [
+            "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/build-llvm18/buddy-framac-rewrite",
+            "/tmp/builtin-transpose-nested-f7y6sof4/outputs/local_object/rewritten.cpp",
+            "--output",
+            "/tmp/builtin-transpose-nested-f7y6sof4/outputs/local_object/second.cpp",
+            "--report",
+            "/tmp/builtin-transpose-nested-f7y6sof4/outputs/local_object/second.json",
+            "--rules=capture",
+            "--",
+            "-std=c++17",
+            "-target",
+            "x86_64-conda-linux-gnu",
+            "-resource-dir=/home/ce/Desktop/framaclang/environment/llvm18/lib/clang/18",
+            "-nostdinc++"
+          ],
+          "cwd": "/tmp/builtin-transpose-nested-f7y6sof4/outputs/local_object",
+          "exit_code": 0,
+          "log": "/tmp/builtin-transpose-nested-f7y6sof4/outputs/local_object/idempotence.log"
+        },
+        "frama_original": {
+          "command": [
+            "/home/ce/.opam/framac-study/bin/frama-c",
+            "/tmp/builtin-transpose-nested-f7y6sof4/outputs/local_object/original.cpp",
+            "-cxx-nostdinc",
+            "-machdep",
+            "gcc_x86_64",
+            "-cxx-clang-command=/home/ce/.opam/framac-study/bin/framaCIRGen",
+            "-fclang-cpp-extra-args=-std=c++17 -target x86_64-conda-linux-gnu -nostdinc++ -resource-dir=/home/ce/Desktop/framaclang/environment/llvm18/lib/clang/18",
+            "-cxx-parseable-output",
+            "-print",
+            "-ocode",
+            "/tmp/builtin-transpose-nested-f7y6sof4/outputs/local_object/original.c"
+          ],
+          "cwd": "/tmp/builtin-transpose-nested-f7y6sof4/outputs/local_object",
+          "exit_code": 1,
+          "log": "/tmp/builtin-transpose-nested-f7y6sof4/outputs/local_object/frama_original.log"
+        },
+        "frama_rewritten": {
+          "command": [
+            "/home/ce/.opam/framac-study/bin/frama-c",
+            "/tmp/builtin-transpose-nested-f7y6sof4/outputs/local_object/rewritten.cpp",
+            "-cxx-nostdinc",
+            "-machdep",
+            "gcc_x86_64",
+            "-cxx-clang-command=/home/ce/.opam/framac-study/bin/framaCIRGen",
+            "-fclang-cpp-extra-args=-std=c++17 -target x86_64-conda-linux-gnu -nostdinc++ -resource-dir=/home/ce/Desktop/framaclang/environment/llvm18/lib/clang/18",
+            "-cxx-parseable-output",
+            "-print",
+            "-ocode",
+            "/tmp/builtin-transpose-nested-f7y6sof4/outputs/local_object/rewritten.c"
+          ],
+          "cwd": "/tmp/builtin-transpose-nested-f7y6sof4/outputs/local_object",
+          "exit_code": 0,
+          "log": "/tmp/builtin-transpose-nested-f7y6sof4/outputs/local_object/frama_rewritten.log"
+        }
+      },
+      "status": "converted",
+      "artifacts_sha256": {
+        "frama_rewritten.log": "128257f60dd0eb404b9a080160819e0ffdd63e00184e086365f65a117d44b801",
+        "compile_rewritten.log": "31e32770a4873598da37b7aaaac18673a89d398b59153623c026330d2f1fffd7",
+        "execute_original.log": "14e1f89bcf838bed7a9ae16cdf9ab7b7006c4519a5dddd2600b75987d4b47ae5",
+        "compile_original.log": "268788730ec51491df61cb7d66890ebf6c7f9048053bf1e026c922dc9ae537fe",
+        "idempotence.log": "368233931d3d905382157400600a5b2edad689e94a77745ef8d61cb4430e63f5",
+        "original.cpp": "2d2b1fd3f23611897f867070b850db306b9c79788eb8cf778273971d7f7e412d",
+        "rewritten.cpp": "3a19ffd17af30b0373ae6e72f8732c818aeaa211851d7804c680c12a0bada353",
+        "frama_original.log": "245e93ce835e650672bd87d3df0f867b055a3ced0711a83c8774d3b630b703ba",
+        "second.cpp": "3a19ffd17af30b0373ae6e72f8732c818aeaa211851d7804c680c12a0bada353",
+        "original": "db113200ad7baed9ce4a09f4a7b37d09aaed20b1eb1b655f03c167d548fa263c",
+        "rewritten.c": "de38d6972bcdd8ffda70903d3fd7843ac4d4fccd7e85f9fa07ad3b4630535b6e",
+        "execute_rewritten.log": "af07b8fe80b40e0def75aaaa1a6a1f3d325b356de0781d0ab380f1b613a836ad",
+        "rewritten": "fdf39dc4742ffdf53e2b0b024ad57967f4d49499ce05ddb2649ccccab6654df1",
+        "rewrite.log": "84b25cbe9d8235a5952be8a9f4cf6d5aca6de13916f8086988bc793a455c2277",
+        "second.json": "94c746302c140bd8bde5b4accdf1fda648e14bb9fa22f466ccfa96335fb8d43f",
+        "rewrite.json": "8109e81cceefd959d41a9d3cdebd7768bafdcee97a1a3b6a706c5ef2414005e0"
+      },
+      "readback": {
+        "command": [
+          "/home/ce/.opam/framac-study/bin/frama-c",
+          "/tmp/builtin-transpose-nested-f7y6sof4/outputs/local_object/rewritten.c",
+          "-machdep",
+          "gcc_x86_64"
+        ],
+        "exit_code": 0,
+        "converted_sha256": "de38d6972bcdd8ffda70903d3fd7843ac4d4fccd7e85f9fa07ad3b4630535b6e"
+      }
+    },
+    "returned_three_levels": {
+      "stages": {
+        "rewrite": {
+          "command": [
+            "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/build-llvm18/buddy-framac-rewrite",
+            "/tmp/builtin-transpose-nested-f7y6sof4/outputs/returned_three_levels/original.cpp",
+            "--output",
+            "/tmp/builtin-transpose-nested-f7y6sof4/outputs/returned_three_levels/rewritten.cpp",
+            "--report",
+            "/tmp/builtin-transpose-nested-f7y6sof4/outputs/returned_three_levels/rewrite.json",
+            "--rules=capture",
+            "--",
+            "-std=c++17",
+            "-target",
+            "x86_64-conda-linux-gnu",
+            "-resource-dir=/home/ce/Desktop/framaclang/environment/llvm18/lib/clang/18",
+            "-nostdinc++"
+          ],
+          "cwd": "/tmp/builtin-transpose-nested-f7y6sof4/outputs/returned_three_levels",
+          "exit_code": 0,
+          "log": "/tmp/builtin-transpose-nested-f7y6sof4/outputs/returned_three_levels/rewrite.log"
+        },
+        "compile_original": {
+          "command": [
+            "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+            "-std=c++17",
+            "/tmp/builtin-transpose-nested-f7y6sof4/outputs/returned_three_levels/original.cpp",
+            "-o",
+            "/tmp/builtin-transpose-nested-f7y6sof4/outputs/returned_three_levels/original"
+          ],
+          "cwd": "/tmp/builtin-transpose-nested-f7y6sof4/outputs/returned_three_levels",
+          "exit_code": 0,
+          "log": "/tmp/builtin-transpose-nested-f7y6sof4/outputs/returned_three_levels/compile_original.log"
+        },
+        "execute_original": {
+          "command": [
+            "/tmp/builtin-transpose-nested-f7y6sof4/outputs/returned_three_levels/original"
+          ],
+          "cwd": "/tmp/builtin-transpose-nested-f7y6sof4/outputs/returned_three_levels",
+          "exit_code": 0,
+          "log": "/tmp/builtin-transpose-nested-f7y6sof4/outputs/returned_three_levels/execute_original.log"
+        },
+        "compile_rewritten": {
+          "command": [
+            "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+            "-std=c++17",
+            "/tmp/builtin-transpose-nested-f7y6sof4/outputs/returned_three_levels/rewritten.cpp",
+            "-o",
+            "/tmp/builtin-transpose-nested-f7y6sof4/outputs/returned_three_levels/rewritten"
+          ],
+          "cwd": "/tmp/builtin-transpose-nested-f7y6sof4/outputs/returned_three_levels",
+          "exit_code": 0,
+          "log": "/tmp/builtin-transpose-nested-f7y6sof4/outputs/returned_three_levels/compile_rewritten.log"
+        },
+        "execute_rewritten": {
+          "command": [
+            "/tmp/builtin-transpose-nested-f7y6sof4/outputs/returned_three_levels/rewritten"
+          ],
+          "cwd": "/tmp/builtin-transpose-nested-f7y6sof4/outputs/returned_three_levels",
+          "exit_code": 0,
+          "log": "/tmp/builtin-transpose-nested-f7y6sof4/outputs/returned_three_levels/execute_rewritten.log"
+        },
+        "idempotence": {
+          "command": [
+            "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/build-llvm18/buddy-framac-rewrite",
+            "/tmp/builtin-transpose-nested-f7y6sof4/outputs/returned_three_levels/rewritten.cpp",
+            "--output",
+            "/tmp/builtin-transpose-nested-f7y6sof4/outputs/returned_three_levels/second.cpp",
+            "--report",
+            "/tmp/builtin-transpose-nested-f7y6sof4/outputs/returned_three_levels/second.json",
+            "--rules=capture",
+            "--",
+            "-std=c++17",
+            "-target",
+            "x86_64-conda-linux-gnu",
+            "-resource-dir=/home/ce/Desktop/framaclang/environment/llvm18/lib/clang/18",
+            "-nostdinc++"
+          ],
+          "cwd": "/tmp/builtin-transpose-nested-f7y6sof4/outputs/returned_three_levels",
+          "exit_code": 0,
+          "log": "/tmp/builtin-transpose-nested-f7y6sof4/outputs/returned_three_levels/idempotence.log"
+        },
+        "frama_original": {
+          "command": [
+            "/home/ce/.opam/framac-study/bin/frama-c",
+            "/tmp/builtin-transpose-nested-f7y6sof4/outputs/returned_three_levels/original.cpp",
+            "-cxx-nostdinc",
+            "-machdep",
+            "gcc_x86_64",
+            "-cxx-clang-command=/home/ce/.opam/framac-study/bin/framaCIRGen",
+            "-fclang-cpp-extra-args=-std=c++17 -target x86_64-conda-linux-gnu -nostdinc++ -resource-dir=/home/ce/Desktop/framaclang/environment/llvm18/lib/clang/18",
+            "-cxx-parseable-output",
+            "-print",
+            "-ocode",
+            "/tmp/builtin-transpose-nested-f7y6sof4/outputs/returned_three_levels/original.c"
+          ],
+          "cwd": "/tmp/builtin-transpose-nested-f7y6sof4/outputs/returned_three_levels",
+          "exit_code": 1,
+          "log": "/tmp/builtin-transpose-nested-f7y6sof4/outputs/returned_three_levels/frama_original.log"
+        },
+        "frama_rewritten": {
+          "command": [
+            "/home/ce/.opam/framac-study/bin/frama-c",
+            "/tmp/builtin-transpose-nested-f7y6sof4/outputs/returned_three_levels/rewritten.cpp",
+            "-cxx-nostdinc",
+            "-machdep",
+            "gcc_x86_64",
+            "-cxx-clang-command=/home/ce/.opam/framac-study/bin/framaCIRGen",
+            "-fclang-cpp-extra-args=-std=c++17 -target x86_64-conda-linux-gnu -nostdinc++ -resource-dir=/home/ce/Desktop/framaclang/environment/llvm18/lib/clang/18",
+            "-cxx-parseable-output",
+            "-print",
+            "-ocode",
+            "/tmp/builtin-transpose-nested-f7y6sof4/outputs/returned_three_levels/rewritten.c"
+          ],
+          "cwd": "/tmp/builtin-transpose-nested-f7y6sof4/outputs/returned_three_levels",
+          "exit_code": 0,
+          "log": "/tmp/builtin-transpose-nested-f7y6sof4/outputs/returned_three_levels/frama_rewritten.log"
+        }
+      },
+      "status": "converted",
+      "artifacts_sha256": {
+        "frama_rewritten.log": "a63a75830f90f38d06e726a7719c3f7e93e43734761fc041d1596961d1cb336f",
+        "compile_rewritten.log": "ae0cfe65af121cc68de832302f088d5910f1ab3f7e19a91b7dfd29a87c18744d",
+        "execute_original.log": "55c3f17f34cf3af70bd00c3707de0d75eeed61f5d738da5f37692fbf4f3d50c4",
+        "compile_original.log": "6847e1b14974e6ec3fc59ddd17edb523c4e5ea73e594bd2c28827878149460e3",
+        "idempotence.log": "cb2f3cf75361f4339678ea9c469e42c32d0cfe5914b2a25906c017f53d2f09b4",
+        "original.cpp": "eaf57334e835ff2f8db5d9bce8dbaeffe60e777a446c4ea9f926306e3267c58f",
+        "rewritten.cpp": "5608911d4ffc0a4ffc35bf7ef49e1384a74832dcc3bbb806ab82314ba5caa8d0",
+        "frama_original.log": "ca5c5578433f5ddebe416b481bf90cea369ee2037f8114cc34dbfc11fa63ad36",
+        "second.cpp": "5608911d4ffc0a4ffc35bf7ef49e1384a74832dcc3bbb806ab82314ba5caa8d0",
+        "original": "4c376adc13f51a146d5b45b90f9207f2e292a707c11ad3ebb0cb6654d22a2285",
+        "rewritten.c": "880af0847921e76070f14e99c4d7b0317673330363be426cca2a353cdcdd1aa4",
+        "execute_rewritten.log": "cc699e00937bd3aaa31be9050db3392d3b95fdecc268c7c972a5935e00e21163",
+        "rewritten": "6adc0ba7742fc8d478538b34dadfca365ae0bc05ae118c3b65fd148fefbbe60d",
+        "rewrite.log": "ce280180c4863b11e0218c8281f35ec27dcc8cef41232772a5e576200d63df25",
+        "second.json": "7629f3f2416fd4edf5edc8343c8965aca810d312de9b82b5a001c247d93b63a3",
+        "rewrite.json": "df27d88cbd89d8cb7e71c2ff6d03e819cf054be9816bb3392b6e5a0892228d7d"
+      },
+      "readback": {
+        "command": [
+          "/home/ce/.opam/framac-study/bin/frama-c",
+          "/tmp/builtin-transpose-nested-f7y6sof4/outputs/returned_three_levels/rewritten.c",
+          "-machdep",
+          "gcc_x86_64"
+        ],
+        "exit_code": 0,
+        "converted_sha256": "880af0847921e76070f14e99c4d7b0317673330363be426cca2a353cdcdd1aa4"
+      }
+    },
+    "two_levels": {
+      "stages": {
+        "rewrite": {
+          "command": [
+            "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/build-llvm18/buddy-framac-rewrite",
+            "/tmp/builtin-transpose-nested-f7y6sof4/outputs/two_levels/original.cpp",
+            "--output",
+            "/tmp/builtin-transpose-nested-f7y6sof4/outputs/two_levels/rewritten.cpp",
+            "--report",
+            "/tmp/builtin-transpose-nested-f7y6sof4/outputs/two_levels/rewrite.json",
+            "--rules=capture",
+            "--",
+            "-std=c++17",
+            "-target",
+            "x86_64-conda-linux-gnu",
+            "-resource-dir=/home/ce/Desktop/framaclang/environment/llvm18/lib/clang/18",
+            "-nostdinc++"
+          ],
+          "cwd": "/tmp/builtin-transpose-nested-f7y6sof4/outputs/two_levels",
+          "exit_code": 0,
+          "log": "/tmp/builtin-transpose-nested-f7y6sof4/outputs/two_levels/rewrite.log"
+        },
+        "compile_original": {
+          "command": [
+            "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+            "-std=c++17",
+            "/tmp/builtin-transpose-nested-f7y6sof4/outputs/two_levels/original.cpp",
+            "-o",
+            "/tmp/builtin-transpose-nested-f7y6sof4/outputs/two_levels/original"
+          ],
+          "cwd": "/tmp/builtin-transpose-nested-f7y6sof4/outputs/two_levels",
+          "exit_code": 0,
+          "log": "/tmp/builtin-transpose-nested-f7y6sof4/outputs/two_levels/compile_original.log"
+        },
+        "execute_original": {
+          "command": [
+            "/tmp/builtin-transpose-nested-f7y6sof4/outputs/two_levels/original"
+          ],
+          "cwd": "/tmp/builtin-transpose-nested-f7y6sof4/outputs/two_levels",
+          "exit_code": 0,
+          "log": "/tmp/builtin-transpose-nested-f7y6sof4/outputs/two_levels/execute_original.log"
+        },
+        "compile_rewritten": {
+          "command": [
+            "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+            "-std=c++17",
+            "/tmp/builtin-transpose-nested-f7y6sof4/outputs/two_levels/rewritten.cpp",
+            "-o",
+            "/tmp/builtin-transpose-nested-f7y6sof4/outputs/two_levels/rewritten"
+          ],
+          "cwd": "/tmp/builtin-transpose-nested-f7y6sof4/outputs/two_levels",
+          "exit_code": 0,
+          "log": "/tmp/builtin-transpose-nested-f7y6sof4/outputs/two_levels/compile_rewritten.log"
+        },
+        "execute_rewritten": {
+          "command": [
+            "/tmp/builtin-transpose-nested-f7y6sof4/outputs/two_levels/rewritten"
+          ],
+          "cwd": "/tmp/builtin-transpose-nested-f7y6sof4/outputs/two_levels",
+          "exit_code": 0,
+          "log": "/tmp/builtin-transpose-nested-f7y6sof4/outputs/two_levels/execute_rewritten.log"
+        },
+        "idempotence": {
+          "command": [
+            "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/build-llvm18/buddy-framac-rewrite",
+            "/tmp/builtin-transpose-nested-f7y6sof4/outputs/two_levels/rewritten.cpp",
+            "--output",
+            "/tmp/builtin-transpose-nested-f7y6sof4/outputs/two_levels/second.cpp",
+            "--report",
+            "/tmp/builtin-transpose-nested-f7y6sof4/outputs/two_levels/second.json",
+            "--rules=capture",
+            "--",
+            "-std=c++17",
+            "-target",
+            "x86_64-conda-linux-gnu",
+            "-resource-dir=/home/ce/Desktop/framaclang/environment/llvm18/lib/clang/18",
+            "-nostdinc++"
+          ],
+          "cwd": "/tmp/builtin-transpose-nested-f7y6sof4/outputs/two_levels",
+          "exit_code": 0,
+          "log": "/tmp/builtin-transpose-nested-f7y6sof4/outputs/two_levels/idempotence.log"
+        },
+        "frama_original": {
+          "command": [
+            "/home/ce/.opam/framac-study/bin/frama-c",
+            "/tmp/builtin-transpose-nested-f7y6sof4/outputs/two_levels/original.cpp",
+            "-cxx-nostdinc",
+            "-machdep",
+            "gcc_x86_64",
+            "-cxx-clang-command=/home/ce/.opam/framac-study/bin/framaCIRGen",
+            "-fclang-cpp-extra-args=-std=c++17 -target x86_64-conda-linux-gnu -nostdinc++ -resource-dir=/home/ce/Desktop/framaclang/environment/llvm18/lib/clang/18",
+            "-cxx-parseable-output",
+            "-print",
+            "-ocode",
+            "/tmp/builtin-transpose-nested-f7y6sof4/outputs/two_levels/original.c"
+          ],
+          "cwd": "/tmp/builtin-transpose-nested-f7y6sof4/outputs/two_levels",
+          "exit_code": 1,
+          "log": "/tmp/builtin-transpose-nested-f7y6sof4/outputs/two_levels/frama_original.log"
+        },
+        "frama_rewritten": {
+          "command": [
+            "/home/ce/.opam/framac-study/bin/frama-c",
+            "/tmp/builtin-transpose-nested-f7y6sof4/outputs/two_levels/rewritten.cpp",
+            "-cxx-nostdinc",
+            "-machdep",
+            "gcc_x86_64",
+            "-cxx-clang-command=/home/ce/.opam/framac-study/bin/framaCIRGen",
+            "-fclang-cpp-extra-args=-std=c++17 -target x86_64-conda-linux-gnu -nostdinc++ -resource-dir=/home/ce/Desktop/framaclang/environment/llvm18/lib/clang/18",
+            "-cxx-parseable-output",
+            "-print",
+            "-ocode",
+            "/tmp/builtin-transpose-nested-f7y6sof4/outputs/two_levels/rewritten.c"
+          ],
+          "cwd": "/tmp/builtin-transpose-nested-f7y6sof4/outputs/two_levels",
+          "exit_code": 0,
+          "log": "/tmp/builtin-transpose-nested-f7y6sof4/outputs/two_levels/frama_rewritten.log"
+        }
+      },
+      "status": "converted",
+      "artifacts_sha256": {
+        "frama_rewritten.log": "c4e98fa0574ed6ae2c6e101a0eb03c87ab0a6cfd6901b8ff7ae4770d19153a5f",
+        "compile_rewritten.log": "32c80e677ddc1b3573342e9f759283720b4256bed5e8a5ba93856e84570f273a",
+        "execute_original.log": "f56cdfbb5d97e53c8d40b4b574e219389be6ad84e0fa3ba9e3b09a9053d43c0b",
+        "compile_original.log": "3b5b25584080b06a68af9e31b0bbac2466202fe66d7ba89db090ac168174f71e",
+        "idempotence.log": "961a31bf0d6e755225f51289717e7933e111bb15eff56273ee7e77b4d0b40e73",
+        "original.cpp": "4272b8f1897c0afc238e821105fdd3c4de45fc9a0a0f237c2f85ac47d2f9fc29",
+        "rewritten.cpp": "fc04856f2cb9bde2026e1768fcb153573e705b1f6ffcb0249708a733dce001bd",
+        "frama_original.log": "222c6ac7177bf419b261b2f643f85d2ccaf3f08925a09e97ea49b258915e4c31",
+        "second.cpp": "fc04856f2cb9bde2026e1768fcb153573e705b1f6ffcb0249708a733dce001bd",
+        "original": "c5b4aff1d7fdaaa97eb2ee9806a3077dbcde167d045e731db2350592a5a6f80a",
+        "rewritten.c": "9b35f22af9d2c34151b6a974c5215f3a28fe404cb81d51ae09060bd379054d3c",
+        "execute_rewritten.log": "f2ad1c62b1766d592d46665367dd9de79a4ca1136289a856f3bd5d4be644b2e4",
+        "rewritten": "1f0b69ae5759c1a6f2b957b24893b343aa0b621a4a83fa93a2e6f954351bad6a",
+        "rewrite.log": "807ce5bc26f2e9fefd44b7e954aad628ff0dfde04a51f2c91b5491793f574ebb",
+        "second.json": "9a5fe164fedaf303ac9cde4d2167f4a36d7dcefdb94e71fd482aa8ee8bc0ad4b",
+        "rewrite.json": "892b0d3c9f01c30520f8ad516ed88d21bed1b7ec63f3ff401bb25ed399340442"
+      },
+      "readback": {
+        "command": [
+          "/home/ce/.opam/framac-study/bin/frama-c",
+          "/tmp/builtin-transpose-nested-f7y6sof4/outputs/two_levels/rewritten.c",
+          "-machdep",
+          "gcc_x86_64"
+        ],
+        "exit_code": 0,
+        "converted_sha256": "9b35f22af9d2c34151b6a974c5215f3a28fe404cb81d51ae09060bd379054d3c"
+      }
+    }
+  },
+  "original_sha256": {
+    "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/tests/fixtures/nested_capture/local_object.cpp": "2d2b1fd3f23611897f867070b850db306b9c79788eb8cf778273971d7f7e412d",
+    "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/tests/fixtures/nested_capture/returned_three_levels.cpp": "eaf57334e835ff2f8db5d9bce8dbaeffe60e777a446c4ea9f926306e3267c58f",
+    "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/tests/fixtures/nested_capture/two_levels.cpp": "4272b8f1897c0afc238e821105fdd3c4de45fc9a0a0f237c2f85ac47d2f9fc29"
+  },
+  "frontend_sources_sha256": {
+    "CMakeLists.txt": "582cb89e62f69fd10c758ad3cffc692c288f1c367ef9c0923920400cc5451071",
+    "build_frontend.py": "356383c993b09df55c0eed47dfb94b658e20092b50ad114ba6aa2e33132b3377",
+    "experiment/__init__.py": "6276af1670f969e34ad5aea54009b12e481af903eb82312e0b5da96d53bce80b",
+    "experiment/artifacts.py": "0a676f50f19283cb866c097cc00c2e0f733a533d5325504114da2777d28788d1",
+    "experiment/interface_pilot/fixtures/library_input.cpp": "26395c027f8dab4578a58c28d42a1740b6ec4c344f8c851c7e751608252b2bf0",
+    "experiment/interface_pilot/python/emission.py": "2104f8720da0d8bc91d2ddb1c5b887a66a1c2873bd9941afeee0a275643216cd",
+    "experiment/interface_pilot/python/environment.py": "52ff040ba5adebccf29b67369ef8eadd9786172ba69632f3bb4eb73b9ed383b6",
+    "experiment/interface_pilot/python/experiments.py": "442c64cff9451412418c1280bb89a5f39b95bcb403a8c7cd5eb3963baf97be39",
+    "experiment/interface_pilot/run.py": "77299402a2dbd086681fb65d46d1884613e9cb0bde55cc531bdc7d6434340f98",
+    "experiment/interface_plans.py": "5e8e9f95b6e6a92744f62370dd5a08a6155231b9fc4534e0d49d0726001cea8a",
+    "experiment/inventory.py": "bedfa423e3133ab4d85a75fe1bf82e1a48589cbc5dd6e2df37f61776de8b9c57",
+    "experiment/output.py": "39465e93e30a3f4d9538af35d64abc6ffbdff9b256510f6d2c1765f77458fcb8",
+    "experiment/profiles.py": "17b81488388c38bcd6394eb29e4d083681fc99f12f7e164fd78afde80bf84f7e",
+    "experiment/toolchain.py": "78d586433ecf031c861fec98192a6ada411b21ca83eed579b60c2c7af9a4e79b",
+    "experiment/validation.py": "0beb7cfaf9e4c0e0ae0f6457755cedeb2c1055cbc1e38716b28257771e5726f7",
+    "include/frontend/FrontendOptions.h": "186d5fded41508788be7755408c5b062190a5f613b6b1e82001184188dbbd55a",
+    "include/frontend/RewritePipeline.h": "c36e7a62d0e0c924ccc9e8c0bf502342f31f03da9d43a4f1c5a463ff20138c03",
+    "include/interface/Analysis.h": "31bce3641199ea702493c083552eb771dea0a7483b026bc83d24cfc58c3a9ae7",
+    "include/interface/MiniSlice.h": "2380582bf7246ee1f2269ff085b972cdf168149d50cb9c6b5d42e911c65b95d3",
+    "include/interface/Probe.h": "ac85fa6faa770676b55b5dc22e32a4e2b621e879d61f101de3e41333516ece55",
+    "include/rewrite/RewritePlan.h": "cfa85b85be20fba20bf8095600fc2e078b22ae8e85e8da63f13cf43a6c2746d2",
+    "include/rules/BorrowedCapture.h": "b1486b7fb3051d6c755e62008a433e2853109241eb1d2ca98ef45575fd072107",
+    "include/rules/CaptureRule.h": "be6e9df6c67b681efd47504c8cfb3c2481c337416d516aa96cf0d89d1cb1c9c8",
+    "include/rules/ConstLocalRule.h": "7509ef40ca4399cc6cf3cccbe6bc1ec46ff75d44c971226ba53868019eae38ee",
+    "include/rules/ConstructorRule.h": "192286309e1b28399da36fa23ae81242f2820a6be1f2156dab4c6f12702b565f",
+    "include/rules/GuardRule.h": "48252e72e7e881187c18dda54825beb8bf7bbdc07d9c0650355ef8184948b111",
+    "include/rules/IfConditionRule.h": "b63fcb982e73ff24658337471806914b2e6f94a4e25c44d7d3f826d5f9bc8c48",
+    "include/rules/InitializerListRule.h": "20abebc910f2760eb441eeeb0074191090487625f4fb8bf305005d658f9a4d01",
+    "include/rules/NamespaceRule.h": "5df8c569174c20bc98de46b21ed5fd08cf99079d009835b9de537e4672446d01",
+    "include/rules/NestedCapture.h": "05f63b6d6d455af46451ea675b018c4a643d23935abe9bd52a2c51d7ea5d1dcc",
+    "include/rules/RangeForRule.h": "532af55f3bd11c0cc93b80705d108b8f67a575dfcf842b51f8b5f6f7cbe09884",
+    "include/rules/ValueRangeRule.h": "0e5080bb530a9d10489d70e17f8a2103a4dc63bdb043cef61e3444aff9b778b2",
+    "include/rules/WhileRule.h": "c218c9a02d0b23a1833fb96f489ddf5bd71a7aaef30570e693ed76e2c40af17e",
+    "include/support/AstSupport.h": "4d2b6835c82286d3986cc57530508192442d544fb94baeebcdde1fb7ab917c0b",
+    "include/support/FrontendOutput.h": "253aaf86e71d8d84413cc79c155e9c56333b18b5493305389e2269e4aa03ba5d",
+    "run.py": "c14cc05cfcf359bcb6786d70c7324313e4856693c0b5c51df1b7770ab5281f76",
+    "src/frontend/FrontendOptions.cpp": "b76ad262a8f246e5d0e84b17221fb8e29c815ddfa95b503d5b0ef6b61ebf95b0",
+    "src/frontend/RewriteFrontend.cpp": "65e8740177f2debfc88e06d9e756926c582a8c317a4e87f69775f2f5dafd54bc",
+    "src/frontend/RewritePipeline.cpp": "705b8914fd5a6f3b1686727c47ef51e943c831c83d263ab59e73908a540a07e2",
+    "src/interface/Inventory.cpp": "f274ee5924ab354f73a2552e0b6e376c6fe1e42d4d9f03eb36337db5c32b650d",
+    "src/interface/LibrarySlice.cpp": "735ac3d386332bd9f1454e087342a409028fad50dd96689e7f321547a373177a",
+    "src/interface/MiniSlice.cpp": "3ff437a5482c1ecd0eabed5a4e3e5459fa4946f7ebef58979af5a447ab913d67",
+    "src/interface/MiniSliceMain.cpp": "1d7c8a5f2b7e30fea80a72f58e2c3fce901e97b682c8a2361e4e90429902e221",
+    "src/interface/Probe.cpp": "89853bfe9b7b0bc3b4e8667129d30ae99776e23a0065965306555d22d5ccd02e",
+    "src/interface/ProbeMain.cpp": "17086e8a803ec9af8ee8d30903c92d6a167979783711f712daf3a42f39d41765",
+    "src/rewrite/RewritePlan.cpp": "a7d5a4aafea9b45aa30f04e9580d905b1f6f31383961b8bc5e311a9d4842be06",
+    "src/rules/BorrowedCapture.cpp": "d4c5b23ecfd17f16704f47ae5231a48f87c66be7a87e41439506106baa00223d",
+    "src/rules/CaptureRule.cpp": "ad022d923e3be16b3d80d153d37464fb8ed2731d8df4db05a1f22509db5244df",
+    "src/rules/ConstLocalRule.cpp": "5699fd18c3a4ab0c4cd5649304b65f313dfba272cb226348dc12ef0025c0fb7a",
+    "src/rules/ConstructorRule.cpp": "8339fa48f256ff3c3b8e54f40fe62285a99d4cadbfb80088086ae320ebf42f9c",
+    "src/rules/GuardRule.cpp": "8f2d8fb2da9e2580d794fb3d8f58148902896703e2006d4e3b48a0f13b7848bb",
+    "src/rules/IfConditionRule.cpp": "525bbcadcc0fe01abef200f9141bb09072ec65c3642d9dc8b79f7447c7e2526c",
+    "src/rules/InitializerListRule.cpp": "cdd6e76e291d4356694f34d7ab2bfc7fa67c09e04435fc33be5f73707334927b",
+    "src/rules/NamespaceRule.cpp": "d08924c475fb263b8604596afbc388b6f19a670fdcb36fb61d0ef5a45f6898e4",
+    "src/rules/NestedCapture.cpp": "4ffb67a2a45ff454a026930c1e9e6dded65d7c71bdba22605eb22904fdeb1a45",
+    "src/rules/RangeForRule.cpp": "d3c45d864013a190b3504fd3a7746db6c7ee825bccc06cf93413690bf610e766",
+    "src/rules/ValueRangeRule.cpp": "312bf17fca58ade76e3d6555d30cc9c078ea3c960a45a6b7c655bb86a95319e1",
+    "src/rules/WhileRule.cpp": "c34dd8398215f3726630671d35782b9f779b4f9e378e169baed369f80d244c00",
+    "src/support/AstSupport.cpp": "b760289df174e9c377c1bd4afef33c86400389afcb97599822737b52dc31c072",
+    "src/support/FrontendOutput.cpp": "bf27a0c66cbfe511fb6cda3471bf1032f89205f3e28949cd504c3df0b6f47ce8",
+    "tests/fixtures/nested_capture/local_object.cpp": "2d2b1fd3f23611897f867070b850db306b9c79788eb8cf778273971d7f7e412d",
+    "tests/fixtures/nested_capture/returned_three_levels.cpp": "eaf57334e835ff2f8db5d9bce8dbaeffe60e777a446c4ea9f926306e3267c58f",
+    "tests/fixtures/nested_capture/two_levels.cpp": "4272b8f1897c0afc238e821105fdd3c4de45fc9a0a0f237c2f85ac47d2f9fc29",
+    "tests/references/matmul-scalar-guard-binding.cpp": "56edd2ac48550ba73ac8f95bc829c6eb6e8b3ccc5cb321498a1dfee128979f8d",
+    "tests/rewrite_support.py": "cdaa43b52ba987699da86a93cfb9f79a89bcc958ef67a87adfa01da1d08f8b3c",
+    "tests/run_nested_capture.py": "9b3ca0955a234d232dd4af960c1853bc5c4855e929dc429c77e358dd47ee96a6",
+    "tests/test_imported_passes.py": "dd9984fa24d562d68fa346719a4867e3ace1ae742c29cc1ed9c8c6ea85456ec7",
+    "tests/test_mini_headers.py": "25e4b47f19a63a5192f7a9e60af5428f5ed81a0d145d6808d2078f36869f9579",
+    "tests/test_mini_slice.py": "02afb11dd3b787344618dca7711fad863fb6ca95e8c46456b9a60adf08a253c0",
+    "tests/test_nested_capture.py": "96bd6af4489c9200578eb3af61c83d54476813e0486231039e1d18eae72d27e5",
+    "tests/test_output.py": "e65163e9f885f9fa8cada5ec34dccadfb771f799501e52dfb4f5962e3e074c46",
+    "tests/test_parser_version.py": "23fb2d54b987cd606a2ffd6c5663e952f66fe162098da4eb8f89db1782cd0412",
+    "tests/test_range_for.py": "16155b3e8204d561b5cf8f3450ed936c94dace7ae03b63703a94b1c95db9d4b7",
+    "tests/test_rewrite.py": "9318e67558f231479482f114ba582906578cc4d221b7e047af7d836d7a84392b",
+    "tests/test_silu.py": "533c20fc476e803dcf7e6751433b1e9f5384b5ff2a2e6079ee9e22368543d65a",
+    "../MiniMLIR/extract.py": "7342e1bbf7cade8954956d1064561bae44a4f9693b05417bd0b0ad3bf10a4a5d",
+    "../MiniMLIR/rewrite_headers.py": "addea700fd60d76c1cd956a6a73967365394f4cd6f542f062986a3586d258678",
+    "../MiniMLIR/python/__init__.py": "6839685634279aa1b47e32d57a192e6f22b1d3dfcb651a7a356d3c12cac223c2",
+    "../MiniMLIR/python/emission.py": "2289bf33341a9c89d05d29fb9eacb4a213278ae8de0d48beff77e029b63a9041",
+    "../MiniMLIR/python/rewrites/__init__.py": "45c169ab90a00fbe961b3b67d6151ab4a2b428169213989d8dd4c8713ea79b8c",
+    "../MiniMLIR/python/rewrites/bounded_interfaces.py": "81befd4a476e5a22e46a384e6722b3ea75f297f162b431847e5e243095cad0b6",
+    "../MiniMLIR/python/rewrites/constructors.py": "1b48cad2d05544cf87d0a70c051d69b2f58ab5fdac5addc5973940cb75865d39",
+    "../MiniMLIR/python/rewrites/conversion_pattern.py": "bbaeb94e5c4a9755c7129ce8f1e9fd7b6b953f2e790faf545a1fbf4b6e7785cf",
+    "../MiniMLIR/python/rewrites/indexed_ranges.py": "1d8a45c778e10d095048289fb53d4c987ab26e3a35475b0c5624aeb4fbab528e",
+    "../MiniMLIR/python/rewrites/nested_records.py": "c5fc676ac866a30a1ac904a8345dbc5cfa95abcd474989adb45012e3e77ca14d",
+    "../MiniMLIR/python/rewrites/pipeline.py": "ca45423e70008af3da1da545ace1e1eca4a28178fbad40889b9d0e7dc96998cb",
+    "../MiniMLIR/python/rewrites/typed_attr.py": "8d30881c2cd1d93038af77aa297e50147c5d48699b1503c284216214ce921f09",
+    "../MiniMLIR/python/rewrites/walk.py": "e8d2d3b374d7426fada71f2ce5d1cbf46e2acb124e65229c6459ff66f38dcbf0"
+  },
+  "tool_sha256": "1434219e4fd1fb0a2f6916569a977b52739611baa3d88d4286d0176a56653519",
+  "versions": {
+    "clang_version": {
+      "command": [
+        "/home/ce/Desktop/framaclang/environment/llvm18/bin/clang++",
+        "--version"
+      ],
+      "cwd": "/tmp/builtin-transpose-nested-f7y6sof4/outputs",
+      "exit_code": 0,
+      "log": "/tmp/builtin-transpose-nested-f7y6sof4/outputs/clang_version.log"
+    },
+    "frama_version": {
+      "command": [
+        "/home/ce/.opam/framac-study/bin/frama-c",
+        "-version"
+      ],
+      "cwd": "/tmp/builtin-transpose-nested-f7y6sof4/outputs",
+      "exit_code": 0,
+      "log": "/tmp/builtin-transpose-nested-f7y6sof4/outputs/frama_version.log"
+    }
+  },
+  "toolchains": {
+    "frontend": "/home/ce/Desktop/framaclang/environment/llvm18",
+    "conversion": "/home/ce/Desktop/framaclang/environment/llvm18",
+    "converter": "/home/ce/.opam/framac-study/bin/framaCIRGen"
+  },
+  "effective_arguments": [
+    "-std=c++17",
+    "-target",
+    "x86_64-conda-linux-gnu",
+    "-resource-dir=/home/ce/Desktop/framaclang/environment/llvm18/lib/clang/18",
+    "-nostdinc++"
+  ],
+  "effective_frama_arguments": [
+    "-std=c++17",
+    "-target",
+    "x86_64-conda-linux-gnu",
+    "-nostdinc++",
+    "-resource-dir=/home/ce/Desktop/framaclang/environment/llvm18/lib/clang/18"
+  ],
+  "scope": "Self-contained nested captures; no MLIR implementation or lifetime proof",
+  "temporary_outputs_cleaned": true
+}

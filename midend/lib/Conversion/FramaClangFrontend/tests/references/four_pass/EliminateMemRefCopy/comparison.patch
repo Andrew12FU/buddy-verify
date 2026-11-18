@@ -1,0 +1,176 @@
+--- EliminateMemRefCopy/original.cpp
++++ EliminateMemRefCopy/rewritten.cpp
+@@ -24,6 +24,11 @@
+ //
+ // Transformed to:
+ //   // ... uses of %arg (replacing %alloc) ...
++//
++// NOTE: this copy is syntactically adapted for the Frama-Clang front-end.
++//       Range-based for loops and structured bindings (unsupported by
++//       Frama-Clang 0.0.20) are desugared into equivalent indexed loops.
++//       The semantics of the pass are unchanged.
+ //
+ //===----------------------------------------------------------------------===//
+ 
+@@ -40,7 +45,7 @@
+ 
+ using namespace mlir;
+ 
+-namespace {
++namespace eliminate_memref_copy_detail {
+ 
+ static bool isFunctionArgument(Value value) {
+   auto arg = dyn_cast<BlockArgument>(value);
+@@ -53,15 +58,20 @@
+   if (isFunctionArgument(value))
+     return true;
+ 
+-  if (auto castOp = value.getDefiningOp<memref::CastOp>())
++  memref::CastOp castOp = value.getDefiningOp<memref::CastOp>();
++  if (castOp)
+     return isAliasOfFunctionArgument(castOp.getSource());
+ 
+-  if (auto reinterpretOp = value.getDefiningOp<memref::ReinterpretCastOp>())
++  memref::ReinterpretCastOp reinterpretOp =
++      value.getDefiningOp<memref::ReinterpretCastOp>();
++  if (reinterpretOp)
+     return isAliasOfFunctionArgument(reinterpretOp.getSource());
+ 
+-  if (auto result = dyn_cast<OpResult>(value)) {
+-    if (auto metadataOp =
+-            dyn_cast<memref::ExtractStridedMetadataOp>(result.getOwner()))
++  OpResult result = dyn_cast<OpResult>(value);
++  if (result) {
++    memref::ExtractStridedMetadataOp metadataOp =
++        dyn_cast<memref::ExtractStridedMetadataOp>(result.getOwner());
++    if (metadataOp)
+       return isAliasOfFunctionArgument(metadataOp.getSource());
+   }
+ 
+@@ -70,7 +80,8 @@
+ 
+ // Pattern to eliminate memref.copy from function arguments to allocations
+ struct EliminateMemRefCopyPattern : public OpRewritePattern<memref::CopyOp> {
+-  using OpRewritePattern<memref::CopyOp>::OpRewritePattern;
++    explicit EliminateMemRefCopyPattern(MLIRContext* context)
++        : OpRewritePattern<memref::CopyOp>(context) {}
+ 
+   LogicalResult matchAndRewrite(memref::CopyOp copyOp,
+                                 PatternRewriter &rewriter) const override {
+@@ -90,7 +101,9 @@
+     // Verify that the types are compatible (same shape and element type)
+     auto sourceType = dyn_cast<MemRefType>(source.getType());
+     auto destType = dyn_cast<MemRefType>(dest.getType());
+-    if (!sourceType || !destType)
++    if (!sourceType)
++      return failure();
++    if (!destType)
+       return failure();
+ 
+     // Check element types match
+@@ -104,13 +117,19 @@
+     // Collect all uses of the allocation
+     SmallVector<OpOperand *> uses;
+     SmallVector<memref::DeallocOp> deallocs;
+-    for (OpOperand &use : allocOp->getUses()) {
++    use_range allocUses = allocOp->getUses();
++        use_range::iterator useIt = allocUses.begin();
++        use_range::iterator useItEnd = allocUses.end();
++     for (; useIt != useItEnd; ++useIt) {
++      OpOperand &use = *useIt;
+       // Skip the copy operation itself
+       if (use.getOwner() == copyOp.getOperation())
+         continue;
+       // The allocation will be removed, so its dealloc should be removed too.
+       // Retargeting it to a function argument alias is invalid.
+-      if (auto deallocOp = dyn_cast<memref::DeallocOp>(use.getOwner())) {
++      memref::DeallocOp deallocOp =
++          dyn_cast<memref::DeallocOp>(use.getOwner());
++      if (deallocOp) {
+         deallocs.push_back(deallocOp);
+         continue;
+       }
+@@ -123,8 +142,9 @@
+     Value replacementValue = source;
+ 
+     // Check if source has a strided layout
+-    if (auto stridedLayout =
+-            dyn_cast<StridedLayoutAttr>(sourceType.getLayout())) {
++    StridedLayoutAttr stridedLayout =
++        dyn_cast<StridedLayoutAttr>(sourceType.getLayout());
++    if (stridedLayout) {
+       ArrayRef<int64_t> strides = stridedLayout.getStrides();
+       if (!strides.empty()) {
+         // Check if the most minor dimension (last stride) is not 1
+@@ -147,7 +167,9 @@
+           SmallVector<OpFoldResult> sizes;
+           sizes.reserve(rank);
+           auto metadataSizes = metadata.getSizes();
+-          for (auto [idx, dim] : llvm::enumerate(sourceType.getShape())) {
++          ArrayRef<int64_t> shape = sourceType.getShape();
++          for (size_t idx = 0; idx < shape.size(); ++idx) {
++            int64_t dim = shape[idx];
+             if (ShapedType::isDynamic(dim))
+               sizes.push_back(metadataSizes[idx]);
+             else
+@@ -158,17 +180,16 @@
+           SmallVector<OpFoldResult> stridesOfr;
+           stridesOfr.reserve(rank);
+           auto metadataStrides = metadata.getStrides();
+-          for (auto [idx, stride] : llvm::enumerate(strides)) {
++          for (size_t idx = 0; idx < strides.size(); ++idx) {
++            int64_t stride = strides[idx];
+             if (static_cast<int64_t>(idx) == rank - 1) {
+               // Last stride: set to 1
+               stridesOfr.push_back(builder.getIndexAttr(1));
+-              continue;
++            } else if (ShapedType::isDynamic(stride)) {
++              stridesOfr.push_back(metadataStrides[idx]);
++            } else {
++              stridesOfr.push_back(builder.getIndexAttr(stride));
+             }
+-            // Preserve original stride
+-            if (ShapedType::isDynamic(stride))
+-              stridesOfr.push_back(metadataStrides[idx]);
+-            else
+-              stridesOfr.push_back(builder.getIndexAttr(stride));
+           }
+ 
+           // Get offset
+@@ -207,15 +228,19 @@
+     }
+ 
+     // Replace all uses of the allocation with the replacement value
+-    for (OpOperand *use : uses) {
++    for (size_t replaceIndex = 0; replaceIndex < uses.size(); ++replaceIndex) {
++      OpOperand *use = uses[replaceIndex];
+       use->set(replacementValue);
+     }
+ 
+     // Erase the copy operation
+     rewriter.eraseOp(copyOp);
+ 
+-    for (memref::DeallocOp deallocOp : deallocs)
++    for (size_t deallocIndex = 0; deallocIndex < deallocs.size();
++         ++deallocIndex) {
++      memref::DeallocOp deallocOp = deallocs[deallocIndex];
+       rewriter.eraseOp(deallocOp);
++    }
+ 
+     // Erase the allocation if it has no more uses
+     if (allocOp->use_empty()) {
+@@ -251,12 +276,12 @@
+     registry.insert<memref::MemRefDialect>();
+   }
+ };
+-} // namespace
++} // namespace eliminate_memref_copy_detail
+ 
+ namespace mlir {
+ namespace buddy {
+ void registerEliminateMemRefCopyPass() {
+-  PassRegistration<EliminateMemRefCopyPass>();
++  PassRegistration<eliminate_memref_copy_detail::EliminateMemRefCopyPass>();
+ }
+ } // namespace buddy
+ } // namespace mlir

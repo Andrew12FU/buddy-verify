@@ -1,0 +1,52 @@
+{
+  "clang_version": "clang version 18.1.8 (https://github.com/conda-forge/clangdev-feedstock 3c15221e001c9fe87fcc807876aa06d599616b01)",
+  "edits": [
+    {
+      "after": "namespace LowerIMEPass_anonymousNamespace_01",
+      "before": "namespace",
+      "column": 1,
+      "dependency_change": "Changes internal linkage; single-TU compatibility workaround",
+      "insertion_order": -1,
+      "length": 9,
+      "line": 36,
+      "offset": 1325,
+      "reason": "Name an anonymous namespace; reopened declarations share one name",
+      "rule": "namespace"
+    },
+    {
+      "after": "LowerIMEPass_anonymousNamespace_01::LowerIMEToLLVMPass",
+      "before": "LowerIMEToLLVMPass",
+      "column": 6,
+      "dependency_change": "none",
+      "insertion_order": -1,
+      "length": 18,
+      "line": 59,
+      "offset": 2048,
+      "reason": "Preserve the bound class reference outside the renamed namespace",
+      "rule": "namespace-reference"
+    },
+    {
+      "after": "LowerIMEPass_anonymousNamespace_01::LowerIMEToLLVMPass",
+      "before": "LowerIMEToLLVMPass",
+      "column": 48,
+      "dependency_change": "none",
+      "insertion_order": -1,
+      "length": 18,
+      "line": 76,
+      "offset": 2583,
+      "reason": "Preserve the bound class reference outside the renamed namespace",
+      "rule": "namespace-reference"
+    }
+  ],
+  "input": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/LowerIME/LowerIMEPass.cpp",
+  "output": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/lower-ime/rewritten.cpp",
+  "parsed": true,
+  "profile": "lower-ime",
+  "rejections": [],
+  "rules": [
+    "namespace"
+  ],
+  "schema_version": 1,
+  "scope": "Audited pass compatibility rules; no general equivalence claim",
+  "status": "rewritten"
+}

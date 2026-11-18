@@ -1,0 +1,271 @@
+{
+  "clang_version": "clang version 18.1.8 (https://github.com/conda-forge/clangdev-feedstock 3c15221e001c9fe87fcc807876aa06d599616b01)",
+  "edits": [
+    {
+      "after": "namespace EliminateMemRefCopy_anonymousNamespace_01",
+      "before": "namespace",
+      "column": 1,
+      "dependency_change": "Changes internal linkage; single-TU compatibility workaround",
+      "insertion_order": -1,
+      "length": 9,
+      "line": 43,
+      "offset": 1669,
+      "reason": "Name an anonymous namespace; reopened declarations share one name",
+      "rule": "namespace",
+      "round": 0,
+      "input_sha256": "29f6387c245e8293abba517f8728cda54f1fc658a8385b36cb09f87446f91ec1"
+    },
+    {
+      "after": "EliminateMemRefCopy_anonymousNamespace_01::EliminateMemRefCopyPass",
+      "before": "EliminateMemRefCopyPass",
+      "column": 20,
+      "dependency_change": "none",
+      "insertion_order": -1,
+      "length": 23,
+      "line": 259,
+      "offset": 9567,
+      "reason": "Preserve the bound class reference outside the renamed namespace",
+      "rule": "namespace-reference",
+      "round": 0,
+      "input_sha256": "29f6387c245e8293abba517f8728cda54f1fc658a8385b36cb09f87446f91ec1"
+    },
+    {
+      "after": "\n  explicit EliminateMemRefCopyPattern(mlir::MLIRContext *context)\n      : mlir::OpRewritePattern<mlir::memref::CopyOp>(context) {}",
+      "before": "",
+      "column": 60,
+      "dependency_change": "No new external interface or pattern behavior",
+      "insertion_order": 10,
+      "length": 0,
+      "line": 73,
+      "offset": 2722,
+      "reason": "Explicitly forward the used context overload; retain all inherited overloads",
+      "rule": "constructor",
+      "round": 1,
+      "input_sha256": "682ae0072379544c3aa7c441126dbdadf687a54555521e4997bbe89c68883efd"
+    },
+    {
+      "after": "{\n      auto &&rangeValues = allocOp->getUses();\n      auto rangeIt = rangeValues.begin();\n      auto rangeEnd = rangeValues.end();\n      for (; rangeIt != rangeEnd; ++rangeIt) {\n        OpOperand & use = *rangeIt;\n        {\n      // Skip the copy operation itself\n      if (use.getOwner() == copyOp.getOperation())\n        continue;\n      // The allocation will be removed, so its dealloc should be removed too.\n      // Retargeting it to a function argument alias is invalid.\n      if (auto deallocOp = dyn_cast<memref::DeallocOp>(use.getOwner())) {\n        deallocs.push_back(deallocOp);\n        continue;\n      }\n      uses.push_back(&use);\n    }\n      }\n    }",
+      "before": "for (OpOperand &use : allocOp->getUses()) {\n      // Skip the copy operation itself\n      if (use.getOwner() == copyOp.getOperation())\n        continue;\n      // The allocation will be removed, so its dealloc should be removed too.\n      // Retargeting it to a function argument alias is invalid.\n      if (auto deallocOp = dyn_cast<memref::DeallocOp>(use.getOwner())) {\n        deallocs.push_back(deallocOp);\n        continue;\n      }\n      uses.push_back(&use);\n    }",
+      "column": 5,
+      "dependency_change": "none",
+      "insertion_order": -1,
+      "length": 469,
+      "line": 109,
+      "offset": 4057,
+      "reason": "Desugar 1 range loops; preserve one-time evaluation, lifetime and early increment",
+      "rule": "range-for",
+      "round": 2,
+      "input_sha256": "229f0e8e51c6277f0276fd5fac0bd96b58b0cee9cfb49c8dcbf38c5965b4970b"
+    },
+    {
+      "after": "{\n            auto rangeValues1 = sourceType.getShape();\n            size_t rangeSize = rangeValues1.size();\n            for (size_t idx = 0; idx < rangeSize; ++idx) {\n              auto &&dim = rangeValues1[idx];\n              {\n            if (ShapedType::isDynamic(dim))\n              sizes.push_back(metadataSizes[idx]);\n            else\n              sizes.push_back(builder.getIndexAttr(dim));\n          }\n            }\n          }",
+      "before": "for (auto [idx, dim] : llvm::enumerate(sourceType.getShape())) {\n            if (ShapedType::isDynamic(dim))\n              sizes.push_back(metadataSizes[idx]);\n            else\n              sizes.push_back(builder.getIndexAttr(dim));\n          }",
+      "column": 11,
+      "dependency_change": "none",
+      "insertion_order": -1,
+      "length": 246,
+      "line": 152,
+      "offset": 5811,
+      "reason": "Desugar 1 range loops; preserve one-time evaluation, lifetime and early increment",
+      "rule": "range-for",
+      "round": 2,
+      "input_sha256": "229f0e8e51c6277f0276fd5fac0bd96b58b0cee9cfb49c8dcbf38c5965b4970b"
+    },
+    {
+      "after": "{\n            auto rangeValues2 = strides;\n            size_t rangeSize1 = rangeValues2.size();\n            for (size_t idx = 0; idx < rangeSize1; ++idx) {\n              auto &&stride = rangeValues2[idx];\n              {\n            if (static_cast<int64_t>(idx) == rank - 1) {\n              // Last stride: set to 1\n              stridesOfr.push_back(builder.getIndexAttr(1));\n              continue;\n            }\n            // Preserve original stride\n            if (ShapedType::isDynamic(stride))\n              stridesOfr.push_back(metadataStrides[idx]);\n            else\n              stridesOfr.push_back(builder.getIndexAttr(stride));\n          }\n            }\n          }",
+      "before": "for (auto [idx, stride] : llvm::enumerate(strides)) {\n            if (static_cast<int64_t>(idx) == rank - 1) {\n              // Last stride: set to 1\n              stridesOfr.push_back(builder.getIndexAttr(1));\n              continue;\n            }\n            // Preserve original stride\n            if (ShapedType::isDynamic(stride))\n              stridesOfr.push_back(metadataStrides[idx]);\n            else\n              stridesOfr.push_back(builder.getIndexAttr(stride));\n          }",
+      "column": 11,
+      "dependency_change": "none",
+      "insertion_order": -1,
+      "length": 488,
+      "line": 163,
+      "offset": 6289,
+      "reason": "Desugar 1 range loops; preserve one-time evaluation, lifetime and early increment",
+      "rule": "range-for",
+      "round": 2,
+      "input_sha256": "229f0e8e51c6277f0276fd5fac0bd96b58b0cee9cfb49c8dcbf38c5965b4970b"
+    },
+    {
+      "after": "{\n      auto &&rangeValues3 = uses;\n      auto rangeIt3 = rangeValues3.begin();\n      auto rangeEnd3 = rangeValues3.end();\n      for (; rangeIt3 != rangeEnd3; ++rangeIt3) {\n        OpOperand * use = *rangeIt3;\n        {\n      use->set(replacementValue);\n    }\n      }\n    }",
+      "before": "for (OpOperand *use : uses) {\n      use->set(replacementValue);\n    }",
+      "column": 5,
+      "dependency_change": "none",
+      "insertion_order": -1,
+      "length": 69,
+      "line": 212,
+      "offset": 8339,
+      "reason": "Desugar 1 range loops; preserve one-time evaluation, lifetime and early increment",
+      "rule": "range-for",
+      "round": 2,
+      "input_sha256": "229f0e8e51c6277f0276fd5fac0bd96b58b0cee9cfb49c8dcbf38c5965b4970b"
+    },
+    {
+      "after": "{\n      auto &&rangeValues4 = deallocs;\n      auto rangeIt4 = rangeValues4.begin();\n      auto rangeEnd4 = rangeValues4.end();\n      for (; rangeIt4 != rangeEnd4; ++rangeIt4) {\n        memref::DeallocOp deallocOp = *rangeIt4;\n        rewriter.eraseOp(deallocOp);\n      }\n    }",
+      "before": "for (memref::DeallocOp deallocOp : deallocs)\n      rewriter.eraseOp(deallocOp);",
+      "column": 5,
+      "dependency_change": "none",
+      "insertion_order": -1,
+      "length": 79,
+      "line": 219,
+      "offset": 8477,
+      "reason": "Desugar 1 range loops; preserve one-time evaluation, lifetime and early increment",
+      "rule": "range-for",
+      "round": 2,
+      "input_sha256": "229f0e8e51c6277f0276fd5fac0bd96b58b0cee9cfb49c8dcbf38c5965b4970b"
+    },
+    {
+      "after": "{\n    auto castOp = value.getDefiningOp<memref::CastOp>();\n    if (static_cast<bool>(castOp)) return isAliasOfFunctionArgument(castOp.getSource());\n  }",
+      "before": "if (auto castOp = value.getDefiningOp<memref::CastOp>())\n    return isAliasOfFunctionArgument(castOp.getSource());",
+      "column": 3,
+      "dependency_change": "Explicit contextual bool; no new library interface",
+      "insertion_order": -1,
+      "length": 114,
+      "line": 56,
+      "offset": 2013,
+      "reason": "Preserve conditional construction, else priority and body scopes",
+      "rule": "if-condition",
+      "round": 3,
+      "input_sha256": "47a346959b7d7bf7c9329f3afb5046c70a646ca8231d0bec36638bf8ad9256e6"
+    },
+    {
+      "after": "{\n    auto reinterpretOp = value.getDefiningOp<memref::ReinterpretCastOp>();\n    if (static_cast<bool>(reinterpretOp)) return isAliasOfFunctionArgument(reinterpretOp.getSource());\n  }",
+      "before": "if (auto reinterpretOp = value.getDefiningOp<memref::ReinterpretCastOp>())\n    return isAliasOfFunctionArgument(reinterpretOp.getSource());",
+      "column": 3,
+      "dependency_change": "Explicit contextual bool; no new library interface",
+      "insertion_order": -1,
+      "length": 139,
+      "line": 59,
+      "offset": 2131,
+      "reason": "Preserve conditional construction, else priority and body scopes",
+      "rule": "if-condition",
+      "round": 3,
+      "input_sha256": "47a346959b7d7bf7c9329f3afb5046c70a646ca8231d0bec36638bf8ad9256e6"
+    },
+    {
+      "after": "{\n    auto result = dyn_cast<OpResult>(value);\n    if (static_cast<bool>(result)) {\n      if (auto metadataOp =\n              dyn_cast<memref::ExtractStridedMetadataOp>(result.getOwner()))\n        return isAliasOfFunctionArgument(metadataOp.getSource());\n    }\n  }",
+      "before": "if (auto result = dyn_cast<OpResult>(value)) {\n    if (auto metadataOp =\n            dyn_cast<memref::ExtractStridedMetadataOp>(result.getOwner()))\n      return isAliasOfFunctionArgument(metadataOp.getSource());\n  }",
+      "column": 3,
+      "dependency_change": "Explicit contextual bool; no new library interface",
+      "insertion_order": -1,
+      "length": 215,
+      "line": 62,
+      "offset": 2274,
+      "reason": "Preserve conditional construction, else priority and body scopes",
+      "rule": "if-condition",
+      "round": 3,
+      "input_sha256": "47a346959b7d7bf7c9329f3afb5046c70a646ca8231d0bec36638bf8ad9256e6"
+    },
+    {
+      "after": "{\n        auto deallocOp = dyn_cast<memref::DeallocOp>(use.getOwner());\n        if (static_cast<bool>(deallocOp)) {\n          deallocs.push_back(deallocOp);\n          continue;\n        }\n      }",
+      "before": "if (auto deallocOp = dyn_cast<memref::DeallocOp>(use.getOwner())) {\n        deallocs.push_back(deallocOp);\n        continue;\n      }",
+      "column": 7,
+      "dependency_change": "Explicit contextual bool; no new library interface",
+      "insertion_order": -1,
+      "length": 132,
+      "line": 121,
+      "offset": 4541,
+      "reason": "Preserve conditional construction, else priority and body scopes",
+      "rule": "if-condition",
+      "round": 3,
+      "input_sha256": "47a346959b7d7bf7c9329f3afb5046c70a646ca8231d0bec36638bf8ad9256e6"
+    },
+    {
+      "after": "{\n      auto stridedLayout =\n            dyn_cast<StridedLayoutAttr>(sourceType.getLayout());\n      if (static_cast<bool>(stridedLayout)) {\n        ArrayRef<int64_t> strides = stridedLayout.getStrides();\n        if (!strides.empty()) {\n          // Check if the most minor dimension (last stride) is not 1\n          int64_t lastStride = strides.back();\n          if (ShapedType::isDynamic(lastStride) || lastStride != 1) {\n            // Use ExtractStridedMetadataOp to get actual stride values\n            // This ensures we preserve the correct strides from the source\n            Location loc = copyOp.getLoc();\n            OpBuilder builder(rewriter);\n            builder.setInsertionPoint(copyOp);\n\n            // Extract metadata to get actual stride values\n            auto metadata =\n                memref::ExtractStridedMetadataOp::create(builder, loc, source);\n\n            // Get the rank\n            int64_t rank = sourceType.getRank();\n\n            // Build sizes from shape\n            SmallVector<OpFoldResult> sizes;\n            sizes.reserve(rank);\n            auto metadataSizes = metadata.getSizes();\n            {\n              auto rangeValues1 = sourceType.getShape();\n              size_t rangeSize = rangeValues1.size();\n              for (size_t idx = 0; idx < rangeSize; ++idx) {\n                auto &&dim = rangeValues1[idx];\n                {\n              if (ShapedType::isDynamic(dim))\n                sizes.push_back(metadataSizes[idx]);\n              else\n                sizes.push_back(builder.getIndexAttr(dim));\n            }\n              }\n            }\n\n            // Build strides: preserve all strides except the last one (set to 1)\n            SmallVector<OpFoldResult> stridesOfr;\n            stridesOfr.reserve(rank);\n            auto metadataStrides = metadata.getStrides();\n            {\n              auto rangeValues2 = strides;\n              size_t rangeSize1 = rangeValues2.size();\n              for (size_t idx = 0; idx < rangeSize1; ++idx) {\n                auto &&stride = rangeValues2[idx];\n                {\n              if (static_cast<int64_t>(idx) == rank - 1) {\n                // Last stride: set to 1\n                stridesOfr.push_back(builder.getIndexAttr(1));\n                continue;\n              }\n              // Preserve original stride\n              if (ShapedType::isDynamic(stride))\n                stridesOfr.push_back(metadataStrides[idx]);\n              else\n                stridesOfr.push_back(builder.getIndexAttr(stride));\n            }\n              }\n            }\n\n            // Get offset\n            OpFoldResult offset;\n            if (ShapedType::isDynamic(stridedLayout.getOffset()))\n              offset = metadata.getOffset();\n            else\n              offset = builder.getIndexAttr(stridedLayout.getOffset());\n\n            // Create tightened layout with last stride = 1\n            SmallVector<int64_t> tightenedStrides(strides.begin(), strides.end());\n            tightenedStrides.back() = 1;\n            auto tightenedLayout = StridedLayoutAttr::get(\n                sourceType.getContext(), stridedLayout.getOffset(),\n                tightenedStrides);\n            auto tightenedType = MemRefType::get(\n                sourceType.getShape(), sourceType.getElementType(),\n                tightenedLayout, sourceType.getMemorySpace());\n\n            // Create reinterpret_cast with tightened layout\n            Value tightened = memref::ReinterpretCastOp::create(\n                builder, loc, tightenedType, metadata.getBaseBuffer(), offset,\n                sizes, stridesOfr);\n\n            // Then cast to static layout type (no layout information)\n            // This ensures compatibility with function signatures\n            MemRefType finalType = MemRefType::get(\n                sourceType.getShape(), sourceType.getElementType(),\n                MemRefLayoutAttrInterface(), // No layout = static layout\n                sourceType.getMemorySpace());\n\n            replacementValue =\n                memref::CastOp::create(builder, loc, finalType, tightened);\n          }\n        }\n      }\n    }",
+      "before": "if (auto stridedLayout =\n            dyn_cast<StridedLayoutAttr>(sourceType.getLayout())) {\n      ArrayRef<int64_t> strides = stridedLayout.getStrides();\n      if (!strides.empty()) {\n        // Check if the most minor dimension (last stride) is not 1\n        int64_t lastStride = strides.back();\n        if (ShapedType::isDynamic(lastStride) || lastStride != 1) {\n          // Use ExtractStridedMetadataOp to get actual stride values\n          // This ensures we preserve the correct strides from the source\n          Location loc = copyOp.getLoc();\n          OpBuilder builder(rewriter);\n          builder.setInsertionPoint(copyOp);\n\n          // Extract metadata to get actual stride values\n          auto metadata =\n              memref::ExtractStridedMetadataOp::create(builder, loc, source);\n\n          // Get the rank\n          int64_t rank = sourceType.getRank();\n\n          // Build sizes from shape\n          SmallVector<OpFoldResult> sizes;\n          sizes.reserve(rank);\n          auto metadataSizes = metadata.getSizes();\n          {\n            auto rangeValues1 = sourceType.getShape();\n            size_t rangeSize = rangeValues1.size();\n            for (size_t idx = 0; idx < rangeSize; ++idx) {\n              auto &&dim = rangeValues1[idx];\n              {\n            if (ShapedType::isDynamic(dim))\n              sizes.push_back(metadataSizes[idx]);\n            else\n              sizes.push_back(builder.getIndexAttr(dim));\n          }\n            }\n          }\n\n          // Build strides: preserve all strides except the last one (set to 1)\n          SmallVector<OpFoldResult> stridesOfr;\n          stridesOfr.reserve(rank);\n          auto metadataStrides = metadata.getStrides();\n          {\n            auto rangeValues2 = strides;\n            size_t rangeSize1 = rangeValues2.size();\n            for (size_t idx = 0; idx < rangeSize1; ++idx) {\n              auto &&stride = rangeValues2[idx];\n              {\n            if (static_cast<int64_t>(idx) == rank - 1) {\n              // Last stride: set to 1\n              stridesOfr.push_back(builder.getIndexAttr(1));\n              continue;\n            }\n            // Preserve original stride\n            if (ShapedType::isDynamic(stride))\n              stridesOfr.push_back(metadataStrides[idx]);\n            else\n              stridesOfr.push_back(builder.getIndexAttr(stride));\n          }\n            }\n          }\n\n          // Get offset\n          OpFoldResult offset;\n          if (ShapedType::isDynamic(stridedLayout.getOffset()))\n            offset = metadata.getOffset();\n          else\n            offset = builder.getIndexAttr(stridedLayout.getOffset());\n\n          // Create tightened layout with last stride = 1\n          SmallVector<int64_t> tightenedStrides(strides.begin(), strides.end());\n          tightenedStrides.back() = 1;\n          auto tightenedLayout = StridedLayoutAttr::get(\n              sourceType.getContext(), stridedLayout.getOffset(),\n              tightenedStrides);\n          auto tightenedType = MemRefType::get(\n              sourceType.getShape(), sourceType.getElementType(),\n              tightenedLayout, sourceType.getMemorySpace());\n\n          // Create reinterpret_cast with tightened layout\n          Value tightened = memref::ReinterpretCastOp::create(\n              builder, loc, tightenedType, metadata.getBaseBuffer(), offset,\n              sizes, stridesOfr);\n\n          // Then cast to static layout type (no layout information)\n          // This ensures compatibility with function signatures\n          MemRefType finalType = MemRefType::get(\n              sourceType.getShape(), sourceType.getElementType(),\n              MemRefLayoutAttrInterface(), // No layout = static layout\n              sourceType.getMemorySpace());\n\n          replacementValue =\n              memref::CastOp::create(builder, loc, finalType, tightened);\n        }\n      }\n    }",
+      "column": 5,
+      "dependency_change": "Explicit contextual bool; no new library interface",
+      "insertion_order": -1,
+      "length": 3882,
+      "line": 136,
+      "offset": 4961,
+      "reason": "Preserve conditional construction, else priority and body scopes",
+      "rule": "if-condition",
+      "round": 3,
+      "input_sha256": "47a346959b7d7bf7c9329f3afb5046c70a646ca8231d0bec36638bf8ad9256e6"
+    },
+    {
+      "after": "{\n        auto metadataOp =\n              dyn_cast<memref::ExtractStridedMetadataOp>(result.getOwner());\n        if (static_cast<bool>(metadataOp)) return isAliasOfFunctionArgument(metadataOp.getSource());\n      }",
+      "before": "if (auto metadataOp =\n              dyn_cast<memref::ExtractStridedMetadataOp>(result.getOwner()))\n        return isAliasOfFunctionArgument(metadataOp.getSource());",
+      "column": 7,
+      "dependency_change": "Explicit contextual bool; no new library interface",
+      "insertion_order": -1,
+      "length": 164,
+      "line": 69,
+      "offset": 2445,
+      "reason": "Preserve conditional construction, else priority and body scopes",
+      "rule": "if-condition",
+      "round": 4,
+      "input_sha256": "0ad37c5abad37f7dc9b0eb1a6f17bb1e6018931be31dfb169bd41fcdc7477f75"
+    },
+    {
+      "after": "{\n      bool guardFailed = (!sourceType || !destType);\n      if (guardFailed)\n        return failure();\n    }",
+      "before": "if (!sourceType || !destType)\n      return failure();",
+      "column": 5,
+      "dependency_change": "One fresh built-in bool; no new external interface dependency",
+      "insertion_order": -1,
+      "length": 53,
+      "line": 104,
+      "offset": 3793,
+      "reason": "Bind the original short-circuit condition in a block-local boolean so the conversion retains the guard scope",
+      "rule": "guard",
+      "round": 6,
+      "input_sha256": "cdc8376472ae895595a833612e4cd20e1476beb7bd4573ca0b07e0c34ae6e74a"
+    }
+  ],
+  "input": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/EliminateMemRefCopy/EliminateMemRefCopy.cpp",
+  "output": "/tmp/buddy-rules-zr_7x4ld/round-6.cpp",
+  "parsed": true,
+  "profile": "eliminate-copy",
+  "rejections": [],
+  "rules": [
+    "guard"
+  ],
+  "schema_version": 1,
+  "scope": "Audited pass compatibility rules; no general equivalence claim",
+  "status": "rewritten",
+  "rounds": [
+    {
+      "rule": "namespace",
+      "input_sha256": "29f6387c245e8293abba517f8728cda54f1fc658a8385b36cb09f87446f91ec1",
+      "output_sha256": "682ae0072379544c3aa7c441126dbdadf687a54555521e4997bbe89c68883efd",
+      "edit_count": 2
+    },
+    {
+      "rule": "constructor",
+      "input_sha256": "682ae0072379544c3aa7c441126dbdadf687a54555521e4997bbe89c68883efd",
+      "output_sha256": "229f0e8e51c6277f0276fd5fac0bd96b58b0cee9cfb49c8dcbf38c5965b4970b",
+      "edit_count": 1
+    },
+    {
+      "rule": "range-for",
+      "input_sha256": "229f0e8e51c6277f0276fd5fac0bd96b58b0cee9cfb49c8dcbf38c5965b4970b",
+      "output_sha256": "47a346959b7d7bf7c9329f3afb5046c70a646ca8231d0bec36638bf8ad9256e6",
+      "edit_count": 5
+    },
+    {
+      "rule": "if-condition",
+      "input_sha256": "47a346959b7d7bf7c9329f3afb5046c70a646ca8231d0bec36638bf8ad9256e6",
+      "output_sha256": "0ad37c5abad37f7dc9b0eb1a6f17bb1e6018931be31dfb169bd41fcdc7477f75",
+      "edit_count": 5
+    },
+    {
+      "rule": "if-condition",
+      "input_sha256": "0ad37c5abad37f7dc9b0eb1a6f17bb1e6018931be31dfb169bd41fcdc7477f75",
+      "output_sha256": "cdc8376472ae895595a833612e4cd20e1476beb7bd4573ca0b07e0c34ae6e74a",
+      "edit_count": 1
+    },
+    {
+      "rule": "if-condition",
+      "input_sha256": "cdc8376472ae895595a833612e4cd20e1476beb7bd4573ca0b07e0c34ae6e74a",
+      "output_sha256": "cdc8376472ae895595a833612e4cd20e1476beb7bd4573ca0b07e0c34ae6e74a",
+      "edit_count": 0
+    },
+    {
+      "rule": "guard",
+      "input_sha256": "cdc8376472ae895595a833612e4cd20e1476beb7bd4573ca0b07e0c34ae6e74a",
+      "output_sha256": "e01ead2709e5cc049be73f5daf41f12fe98d9b354e631de8cde6f8c9db86ec04",
+      "edit_count": 1
+    }
+  ],
+  "offset_basis": "UTF-8 bytes in the input of each numbered AST round"
+}

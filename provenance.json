@@ -1,0 +1,26 @@
+{
+  "snapshot_date": "2026-11-18",
+  "repository": "https://github.com/Andrew12FU/buddy-mlir-v0.0.4.git",
+  "buddy_head": "851e7c9f13144c75b8460bb73d7a99fe29804b67",
+  "llvm_gitlink": "0af6fcef7510ff068f665441564b69bcc74db3f6",
+  "scope": "Selected frontend, abstract headers, required references, nine current verified pass results",
+  "passes": [
+    "reshape",
+    "matmul-scalar",
+    "lower-ime",
+    "silu-fusion",
+    "assume-tight",
+    "eliminate-copy",
+    "gpu-memcpy",
+    "depthwise-conv",
+    "builtin-transpose"
+  ],
+  "verification": "midend/lib/Conversion/MiniMLIR/current/verification.json",
+  "excluded": [
+    "full Buddy/LLVM checkout",
+    "build directories",
+    "toolchain binaries",
+    "Python caches",
+    "temporary and lock files"
+  ]
+}

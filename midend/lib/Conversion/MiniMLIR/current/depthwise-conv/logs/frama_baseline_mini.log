@@ -1,0 +1,366 @@
+$ /home/ce/.opam/framac-study/bin/frama-c /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp -cxx-nostdinc -machdep gcc_x86_64 -cxx-clang-command=/home/ce/.opam/framac-study/bin/framaCIRGen '-fclang-cpp-extra-args=-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include -D_DEBUG -D_GLIBCXX_ASSERTIONS -D_GLIBCXX_USE_CXX11_ABI=1 -D_LIBCPP_HARDENING_MODE=_LIBCPP_HARDENING_MODE_EXTENSIVE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Werror=unguarded-availability-new -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wmissing-field-initializers -Wimplicit-fallthrough -Wcovered-switch-default -Wno-noexcept-type -Wnon-virtual-dtor -Wdelete-non-virtual-dtor -Wsuggest-override -Wstring-conversion -Wno-pass-failed -Wmisleading-indentation -Wctad-maybe-unsupported -fdiagnostics-color -Xclang -fno-pch-timestamp -g -std=gnu++17 -fno-exceptions -funwind-tables -fno-rtti -target x86_64-conda-linux-gnu -fno-color-diagnostics --sysroot=/home/ce/Desktop/framaclang/environment/llvm18/x86_64-conda-linux-gnu/sysroot -nostdinc++ -resource-dir=/home/ce/Desktop/framaclang/environment/llvm18/lib/clang/18' -cxx-parseable-output -print -ocode /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline.c
+cwd: /home/ce/Desktop/BuddyCompiler/build-v0.0.4/buddy
+exit_code: 4
+--- stdout ---
+[kernel] Parsing /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp (external front-end)
+[fclang] Warning: framaCIRGen emitted messages on stderr:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:22:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/Dialect/Affine/IR/AffineOps.h:5:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/IR/Builders.h:6:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/IR/AffineExpr.h:20:13: warning: constexpr constructor that does not initialize all members is a C++20 extension [-Wc++20-extensions]
+     20 |   constexpr AffineExpr() {}
+        |             ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/IR/AffineExpr.h:23:13: note: member not initialized by constructor
+     23 |   ImplType *expr;
+        |             ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:26:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/Pass/Pass.h:7:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/IR/DialectRegistry.h:7:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/Support/TypeID.h:21:24: warning: inline function 'mlir::TypeID::getFromOpaquePointer' is not defined [-Wundefined-inline]
+     21 |   inline static TypeID getFromOpaquePointer(const void *pointer);
+        |                        ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/Support/TypeID.h:38:45: note: used here
+     38 |   TypeID getTypeID() const { return TypeID::getFromOpaquePointer(this); }
+        |                                             ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:22:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/Dialect/Affine/IR/AffineOps.h:4:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/IR/Dialect.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/Support/LLVM.h:8:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/llvm/ADT/SmallVector.h:148:10: warning: inline function 'llvm::SmallVector<mlir::OperationName, 2>::~SmallVector' is not defined [-Wundefined-inline]
+    148 |   inline ~SmallVector();
+        |          ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/IR/PatternMatch.h:78:7: note: used here
+     78 | class Pattern {
+        |       ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:22:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/Dialect/Affine/IR/AffineOps.h:4:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/IR/Dialect.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/Support/LLVM.h:8:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/llvm/ADT/SmallVector.h:148:10: warning: inline function 'llvm::SmallVector<llvm::StringRef, 0>::~SmallVector' is not defined [-Wundefined-inline]
+    148 |   inline ~SmallVector();
+        |          ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/IR/PatternMatch.h:78:7: note: used here
+     78 | class Pattern {
+        |       ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:22:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/Dialect/Affine/IR/AffineOps.h:6:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/IR/OpDefinition.h:47:12: warning: inline function 'mlir::OpTrait::OneTypedResult<mlir::Type>::Impl<mlir::arith::ConstantOp>::operator Value' is not defined [-Wundefined-inline]
+     47 |     inline operator ::mlir::TypedValue<ResultType>();
+        |            ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:54:9: note: used here
+     54 |         arith::ConstantOp::create(rewriter, loc, rewriter.getIndexAttr(0));
+        |         ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:22:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/Dialect/Affine/IR/AffineOps.h:4:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/IR/Dialect.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/Support/LLVM.h:6:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/llvm/ADT/ArrayRef.h:28:10: warning: inline function 'llvm::ArrayRef<long>::ArrayRef' is not defined [-Wundefined-inline]
+     28 |   inline ArrayRef(const T &OneElt [[clang::lifetimebound]]);
+        |          ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:93:40: note: used here
+     93 |     VectorType vecTy = VectorType::get(vecSize, elemTy);
+        |                                        ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:22:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/Dialect/Affine/IR/AffineOps.h:6:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/IR/OpDefinition.h:47:12: warning: inline function 'mlir::OpTrait::OneTypedResult<mlir::VectorType>::Impl<mlir::vector::BroadcastOp>::operator TypedValue' is not defined [-Wundefined-inline]
+     47 |     inline operator ::mlir::TypedValue<ResultType>();
+        |            ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:101:11: note: used here
+    101 |           vector::BroadcastOp::create(rewriter, loc, vecTy, zeroElementType);
+        |           ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:22:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/Dialect/Affine/IR/AffineOps.h:6:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/IR/OpDefinition.h:47:12: warning: inline function 'mlir::OpTrait::OneTypedResult<mlir::IndexType>::Impl<mlir::memref::DimOp>::operator TypedValue' is not defined [-Wundefined-inline]
+     47 |     inline operator ::mlir::TypedValue<ResultType>();
+        |            ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:107:15: note: used here
+    107 |     Value N = memref::DimOp::create(rewriter, loc, output, 0);  // N
+        |               ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:22:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/Dialect/Affine/IR/AffineOps.h:5:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/IR/Builders.h:9:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/IR/Operation.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/IR/OperationSupport.h:6:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/IR/ValueRange.h:85:10: warning: inline function 'mlir::ValueRange::ValueRange' is not defined [-Wundefined-inline]
+     85 |   inline ValueRange(const Value &value [[clang::lifetimebound]]);
+        |          ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:114:9: note: used here
+    114 |         OC);
+        |         ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:22:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/Dialect/Affine/IR/AffineOps.h:6:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/IR/OpDefinition.h:47:12: warning: inline function 'mlir::OpTrait::OneTypedResult<mlir::IndexType>::Impl<mlir::affine::AffineApplyOp>::operator TypedValue' is not defined [-Wundefined-inline]
+     47 |     inline operator ::mlir::TypedValue<ResultType>();
+        |            ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:112:21: note: used here
+    112 |     Value applyOC = affine::AffineApplyOp::create(
+        |                     ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:22:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/Dialect/Affine/IR/AffineOps.h:5:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/IR/Builders.h:9:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/IR/Operation.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/IR/OperationSupport.h:6:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/IR/ValueRange.h:86:10: warning: inline function 'mlir::ValueRange::ValueRange' is not defined [-Wundefined-inline]
+     86 |   inline ValueRange(const std::initializer_list<Value> &values
+        |          ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:116:60: note: used here
+    116 |         rewriter, loc, AffineMap::get(1, 0, d0 % vecSize), ValueRange{OC});
+        |                                                            ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:22:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/Dialect/Affine/IR/AffineOps.h:4:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/IR/Dialect.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/Support/LLVM.h:6:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/llvm/ADT/ArrayRef.h:43:13: warning: inline function 'llvm::ArrayRef<long>::ArrayRef' is not defined [-Wundefined-inline]
+     43 |   constexpr ArrayRef(std::initializer_list<T> Vec [[clang::lifetimebound]]);
+        |             ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:118:40: note: used here
+    118 |         rewriter, loc, VectorType::get({vecSize}, rewriter.getI1Type()),
+        |                                        ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:22:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/Dialect/Affine/IR/AffineOps.h:6:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/IR/OpDefinition.h:47:12: warning: inline function 'mlir::OpTrait::OneTypedResult<mlir::VectorType>::Impl<mlir::vector::CreateMaskOp>::operator TypedValue' is not defined [-Wundefined-inline]
+     47 |     inline operator ::mlir::TypedValue<ResultType>();
+        |            ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:117:24: note: used here
+    117 |     Value maskVector = vector::CreateMaskOp::create(
+        |                        ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:22:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/Dialect/Affine/IR/AffineOps.h:4:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/IR/Dialect.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/Support/LLVM.h:8:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/llvm/ADT/SmallVector.h:148:10: warning: inline function 'llvm::SmallVector<mlir::OpFoldResult, 3>::~SmallVector' is not defined [-Wundefined-inline]
+    148 |   inline ~SmallVector();
+        |          ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:128:24: note: used here
+    128 |         rewriter, loc, SmallVector<OpFoldResult, 3>({N, OH, OW}), ValueRange{},
+        |                        ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:22:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/Dialect/Affine/IR/AffineOps.h:6:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/IR/OpDefinition.h:47:12: warning: inline function 'mlir::OpTrait::OneTypedResult<mlir::VectorType>::Impl<mlir::vector::LoadOp>::operator TypedValue' is not defined [-Wundefined-inline]
+     47 |     inline operator ::mlir::TypedValue<ResultType>();
+        |            ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:141:21: note: used here
+    141 |                     vector::LoadOp::create(builder, loc, vecTy, output,
+        |                     ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:22:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/Dialect/Affine/IR/AffineOps.h:6:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/IR/OpDefinition.h:47:12: warning: inline function 'mlir::OpTrait::OneTypedResult<mlir::Type>::Impl<mlir::arith::MulIOp>::operator Value' is not defined [-Wundefined-inline]
+     47 |     inline operator ::mlir::TypedValue<ResultType>();
+        |            ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:174:46: note: used here
+    174 |                               Value mulVec = arith::MulIOp::create(builder, loc,
+        |                                              ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:22:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/Dialect/Affine/IR/AffineOps.h:6:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/IR/OpDefinition.h:47:12: warning: inline function 'mlir::OpTrait::OneTypedResult<mlir::Type>::Impl<mlir::arith::AddIOp>::operator Value' is not defined [-Wundefined-inline]
+     47 |     inline operator ::mlir::TypedValue<ResultType>();
+        |            ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:176:42: note: used here
+    176 |                               tVecNext = arith::AddIOp::create(
+        |                                          ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:22:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/Dialect/Affine/IR/AffineOps.h:6:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/IR/OpDefinition.h:47:12: warning: inline function 'mlir::OpTrait::OneTypedResult<mlir::VectorType>::Impl<mlir::vector::FMAOp>::operator TypedValue' is not defined [-Wundefined-inline]
+     47 |     inline operator ::mlir::TypedValue<ResultType>();
+        |            ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:179:42: note: used here
+    179 |                               tVecNext = vector::FMAOp::create(
+        |                                          ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:22:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/Dialect/Affine/IR/AffineOps.h:6:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/IR/OpDefinition.h:47:12: warning: inline function 'mlir::OpTrait::OneTypedResult<mlir::Type>::Impl<mlir::arith::CmpIOp>::operator Value' is not defined [-Wundefined-inline]
+     47 |     inline operator ::mlir::TypedValue<ResultType>();
+        |            ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:197:29: note: used here
+    197 |           Value condition = arith::CmpIOp::create(
+        |                             ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:22:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/Dialect/Affine/IR/AffineOps.h:6:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/IR/OpDefinition.h:47:12: warning: inline function 'mlir::OpTrait::OneTypedResult<mlir::VectorType>::Impl<mlir::vector::MaskedLoadOp>::operator TypedValue' is not defined [-Wundefined-inline]
+     47 |     inline operator ::mlir::TypedValue<ResultType>();
+        |            ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:202:30: note: used here
+    202 |                 Value tVec = vector::MaskedLoadOp::create(
+        |                              ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:22:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/Dialect/Affine/IR/AffineOps.h:4:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/IR/Dialect.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/Support/LLVM.h:6:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/llvm/ADT/ArrayRef.h:40:13: warning: inline function 'llvm::ArrayRef<mlir::OpFoldResult>::ArrayRef<llvm::SmallVector<mlir::OpFoldResult, 3>, void>' is not defined [-Wundefined-inline]
+     40 |   constexpr ArrayRef(const C &V);
+        |             ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:128:24: note: used here
+    128 |         rewriter, loc, SmallVector<OpFoldResult, 3>({N, OH, OW}), ValueRange{},
+        |                        ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:22:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/Dialect/Affine/IR/AffineOps.h:4:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/IR/Dialect.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/Support/LLVM.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/llvm/ADT/ArrayRef.h:6:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mini/Support/Standard.h:578:12: warning: inline function 'std::optional<mlir::ArrayAttr>::optional' is not defined [-Wundefined-inline]
+    578 |  constexpr optional(nullopt_t) noexcept;
+        |            ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:129:9: note: used here
+    129 |         std::nullopt, // No mapping specified in this example
+        |         ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:22:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/Dialect/Affine/IR/AffineOps.h:4:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/IR/Dialect.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/Support/LLVM.h:11:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/llvm/Support/LogicalResult.h:22:22: warning: inline function 'llvm::success' is not defined [-Wundefined-inline]
+     22 | inline LogicalResult success(bool IsSuccess = true);
+        |                      ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:264:12: note: used here
+    264 |     return success();
+        |            ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:22:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/Dialect/Affine/IR/AffineOps.h:4:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/IR/Dialect.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/Support/LLVM.h:9:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/llvm/ADT/StringRef.h:21:13: warning: inline function 'llvm::StringRef::StringRef' is not defined [-Wundefined-inline]
+     21 |   constexpr StringRef(const char *Str [[clang::lifetimebound]]);
+        |             ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:284:12: note: used here
+    284 |     return "depthwise-conv-nhwc-hwc-optimize";
+        |            ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:26:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/Pass/Pass.h:73:10: warning: function 'mlir::PassWrapper<(anonymous namespace)::DepthwiseConv2DNhwcHwcOptimizePass, mlir::OperationPass<mlir::ModuleOp>>::PassWrapper' has internal linkage but is not defined [-Wundefined-internal]
+     73 |   inline PassWrapper();
+        |          ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:290:3: note: used here
+    290 |   DepthwiseConv2DNhwcHwcOptimizePass(
+        |   ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:26:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/Pass/Pass.h:7:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/IR/DialectRegistry.h:29:15: warning: inline function 'mlir::DialectRegistry::insert<mlir::linalg::LinalgDialect, mlir::scf::SCFDialect, mlir::affine::AffineDialect, mlir::vector::VectorDialect>' is not defined [-Wundefined-inline]
+     29 |   inline void insert();
+        |               ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:299:14: note: used here
+    299 |     registry.insert<linalg::LinalgDialect, scf::SCFDialect,
+        |              ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:26:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/Pass/Pass.h:58:14: warning: inline function 'mlir::OperationPass<mlir::ModuleOp>::getOperation' is not defined [-Wundefined-inline]
+     58 |   inline OpT getOperation();
+        |              ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:310:21: note: used here
+    310 |   ModuleOp module = getOperation();
+        |                     ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:24:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/Dialect/Linalg/Transforms/Transforms.h:4:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/Transforms/DialectConversion.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/Rewrite/FrozenRewritePatternSet.h:6:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/IR/PatternMatch.h:167:10: warning: inline function 'mlir::RewritePatternSet::RewritePatternSet' is not defined [-Wundefined-inline]
+    167 |   inline RewritePatternSet(MLIRContext *context);
+        |          ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:319:21: note: used here
+    319 |   RewritePatternSet patterns(context);
+        |                     ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:24:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/Dialect/Linalg/Transforms/Transforms.h:4:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/Transforms/DialectConversion.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/Rewrite/FrozenRewritePatternSet.h:6:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/IR/PatternMatch.h:173:29: warning: function 'mlir::RewritePatternSet::add<(anonymous namespace)::DepthwiseConv2DNhwcHwcOptimizePattern, mlir::MLIRContext *&, mlir::Pass::Option<long> &, void>' has internal linkage but is not defined [-Wundefined-internal]
+    173 |   inline RewritePatternSet &add(ConstructorArg &&arg,
+        |                             ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:320:12: note: used here
+    320 |   patterns.add<DepthwiseConv2DNhwcHwcOptimizePattern>(context, vecSize);
+        |            ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:22:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/Dialect/Affine/IR/AffineOps.h:6:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/IR/OpDefinition.h:14:10: warning: inline function 'mlir::OpState::operator mlir::Operation *' is not defined [-Wundefined-inline]
+     14 |   inline operator Operation *() const;
+        |          ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:322:37: note: used here
+    322 |   if (failed(applyPartialConversion(module, target, std::move(patterns))))
+        |                                     ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:22:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/Dialect/Affine/IR/AffineOps.h:4:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/IR/Dialect.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/Support/LLVM.h:11:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/llvm/Support/LogicalResult.h:30:13: warning: inline function 'llvm::failed' is not defined [-Wundefined-inline]
+     30 | inline bool failed(LogicalResult Result);
+        |             ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:322:7: note: used here
+    322 |   if (failed(applyPartialConversion(module, target, std::move(patterns))))
+        |       ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:26:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/Pass/Pass.h:22:10: warning: function 'mlir::PassRegistration<(anonymous namespace)::DepthwiseConv2DNhwcHwcOptimizePass>::PassRegistration' has internal linkage but is not defined [-Wundefined-internal]
+     22 |   inline PassRegistration();
+        |          ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:329:3: note: used here
+    329 |   PassRegistration<DepthwiseConv2DNhwcHwcOptimizePass>();
+        |   ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:26:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/Pass/Pass.h:36:28: warning: inline function 'mlir::Pass::getArgument' is not defined [-Wundefined-inline]
+     36 |   inline virtual StringRef getArgument() const;
+        |                            ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:290:3: note: used here
+    290 |   DepthwiseConv2DNhwcHwcOptimizePass(
+        |   ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:26:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/Pass/Pass.h:37:28: warning: inline function 'mlir::Pass::getDescription' is not defined [-Wundefined-inline]
+     37 |   inline virtual StringRef getDescription() const;
+        |                            ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:290:3: note: used here
+    290 |   DepthwiseConv2DNhwcHwcOptimizePass(
+        |   ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:26:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/conversion-include/mlir/Pass/Pass.h:38:23: warning: inline function 'mlir::Pass::getDependentDialects' is not defined [-Wundefined-inline]
+     38 |   inline virtual void getDependentDialects(DialectRegistry &registry) const;
+        |                       ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:290:3: note: used here
+    290 |   DepthwiseConv2DNhwcHwcOptimizePass(
+        |   ^
+  35 warnings generated.
+[fclang] /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/depthwise-conv/baseline_mini.cpp:37: Failure: 
+  Unknown aggregate type anonymous_namespace_2::DepthwiseConv2DNhwcHwcOptimizePattern
+[kernel] Current source was: <unknown location>
+  The full backtrace is:
+  Raised at Frama_c_kernel__Log.finally_raise in file "src/libraries/utils/log.ml" (inlined), line 529, characters 24-31
+  Called from Frama_c_kernel__Log.Register.fatal in file "src/libraries/utils/log.ml", line 1160, characters 17-55
+  Called from Frama_c_kernel__Log.logwithfinal.(fun) in file "src/libraries/utils/log.ml", line 522, characters 9-23
+  Re-raised at Frama_c_kernel__Log.logwithfinal.(fun) in file "src/libraries/utils/log.ml", line 525, characters 9-16
+  Called from Clang__Convert_env.is_extern_c_aggregate in file "convert_env.ml" (inlined), line 639, characters 43-71
+  Called from Clang__Convert.convert_class_name in file "convert.ml", line 584, characters 5-50
+  Called from Clang__Convert.convert_base_type in file "convert.ml", line 644, characters 15-41
+  Called from Clang__Convert.convert_decl in file "convert.ml", line 769, characters 4-59
+  Called from Clang__Convert_env.env_map.do_one in file "convert_env.ml", line 815, characters 41-48
+  Called from Stdlib__List.fold_left in file "list.ml", line 121, characters 24-34
+  Called from Clang__Convert_env.env_map in file "convert_env.ml", line 816, characters 17-49
+  Called from Clang__Convert.make_prototype in file "convert.ml", line 784, characters 6-41
+  Called from Clang__Convert.convert_class_component in file "convert.ml", line 3556, characters 6-76
+  Called from Stdlib__Fun.protect in file "fun.ml", line 33, characters 8-15
+  Re-raised at Stdlib__Fun.protect in file "fun.ml", line 38, characters 6-52
+  Called from Stdlib__List.fold_left in file "list.ml", line 121, characters 24-34
+  Called from Clang__Convert.convert_class in file "convert.ml", line 3714, characters 19-57
+  Called from Clang__Convert.convert_global in file "convert.ml", line 3933, characters 14-70
+  Called from Stdlib__Fun.protect in file "fun.ml", line 33, characters 8-15
+  Re-raised at Stdlib__Fun.protect in file "fun.ml", line 38, characters 6-52
+  Called from Stdlib__List.fold_left in file "list.ml", line 121, characters 24-34
+  Called from Clang__Convert.convert_global in file "convert.ml", line 4021, characters 18-60
+  Called from Stdlib__Fun.protect in file "fun.ml", line 33, characters 8-15
+  Re-raised at Stdlib__Fun.protect in file "fun.ml", line 38, characters 6-52
+  Called from Stdlib__List.fold_left in file "list.ml", line 121, characters 24-34
+  Called from Clang__Convert.convert_ast in file "convert.ml", line 4054, characters 12-76
+  Called from Clang__Frama_Clang_register.parse_cxx in file "frama_Clang_register.ml", line 221, characters 13-36
+  Called from Frama_c_kernel__File.to_cil_cabs in file "src/kernel_services/ast_queries/file.ml", line 666, characters 12-36
+  Called from Frama_c_kernel__File.files_to_cabs_cil.(fun) in file "src/kernel_services/ast_queries/file.ml", line 743, characters 46-72
+  Called from Stdlib__List.fold_left in file "list.ml", line 121, characters 24-34
+  Called from Frama_c_kernel__File.files_to_cabs_cil in file "src/kernel_services/ast_queries/file.ml", line 743, characters 17-89
+  Called from Frama_c_kernel__File.prepare_from_c_files in file "src/kernel_services/ast_queries/file.ml", line 1863, characters 24-60
+  Called from Frama_c_kernel__File.init_from_cmdline in file "src/kernel_services/ast_queries/file.ml", line 1941, characters 4-27
+  Called from Frama_c_kernel__Ast.force_compute in file "src/kernel_services/ast_data/ast.ml", line 98, characters 2-28
+  Called from Frama_c_kernel__Ast.compute in file "src/kernel_services/ast_data/ast.ml", line 106, characters 53-71
+  Called from Frama_c_kernel__Boot.play_analysis in file "src/kernel_internals/runtime/boot.ml", line 17, characters 6-20
+  Called from Frama_c_kernel__Cmdline.play_in_toplevel_one_shot in file "src/kernel_services/cmdline_parameters/cmdline.ml", line 951, characters 2-9
+  Called from Frama_c_kernel__Cmdline.play_in_toplevel in file "src/kernel_services/cmdline_parameters/cmdline.ml", line 1005, characters 18-64
+  Called from Frama_c_kernel__Cmdline.catch_toplevel_run in file "src/kernel_services/cmdline_parameters/cmdline.ml", line 192, characters 4-8
+  
+  Plug-in fclang aborted: internal error.
+  Please report as 'crash' at https://git.frama-c.com/pub/frama-c/issues
+  Your Frama-C version is 33.0 (Arsenic).
+  Note that a version and a backtrace alone often do not contain enough
+  information to understand the bug. Guidelines for reporting bugs are at:
+  https://git.frama-c.com/pub/frama-c/-/wikis/Guidelines-for-reporting-bugs
+
+--- stderr ---

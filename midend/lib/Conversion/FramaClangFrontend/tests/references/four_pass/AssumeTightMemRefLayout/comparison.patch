@@ -1,0 +1,122 @@
+--- AssumeTightMemRefLayout/original.cpp
++++ AssumeTightMemRefLayout/rewritten.cpp
+@@ -17,6 +17,11 @@
+ // This file implements a helper pass that tightens memref values with a
+ // trailing dynamic stride to an explicitly unit-stride layout by reinterpreting
+ // the underlying buffer.
++//
++// NOTE: this copy is syntactically adapted for the Frama-Clang front-end.
++//       Range-based for loops and structured bindings (unsupported by
++//       Frama-Clang 0.0.20) are desugared into equivalent indexed loops.
++//       The semantics of the pass are unchanged.
+ //
+ //===----------------------------------------------------------------------===//
+ 
+@@ -31,7 +36,7 @@
+ 
+ using namespace mlir;
+ 
+-namespace {
++namespace assume_tight_detail {
+ 
+ /// Returns true if `type` is a memref whose layout uses a trailing dynamic
+ /// stride that we want to tighten to 1.
+@@ -68,25 +73,42 @@
+     SmallVector<Value> worklist;
+ 
+     // Collect block arguments (including entry block) first.
+-    for (Block &block : func)
+-      for (BlockArgument arg : block.getArguments())
++    Region &funcBody = func.getBody();
++    for (Block *blockIt = funcBody.begin(); blockIt != funcBody.end();
++         ++blockIt) {
++      Block &block = *blockIt;
++      llvm::ArrayRef<BlockArgument> args = block.getArguments();
++      for (size_t argIndex = 0; argIndex < args.size(); ++argIndex) {
++        BlockArgument arg = args[argIndex];
+         if (isa<MemRefType>(arg.getType()))
+           worklist.push_back(arg);
+-
+-    // Collect op results.
+-    func.walk([&](Operation *op) {
+-      for (Value result : op->getResults())
++      }
++    }
++
++    // Collect op results.  Frama-Clang cannot capture a class-typed local by
++    // reference, so the worklist is reached through an explicit pointer.
++    SmallVector<Value> *worklistPtr = &worklist;
++    func.walk([worklistPtr](Operation *op) {
++      ResultRange results = op->getResults();
++      for (size_t resultIndex = 0; resultIndex < results.size(); ++resultIndex) {
++        Value result = results[resultIndex];
+         if (isa<MemRefType>(result.getType()))
+-          worklist.push_back(result);
++          worklistPtr->push_back(result);
++      }
+     });
+ 
+-    for (Value value : worklist) {
++    for (size_t valueIndex = 0; valueIndex < worklist.size(); ++valueIndex) {
++      Value value = worklist[valueIndex];
+       auto type = dyn_cast<MemRefType>(value.getType());
+       if (!type || !hasLooseTrailingStride(type))
+         continue;
+ 
+       SmallVector<OpOperand *> toUpdate;
+-      for (OpOperand &use : value.getUses()) {
++      use_range uses = value.getUses();
++            use_range::iterator useIt = uses.begin();
++            use_range::iterator useItEnd = uses.end();
++       for (; useIt != useItEnd; ++useIt) {
++        OpOperand &use = *useIt;
+         Operation *owner = use.getOwner();
+         if (isa<func::ReturnOp>(owner))
+           continue;
+@@ -115,7 +137,9 @@
+       SmallVector<OpFoldResult> sizes;
+       sizes.reserve(type.getRank());
+       auto metadataSizes = metadata.getSizes();
+-      for (auto [idx, dim] : llvm::enumerate(type.getShape())) {
++      ArrayRef<int64_t> shape = type.getShape();
++      for (size_t idx = 0; idx < shape.size(); ++idx) {
++        int64_t dim = shape[idx];
+         if (ShapedType::isDynamic(dim))
+           sizes.push_back(metadataSizes[idx]);
+         else
+@@ -128,7 +152,8 @@
+       SmallVector<OpFoldResult> stridesOfr;
+       stridesOfr.reserve(type.getRank());
+       auto metadataStrides = metadata.getStrides();
+-      for (auto [idx, stride] : llvm::enumerate(strides)) {
++      for (size_t idx = 0; idx < strides.size(); ++idx) {
++        int64_t stride = strides[idx];
+         if (idx == static_cast<int64_t>(type.getRank()) - 1) {
+           stridesOfr.push_back(builder.getIndexAttr(1));
+           continue;
+@@ -157,19 +182,22 @@
+           builder, value.getLoc(), tightenedType, metadata.getBaseBuffer(),
+           offset, sizes, stridesOfr);
+ 
+-      for (OpOperand *operand : toUpdate)
++      for (size_t operandIndex = 0; operandIndex < toUpdate.size();
++           ++operandIndex) {
++        OpOperand *operand = toUpdate[operandIndex];
+         operand->set(reinterpret);
++      }
+     }
+   }
+ };
+ 
+-} // namespace
++} // namespace assume_tight_detail
+ 
+ namespace mlir {
+ namespace buddy {
+ 
+ void registerAssumeTightMemRefLayoutPass() {
+-  PassRegistration<AssumeTightMemRefLayoutPass>();
++  PassRegistration<assume_tight_detail::AssumeTightMemRefLayoutPass>();
+ }
+ 
+ } // namespace buddy

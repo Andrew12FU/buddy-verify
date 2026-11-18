@@ -1,0 +1,611 @@
+{
+  "schema_version": 1,
+  "pass": "eliminate-copy",
+  "run_state": "converted",
+  "source_rewrites": {
+    "applied": true,
+    "input": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/EliminateMemRefCopy/EliminateMemRefCopy.cpp",
+    "original_snapshot": {
+      "path": "original.cpp",
+      "sha256": "29f6387c245e8293abba517f8728cda54f1fc658a8385b36cb09f87446f91ec1"
+    },
+    "rewritten_source": {
+      "path": "rewritten.cpp",
+      "sha256": "e01ead2709e5cc049be73f5daf41f12fe98d9b354e631de8cde6f8c9db86ec04"
+    },
+    "report": {
+      "path": "rewrite.json",
+      "sha256": "74710df3f649bac8411f6e9bf2b4b6eeb5f7da061912e4487b67bbde89e0e782"
+    },
+    "offset_basis": "UTF-8 bytes in the input of each numbered AST round",
+    "rounds": [
+      {
+        "rule": "namespace",
+        "input_sha256": "29f6387c245e8293abba517f8728cda54f1fc658a8385b36cb09f87446f91ec1",
+        "output_sha256": "682ae0072379544c3aa7c441126dbdadf687a54555521e4997bbe89c68883efd",
+        "edit_count": 2
+      },
+      {
+        "rule": "constructor",
+        "input_sha256": "682ae0072379544c3aa7c441126dbdadf687a54555521e4997bbe89c68883efd",
+        "output_sha256": "229f0e8e51c6277f0276fd5fac0bd96b58b0cee9cfb49c8dcbf38c5965b4970b",
+        "edit_count": 1
+      },
+      {
+        "rule": "range-for",
+        "input_sha256": "229f0e8e51c6277f0276fd5fac0bd96b58b0cee9cfb49c8dcbf38c5965b4970b",
+        "output_sha256": "47a346959b7d7bf7c9329f3afb5046c70a646ca8231d0bec36638bf8ad9256e6",
+        "edit_count": 5
+      },
+      {
+        "rule": "if-condition",
+        "input_sha256": "47a346959b7d7bf7c9329f3afb5046c70a646ca8231d0bec36638bf8ad9256e6",
+        "output_sha256": "0ad37c5abad37f7dc9b0eb1a6f17bb1e6018931be31dfb169bd41fcdc7477f75",
+        "edit_count": 5
+      },
+      {
+        "rule": "if-condition",
+        "input_sha256": "0ad37c5abad37f7dc9b0eb1a6f17bb1e6018931be31dfb169bd41fcdc7477f75",
+        "output_sha256": "cdc8376472ae895595a833612e4cd20e1476beb7bd4573ca0b07e0c34ae6e74a",
+        "edit_count": 1
+      },
+      {
+        "rule": "if-condition",
+        "input_sha256": "cdc8376472ae895595a833612e4cd20e1476beb7bd4573ca0b07e0c34ae6e74a",
+        "output_sha256": "cdc8376472ae895595a833612e4cd20e1476beb7bd4573ca0b07e0c34ae6e74a",
+        "edit_count": 0
+      },
+      {
+        "rule": "guard",
+        "input_sha256": "cdc8376472ae895595a833612e4cd20e1476beb7bd4573ca0b07e0c34ae6e74a",
+        "output_sha256": "e01ead2709e5cc049be73f5daf41f12fe98d9b354e631de8cde6f8c9db86ec04",
+        "edit_count": 1
+      }
+    ],
+    "edit_count": 15,
+    "rule_counts": {
+      "namespace": 1,
+      "namespace-reference": 1,
+      "constructor": 1,
+      "range-for": 5,
+      "if-condition": 6,
+      "guard": 1
+    },
+    "edits": [
+      {
+        "after": "namespace EliminateMemRefCopy_anonymousNamespace_01",
+        "before": "namespace",
+        "column": 1,
+        "dependency_change": "Changes internal linkage; single-TU compatibility workaround",
+        "insertion_order": -1,
+        "length": 9,
+        "line": 43,
+        "offset": 1669,
+        "reason": "Name an anonymous namespace; reopened declarations share one name",
+        "rule": "namespace",
+        "round": 0,
+        "input_sha256": "29f6387c245e8293abba517f8728cda54f1fc658a8385b36cb09f87446f91ec1"
+      },
+      {
+        "after": "EliminateMemRefCopy_anonymousNamespace_01::EliminateMemRefCopyPass",
+        "before": "EliminateMemRefCopyPass",
+        "column": 20,
+        "dependency_change": "none",
+        "insertion_order": -1,
+        "length": 23,
+        "line": 259,
+        "offset": 9567,
+        "reason": "Preserve the bound class reference outside the renamed namespace",
+        "rule": "namespace-reference",
+        "round": 0,
+        "input_sha256": "29f6387c245e8293abba517f8728cda54f1fc658a8385b36cb09f87446f91ec1"
+      },
+      {
+        "after": "\n  explicit EliminateMemRefCopyPattern(mlir::MLIRContext *context)\n      : mlir::OpRewritePattern<mlir::memref::CopyOp>(context) {}",
+        "before": "",
+        "column": 60,
+        "dependency_change": "No new external interface or pattern behavior",
+        "insertion_order": 10,
+        "length": 0,
+        "line": 73,
+        "offset": 2722,
+        "reason": "Explicitly forward the used context overload; retain all inherited overloads",
+        "rule": "constructor",
+        "round": 1,
+        "input_sha256": "682ae0072379544c3aa7c441126dbdadf687a54555521e4997bbe89c68883efd"
+      },
+      {
+        "after": "{\n      auto &&rangeValues = allocOp->getUses();\n      auto rangeIt = rangeValues.begin();\n      auto rangeEnd = rangeValues.end();\n      for (; rangeIt != rangeEnd; ++rangeIt) {\n        OpOperand & use = *rangeIt;\n        {\n      // Skip the copy operation itself\n      if (use.getOwner() == copyOp.getOperation())\n        continue;\n      // The allocation will be removed, so its dealloc should be removed too.\n      // Retargeting it to a function argument alias is invalid.\n      if (auto deallocOp = dyn_cast<memref::DeallocOp>(use.getOwner())) {\n        deallocs.push_back(deallocOp);\n        continue;\n      }\n      uses.push_back(&use);\n    }\n      }\n    }",
+        "before": "for (OpOperand &use : allocOp->getUses()) {\n      // Skip the copy operation itself\n      if (use.getOwner() == copyOp.getOperation())\n        continue;\n      // The allocation will be removed, so its dealloc should be removed too.\n      // Retargeting it to a function argument alias is invalid.\n      if (auto deallocOp = dyn_cast<memref::DeallocOp>(use.getOwner())) {\n        deallocs.push_back(deallocOp);\n        continue;\n      }\n      uses.push_back(&use);\n    }",
+        "column": 5,
+        "dependency_change": "none",
+        "insertion_order": -1,
+        "length": 469,
+        "line": 109,
+        "offset": 4057,
+        "reason": "Desugar 1 range loops; preserve one-time evaluation, lifetime and early increment",
+        "rule": "range-for",
+        "round": 2,
+        "input_sha256": "229f0e8e51c6277f0276fd5fac0bd96b58b0cee9cfb49c8dcbf38c5965b4970b"
+      },
+      {
+        "after": "{\n            auto rangeValues1 = sourceType.getShape();\n            size_t rangeSize = rangeValues1.size();\n            for (size_t idx = 0; idx < rangeSize; ++idx) {\n              auto &&dim = rangeValues1[idx];\n              {\n            if (ShapedType::isDynamic(dim))\n              sizes.push_back(metadataSizes[idx]);\n            else\n              sizes.push_back(builder.getIndexAttr(dim));\n          }\n            }\n          }",
+        "before": "for (auto [idx, dim] : llvm::enumerate(sourceType.getShape())) {\n            if (ShapedType::isDynamic(dim))\n              sizes.push_back(metadataSizes[idx]);\n            else\n              sizes.push_back(builder.getIndexAttr(dim));\n          }",
+        "column": 11,
+        "dependency_change": "none",
+        "insertion_order": -1,
+        "length": 246,
+        "line": 152,
+        "offset": 5811,
+        "reason": "Desugar 1 range loops; preserve one-time evaluation, lifetime and early increment",
+        "rule": "range-for",
+        "round": 2,
+        "input_sha256": "229f0e8e51c6277f0276fd5fac0bd96b58b0cee9cfb49c8dcbf38c5965b4970b"
+      },
+      {
+        "after": "{\n            auto rangeValues2 = strides;\n            size_t rangeSize1 = rangeValues2.size();\n            for (size_t idx = 0; idx < rangeSize1; ++idx) {\n              auto &&stride = rangeValues2[idx];\n              {\n            if (static_cast<int64_t>(idx) == rank - 1) {\n              // Last stride: set to 1\n              stridesOfr.push_back(builder.getIndexAttr(1));\n              continue;\n            }\n            // Preserve original stride\n            if (ShapedType::isDynamic(stride))\n              stridesOfr.push_back(metadataStrides[idx]);\n            else\n              stridesOfr.push_back(builder.getIndexAttr(stride));\n          }\n            }\n          }",
+        "before": "for (auto [idx, stride] : llvm::enumerate(strides)) {\n            if (static_cast<int64_t>(idx) == rank - 1) {\n              // Last stride: set to 1\n              stridesOfr.push_back(builder.getIndexAttr(1));\n              continue;\n            }\n            // Preserve original stride\n            if (ShapedType::isDynamic(stride))\n              stridesOfr.push_back(metadataStrides[idx]);\n            else\n              stridesOfr.push_back(builder.getIndexAttr(stride));\n          }",
+        "column": 11,
+        "dependency_change": "none",
+        "insertion_order": -1,
+        "length": 488,
+        "line": 163,
+        "offset": 6289,
+        "reason": "Desugar 1 range loops; preserve one-time evaluation, lifetime and early increment",
+        "rule": "range-for",
+        "round": 2,
+        "input_sha256": "229f0e8e51c6277f0276fd5fac0bd96b58b0cee9cfb49c8dcbf38c5965b4970b"
+      },
+      {
+        "after": "{\n      auto &&rangeValues3 = uses;\n      auto rangeIt3 = rangeValues3.begin();\n      auto rangeEnd3 = rangeValues3.end();\n      for (; rangeIt3 != rangeEnd3; ++rangeIt3) {\n        OpOperand * use = *rangeIt3;\n        {\n      use->set(replacementValue);\n    }\n      }\n    }",
+        "before": "for (OpOperand *use : uses) {\n      use->set(replacementValue);\n    }",
+        "column": 5,
+        "dependency_change": "none",
+        "insertion_order": -1,
+        "length": 69,
+        "line": 212,
+        "offset": 8339,
+        "reason": "Desugar 1 range loops; preserve one-time evaluation, lifetime and early increment",
+        "rule": "range-for",
+        "round": 2,
+        "input_sha256": "229f0e8e51c6277f0276fd5fac0bd96b58b0cee9cfb49c8dcbf38c5965b4970b"
+      },
+      {
+        "after": "{\n      auto &&rangeValues4 = deallocs;\n      auto rangeIt4 = rangeValues4.begin();\n      auto rangeEnd4 = rangeValues4.end();\n      for (; rangeIt4 != rangeEnd4; ++rangeIt4) {\n        memref::DeallocOp deallocOp = *rangeIt4;\n        rewriter.eraseOp(deallocOp);\n      }\n    }",
+        "before": "for (memref::DeallocOp deallocOp : deallocs)\n      rewriter.eraseOp(deallocOp);",
+        "column": 5,
+        "dependency_change": "none",
+        "insertion_order": -1,
+        "length": 79,
+        "line": 219,
+        "offset": 8477,
+        "reason": "Desugar 1 range loops; preserve one-time evaluation, lifetime and early increment",
+        "rule": "range-for",
+        "round": 2,
+        "input_sha256": "229f0e8e51c6277f0276fd5fac0bd96b58b0cee9cfb49c8dcbf38c5965b4970b"
+      },
+      {
+        "after": "{\n    auto castOp = value.getDefiningOp<memref::CastOp>();\n    if (static_cast<bool>(castOp)) return isAliasOfFunctionArgument(castOp.getSource());\n  }",
+        "before": "if (auto castOp = value.getDefiningOp<memref::CastOp>())\n    return isAliasOfFunctionArgument(castOp.getSource());",
+        "column": 3,
+        "dependency_change": "Explicit contextual bool; no new library interface",
+        "insertion_order": -1,
+        "length": 114,
+        "line": 56,
+        "offset": 2013,
+        "reason": "Preserve conditional construction, else priority and body scopes",
+        "rule": "if-condition",
+        "round": 3,
+        "input_sha256": "47a346959b7d7bf7c9329f3afb5046c70a646ca8231d0bec36638bf8ad9256e6"
+      },
+      {
+        "after": "{\n    auto reinterpretOp = value.getDefiningOp<memref::ReinterpretCastOp>();\n    if (static_cast<bool>(reinterpretOp)) return isAliasOfFunctionArgument(reinterpretOp.getSource());\n  }",
+        "before": "if (auto reinterpretOp = value.getDefiningOp<memref::ReinterpretCastOp>())\n    return isAliasOfFunctionArgument(reinterpretOp.getSource());",
+        "column": 3,
+        "dependency_change": "Explicit contextual bool; no new library interface",
+        "insertion_order": -1,
+        "length": 139,
+        "line": 59,
+        "offset": 2131,
+        "reason": "Preserve conditional construction, else priority and body scopes",
+        "rule": "if-condition",
+        "round": 3,
+        "input_sha256": "47a346959b7d7bf7c9329f3afb5046c70a646ca8231d0bec36638bf8ad9256e6"
+      },
+      {
+        "after": "{\n    auto result = dyn_cast<OpResult>(value);\n    if (static_cast<bool>(result)) {\n      if (auto metadataOp =\n              dyn_cast<memref::ExtractStridedMetadataOp>(result.getOwner()))\n        return isAliasOfFunctionArgument(metadataOp.getSource());\n    }\n  }",
+        "before": "if (auto result = dyn_cast<OpResult>(value)) {\n    if (auto metadataOp =\n            dyn_cast<memref::ExtractStridedMetadataOp>(result.getOwner()))\n      return isAliasOfFunctionArgument(metadataOp.getSource());\n  }",
+        "column": 3,
+        "dependency_change": "Explicit contextual bool; no new library interface",
+        "insertion_order": -1,
+        "length": 215,
+        "line": 62,
+        "offset": 2274,
+        "reason": "Preserve conditional construction, else priority and body scopes",
+        "rule": "if-condition",
+        "round": 3,
+        "input_sha256": "47a346959b7d7bf7c9329f3afb5046c70a646ca8231d0bec36638bf8ad9256e6"
+      },
+      {
+        "after": "{\n        auto deallocOp = dyn_cast<memref::DeallocOp>(use.getOwner());\n        if (static_cast<bool>(deallocOp)) {\n          deallocs.push_back(deallocOp);\n          continue;\n        }\n      }",
+        "before": "if (auto deallocOp = dyn_cast<memref::DeallocOp>(use.getOwner())) {\n        deallocs.push_back(deallocOp);\n        continue;\n      }",
+        "column": 7,
+        "dependency_change": "Explicit contextual bool; no new library interface",
+        "insertion_order": -1,
+        "length": 132,
+        "line": 121,
+        "offset": 4541,
+        "reason": "Preserve conditional construction, else priority and body scopes",
+        "rule": "if-condition",
+        "round": 3,
+        "input_sha256": "47a346959b7d7bf7c9329f3afb5046c70a646ca8231d0bec36638bf8ad9256e6"
+      },
+      {
+        "after": "{\n      auto stridedLayout =\n            dyn_cast<StridedLayoutAttr>(sourceType.getLayout());\n      if (static_cast<bool>(stridedLayout)) {\n        ArrayRef<int64_t> strides = stridedLayout.getStrides();\n        if (!strides.empty()) {\n          // Check if the most minor dimension (last stride) is not 1\n          int64_t lastStride = strides.back();\n          if (ShapedType::isDynamic(lastStride) || lastStride != 1) {\n            // Use ExtractStridedMetadataOp to get actual stride values\n            // This ensures we preserve the correct strides from the source\n            Location loc = copyOp.getLoc();\n            OpBuilder builder(rewriter);\n            builder.setInsertionPoint(copyOp);\n\n            // Extract metadata to get actual stride values\n            auto metadata =\n                memref::ExtractStridedMetadataOp::create(builder, loc, source);\n\n            // Get the rank\n            int64_t rank = sourceType.getRank();\n\n            // Build sizes from shape\n            SmallVector<OpFoldResult> sizes;\n            sizes.reserve(rank);\n            auto metadataSizes = metadata.getSizes();\n            {\n              auto rangeValues1 = sourceType.getShape();\n              size_t rangeSize = rangeValues1.size();\n              for (size_t idx = 0; idx < rangeSize; ++idx) {\n                auto &&dim = rangeValues1[idx];\n                {\n              if (ShapedType::isDynamic(dim))\n                sizes.push_back(metadataSizes[idx]);\n              else\n                sizes.push_back(builder.getIndexAttr(dim));\n            }\n              }\n            }\n\n            // Build strides: preserve all strides except the last one (set to 1)\n            SmallVector<OpFoldResult> stridesOfr;\n            stridesOfr.reserve(rank);\n            auto metadataStrides = metadata.getStrides();\n            {\n              auto rangeValues2 = strides;\n              size_t rangeSize1 = rangeValues2.size();\n              for (size_t idx = 0; idx < rangeSize1; ++idx) {\n                auto &&stride = rangeValues2[idx];\n                {\n              if (static_cast<int64_t>(idx) == rank - 1) {\n                // Last stride: set to 1\n                stridesOfr.push_back(builder.getIndexAttr(1));\n                continue;\n              }\n              // Preserve original stride\n              if (ShapedType::isDynamic(stride))\n                stridesOfr.push_back(metadataStrides[idx]);\n              else\n                stridesOfr.push_back(builder.getIndexAttr(stride));\n            }\n              }\n            }\n\n            // Get offset\n            OpFoldResult offset;\n            if (ShapedType::isDynamic(stridedLayout.getOffset()))\n              offset = metadata.getOffset();\n            else\n              offset = builder.getIndexAttr(stridedLayout.getOffset());\n\n            // Create tightened layout with last stride = 1\n            SmallVector<int64_t> tightenedStrides(strides.begin(), strides.end());\n            tightenedStrides.back() = 1;\n            auto tightenedLayout = StridedLayoutAttr::get(\n                sourceType.getContext(), stridedLayout.getOffset(),\n                tightenedStrides);\n            auto tightenedType = MemRefType::get(\n                sourceType.getShape(), sourceType.getElementType(),\n                tightenedLayout, sourceType.getMemorySpace());\n\n            // Create reinterpret_cast with tightened layout\n            Value tightened = memref::ReinterpretCastOp::create(\n                builder, loc, tightenedType, metadata.getBaseBuffer(), offset,\n                sizes, stridesOfr);\n\n            // Then cast to static layout type (no layout information)\n            // This ensures compatibility with function signatures\n            MemRefType finalType = MemRefType::get(\n                sourceType.getShape(), sourceType.getElementType(),\n                MemRefLayoutAttrInterface(), // No layout = static layout\n                sourceType.getMemorySpace());\n\n            replacementValue =\n                memref::CastOp::create(builder, loc, finalType, tightened);\n          }\n        }\n      }\n    }",
+        "before": "if (auto stridedLayout =\n            dyn_cast<StridedLayoutAttr>(sourceType.getLayout())) {\n      ArrayRef<int64_t> strides = stridedLayout.getStrides();\n      if (!strides.empty()) {\n        // Check if the most minor dimension (last stride) is not 1\n        int64_t lastStride = strides.back();\n        if (ShapedType::isDynamic(lastStride) || lastStride != 1) {\n          // Use ExtractStridedMetadataOp to get actual stride values\n          // This ensures we preserve the correct strides from the source\n          Location loc = copyOp.getLoc();\n          OpBuilder builder(rewriter);\n          builder.setInsertionPoint(copyOp);\n\n          // Extract metadata to get actual stride values\n          auto metadata =\n              memref::ExtractStridedMetadataOp::create(builder, loc, source);\n\n          // Get the rank\n          int64_t rank = sourceType.getRank();\n\n          // Build sizes from shape\n          SmallVector<OpFoldResult> sizes;\n          sizes.reserve(rank);\n          auto metadataSizes = metadata.getSizes();\n          {\n            auto rangeValues1 = sourceType.getShape();\n            size_t rangeSize = rangeValues1.size();\n            for (size_t idx = 0; idx < rangeSize; ++idx) {\n              auto &&dim = rangeValues1[idx];\n              {\n            if (ShapedType::isDynamic(dim))\n              sizes.push_back(metadataSizes[idx]);\n            else\n              sizes.push_back(builder.getIndexAttr(dim));\n          }\n            }\n          }\n\n          // Build strides: preserve all strides except the last one (set to 1)\n          SmallVector<OpFoldResult> stridesOfr;\n          stridesOfr.reserve(rank);\n          auto metadataStrides = metadata.getStrides();\n          {\n            auto rangeValues2 = strides;\n            size_t rangeSize1 = rangeValues2.size();\n            for (size_t idx = 0; idx < rangeSize1; ++idx) {\n              auto &&stride = rangeValues2[idx];\n              {\n            if (static_cast<int64_t>(idx) == rank - 1) {\n              // Last stride: set to 1\n              stridesOfr.push_back(builder.getIndexAttr(1));\n              continue;\n            }\n            // Preserve original stride\n            if (ShapedType::isDynamic(stride))\n              stridesOfr.push_back(metadataStrides[idx]);\n            else\n              stridesOfr.push_back(builder.getIndexAttr(stride));\n          }\n            }\n          }\n\n          // Get offset\n          OpFoldResult offset;\n          if (ShapedType::isDynamic(stridedLayout.getOffset()))\n            offset = metadata.getOffset();\n          else\n            offset = builder.getIndexAttr(stridedLayout.getOffset());\n\n          // Create tightened layout with last stride = 1\n          SmallVector<int64_t> tightenedStrides(strides.begin(), strides.end());\n          tightenedStrides.back() = 1;\n          auto tightenedLayout = StridedLayoutAttr::get(\n              sourceType.getContext(), stridedLayout.getOffset(),\n              tightenedStrides);\n          auto tightenedType = MemRefType::get(\n              sourceType.getShape(), sourceType.getElementType(),\n              tightenedLayout, sourceType.getMemorySpace());\n\n          // Create reinterpret_cast with tightened layout\n          Value tightened = memref::ReinterpretCastOp::create(\n              builder, loc, tightenedType, metadata.getBaseBuffer(), offset,\n              sizes, stridesOfr);\n\n          // Then cast to static layout type (no layout information)\n          // This ensures compatibility with function signatures\n          MemRefType finalType = MemRefType::get(\n              sourceType.getShape(), sourceType.getElementType(),\n              MemRefLayoutAttrInterface(), // No layout = static layout\n              sourceType.getMemorySpace());\n\n          replacementValue =\n              memref::CastOp::create(builder, loc, finalType, tightened);\n        }\n      }\n    }",
+        "column": 5,
+        "dependency_change": "Explicit contextual bool; no new library interface",
+        "insertion_order": -1,
+        "length": 3882,
+        "line": 136,
+        "offset": 4961,
+        "reason": "Preserve conditional construction, else priority and body scopes",
+        "rule": "if-condition",
+        "round": 3,
+        "input_sha256": "47a346959b7d7bf7c9329f3afb5046c70a646ca8231d0bec36638bf8ad9256e6"
+      },
+      {
+        "after": "{\n        auto metadataOp =\n              dyn_cast<memref::ExtractStridedMetadataOp>(result.getOwner());\n        if (static_cast<bool>(metadataOp)) return isAliasOfFunctionArgument(metadataOp.getSource());\n      }",
+        "before": "if (auto metadataOp =\n              dyn_cast<memref::ExtractStridedMetadataOp>(result.getOwner()))\n        return isAliasOfFunctionArgument(metadataOp.getSource());",
+        "column": 7,
+        "dependency_change": "Explicit contextual bool; no new library interface",
+        "insertion_order": -1,
+        "length": 164,
+        "line": 69,
+        "offset": 2445,
+        "reason": "Preserve conditional construction, else priority and body scopes",
+        "rule": "if-condition",
+        "round": 4,
+        "input_sha256": "0ad37c5abad37f7dc9b0eb1a6f17bb1e6018931be31dfb169bd41fcdc7477f75"
+      },
+      {
+        "after": "{\n      bool guardFailed = (!sourceType || !destType);\n      if (guardFailed)\n        return failure();\n    }",
+        "before": "if (!sourceType || !destType)\n      return failure();",
+        "column": 5,
+        "dependency_change": "One fresh built-in bool; no new external interface dependency",
+        "insertion_order": -1,
+        "length": 53,
+        "line": 104,
+        "offset": 3793,
+        "reason": "Bind the original short-circuit condition in a block-local boolean so the conversion retains the guard scope",
+        "rule": "guard",
+        "round": 6,
+        "input_sha256": "cdc8376472ae895595a833612e4cd20e1476beb7bd4573ca0b07e0c34ae6e74a"
+      }
+    ]
+  },
+  "header_rewrites": {
+    "applied": true,
+    "report": {
+      "path": "header-rewrite.json",
+      "sha256": "95335d4a663f7f5c25275979cece752ea41e2ed79d330c7748cf369095c212c3"
+    },
+    "patch": {
+      "path": "header-rewrite.patch",
+      "sha256": "668e7db01e3d4816ddf778d857e157fc27d497249b9068f89073288b36212169"
+    },
+    "input_root": "include",
+    "conversion_root": "conversion-include",
+    "offset_basis": "UTF-8 bytes after preceding edits in sequence order",
+    "edit_count": 17,
+    "rule_counts": {
+      "typed-attr-interface-specialization": 1,
+      "bounded-interface-specialization": 8,
+      "bounded-interface-constructor-expansion": 1,
+      "op-fold-result-constructor-expansion": 1,
+      "memref-storage-base-instantiation": 1,
+      "typed-attr-constructor-expansion": 1,
+      "indexed-range-concrete-expansion": 2,
+      "nested-use-iterator-relocation": 2
+    },
+    "changed_headers": [
+      "mlir/IR/Attributes.h",
+      "mlir/IR/BuiltinAttributes.h",
+      "mlir/IR/BuiltinTypes.h",
+      "mlir/IR/OpDefinition.h",
+      "mlir/IR/ValueRange.h"
+    ],
+    "edits": [
+      {
+        "rule": "typed-attr-interface-specialization",
+        "file": "mlir/IR/BuiltinAttributes.h",
+        "offset": 772,
+        "length": 0,
+        "before": "",
+        "after": "// Converter compatibility: exact specialization of the retained template.\n// See header-rewrite.json for source and parameter substitutions.\nclass TypedAttr;\nnamespace detail {\ntemplate <>\nclass Interface<::mlir::TypedAttr, ::mlir::Attribute, ::mlir::detail::TypedAttrInterfaceTraits, ::mlir::Attribute, ::mlir::AttributeTrait::TraitBase> : public ::mlir::Attribute {\npublic:\n  using Concept = typename ::mlir::detail::TypedAttrInterfaceTraits::Concept;\n  template <typename T> using Model = typename ::mlir::detail::TypedAttrInterfaceTraits::template Model<T>;\n  template <typename T>\n  using FallbackModel = typename ::mlir::detail::TypedAttrInterfaceTraits::template FallbackModel<T>;\n  template <typename T, typename U>\n  using ExternalModel = typename ::mlir::detail::TypedAttrInterfaceTraits::template ExternalModel<T, U>;\n  using InterfaceBase =\n      Interface<::mlir::TypedAttr, ::mlir::Attribute, ::mlir::detail::TypedAttrInterfaceTraits, ::mlir::Attribute, ::mlir::AttributeTrait::TraitBase>;\n  using ValueType = ::mlir::Attribute;\n  template <typename ConcreteT>\n  struct Trait : public ::mlir::AttributeTrait::TraitBase<ConcreteT, Trait> {\n    using ModelT = Model<ConcreteT>;\n  };\n  explicit Interface(::mlir::Attribute t = ::mlir::Attribute());\n  Interface(std::nullptr_t);\n  template <typename T,\n            std::enable_if_t<std::is_base_of<Trait<T>, T>::value> * = nullptr>\n  Interface(T t);\n  Interface(::mlir::Attribute t, const Concept *conceptImpl);\n  Interface(::mlir::Attribute t, std::nullptr_t);\n\nprivate:\n  Concept *conceptImpl;\n};\n} // namespace detail\ntemplate class AttributeInterface<TypedAttr, detail::TypedAttrInterfaceTraits>;\n",
+        "template_source": "mlir/Support/InterfaceSupport.h",
+        "template_begin": 810,
+        "template_end": 1738,
+        "arguments": {
+          "ConcreteType": "::mlir::TypedAttr",
+          "ValueT": "::mlir::Attribute",
+          "Traits": "::mlir::detail::TypedAttrInterfaceTraits",
+          "BaseType": "::mlir::Attribute",
+          "BaseTrait": "::mlir::AttributeTrait::TraitBase"
+        },
+        "reason": "Expose nested Trait definitions to Frama-Clang 0.0.20（Clang 18.1.8） without changing their qualified type identity",
+        "sequence": 0
+      },
+      {
+        "rule": "bounded-interface-specialization",
+        "file": "mlir/IR/BuiltinAttributes.h",
+        "offset": 3428,
+        "length": 0,
+        "before": "",
+        "after": "class ElementsAttr;\nnamespace detail {\ntemplate <>\nclass Interface<::mlir::ElementsAttr, ::mlir::Attribute, ::mlir::detail::ElementsAttrInterfaceTraits, ::mlir::Attribute, ::mlir::AttributeTrait::TraitBase> : public ::mlir::Attribute {\npublic:\n  using Concept = typename ::mlir::detail::ElementsAttrInterfaceTraits::Concept;\n  template <typename T> using Model = typename ::mlir::detail::ElementsAttrInterfaceTraits::template Model<T>;\n  template <typename T>\n  using FallbackModel = typename ::mlir::detail::ElementsAttrInterfaceTraits::template FallbackModel<T>;\n  template <typename T, typename U>\n  using ExternalModel = typename ::mlir::detail::ElementsAttrInterfaceTraits::template ExternalModel<T, U>;\n  using InterfaceBase =\n      Interface<::mlir::ElementsAttr, ::mlir::Attribute, ::mlir::detail::ElementsAttrInterfaceTraits, ::mlir::Attribute, ::mlir::AttributeTrait::TraitBase>;\n  using ValueType = ::mlir::Attribute;\n  template <typename ConcreteT>\n  struct Trait : public ::mlir::AttributeTrait::TraitBase<ConcreteT, Trait> {\n    using ModelT = Model<ConcreteT>;\n  };\n  explicit Interface(::mlir::Attribute t = ::mlir::Attribute());\n  Interface(std::nullptr_t);\n  template <typename T,\n            std::enable_if_t<std::is_base_of<Trait<T>, T>::value> * = nullptr>\n  Interface(T t);\n  Interface(::mlir::Attribute t, const Concept *conceptImpl);\n  Interface(::mlir::Attribute t, std::nullptr_t);\n\nprivate:\n  Concept *conceptImpl;\n};\n}\ntemplate class AttributeInterface<ElementsAttr, detail::ElementsAttrInterfaceTraits>;\n",
+        "arguments": {
+          "ConcreteType": "::mlir::ElementsAttr",
+          "ValueT": "::mlir::Attribute",
+          "Traits": "::mlir::detail::ElementsAttrInterfaceTraits",
+          "BaseType": "::mlir::Attribute",
+          "BaseTrait": "::mlir::AttributeTrait::TraitBase"
+        },
+        "template_source": "mlir/Support/InterfaceSupport.h",
+        "reason": "Preserve interface identity while exposing nested Trait before instantiation",
+        "sequence": 1
+      },
+      {
+        "rule": "bounded-interface-specialization",
+        "file": "mlir/IR/Attributes.h",
+        "offset": 1766,
+        "length": 0,
+        "before": "",
+        "after": "class MemRefLayoutAttrInterface;\nnamespace detail {\ntemplate <>\nclass Interface<::mlir::MemRefLayoutAttrInterface, ::mlir::Attribute, ::mlir::detail::MemRefLayoutAttrInterfaceInterfaceTraits, ::mlir::Attribute, ::mlir::AttributeTrait::TraitBase> : public ::mlir::Attribute {\npublic:\n  using Concept = typename ::mlir::detail::MemRefLayoutAttrInterfaceInterfaceTraits::Concept;\n  template <typename T> using Model = typename ::mlir::detail::MemRefLayoutAttrInterfaceInterfaceTraits::template Model<T>;\n  template <typename T>\n  using FallbackModel = typename ::mlir::detail::MemRefLayoutAttrInterfaceInterfaceTraits::template FallbackModel<T>;\n  template <typename T, typename U>\n  using ExternalModel = typename ::mlir::detail::MemRefLayoutAttrInterfaceInterfaceTraits::template ExternalModel<T, U>;\n  using InterfaceBase =\n      Interface<::mlir::MemRefLayoutAttrInterface, ::mlir::Attribute, ::mlir::detail::MemRefLayoutAttrInterfaceInterfaceTraits, ::mlir::Attribute, ::mlir::AttributeTrait::TraitBase>;\n  using ValueType = ::mlir::Attribute;\n  template <typename ConcreteT>\n  struct Trait : public ::mlir::AttributeTrait::TraitBase<ConcreteT, Trait> {\n    using ModelT = Model<ConcreteT>;\n  };\n  explicit Interface(::mlir::Attribute t = ::mlir::Attribute());\n  Interface(std::nullptr_t);\n  template <typename T,\n            std::enable_if_t<std::is_base_of<Trait<T>, T>::value> * = nullptr>\n  Interface(T t);\n  Interface(::mlir::Attribute t, const Concept *conceptImpl);\n  Interface(::mlir::Attribute t, std::nullptr_t);\n\nprivate:\n  Concept *conceptImpl;\n};\n}\ntemplate class AttributeInterface<MemRefLayoutAttrInterface, detail::MemRefLayoutAttrInterfaceInterfaceTraits>;\n",
+        "arguments": {
+          "ConcreteType": "::mlir::MemRefLayoutAttrInterface",
+          "ValueT": "::mlir::Attribute",
+          "Traits": "::mlir::detail::MemRefLayoutAttrInterfaceInterfaceTraits",
+          "BaseType": "::mlir::Attribute",
+          "BaseTrait": "::mlir::AttributeTrait::TraitBase"
+        },
+        "template_source": "mlir/Support/InterfaceSupport.h",
+        "reason": "Preserve interface identity while exposing nested Trait before instantiation",
+        "sequence": 2
+      },
+      {
+        "rule": "bounded-interface-constructor-expansion",
+        "file": "mlir/IR/Attributes.h",
+        "offset": 3713,
+        "length": 0,
+        "before": "",
+        "after": "\n  MemRefLayoutAttrInterface() = default;\n  template<typename T, std::enable_if_t<std::is_base_of<InterfaceBase::template Trait<T>, T>::value> * = nullptr>\n  MemRefLayoutAttrInterface(T t);\n",
+        "owner": "mlir::MemRefLayoutAttrInterface",
+        "reason": "Expand inherited constructor with its original trait availability constraint",
+        "sequence": 3
+      },
+      {
+        "rule": "bounded-interface-specialization",
+        "file": "mlir/IR/BuiltinTypes.h",
+        "offset": 3554,
+        "length": 0,
+        "before": "",
+        "after": "class PtrLikeTypeInterface;\nnamespace detail {\ntemplate <>\nclass Interface<::mlir::PtrLikeTypeInterface, ::mlir::Type, ::mlir::detail::PtrLikeTypeInterfaceInterfaceTraits, ::mlir::Type, ::mlir::TypeTrait::TraitBase> : public ::mlir::Type {\npublic:\n  using Concept = typename ::mlir::detail::PtrLikeTypeInterfaceInterfaceTraits::Concept;\n  template <typename T> using Model = typename ::mlir::detail::PtrLikeTypeInterfaceInterfaceTraits::template Model<T>;\n  template <typename T>\n  using FallbackModel = typename ::mlir::detail::PtrLikeTypeInterfaceInterfaceTraits::template FallbackModel<T>;\n  template <typename T, typename U>\n  using ExternalModel = typename ::mlir::detail::PtrLikeTypeInterfaceInterfaceTraits::template ExternalModel<T, U>;\n  using InterfaceBase =\n      Interface<::mlir::PtrLikeTypeInterface, ::mlir::Type, ::mlir::detail::PtrLikeTypeInterfaceInterfaceTraits, ::mlir::Type, ::mlir::TypeTrait::TraitBase>;\n  using ValueType = ::mlir::Type;\n  template <typename ConcreteT>\n  struct Trait : public ::mlir::TypeTrait::TraitBase<ConcreteT, Trait> {\n    using ModelT = Model<ConcreteT>;\n  };\n  explicit Interface(::mlir::Type t = ::mlir::Type());\n  Interface(std::nullptr_t);\n  template <typename T,\n            std::enable_if_t<std::is_base_of<Trait<T>, T>::value> * = nullptr>\n  Interface(T t);\n  Interface(::mlir::Type t, const Concept *conceptImpl);\n  Interface(::mlir::Type t, std::nullptr_t);\n\nprivate:\n  Concept *conceptImpl;\n};\n}\ntemplate class TypeInterface<PtrLikeTypeInterface, detail::PtrLikeTypeInterfaceInterfaceTraits>;\n",
+        "arguments": {
+          "ConcreteType": "::mlir::PtrLikeTypeInterface",
+          "ValueT": "::mlir::Type",
+          "Traits": "::mlir::detail::PtrLikeTypeInterfaceInterfaceTraits",
+          "BaseType": "::mlir::Type",
+          "BaseTrait": "::mlir::TypeTrait::TraitBase"
+        },
+        "template_source": "mlir/Support/InterfaceSupport.h",
+        "reason": "Preserve interface identity while exposing nested Trait before instantiation",
+        "sequence": 4
+      },
+      {
+        "rule": "bounded-interface-specialization",
+        "file": "mlir/IR/OpDefinition.h",
+        "offset": 24308,
+        "length": 0,
+        "before": "",
+        "after": "class ViewLikeOpInterface;\nnamespace detail {\ntemplate <>\nclass Interface<::mlir::ViewLikeOpInterface, ::mlir::Operation *, ::mlir::detail::ViewLikeOpInterfaceInterfaceTraits, ::mlir::OpState, ::mlir::OpTrait::TraitBase> : public ::mlir::OpState {\npublic:\n  using Concept = typename ::mlir::detail::ViewLikeOpInterfaceInterfaceTraits::Concept;\n  template <typename T> using Model = typename ::mlir::detail::ViewLikeOpInterfaceInterfaceTraits::template Model<T>;\n  template <typename T>\n  using FallbackModel = typename ::mlir::detail::ViewLikeOpInterfaceInterfaceTraits::template FallbackModel<T>;\n  template <typename T, typename U>\n  using ExternalModel = typename ::mlir::detail::ViewLikeOpInterfaceInterfaceTraits::template ExternalModel<T, U>;\n  using InterfaceBase =\n      Interface<::mlir::ViewLikeOpInterface, ::mlir::Operation *, ::mlir::detail::ViewLikeOpInterfaceInterfaceTraits, ::mlir::OpState, ::mlir::OpTrait::TraitBase>;\n  using ValueType = ::mlir::Operation *;\n  template <typename ConcreteT>\n  struct Trait : public ::mlir::OpTrait::TraitBase<ConcreteT, Trait> {\n    using ModelT = Model<ConcreteT>;\n  };\n  explicit Interface(::mlir::Operation * t = ValueType());\n  Interface(std::nullptr_t);\n  template <typename T,\n            std::enable_if_t<std::is_base_of<Trait<T>, T>::value> * = nullptr>\n  Interface(T t);\n  Interface(::mlir::Operation * t, const Concept *conceptImpl);\n  Interface(::mlir::Operation * t, std::nullptr_t);\n\nprivate:\n  Concept *conceptImpl;\n};\n}\ntemplate class OpInterface<ViewLikeOpInterface, detail::ViewLikeOpInterfaceInterfaceTraits>;\n",
+        "arguments": {
+          "ConcreteType": "::mlir::ViewLikeOpInterface",
+          "ValueT": "::mlir::Operation *",
+          "Traits": "::mlir::detail::ViewLikeOpInterfaceInterfaceTraits",
+          "BaseType": "::mlir::OpState",
+          "BaseTrait": "::mlir::OpTrait::TraitBase"
+        },
+        "template_source": "mlir/Support/InterfaceSupport.h",
+        "reason": "Preserve interface identity while exposing nested Trait before instantiation",
+        "sequence": 5
+      },
+      {
+        "rule": "bounded-interface-specialization",
+        "file": "mlir/IR/OpDefinition.h",
+        "offset": 26676,
+        "length": 0,
+        "before": "",
+        "after": "class MemorySpaceCastConsumerOpInterface;\nnamespace detail {\ntemplate <>\nclass Interface<::mlir::MemorySpaceCastConsumerOpInterface, ::mlir::Operation *, ::mlir::detail::MemorySpaceCastConsumerOpInterfaceInterfaceTraits, ::mlir::OpState, ::mlir::OpTrait::TraitBase> : public ::mlir::OpState {\npublic:\n  using Concept = typename ::mlir::detail::MemorySpaceCastConsumerOpInterfaceInterfaceTraits::Concept;\n  template <typename T> using Model = typename ::mlir::detail::MemorySpaceCastConsumerOpInterfaceInterfaceTraits::template Model<T>;\n  template <typename T>\n  using FallbackModel = typename ::mlir::detail::MemorySpaceCastConsumerOpInterfaceInterfaceTraits::template FallbackModel<T>;\n  template <typename T, typename U>\n  using ExternalModel = typename ::mlir::detail::MemorySpaceCastConsumerOpInterfaceInterfaceTraits::template ExternalModel<T, U>;\n  using InterfaceBase =\n      Interface<::mlir::MemorySpaceCastConsumerOpInterface, ::mlir::Operation *, ::mlir::detail::MemorySpaceCastConsumerOpInterfaceInterfaceTraits, ::mlir::OpState, ::mlir::OpTrait::TraitBase>;\n  using ValueType = ::mlir::Operation *;\n  template <typename ConcreteT>\n  struct Trait : public ::mlir::OpTrait::TraitBase<ConcreteT, Trait> {\n    using ModelT = Model<ConcreteT>;\n  };\n  explicit Interface(::mlir::Operation * t = ValueType());\n  Interface(std::nullptr_t);\n  template <typename T,\n            std::enable_if_t<std::is_base_of<Trait<T>, T>::value> * = nullptr>\n  Interface(T t);\n  Interface(::mlir::Operation * t, const Concept *conceptImpl);\n  Interface(::mlir::Operation * t, std::nullptr_t);\n\nprivate:\n  Concept *conceptImpl;\n};\n}\ntemplate class OpInterface<MemorySpaceCastConsumerOpInterface, detail::MemorySpaceCastConsumerOpInterfaceInterfaceTraits>;\n",
+        "arguments": {
+          "ConcreteType": "::mlir::MemorySpaceCastConsumerOpInterface",
+          "ValueT": "::mlir::Operation *",
+          "Traits": "::mlir::detail::MemorySpaceCastConsumerOpInterfaceInterfaceTraits",
+          "BaseType": "::mlir::OpState",
+          "BaseTrait": "::mlir::OpTrait::TraitBase"
+        },
+        "template_source": "mlir/Support/InterfaceSupport.h",
+        "reason": "Preserve interface identity while exposing nested Trait before instantiation",
+        "sequence": 6
+      },
+      {
+        "rule": "bounded-interface-specialization",
+        "file": "mlir/IR/OpDefinition.h",
+        "offset": 29336,
+        "length": 0,
+        "before": "",
+        "after": "class OffsetSizeAndStrideOpInterface;\nnamespace detail {\ntemplate <>\nclass Interface<::mlir::OffsetSizeAndStrideOpInterface, ::mlir::Operation *, ::mlir::detail::OffsetSizeAndStrideOpInterfaceInterfaceTraits, ::mlir::OpState, ::mlir::OpTrait::TraitBase> : public ::mlir::OpState {\npublic:\n  using Concept = typename ::mlir::detail::OffsetSizeAndStrideOpInterfaceInterfaceTraits::Concept;\n  template <typename T> using Model = typename ::mlir::detail::OffsetSizeAndStrideOpInterfaceInterfaceTraits::template Model<T>;\n  template <typename T>\n  using FallbackModel = typename ::mlir::detail::OffsetSizeAndStrideOpInterfaceInterfaceTraits::template FallbackModel<T>;\n  template <typename T, typename U>\n  using ExternalModel = typename ::mlir::detail::OffsetSizeAndStrideOpInterfaceInterfaceTraits::template ExternalModel<T, U>;\n  using InterfaceBase =\n      Interface<::mlir::OffsetSizeAndStrideOpInterface, ::mlir::Operation *, ::mlir::detail::OffsetSizeAndStrideOpInterfaceInterfaceTraits, ::mlir::OpState, ::mlir::OpTrait::TraitBase>;\n  using ValueType = ::mlir::Operation *;\n  template <typename ConcreteT>\n  struct Trait : public ::mlir::OpTrait::TraitBase<ConcreteT, Trait> {\n    using ModelT = Model<ConcreteT>;\n  };\n  explicit Interface(::mlir::Operation * t = ValueType());\n  Interface(std::nullptr_t);\n  template <typename T,\n            std::enable_if_t<std::is_base_of<Trait<T>, T>::value> * = nullptr>\n  Interface(T t);\n  Interface(::mlir::Operation * t, const Concept *conceptImpl);\n  Interface(::mlir::Operation * t, std::nullptr_t);\n\nprivate:\n  Concept *conceptImpl;\n};\n}\ntemplate class OpInterface<OffsetSizeAndStrideOpInterface, detail::OffsetSizeAndStrideOpInterfaceInterfaceTraits>;\n",
+        "arguments": {
+          "ConcreteType": "::mlir::OffsetSizeAndStrideOpInterface",
+          "ValueT": "::mlir::Operation *",
+          "Traits": "::mlir::detail::OffsetSizeAndStrideOpInterfaceInterfaceTraits",
+          "BaseType": "::mlir::OpState",
+          "BaseTrait": "::mlir::OpTrait::TraitBase"
+        },
+        "template_source": "mlir/Support/InterfaceSupport.h",
+        "reason": "Preserve interface identity while exposing nested Trait before instantiation",
+        "sequence": 7
+      },
+      {
+        "rule": "bounded-interface-specialization",
+        "file": "mlir/IR/OpDefinition.h",
+        "offset": 32302,
+        "length": 0,
+        "before": "",
+        "after": "class CastOpInterface;\nnamespace detail {\ntemplate <>\nclass Interface<::mlir::CastOpInterface, ::mlir::Operation *, ::mlir::detail::CastOpInterfaceInterfaceTraits, ::mlir::OpState, ::mlir::OpTrait::TraitBase> : public ::mlir::OpState {\npublic:\n  using Concept = typename ::mlir::detail::CastOpInterfaceInterfaceTraits::Concept;\n  template <typename T> using Model = typename ::mlir::detail::CastOpInterfaceInterfaceTraits::template Model<T>;\n  template <typename T>\n  using FallbackModel = typename ::mlir::detail::CastOpInterfaceInterfaceTraits::template FallbackModel<T>;\n  template <typename T, typename U>\n  using ExternalModel = typename ::mlir::detail::CastOpInterfaceInterfaceTraits::template ExternalModel<T, U>;\n  using InterfaceBase =\n      Interface<::mlir::CastOpInterface, ::mlir::Operation *, ::mlir::detail::CastOpInterfaceInterfaceTraits, ::mlir::OpState, ::mlir::OpTrait::TraitBase>;\n  using ValueType = ::mlir::Operation *;\n  template <typename ConcreteT>\n  struct Trait : public ::mlir::OpTrait::TraitBase<ConcreteT, Trait> {\n    using ModelT = Model<ConcreteT>;\n  };\n  explicit Interface(::mlir::Operation * t = ValueType());\n  Interface(std::nullptr_t);\n  template <typename T,\n            std::enable_if_t<std::is_base_of<Trait<T>, T>::value> * = nullptr>\n  Interface(T t);\n  Interface(::mlir::Operation * t, const Concept *conceptImpl);\n  Interface(::mlir::Operation * t, std::nullptr_t);\n\nprivate:\n  Concept *conceptImpl;\n};\n}\ntemplate class OpInterface<CastOpInterface, detail::CastOpInterfaceInterfaceTraits>;\n",
+        "arguments": {
+          "ConcreteType": "::mlir::CastOpInterface",
+          "ValueT": "::mlir::Operation *",
+          "Traits": "::mlir::detail::CastOpInterfaceInterfaceTraits",
+          "BaseType": "::mlir::OpState",
+          "BaseTrait": "::mlir::OpTrait::TraitBase"
+        },
+        "template_source": "mlir/Support/InterfaceSupport.h",
+        "reason": "Preserve interface identity while exposing nested Trait before instantiation",
+        "sequence": 8
+      },
+      {
+        "rule": "bounded-interface-specialization",
+        "file": "mlir/IR/OpDefinition.h",
+        "offset": 34570,
+        "length": 0,
+        "before": "",
+        "after": "class AlignmentAttrOpInterface;\nnamespace detail {\ntemplate <>\nclass Interface<::mlir::AlignmentAttrOpInterface, ::mlir::Operation *, ::mlir::detail::AlignmentAttrOpInterfaceInterfaceTraits, ::mlir::OpState, ::mlir::OpTrait::TraitBase> : public ::mlir::OpState {\npublic:\n  using Concept = typename ::mlir::detail::AlignmentAttrOpInterfaceInterfaceTraits::Concept;\n  template <typename T> using Model = typename ::mlir::detail::AlignmentAttrOpInterfaceInterfaceTraits::template Model<T>;\n  template <typename T>\n  using FallbackModel = typename ::mlir::detail::AlignmentAttrOpInterfaceInterfaceTraits::template FallbackModel<T>;\n  template <typename T, typename U>\n  using ExternalModel = typename ::mlir::detail::AlignmentAttrOpInterfaceInterfaceTraits::template ExternalModel<T, U>;\n  using InterfaceBase =\n      Interface<::mlir::AlignmentAttrOpInterface, ::mlir::Operation *, ::mlir::detail::AlignmentAttrOpInterfaceInterfaceTraits, ::mlir::OpState, ::mlir::OpTrait::TraitBase>;\n  using ValueType = ::mlir::Operation *;\n  template <typename ConcreteT>\n  struct Trait : public ::mlir::OpTrait::TraitBase<ConcreteT, Trait> {\n    using ModelT = Model<ConcreteT>;\n  };\n  explicit Interface(::mlir::Operation * t = ValueType());\n  Interface(std::nullptr_t);\n  template <typename T,\n            std::enable_if_t<std::is_base_of<Trait<T>, T>::value> * = nullptr>\n  Interface(T t);\n  Interface(::mlir::Operation * t, const Concept *conceptImpl);\n  Interface(::mlir::Operation * t, std::nullptr_t);\n\nprivate:\n  Concept *conceptImpl;\n};\n}\ntemplate class OpInterface<AlignmentAttrOpInterface, detail::AlignmentAttrOpInterfaceInterfaceTraits>;\n",
+        "arguments": {
+          "ConcreteType": "::mlir::AlignmentAttrOpInterface",
+          "ValueT": "::mlir::Operation *",
+          "Traits": "::mlir::detail::AlignmentAttrOpInterfaceInterfaceTraits",
+          "BaseType": "::mlir::OpState",
+          "BaseTrait": "::mlir::OpTrait::TraitBase"
+        },
+        "template_source": "mlir/Support/InterfaceSupport.h",
+        "reason": "Preserve interface identity while exposing nested Trait before instantiation",
+        "sequence": 9
+      },
+      {
+        "rule": "op-fold-result-constructor-expansion",
+        "file": "mlir/IR/OpDefinition.h",
+        "offset": 23143,
+        "length": 0,
+        "before": "",
+        "after": "\n  OpFoldResult() = default;\n  OpFoldResult(Attribute attribute);\n  OpFoldResult(Value value);",
+        "reason": "Expand exactly the Attribute/Value alternatives of the inherited PointerUnion constructor",
+        "sequence": 10
+      },
+      {
+        "rule": "memref-storage-base-instantiation",
+        "file": "mlir/IR/BuiltinTypes.h",
+        "offset": 5950,
+        "length": 0,
+        "before": "",
+        "after": "class MemRefType;\ntemplate class detail::StorageUserBase<MemRefType, BaseMemRefType, detail::MemRefTypeStorage, detail::TypeUniquer, PtrLikeTypeInterface::Trait, ShapedType::Trait>;\n",
+        "reason": "Generate the complete base specialization before the concrete MemRefType",
+        "sequence": 11
+      },
+      {
+        "rule": "typed-attr-constructor-expansion",
+        "file": "mlir/IR/BuiltinAttributes.h",
+        "offset": 2636,
+        "length": 0,
+        "before": "",
+        "after": "\n  // Conversion view: preserve the inherited availability constraint.\n  TypedAttr() = default;\n  template <typename T,\n            std::enable_if_t<std::is_base_of<InterfaceBase::template Trait<T>, T>::value> * = nullptr>\n  TypedAttr(T t);\n",
+        "prototype_source": "mlir/Support/InterfaceSupport.h",
+        "prototype": "  template <typename T,\n            std::enable_if_t<std::is_base_of<Trait<T>, T>::value> * = nullptr>\n  Interface(T t);",
+        "owner": "mlir::TypedAttr",
+        "reason": "Explicit constructor declaration avoids CXXInheritedCtorInitExpr in the conversion model",
+        "abstraction_effect": "Construction remains externally declared; no implementation or IR behavior is synthesized",
+        "sequence": 12
+      },
+      {
+        "rule": "indexed-range-concrete-expansion",
+        "file": "mlir/IR/ValueRange.h",
+        "offset": 1122,
+        "length": 0,
+        "before": "",
+        "after": "// Concrete indexed range: ValueRange\nclass ValueRange;\n} // namespace mlir\nnamespace llvm { namespace detail {\ntemplate<>\nclass indexed_accessor_range_base<::mlir::ValueRange, llvm::PointerUnion<const ::mlir::Value *, ::mlir::OpOperand *, ::mlir::detail::OpResultImpl *, const llvm::Repeated<::mlir::Value> *>, ::mlir::Value, ::mlir::Value, ::mlir::Value> {\npublic:\n  using RangeBaseT = indexed_accessor_range_base;\n  ::mlir::Value operator[](long index) const;\n   \n  class iterator : public indexed_accessor_iterator<iterator,llvm::PointerUnion<const ::mlir::Value *, ::mlir::OpOperand *, ::mlir::detail::OpResultImpl *, const llvm::Repeated<::mlir::Value> *>,::mlir::Value,::mlir::Value,::mlir::Value> {\n  public:\n    ::mlir::Value operator*() const;\n  private:\n    iterator(llvm::PointerUnion<const ::mlir::Value *, ::mlir::OpOperand *, ::mlir::detail::OpResultImpl *, const llvm::Repeated<::mlir::Value> *> owner,std::ptrdiff_t curIndex);\n    friend indexed_accessor_range_base<::mlir::ValueRange,llvm::PointerUnion<const ::mlir::Value *, ::mlir::OpOperand *, ::mlir::detail::OpResultImpl *, const llvm::Repeated<::mlir::Value> *>,::mlir::Value,::mlir::Value,::mlir::Value>;\n  };\n  iterator begin() const;\n   \n  inline indexed_accessor_range_base(iterator begin, iterator end);\n  inline indexed_accessor_range_base(const iterator_range<iterator> &range);\n  inline indexed_accessor_range_base(llvm::PointerUnion<const ::mlir::Value *, ::mlir::OpOperand *, ::mlir::detail::OpResultImpl *, const llvm::Repeated<::mlir::Value> *> base, long count);\n\nprotected:\n  indexed_accessor_range_base(const indexed_accessor_range_base &) = default;\n  indexed_accessor_range_base(indexed_accessor_range_base &&) = default;\n  indexed_accessor_range_base &\n  operator=(const indexed_accessor_range_base &) = default;\n  llvm::PointerUnion<const ::mlir::Value *, ::mlir::OpOperand *, ::mlir::detail::OpResultImpl *, const llvm::Repeated<::mlir::Value> *> base;\n  long count;\n};\n} }\nnamespace mlir {\n",
+        "template_source": "llvm/ADT/STLExtras.h",
+        "template_sha256": "7993b2d245ae6889d61341e6da9421aeab8b1cf11869a1c93e7f50a9a09cc26c",
+        "arguments": {
+          "DerivedT": "::mlir::ValueRange",
+          "BaseT": "llvm::PointerUnion<const ::mlir::Value *, ::mlir::OpOperand *, ::mlir::detail::OpResultImpl *, const llvm::Repeated<::mlir::Value> *>",
+          "T": "::mlir::Value",
+          "PointerT": "::mlir::Value",
+          "ReferenceT": "::mlir::Value"
+        },
+        "reason": "Emit the same concrete nested iterator before iterator_range stores it by value",
+        "sequence": 13
+      },
+      {
+        "rule": "indexed-range-concrete-expansion",
+        "file": "mlir/IR/ValueRange.h",
+        "offset": 4371,
+        "length": 0,
+        "before": "",
+        "after": "// Concrete indexed range: ResultRange\nclass ResultRange;\n} // namespace mlir\nnamespace llvm { namespace detail {\ntemplate<>\nclass indexed_accessor_range_base<::mlir::ResultRange, ::mlir::detail::OpResultImpl *, ::mlir::OpResult, ::mlir::OpResult, ::mlir::OpResult> {\npublic:\n  using RangeBaseT = indexed_accessor_range_base;\n  ::mlir::OpResult operator[](long index) const;\n   \n  class iterator : public indexed_accessor_iterator<iterator,::mlir::detail::OpResultImpl *,::mlir::OpResult,::mlir::OpResult,::mlir::OpResult> {\n  public:\n    ::mlir::OpResult operator*() const;\n  private:\n    iterator(::mlir::detail::OpResultImpl * owner,std::ptrdiff_t curIndex);\n    friend indexed_accessor_range_base<::mlir::ResultRange,::mlir::detail::OpResultImpl *,::mlir::OpResult,::mlir::OpResult,::mlir::OpResult>;\n  };\n  iterator begin() const;\n   \n  inline indexed_accessor_range_base(iterator begin, iterator end);\n  inline indexed_accessor_range_base(const iterator_range<iterator> &range);\n  inline indexed_accessor_range_base(::mlir::detail::OpResultImpl * base, long count);\n\nprotected:\n  indexed_accessor_range_base(const indexed_accessor_range_base &) = default;\n  indexed_accessor_range_base(indexed_accessor_range_base &&) = default;\n  indexed_accessor_range_base &\n  operator=(const indexed_accessor_range_base &) = default;\n  ::mlir::detail::OpResultImpl * base;\n  long count;\n};\n} }\nnamespace mlir {\n",
+        "template_source": "llvm/ADT/STLExtras.h",
+        "template_sha256": "7993b2d245ae6889d61341e6da9421aeab8b1cf11869a1c93e7f50a9a09cc26c",
+        "arguments": {
+          "DerivedT": "::mlir::ResultRange",
+          "BaseT": "::mlir::detail::OpResultImpl *",
+          "T": "::mlir::OpResult",
+          "PointerT": "::mlir::OpResult",
+          "ReferenceT": "::mlir::OpResult"
+        },
+        "reason": "Emit the same concrete nested iterator before iterator_range stores it by value",
+        "sequence": 14
+      },
+      {
+        "rule": "nested-use-iterator-relocation",
+        "file": "mlir/IR/ValueRange.h",
+        "offset": 6095,
+        "length": 384,
+        "before": "class ResultRange::UseIterator final\n    : public llvm::iterator_facade_base<UseIterator, std::forward_iterator_tag, OpOperand> {\npublic:\n  explicit UseIterator(ResultRange results, bool end = false);\n  UseIterator &operator++();\n  OpOperand &operator*() const;\n  bool operator!=(const UseIterator &rhs) const;\nprivate:\n  ResultRange::iterator it, endIt;\n  Value::use_iterator use;\n};",
+        "after": "",
+        "reason": "Remove the out-of-line nested definition that triggers ClangVisitor.cpp:8370",
+        "sequence": 15
+      },
+      {
+        "rule": "nested-use-iterator-relocation",
+        "file": "mlir/IR/ValueRange.h",
+        "offset": 5959,
+        "length": 20,
+        "before": "  class UseIterator;",
+        "after": "  class UseIterator final\n      : public llvm::iterator_facade_base<UseIterator, std::forward_iterator_tag, OpOperand> {\n  public:\n    explicit UseIterator(ResultRange results, bool end = false);\n    UseIterator &operator++();\n    OpOperand &operator*() const;\n    bool operator!=(const UseIterator &rhs) const;\n  private:\n    ResultRange::iterator it, endIt;\n    Value::use_iterator use;\n  };",
+        "reason": "Define the same nested type inside its original owner without changing layout or members",
+        "sequence": 16
+      }
+    ]
+  },
+  "extraction_inputs": {
+    "rewritten_pass": {
+      "path": "rewritten.cpp",
+      "sha256": "e01ead2709e5cc049be73f5daf41f12fe98d9b354e631de8cde6f8c9db86ec04"
+    },
+    "declaration_dependency_plan": {
+      "path": "interface-plan.json",
+      "sha256": "65a31d1cb606e740da06b17523742a0a018cfcadc458819a7682b2b215955a46"
+    },
+    "canonical_to_extracted_manifest": {
+      "path": "interface-manifest.json",
+      "sha256": "366e63e06cfbe499624614ece60f7bd9c09bd8671a270746f6cd1154a82f3be6"
+    },
+    "canonical_interface_abstractions": {
+      "path": "interface-abstractions.json",
+      "sha256": "5b97d299a849e2b35dfd83c8c7ab1a99a85a90a4abe58f2930d9e4254d61c02b"
+    },
+    "extracted_to_conversion_rewrites": {
+      "path": "header-rewrite.json",
+      "sha256": "95335d4a663f7f5c25275979cece752ea41e2ed79d330c7748cf369095c212c3"
+    },
+    "boundary": "Canonical interface abstraction and converter compatibility are separate stages; this ledger is not an arbitrary real-MLIR extractor"
+  }
+}

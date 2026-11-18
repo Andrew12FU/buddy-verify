@@ -1,0 +1,274 @@
+$ /home/ce/.opam/framac-study/bin/frama-c /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/baseline_mini.cpp -cxx-nostdinc -machdep gcc_x86_64 -cxx-clang-command=/home/ce/.opam/framac-study/bin/framaCIRGen '-fclang-cpp-extra-args=-I/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include -D_DEBUG -D_GLIBCXX_ASSERTIONS -D_GLIBCXX_USE_CXX11_ABI=1 -D_LIBCPP_HARDENING_MODE=_LIBCPP_HARDENING_MODE_EXTENSIVE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Werror=unguarded-availability-new -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wmissing-field-initializers -Wimplicit-fallthrough -Wcovered-switch-default -Wno-noexcept-type -Wnon-virtual-dtor -Wdelete-non-virtual-dtor -Wsuggest-override -Wstring-conversion -Wno-pass-failed -Wmisleading-indentation -Wctad-maybe-unsupported -fdiagnostics-color -Xclang -fno-pch-timestamp -g -std=gnu++17 -fno-exceptions -funwind-tables -fno-rtti -target x86_64-conda-linux-gnu -fno-color-diagnostics --sysroot=/home/ce/Desktop/framaclang/environment/llvm18/x86_64-conda-linux-gnu/sysroot -nostdinc++ -resource-dir=/home/ce/Desktop/framaclang/environment/llvm18/lib/clang/18' -cxx-parseable-output -print -ocode /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/baseline.c
+cwd: /home/ce/Desktop/BuddyCompiler/build-v0.0.4/buddy
+exit_code: 4
+--- stdout ---
+[kernel] Parsing /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/baseline_mini.cpp (external front-end)
+[fclang] Warning: framaCIRGen emitted messages on stderr:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/baseline_mini.cpp:34:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/Pass/Pass.h:7:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/IR/DialectRegistry.h:7:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/Support/TypeID.h:21:24: warning: inline function 'mlir::TypeID::getFromOpaquePointer' is not defined [-Wundefined-inline]
+     21 |   inline static TypeID getFromOpaquePointer(const void *pointer);
+        |                        ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/Support/TypeID.h:38:45: note: used here
+     38 |   TypeID getTypeID() const { return TypeID::getFromOpaquePointer(this); }
+        |                                             ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/baseline_mini.cpp:28:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/Dialect/Func/IR/FuncOps.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/IR/OpDefinition.h:7:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/IR/Operation.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/IR/OperationSupport.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/IR/ValueRange.h:6:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/IR/Value.h:58:13: warning: inline function 'mlir::detail::TypedValue<mlir::TensorType>::getType' is not defined [-Wundefined-inline]
+     58 |   inline Ty getType() const;
+        |             ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/baseline_mini.cpp:47:55: note: used here
+     47 |     auto lhsTy = dyn_cast<RankedTensorType>(op.getA().getType());
+        |                                                       ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/baseline_mini.cpp:28:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/Dialect/Func/IR/FuncOps.h:6:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/IR/OpDefinition.h:48:23: warning: inline function 'mlir::OpTrait::OneTypedResult<mlir::TensorType>::Impl<mlir::tosa::MatMulOp>::getType' is not defined [-Wundefined-inline]
+     48 |     inline ResultType getType();
+        |                       ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/baseline_mini.cpp:49:48: note: used here
+     49 |     auto outTy = dyn_cast<RankedTensorType>(op.getType());
+        |                                                ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/baseline_mini.cpp:28:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/Dialect/Func/IR/FuncOps.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/IR/OpDefinition.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/IR/BuiltinTypes.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/IR/Attributes.h:6:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/IR/Types.h:44:15: warning: inline function 'mlir::Type::operator!' is not defined [-Wundefined-inline]
+     44 |   inline bool operator!() const;
+        |               ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/baseline_mini.cpp:50:9: note: used here
+     50 |     if (!lhsTy || !rhsTy || !outTy)
+        |         ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/baseline_mini.cpp:28:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/Dialect/Func/IR/FuncOps.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/IR/OpDefinition.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/IR/BuiltinTypes.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/IR/Attributes.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/IR/Types.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/Support/InterfaceSupport.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/Support/LLVM.h:11:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/llvm/Support/LogicalResult.h:26:22: warning: inline function 'llvm::failure' is not defined [-Wundefined-inline]
+     26 | inline LogicalResult failure(bool IsFailure = true);
+        |                      ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/baseline_mini.cpp:51:14: note: used here
+     51 |       return failure();
+        |              ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/baseline_mini.cpp:28:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/Dialect/Func/IR/FuncOps.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/IR/OpDefinition.h:6:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/IR/BuiltinTypes.h:36:25: warning: inline function 'mlir::ShapedType::isDynamic' is not defined [-Wundefined-inline]
+     36 |   static constexpr bool isDynamic(int64_t dValue);
+        |                         ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/baseline_mini.cpp:77:21: note: used here
+     77 |     if (ShapedType::isDynamic(I) || ShapedType::isDynamic(K_lhs) ||
+        |                     ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/baseline_mini.cpp:28:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/Dialect/Func/IR/FuncOps.h:6:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/IR/OpDefinition.h:17:23: warning: inline function 'mlir::OpState::getContext' is not defined [-Wundefined-inline]
+     17 |   inline MLIRContext *getContext();
+        |                       ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/baseline_mini.cpp:100:39: note: used here
+    100 |     auto i8Type = IntegerType::get(op.getContext(), 8);
+        |                                       ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/baseline_mini.cpp:28:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/Dialect/Func/IR/FuncOps.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/IR/OpDefinition.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/IR/BuiltinTypes.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/IR/Attributes.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/IR/Types.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/Support/InterfaceSupport.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/Support/LLVM.h:6:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/llvm/ADT/ArrayRef.h:43:13: warning: inline function 'llvm::ArrayRef<long>::ArrayRef' is not defined [-Wundefined-inline]
+     43 |   constexpr ArrayRef(std::initializer_list<T> Vec [[clang::lifetimebound]]);
+        |             ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/baseline_mini.cpp:101:44: note: used here
+    101 |     auto shiftType = RankedTensorType::get({1}, i8Type);
+        |                                            ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/baseline_mini.cpp:28:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/Dialect/Func/IR/FuncOps.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/IR/OpDefinition.h:6:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/IR/BuiltinTypes.h:68:10: warning: inline function 'mlir::TensorType::operator ShapedType' is not defined [-Wundefined-inline]
+     68 |   inline operator ShapedType() const;
+        |          ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/baseline_mini.cpp:103:45: note: used here
+    103 |     auto denseAttr = DenseElementsAttr::get(shiftType, zeroAttr);
+        |                                             ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/baseline_mini.cpp:28:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/Dialect/Func/IR/FuncOps.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/IR/OpDefinition.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/IR/BuiltinTypes.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/IR/Attributes.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/IR/Types.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/Support/InterfaceSupport.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/Support/LLVM.h:6:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/llvm/ADT/ArrayRef.h:28:10: warning: inline function 'llvm::ArrayRef<mlir::Attribute>::ArrayRef' is not defined [-Wundefined-inline]
+     28 |   inline ArrayRef(const T &OneElt [[clang::lifetimebound]]);
+        |          ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/baseline_mini.cpp:103:56: note: used here
+    103 |     auto denseAttr = DenseElementsAttr::get(shiftType, zeroAttr);
+        |                                                        ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/baseline_mini.cpp:28:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/Dialect/Func/IR/FuncOps.h:6:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/IR/OpDefinition.h:46:43: warning: inline function 'mlir::OpTrait::OneTypedResult<mlir::TensorType>::Impl<mlir::tosa::ConstOp>::getResult' is not defined [-Wundefined-inline]
+     46 |     inline ::mlir::TypedValue<ResultType> getResult();
+        |                                           ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/baseline_mini.cpp:108:54: note: used here
+    108 |                                              shiftOp.getResult());
+        |                                                      ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/baseline_mini.cpp:28:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/Dialect/Func/IR/FuncOps.h:6:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/IR/OpDefinition.h:14:10: warning: inline function 'mlir::OpState::operator mlir::Operation *' is not defined [-Wundefined-inline]
+     14 |   inline operator Operation *() const;
+        |          ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/baseline_mini.cpp:107:46: note: used here
+    107 |     rewriter.replaceOpWithNewOp<tosa::MulOp>(op, outTy, op.getA(), op.getB(),
+        |                                              ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/baseline_mini.cpp:28:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/Dialect/Func/IR/FuncOps.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/IR/OpDefinition.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/IR/BuiltinTypes.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/IR/Attributes.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/IR/Types.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/Support/InterfaceSupport.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/Support/LLVM.h:11:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/llvm/Support/LogicalResult.h:22:22: warning: inline function 'llvm::success' is not defined [-Wundefined-inline]
+     22 | inline LogicalResult success(bool IsSuccess = true);
+        |                      ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/baseline_mini.cpp:109:12: note: used here
+    109 |     return success();
+        |            ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/baseline_mini.cpp:28:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/Dialect/Func/IR/FuncOps.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/IR/OpDefinition.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/IR/BuiltinTypes.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/IR/Attributes.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/IR/Types.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/Support/InterfaceSupport.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/Support/LLVM.h:9:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/llvm/ADT/StringRef.h:21:13: warning: inline function 'llvm::StringRef::StringRef' is not defined [-Wundefined-inline]
+     21 |   constexpr StringRef(const char *Str [[clang::lifetimebound]]);
+        |             ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/baseline_mini.cpp:118:48: note: used here
+    118 |   StringRef getArgument() const final { return "simplify-tosa-matmul-scalar"; }
+        |                                                ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/baseline_mini.cpp:34:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/Pass/Pass.h:58:14: warning: inline function 'mlir::OperationPass<mlir::func::FuncOp>::getOperation' is not defined [-Wundefined-inline]
+     58 |   inline OpT getOperation();
+        |              ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/baseline_mini.cpp:124:25: note: used here
+    124 |     func::FuncOp func = getOperation();
+        |                         ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/baseline_mini.cpp:33:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/IR/PatternMatch.h:167:10: warning: inline function 'mlir::RewritePatternSet::RewritePatternSet' is not defined [-Wundefined-inline]
+    167 |   inline RewritePatternSet(MLIRContext *context);
+        |          ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/baseline_mini.cpp:126:23: note: used here
+    126 |     RewritePatternSet patterns(ctx);
+        |                       ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/baseline_mini.cpp:33:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/IR/PatternMatch.h:173:29: warning: function 'mlir::RewritePatternSet::add<(anonymous namespace)::ReplaceScalarLikeMatmul, mlir::MLIRContext *&, void>' has internal linkage but is not defined [-Wundefined-internal]
+    173 |   inline RewritePatternSet &add(ConstructorArg &&arg,
+        |                             ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/baseline_mini.cpp:127:14: note: used here
+    127 |     patterns.add<ReplaceScalarLikeMatmul>(ctx);
+        |              ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/baseline_mini.cpp:34:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/Pass/Pass.h:7:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/IR/DialectRegistry.h:26:51: warning: inline function 'mlir::DialectRegistry::insert<mlir::tosa::TosaDialect>' is not defined [-Wundefined-inline]
+     26 |   template <typename ConcreteDialect> inline void insert();
+        |                                                   ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/baseline_mini.cpp:135:14: note: used here
+    135 |     registry.insert<tosa::TosaDialect>();
+        |              ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/baseline_mini.cpp:34:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/Pass/Pass.h:22:10: warning: function 'mlir::PassRegistration<(anonymous namespace)::SimplifyTosaMatmulScalarPass>::PassRegistration' has internal linkage but is not defined [-Wundefined-internal]
+     22 |   inline PassRegistration();
+        |          ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/baseline_mini.cpp:143:3: note: used here
+    143 |   PassRegistration<SimplifyTosaMatmulScalarPass>();
+        |   ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/baseline_mini.cpp:28:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/Dialect/Func/IR/FuncOps.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/IR/OpDefinition.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/IR/BuiltinTypes.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/IR/Attributes.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/IR/Types.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/Support/InterfaceSupport.h:6:
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/Support/LLVM.h:10:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/llvm/Support/Casting.h:42:35: warning: inline function 'llvm::detail::isPresent<mlir::TensorType>' is not defined [-Wundefined-inline]
+     42 | template <typename T> inline bool isPresent(const T &t);
+        |                                   ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/llvm/Support/Casting.h:91:28: note: used here
+     91 |   MINI_LLVM_ASSERT(detail::isPresent(Val) &&
+        |                            ^
+  In file included from /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/baseline_mini.cpp:35:
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/Transforms/GreedyPatternRewriteDriver.h:40:11: warning: private field 'scope' is not used [-Wunused-private-field]
+     40 |   Region *scope = nullptr;
+        |           ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/Transforms/GreedyPatternRewriteDriver.h:41:8: warning: private field 'useTopDownTraversal' is not used [-Wunused-private-field]
+     41 |   bool useTopDownTraversal = false;
+        |        ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/Transforms/GreedyPatternRewriteDriver.h:42:29: warning: private field 'regionSimplificationLevel' is not used [-Wunused-private-field]
+     42 |   GreedySimplifyRegionLevel regionSimplificationLevel =
+        |                             ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/Transforms/GreedyPatternRewriteDriver.h:44:8: warning: private field 'maxIterations' is not used [-Wunused-private-field]
+     44 |   long maxIterations = 10;
+        |        ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/Transforms/GreedyPatternRewriteDriver.h:45:8: warning: private field 'maxNumRewrites' is not used [-Wunused-private-field]
+     45 |   long maxNumRewrites = kNoLimit;
+        |        ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/Transforms/GreedyPatternRewriteDriver.h:47:27: warning: private field 'listener' is not used [-Wunused-private-field]
+     47 |   RewriterBase::Listener *listener = nullptr;
+        |                           ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/Transforms/GreedyPatternRewriteDriver.h:48:8: warning: private field 'fold' is not used [-Wunused-private-field]
+     48 |   bool fold = true;
+        |        ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/Transforms/GreedyPatternRewriteDriver.h:49:8: warning: private field 'cseConstants' is not used [-Wunused-private-field]
+     49 |   bool cseConstants = true;
+        |        ^
+  /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/matmul-scalar/conversion-include/mlir/Transforms/GreedyPatternRewriteDriver.h:50:8: warning: private field 'cseBetweenIterations' is not used [-Wunused-private-field]
+     50 |   bool cseBetweenIterations = false;
+        |        ^
+  29 warnings generated.
+[fclang] Failure: could not find all needed definitions:
+   _ZN21anonymous_namespace_128SimplifyTosaMatmulScalarPassED1 (id -1, defined: false)
+   _ZNK21anonymous_namespace_128SimplifyTosaMatmulScalarPassE20getDependentDialectsRN4mlirE15DialectRegistry (id -1, defined: false)
+   _ZNK21anonymous_namespace_128SimplifyTosaMatmulScalarPassE14getDescription (id -1, defined: false)
+   _ZN21anonymous_namespace_123ReplaceScalarLikeMatmulED1 (id -1, defined: false)
+   _ZN21anonymous_namespace_128SimplifyTosaMatmulScalarPassE14runOnOperation (id -1, defined: false)
+   _ZNK21anonymous_namespace_128SimplifyTosaMatmulScalarPassE11getArgument (id -1, defined: false)
+   _ZNK21anonymous_namespace_123ReplaceScalarLikeMatmulE15matchAndRewriteN4mlir4tosaE8MatMulOpRN4mlirE15PatternRewriter (id -1, defined: false)
+[kernel] Current source was: <unknown location>
+  The full backtrace is:
+  Raised at Frama_c_kernel__Log.finally_raise in file "src/libraries/utils/log.ml" (inlined), line 529, characters 24-31
+  Called from Frama_c_kernel__Log.Register.fatal in file "src/libraries/utils/log.ml", line 1160, characters 17-55
+  Called from Frama_c_kernel__Log.logwithfinal.(fun) in file "src/libraries/utils/log.ml", line 522, characters 9-23
+  Re-raised at Frama_c_kernel__Log.logwithfinal.(fun) in file "src/libraries/utils/log.ml", line 525, characters 9-16
+  Called from Clang__Reorder_defs.reorder in file "reorder_defs.ml", line 459, characters 4-107
+  Called from Clang__Frama_Clang_register.parse_cxx in file "frama_Clang_register.ml", line 221, characters 13-36
+  Called from Frama_c_kernel__File.to_cil_cabs in file "src/kernel_services/ast_queries/file.ml", line 666, characters 12-36
+  Called from Frama_c_kernel__File.files_to_cabs_cil.(fun) in file "src/kernel_services/ast_queries/file.ml", line 743, characters 46-72
+  Called from Stdlib__List.fold_left in file "list.ml", line 121, characters 24-34
+  Called from Frama_c_kernel__File.files_to_cabs_cil in file "src/kernel_services/ast_queries/file.ml", line 743, characters 17-89
+  Called from Frama_c_kernel__File.prepare_from_c_files in file "src/kernel_services/ast_queries/file.ml", line 1863, characters 24-60
+  Called from Frama_c_kernel__File.init_from_cmdline in file "src/kernel_services/ast_queries/file.ml", line 1941, characters 4-27
+  Called from Frama_c_kernel__Ast.force_compute in file "src/kernel_services/ast_data/ast.ml", line 98, characters 2-28
+  Called from Frama_c_kernel__Ast.compute in file "src/kernel_services/ast_data/ast.ml", line 106, characters 53-71
+  Called from Frama_c_kernel__Boot.play_analysis in file "src/kernel_internals/runtime/boot.ml", line 17, characters 6-20
+  Called from Frama_c_kernel__Cmdline.play_in_toplevel_one_shot in file "src/kernel_services/cmdline_parameters/cmdline.ml", line 951, characters 2-9
+  Called from Frama_c_kernel__Cmdline.play_in_toplevel in file "src/kernel_services/cmdline_parameters/cmdline.ml", line 1005, characters 18-64
+  Called from Frama_c_kernel__Cmdline.catch_toplevel_run in file "src/kernel_services/cmdline_parameters/cmdline.ml", line 192, characters 4-8
+  
+  Plug-in fclang aborted: internal error.
+  Please report as 'crash' at https://git.frama-c.com/pub/frama-c/issues
+  Your Frama-C version is 33.0 (Arsenic).
+  Note that a version and a backtrace alone often do not contain enough
+  information to understand the bug. Guidelines for reporting bugs are at:
+  https://git.frama-c.com/pub/frama-c/-/wikis/Guidelines-for-reporting-bugs
+
+--- stderr ---
