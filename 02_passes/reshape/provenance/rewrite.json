@@ -1,0 +1,179 @@
+{
+  "clang_version": "clang version 18.1.8 (https://github.com/conda-forge/clangdev-feedstock 3c15221e001c9fe87fcc807876aa06d599616b01)",
+  "edits": [
+    {
+      "after": "namespace SimplifyTosaReshape_anonymousNamespace_01 {} using namespace SimplifyTosaReshape_anonymousNamespace_01;\nnamespace SimplifyTosaReshape_anonymousNamespace_01",
+      "before": "namespace",
+      "column": 1,
+      "dependency_change": "Changes internal linkage; single-TU compatibility workaround",
+      "insertion_order": -1,
+      "length": 9,
+      "line": 29,
+      "offset": 1163,
+      "reason": "Name an anonymous namespace and preserve its implicit using-directive; reopened declarations share one name",
+      "rule": "namespace",
+      "round": 0,
+      "input_sha256": "9c6383f0ad144df9a4b0dde927d052a48087d97caeb984cf1af540437a124af4"
+    },
+    {
+      "after": "SimplifyTosaReshape_anonymousNamespace_01::SimplifyTosaReshapePass",
+      "before": "SimplifyTosaReshapePass",
+      "column": 20,
+      "dependency_change": "none",
+      "insertion_order": -1,
+      "length": 23,
+      "line": 129,
+      "offset": 4772,
+      "reason": "Preserve the bound class reference outside the renamed namespace",
+      "rule": "namespace-reference",
+      "round": 0,
+      "input_sha256": "9c6383f0ad144df9a4b0dde927d052a48087d97caeb984cf1af540437a124af4"
+    },
+    {
+      "after": "while (true) {\n      auto inner = base.getDefiningOp<tosa::ReshapeOp>();\n      if (!static_cast<bool>(inner))\n        break;\n      {\n        base = inner.getInput1();\n        changed = true;\n      }\n    }",
+      "before": "while (auto inner = base.getDefiningOp<tosa::ReshapeOp>()) {\n      base = inner.getInput1();\n      changed = true;\n    }",
+      "column": 5,
+      "dependency_change": "No new library API; explicit bool conversion",
+      "insertion_order": -1,
+      "length": 120,
+      "line": 43,
+      "offset": 1885,
+      "reason": "Reevaluate each iteration; preserve body scope and contextual bool",
+      "rule": "while",
+      "round": 1,
+      "input_sha256": "8bd6512227c02aeb728232ae28db5f92ad16a0fa11968ef332cb4519c5607bc2"
+    },
+    {
+      "after": "auto *opPtr = &op;\n    auto *basePtr = &base;\n    ",
+      "before": "",
+      "column": 5,
+      "dependency_change": "Original object lifetimes remain the caller's responsibility",
+      "insertion_order": 20,
+      "length": 0,
+      "line": 55,
+      "offset": 2137,
+      "reason": "Take original-object addresses before the outer lambda",
+      "rule": "capture-pointers",
+      "round": 2,
+      "input_sha256": "01fb80a24f711e967d24c17ae8575ced4fb2bf75244f2a55e0f07b6db32bbff2"
+    },
+    {
+      "after": "[opPtr, basePtr]() { (*opPtr).getInput1Mutable().assign((*basePtr)); }",
+      "before": "[&]() { op.getInput1Mutable().assign(base); }",
+      "column": 34,
+      "dependency_change": "Nested by-value pointer captures and local aliases; no library API or ownership added",
+      "insertion_order": -1,
+      "length": 45,
+      "line": 55,
+      "offset": 2166,
+      "reason": "Compose 1 nested lambdas; materialize local pointer copies at each boundary",
+      "rule": "capture",
+      "round": 2,
+      "input_sha256": "01fb80a24f711e967d24c17ae8575ced4fb2bf75244f2a55e0f07b6db32bbff2"
+    },
+    {
+      "after": "auto *reshapeOpsPtr = &reshapeOps;\n    ",
+      "before": "",
+      "column": 5,
+      "dependency_change": "Original object lifetimes remain the caller's responsibility",
+      "insertion_order": 20,
+      "length": 0,
+      "line": 112,
+      "offset": 4215,
+      "reason": "Take original-object addresses before the outer lambda",
+      "rule": "capture-pointers",
+      "round": 2,
+      "input_sha256": "01fb80a24f711e967d24c17ae8575ced4fb2bf75244f2a55e0f07b6db32bbff2"
+    },
+    {
+      "after": "[reshapeOpsPtr](tosa::ReshapeOp rop) { (*reshapeOpsPtr).push_back(rop.getOperation()); }",
+      "before": "[&](tosa::ReshapeOp rop) { reshapeOps.push_back(rop.getOperation()); }",
+      "column": 9,
+      "dependency_change": "Nested by-value pointer captures and local aliases; no library API or ownership added",
+      "insertion_order": -1,
+      "length": 70,
+      "line": 113,
+      "offset": 4234,
+      "reason": "Compose 1 nested lambdas; materialize local pointer copies at each boundary",
+      "rule": "capture",
+      "round": 2,
+      "input_sha256": "01fb80a24f711e967d24c17ae8575ced4fb2bf75244f2a55e0f07b6db32bbff2"
+    },
+    {
+      "after": "{\n      bool guardFailed = (!inTy || !outTy);\n      if (guardFailed)\n      return failure();\n    }",
+      "before": "if (!inTy || !outTy)\n      return failure();",
+      "column": 5,
+      "dependency_change": "One fresh block-local bool; if-init lifetime and short-circuit evaluation remain scoped to the original if",
+      "insertion_order": -1,
+      "length": 44,
+      "line": 71,
+      "offset": 2858,
+      "reason": "Bind a built-in || condition once; preserve the complete if and both branches independently of profile, method and return value",
+      "rule": "guard",
+      "round": 3,
+      "input_sha256": "e25c2ea0add399df5273f9a5279ca1aab81311dcb464f489e060f676fd28e3d6"
+    }
+  ],
+  "input": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/GraphRedundancyElimination/SimplifyTosaReshape.cpp",
+  "output": "/home/ce/Desktop/BuddyCompiler/audits/remaining-rules-generalization-20261120-031609/verified/reshape/rewritten.cpp",
+  "parsed": true,
+  "profile": "reshape",
+  "rejections": [],
+  "rules": [
+    "namespace",
+    "while",
+    "capture",
+    "guard"
+  ],
+  "schema_version": 1,
+  "scope": "Audited pass compatibility rules; no general equivalence claim",
+  "status": "rewritten",
+  "rounds": [
+    {
+      "rule": "namespace",
+      "phases": [
+        "namespace",
+        "namespace-reference"
+      ],
+      "input_sha256": "9c6383f0ad144df9a4b0dde927d052a48087d97caeb984cf1af540437a124af4",
+      "output_sha256": "8bd6512227c02aeb728232ae28db5f92ad16a0fa11968ef332cb4519c5607bc2",
+      "edit_count": 2
+    },
+    {
+      "rule": "while",
+      "phases": [
+        "while"
+      ],
+      "input_sha256": "8bd6512227c02aeb728232ae28db5f92ad16a0fa11968ef332cb4519c5607bc2",
+      "output_sha256": "01fb80a24f711e967d24c17ae8575ced4fb2bf75244f2a55e0f07b6db32bbff2",
+      "edit_count": 1
+    },
+    {
+      "rule": "capture",
+      "phases": [
+        "capture",
+        "capture-pointers"
+      ],
+      "input_sha256": "01fb80a24f711e967d24c17ae8575ced4fb2bf75244f2a55e0f07b6db32bbff2",
+      "output_sha256": "e25c2ea0add399df5273f9a5279ca1aab81311dcb464f489e060f676fd28e3d6",
+      "edit_count": 4
+    },
+    {
+      "rule": "guard",
+      "phases": [
+        "guard"
+      ],
+      "input_sha256": "e25c2ea0add399df5273f9a5279ca1aab81311dcb464f489e060f676fd28e3d6",
+      "output_sha256": "bf3cc7e111fdac5cc3c0d1840ed413f54e73eb448a05d8cb42aba5213e3c79ed",
+      "edit_count": 1
+    },
+    {
+      "rule": "guard",
+      "phases": [],
+      "input_sha256": "bf3cc7e111fdac5cc3c0d1840ed413f54e73eb448a05d8cb42aba5213e3c79ed",
+      "output_sha256": "bf3cc7e111fdac5cc3c0d1840ed413f54e73eb448a05d8cb42aba5213e3c79ed",
+      "edit_count": 0
+    }
+  ],
+  "offset_basis": "UTF-8 bytes in the input of each numbered AST round"
+}

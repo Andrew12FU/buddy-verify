@@ -1,0 +1,8 @@
+-- Could NOT find LibXml2 (missing: LIBXML2_LIBRARY LIBXML2_INCLUDE_DIR) 
+-- Could NOT find LibXml2 (missing: LIBXML2_LIBRARY LIBXML2_INCLUDE_DIR) 
+-- Frontend parser: LLVM/Clang 18.1.8; Frama-Clang is configured separately
+-- Configuring done (0.2s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/ce/Desktop/FramaClangFrontend-standalone-20261120/01_frontend/FramaClangFrontend/build-llvm18
+[1/2] Building CXX object CMakeFiles/buddy-framac-rewrite.dir/src/rules/ConstructorRule.cpp.o
+[2/2] Linking CXX executable buddy-framac-rewrite

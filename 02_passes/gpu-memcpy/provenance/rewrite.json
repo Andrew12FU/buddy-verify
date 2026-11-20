@@ -1,0 +1,254 @@
+{
+  "clang_version": "clang version 18.1.8 (https://github.com/conda-forge/clangdev-feedstock 3c15221e001c9fe87fcc807876aa06d599616b01)",
+  "edits": [
+    {
+      "after": "namespace ConvertMemcpyToGPU_anonymousNamespace_01 {} using namespace ConvertMemcpyToGPU_anonymousNamespace_01;\nnamespace ConvertMemcpyToGPU_anonymousNamespace_01",
+      "before": "namespace",
+      "column": 1,
+      "dependency_change": "Changes internal linkage; single-TU compatibility workaround",
+      "insertion_order": -1,
+      "length": 9,
+      "line": 53,
+      "offset": 1911,
+      "reason": "Name an anonymous namespace and preserve its implicit using-directive; reopened declarations share one name",
+      "rule": "namespace",
+      "round": 0,
+      "input_sha256": "9ec27a7c56878415133040a583ac925554f496946cb187263d75f9dcaf08548e"
+    },
+    {
+      "after": "ConvertMemcpyToGPU_anonymousNamespace_01::ConvertMemcpyToGPUPass",
+      "before": "ConvertMemcpyToGPUPass",
+      "column": 20,
+      "dependency_change": "none",
+      "insertion_order": -1,
+      "length": 22,
+      "line": 228,
+      "offset": 9064,
+      "reason": "Preserve the bound class reference outside the renamed namespace",
+      "rule": "namespace-reference",
+      "round": 0,
+      "input_sha256": "9ec27a7c56878415133040a583ac925554f496946cb187263d75f9dcaf08548e"
+    },
+    {
+      "after": "auto *builderPtr = &builder;\n  auto *unDeallocatedValuePtr = &unDeallocatedValue;\n  auto *funcOpPtr = &funcOp;\n  ",
+      "before": "",
+      "column": 3,
+      "dependency_change": "Original object lifetimes remain the caller's responsibility",
+      "insertion_order": 20,
+      "length": 0,
+      "line": 122,
+      "offset": 4553,
+      "reason": "Take original-object addresses before the outer lambda",
+      "rule": "capture-pointers",
+      "round": 1,
+      "input_sha256": "5e4e165404d81a739b1dea7c03b83cdcd4c9cf1da16d82ae2f118991fb48e9b9"
+    },
+    {
+      "after": "[builderPtr, unDeallocatedValuePtr, funcOpPtr](Operation *nestedOp) {\n    // Replace all allocations with GPU.alloc\n    if (auto allocOp = dyn_cast<memref::AllocOp>(nestedOp)) {\n      // Rewrite this allocOp to gpu.alloc, change for all users\n      (*builderPtr).setInsertionPointAfter(allocOp);\n      auto result = allocOp->getResult(0);\n      auto memrefType = dyn_cast<MemRefType>(result.getType());\n      auto memorySpace = memrefType.getMemorySpace();\n\n      // Filter operations.\n      if (memorySpace) {\n        if (auto intMemorySpace = llvm::dyn_cast<IntegerAttr>(memorySpace)) {\n          if (intMemorySpace.getInt() != 0) {\n            return WalkResult::advance();\n          }\n        } else if (auto gpuMemorySpace =\n                       llvm::dyn_cast<gpu::AddressSpaceAttr>(memorySpace)) {\n          if (gpuMemorySpace.getValue() != gpu::AddressSpace::Global) {\n            return WalkResult::advance();\n          }\n        } else\n          return WalkResult::advance();\n      }\n\n      auto gpuAllocOp = gpu::AllocOp::create(\n          (*builderPtr), allocOp->getLoc(),\n          TypeRange({stripMemRefLayout(memrefType)}), ValueRange({}));\n\n      for (auto user : llvm::make_early_inc_range(result.getUsers())) {\n        if (auto deallocOp = dyn_cast<memref::DeallocOp>(user)) {\n          (*builderPtr).setInsertionPointAfter(deallocOp);\n          gpu::DeallocOp::create((*builderPtr), deallocOp->getLoc(), TypeRange(),\n                                 ValueRange(), gpuAllocOp.getResult(0));\n          deallocOp->erase();\n        } else {\n          for (auto &opOperand : user->getOpOperands()) {\n            if (opOperand.is(result)) {\n              opOperand.set(gpuAllocOp.getResult(0));\n            }\n          }\n        }\n      }\n      allocOp->erase();\n    }\n    // Replace all memory.copy operations with gpu.memcpy\n    else if (auto copyOp = dyn_cast<memref::CopyOp>(nestedOp)) {\n      auto src = copyOp.getOperand(0);\n      auto dst = copyOp.getOperand(1);\n      // Notice: GPU.memcpy has a different src dst order\n      (*builderPtr).setInsertionPointAfter(copyOp);\n      auto gpuMemcpyOp = gpu::MemcpyOp::create(\n          (*builderPtr), copyOp->getLoc(), TypeRange(), ValueRange(), dst, src);\n      src.replaceAllUsesWith(gpuMemcpyOp->getResult(1));\n      dst.replaceAllUsesWith(gpuMemcpyOp->getResult(0));\n      copyOp->erase();\n    }\n    // Allocate space on GPU and copy global memrefs to GPU, needs deallocation\n    else if (auto getGlobalOp = dyn_cast<memref::GetGlobalOp>(nestedOp)) {\n      (*builderPtr).setInsertionPointAfter(getGlobalOp);\n      auto result = getGlobalOp->getResult(0);\n      auto memrefType = dyn_cast<MemRefType>(result.getType());\n      auto gpuAllocOp = gpu::AllocOp::create(\n          (*builderPtr), getGlobalOp->getLoc(),\n          TypeRange({stripMemRefLayout(memrefType)}), ValueRange({}));\n      (*unDeallocatedValuePtr).push_back(gpuAllocOp->getResult(0));\n\n      auto src = result;\n      auto dst = gpuAllocOp->getResult(0);\n      auto gpuMemcpyOp = gpu::MemcpyOp::create(\n          (*builderPtr), gpuAllocOp->getLoc(), TypeRange(), ValueRange(), dst, src);\n      src.replaceAllUsesExcept(dst, gpuMemcpyOp);\n    }\n    // Copy data back to CPU, deallocate GPU, then return\n    else if (auto returnOp = dyn_cast<func::ReturnOp>(nestedOp)) {\n      (*builderPtr).setInsertionPoint(returnOp);\n      llvm::SmallVector<Type> outputTypes(\n          (*funcOpPtr).getFunctionType().getResults());\n      for (unsigned i = 0; i < returnOp.getNumOperands(); ++i) {\n        auto val = returnOp->getOperand(i);\n        if (auto memrefType = dyn_cast<MemRefType>(val.getType())) {\n          auto identityMemrefType = stripMemRefLayout(memrefType);\n          auto allocOp = memref::AllocOp::create((*builderPtr), returnOp->getLoc(),\n                                                 identityMemrefType);\n          gpu::MemcpyOp::create((*builderPtr), allocOp.getLoc(), TypeRange(),\n                                ValueRange(), allocOp->getResult(0), val);\n          // FIXME: may be leak memory\n          // auto gpuDeallocOp = builder.create<gpu::DeallocOp>(\n          //     gpuMemcpyOp->getLoc(), TypeRange(), ValueRange(), val);\n          outputTypes[i] = identityMemrefType;\n          returnOp->setOperand(i, allocOp->getResult(0));\n        }\n      }\n      for (auto value : (*unDeallocatedValuePtr)) {\n        gpu::DeallocOp::create((*builderPtr), returnOp->getLoc(), TypeRange(),\n                               ValueRange(), value);\n      }\n      (*funcOpPtr).setType(\n          (*builderPtr).getFunctionType((*funcOpPtr).getArgumentTypes(), outputTypes));\n    }\n    return WalkResult::advance();\n  }",
+      "before": "[&](Operation *nestedOp) {\n    // Replace all allocations with GPU.alloc\n    if (auto allocOp = dyn_cast<memref::AllocOp>(nestedOp)) {\n      // Rewrite this allocOp to gpu.alloc, change for all users\n      builder.setInsertionPointAfter(allocOp);\n      auto result = allocOp->getResult(0);\n      auto memrefType = dyn_cast<MemRefType>(result.getType());\n      auto memorySpace = memrefType.getMemorySpace();\n\n      // Filter operations.\n      if (memorySpace) {\n        if (auto intMemorySpace = llvm::dyn_cast<IntegerAttr>(memorySpace)) {\n          if (intMemorySpace.getInt() != 0) {\n            return WalkResult::advance();\n          }\n        } else if (auto gpuMemorySpace =\n                       llvm::dyn_cast<gpu::AddressSpaceAttr>(memorySpace)) {\n          if (gpuMemorySpace.getValue() != gpu::AddressSpace::Global) {\n            return WalkResult::advance();\n          }\n        } else\n          return WalkResult::advance();\n      }\n\n      auto gpuAllocOp = gpu::AllocOp::create(\n          builder, allocOp->getLoc(),\n          TypeRange({stripMemRefLayout(memrefType)}), ValueRange({}));\n\n      for (auto user : llvm::make_early_inc_range(result.getUsers())) {\n        if (auto deallocOp = dyn_cast<memref::DeallocOp>(user)) {\n          builder.setInsertionPointAfter(deallocOp);\n          gpu::DeallocOp::create(builder, deallocOp->getLoc(), TypeRange(),\n                                 ValueRange(), gpuAllocOp.getResult(0));\n          deallocOp->erase();\n        } else {\n          for (auto &opOperand : user->getOpOperands()) {\n            if (opOperand.is(result)) {\n              opOperand.set(gpuAllocOp.getResult(0));\n            }\n          }\n        }\n      }\n      allocOp->erase();\n    }\n    // Replace all memory.copy operations with gpu.memcpy\n    else if (auto copyOp = dyn_cast<memref::CopyOp>(nestedOp)) {\n      auto src = copyOp.getOperand(0);\n      auto dst = copyOp.getOperand(1);\n      // Notice: GPU.memcpy has a different src dst order\n      builder.setInsertionPointAfter(copyOp);\n      auto gpuMemcpyOp = gpu::MemcpyOp::create(\n          builder, copyOp->getLoc(), TypeRange(), ValueRange(), dst, src);\n      src.replaceAllUsesWith(gpuMemcpyOp->getResult(1));\n      dst.replaceAllUsesWith(gpuMemcpyOp->getResult(0));\n      copyOp->erase();\n    }\n    // Allocate space on GPU and copy global memrefs to GPU, needs deallocation\n    else if (auto getGlobalOp = dyn_cast<memref::GetGlobalOp>(nestedOp)) {\n      builder.setInsertionPointAfter(getGlobalOp);\n      auto result = getGlobalOp->getResult(0);\n      auto memrefType = dyn_cast<MemRefType>(result.getType());\n      auto gpuAllocOp = gpu::AllocOp::create(\n          builder, getGlobalOp->getLoc(),\n          TypeRange({stripMemRefLayout(memrefType)}), ValueRange({}));\n      unDeallocatedValue.push_back(gpuAllocOp->getResult(0));\n\n      auto src = result;\n      auto dst = gpuAllocOp->getResult(0);\n      auto gpuMemcpyOp = gpu::MemcpyOp::create(\n          builder, gpuAllocOp->getLoc(), TypeRange(), ValueRange(), dst, src);\n      src.replaceAllUsesExcept(dst, gpuMemcpyOp);\n    }\n    // Copy data back to CPU, deallocate GPU, then return\n    else if (auto returnOp = dyn_cast<func::ReturnOp>(nestedOp)) {\n      builder.setInsertionPoint(returnOp);\n      llvm::SmallVector<Type> outputTypes(\n          funcOp.getFunctionType().getResults());\n      for (unsigned i = 0; i < returnOp.getNumOperands(); ++i) {\n        auto val = returnOp->getOperand(i);\n        if (auto memrefType = dyn_cast<MemRefType>(val.getType())) {\n          auto identityMemrefType = stripMemRefLayout(memrefType);\n          auto allocOp = memref::AllocOp::create(builder, returnOp->getLoc(),\n                                                 identityMemrefType);\n          gpu::MemcpyOp::create(builder, allocOp.getLoc(), TypeRange(),\n                                ValueRange(), allocOp->getResult(0), val);\n          // FIXME: may be leak memory\n          // auto gpuDeallocOp = builder.create<gpu::DeallocOp>(\n          //     gpuMemcpyOp->getLoc(), TypeRange(), ValueRange(), val);\n          outputTypes[i] = identityMemrefType;\n          returnOp->setOperand(i, allocOp->getResult(0));\n        }\n      }\n      for (auto value : unDeallocatedValue) {\n        gpu::DeallocOp::create(builder, returnOp->getLoc(), TypeRange(),\n                               ValueRange(), value);\n      }\n      funcOp.setType(\n          builder.getFunctionType(funcOp.getArgumentTypes(), outputTypes));\n    }\n    return WalkResult::advance();\n  }",
+      "column": 37,
+      "dependency_change": "Nested by-value pointer captures and local aliases; no library API or ownership added",
+      "insertion_order": -1,
+      "length": 4500,
+      "line": 122,
+      "offset": 4587,
+      "reason": "Compose 1 nested lambdas; materialize local pointer copies at each boundary",
+      "rule": "capture",
+      "round": 1,
+      "input_sha256": "5e4e165404d81a739b1dea7c03b83cdcd4c9cf1da16d82ae2f118991fb48e9b9"
+    },
+    {
+      "after": "{\n        auto &&rangeValues = llvm::make_early_inc_range(result.getUsers());\n        auto rangeIt = rangeValues.begin();\n        auto rangeEnd = rangeValues.end();\n        for (; rangeIt != rangeEnd; ++rangeIt) {\n          auto user = *rangeIt;\n          {\n        if (auto deallocOp = dyn_cast<memref::DeallocOp>(user)) {\n          (*builderPtr).setInsertionPointAfter(deallocOp);\n          gpu::DeallocOp::create((*builderPtr), deallocOp->getLoc(), TypeRange(),\n                                 ValueRange(), gpuAllocOp.getResult(0));\n          deallocOp->erase();\n        } else {\n          {\n            auto &&rangeValues1 = user->getOpOperands();\n            auto rangeIt1 = rangeValues1.begin();\n            auto rangeEnd1 = rangeValues1.end();\n            for (; rangeIt1 != rangeEnd1; ++rangeIt1) {\n              auto & opOperand = *rangeIt1;\n              {\n            if (opOperand.is(result)) {\n              opOperand.set(gpuAllocOp.getResult(0));\n            }\n          }\n            }\n          }\n        }\n      }\n        }\n      }",
+      "before": "for (auto user : llvm::make_early_inc_range(result.getUsers())) {\n        if (auto deallocOp = dyn_cast<memref::DeallocOp>(user)) {\n          (*builderPtr).setInsertionPointAfter(deallocOp);\n          gpu::DeallocOp::create((*builderPtr), deallocOp->getLoc(), TypeRange(),\n                                 ValueRange(), gpuAllocOp.getResult(0));\n          deallocOp->erase();\n        } else {\n          for (auto &opOperand : user->getOpOperands()) {\n            if (opOperand.is(result)) {\n              opOperand.set(gpuAllocOp.getResult(0));\n            }\n          }\n        }\n      }",
+      "column": 7,
+      "dependency_change": "none",
+      "insertion_order": -1,
+      "length": 588,
+      "line": 153,
+      "offset": 5865,
+      "reason": "Desugar 2 range loops; preserve one-time evaluation, lifetime and early increment",
+      "rule": "range-for",
+      "round": 2,
+      "input_sha256": "149384fca0bb5c0c22b1162c43840fdca98ff2f9672c400cbda84daee1d59285"
+    },
+    {
+      "after": "{\n        auto &&rangeValues2 = (*unDeallocatedValuePtr);\n        auto rangeIt2 = rangeValues2.begin();\n        auto rangeEnd2 = rangeValues2.end();\n        for (; rangeIt2 != rangeEnd2; ++rangeIt2) {\n          auto value = *rangeIt2;\n          {\n        gpu::DeallocOp::create((*builderPtr), returnOp->getLoc(), TypeRange(),\n                               ValueRange(), value);\n      }\n        }\n      }",
+      "before": "for (auto value : (*unDeallocatedValuePtr)) {\n        gpu::DeallocOp::create((*builderPtr), returnOp->getLoc(), TypeRange(),\n                               ValueRange(), value);\n      }",
+      "column": 7,
+      "dependency_change": "none",
+      "insertion_order": -1,
+      "length": 185,
+      "line": 217,
+      "offset": 9012,
+      "reason": "Desugar 1 range loops; preserve one-time evaluation, lifetime and early increment",
+      "rule": "range-for",
+      "round": 2,
+      "input_sha256": "149384fca0bb5c0c22b1162c43840fdca98ff2f9672c400cbda84daee1d59285"
+    },
+    {
+      "after": "{\n      auto gpuLaunchOp = dyn_cast<gpu::LaunchOp>(nestedOp);\n      if (static_cast<bool>(gpuLaunchOp)) {\n        nestedOp->emitOpError(\"The gpu function should be outlined.\");\n      }\n    }",
+      "before": "if (auto gpuLaunchOp = dyn_cast<gpu::LaunchOp>(nestedOp)) {\n      nestedOp->emitOpError(\"The gpu function should be outlined.\");\n    }",
+      "column": 5,
+      "dependency_change": "Explicit contextual bool; no new library interface",
+      "insertion_order": -1,
+      "length": 134,
+      "line": 92,
+      "offset": 3329,
+      "reason": "Preserve conditional construction, else priority and body scopes",
+      "rule": "if-condition",
+      "round": 3,
+      "input_sha256": "2881a2b6c1fe549bf8822dfe08f9a6026d2d319218c35ffb3c6c36000a17c913"
+    },
+    {
+      "after": "{\n      auto allocOp = dyn_cast<memref::AllocOp>(nestedOp);\n      if (static_cast<bool>(allocOp)) {\n        // Rewrite this allocOp to gpu.alloc, change for all users\n        (*builderPtr).setInsertionPointAfter(allocOp);\n        auto result = allocOp->getResult(0);\n        auto memrefType = dyn_cast<MemRefType>(result.getType());\n        auto memorySpace = memrefType.getMemorySpace();\n\n        // Filter operations.\n        if (memorySpace) {\n          if (auto intMemorySpace = llvm::dyn_cast<IntegerAttr>(memorySpace)) {\n            if (intMemorySpace.getInt() != 0) {\n              return WalkResult::advance();\n            }\n          } else if (auto gpuMemorySpace =\n                         llvm::dyn_cast<gpu::AddressSpaceAttr>(memorySpace)) {\n            if (gpuMemorySpace.getValue() != gpu::AddressSpace::Global) {\n              return WalkResult::advance();\n            }\n          } else\n            return WalkResult::advance();\n        }\n\n        auto gpuAllocOp = gpu::AllocOp::create(\n            (*builderPtr), allocOp->getLoc(),\n            TypeRange({stripMemRefLayout(memrefType)}), ValueRange({}));\n\n        {\n          auto &&rangeValues = llvm::make_early_inc_range(result.getUsers());\n          auto rangeIt = rangeValues.begin();\n          auto rangeEnd = rangeValues.end();\n          for (; rangeIt != rangeEnd; ++rangeIt) {\n            auto user = *rangeIt;\n            {\n          if (auto deallocOp = dyn_cast<memref::DeallocOp>(user)) {\n            (*builderPtr).setInsertionPointAfter(deallocOp);\n            gpu::DeallocOp::create((*builderPtr), deallocOp->getLoc(), TypeRange(),\n                                   ValueRange(), gpuAllocOp.getResult(0));\n            deallocOp->erase();\n          } else {\n            {\n              auto &&rangeValues1 = user->getOpOperands();\n              auto rangeIt1 = rangeValues1.begin();\n              auto rangeEnd1 = rangeValues1.end();\n              for (; rangeIt1 != rangeEnd1; ++rangeIt1) {\n                auto & opOperand = *rangeIt1;\n                {\n              if (opOperand.is(result)) {\n                opOperand.set(gpuAllocOp.getResult(0));\n              }\n            }\n              }\n            }\n          }\n        }\n          }\n        }\n        allocOp->erase();\n      } else {\n        auto copyOp = dyn_cast<memref::CopyOp>(nestedOp);\n        if (static_cast<bool>(copyOp)) {\n          auto src = copyOp.getOperand(0);\n          auto dst = copyOp.getOperand(1);\n          // Notice: GPU.memcpy has a different src dst order\n          (*builderPtr).setInsertionPointAfter(copyOp);\n          auto gpuMemcpyOp = gpu::MemcpyOp::create(\n              (*builderPtr), copyOp->getLoc(), TypeRange(), ValueRange(), dst, src);\n          src.replaceAllUsesWith(gpuMemcpyOp->getResult(1));\n          dst.replaceAllUsesWith(gpuMemcpyOp->getResult(0));\n          copyOp->erase();\n        } else {\n          auto getGlobalOp = dyn_cast<memref::GetGlobalOp>(nestedOp);\n          if (static_cast<bool>(getGlobalOp)) {\n            (*builderPtr).setInsertionPointAfter(getGlobalOp);\n            auto result = getGlobalOp->getResult(0);\n            auto memrefType = dyn_cast<MemRefType>(result.getType());\n            auto gpuAllocOp = gpu::AllocOp::create(\n                (*builderPtr), getGlobalOp->getLoc(),\n                TypeRange({stripMemRefLayout(memrefType)}), ValueRange({}));\n            (*unDeallocatedValuePtr).push_back(gpuAllocOp->getResult(0));\n\n            auto src = result;\n            auto dst = gpuAllocOp->getResult(0);\n            auto gpuMemcpyOp = gpu::MemcpyOp::create(\n                (*builderPtr), gpuAllocOp->getLoc(), TypeRange(), ValueRange(), dst, src);\n            src.replaceAllUsesExcept(dst, gpuMemcpyOp);\n          } else {\n            auto returnOp = dyn_cast<func::ReturnOp>(nestedOp);\n            if (static_cast<bool>(returnOp)) {\n              (*builderPtr).setInsertionPoint(returnOp);\n              llvm::SmallVector<Type> outputTypes(\n                  (*funcOpPtr).getFunctionType().getResults());\n              for (unsigned i = 0; i < returnOp.getNumOperands(); ++i) {\n                auto val = returnOp->getOperand(i);\n                if (auto memrefType = dyn_cast<MemRefType>(val.getType())) {\n                  auto identityMemrefType = stripMemRefLayout(memrefType);\n                  auto allocOp = memref::AllocOp::create((*builderPtr), returnOp->getLoc(),\n                                                         identityMemrefType);\n                  gpu::MemcpyOp::create((*builderPtr), allocOp.getLoc(), TypeRange(),\n                                        ValueRange(), allocOp->getResult(0), val);\n                  // FIXME: may be leak memory\n                  // auto gpuDeallocOp = builder.create<gpu::DeallocOp>(\n                  //     gpuMemcpyOp->getLoc(), TypeRange(), ValueRange(), val);\n                  outputTypes[i] = identityMemrefType;\n                  returnOp->setOperand(i, allocOp->getResult(0));\n                }\n              }\n              {\n                auto &&rangeValues2 = (*unDeallocatedValuePtr);\n                auto rangeIt2 = rangeValues2.begin();\n                auto rangeEnd2 = rangeValues2.end();\n                for (; rangeIt2 != rangeEnd2; ++rangeIt2) {\n                  auto value = *rangeIt2;\n                  {\n                gpu::DeallocOp::create((*builderPtr), returnOp->getLoc(), TypeRange(),\n                                       ValueRange(), value);\n              }\n                }\n              }\n              (*funcOpPtr).setType(\n                  (*builderPtr).getFunctionType((*funcOpPtr).getArgumentTypes(), outputTypes));\n            }\n          }\n        }\n      }\n    }",
+      "before": "if (auto allocOp = dyn_cast<memref::AllocOp>(nestedOp)) {\n      // Rewrite this allocOp to gpu.alloc, change for all users\n      (*builderPtr).setInsertionPointAfter(allocOp);\n      auto result = allocOp->getResult(0);\n      auto memrefType = dyn_cast<MemRefType>(result.getType());\n      auto memorySpace = memrefType.getMemorySpace();\n\n      // Filter operations.\n      if (memorySpace) {\n        if (auto intMemorySpace = llvm::dyn_cast<IntegerAttr>(memorySpace)) {\n          if (intMemorySpace.getInt() != 0) {\n            return WalkResult::advance();\n          }\n        } else if (auto gpuMemorySpace =\n                       llvm::dyn_cast<gpu::AddressSpaceAttr>(memorySpace)) {\n          if (gpuMemorySpace.getValue() != gpu::AddressSpace::Global) {\n            return WalkResult::advance();\n          }\n        } else\n          return WalkResult::advance();\n      }\n\n      auto gpuAllocOp = gpu::AllocOp::create(\n          (*builderPtr), allocOp->getLoc(),\n          TypeRange({stripMemRefLayout(memrefType)}), ValueRange({}));\n\n      {\n        auto &&rangeValues = llvm::make_early_inc_range(result.getUsers());\n        auto rangeIt = rangeValues.begin();\n        auto rangeEnd = rangeValues.end();\n        for (; rangeIt != rangeEnd; ++rangeIt) {\n          auto user = *rangeIt;\n          {\n        if (auto deallocOp = dyn_cast<memref::DeallocOp>(user)) {\n          (*builderPtr).setInsertionPointAfter(deallocOp);\n          gpu::DeallocOp::create((*builderPtr), deallocOp->getLoc(), TypeRange(),\n                                 ValueRange(), gpuAllocOp.getResult(0));\n          deallocOp->erase();\n        } else {\n          {\n            auto &&rangeValues1 = user->getOpOperands();\n            auto rangeIt1 = rangeValues1.begin();\n            auto rangeEnd1 = rangeValues1.end();\n            for (; rangeIt1 != rangeEnd1; ++rangeIt1) {\n              auto & opOperand = *rangeIt1;\n              {\n            if (opOperand.is(result)) {\n              opOperand.set(gpuAllocOp.getResult(0));\n            }\n          }\n            }\n          }\n        }\n      }\n        }\n      }\n      allocOp->erase();\n    }\n    // Replace all memory.copy operations with gpu.memcpy\n    else if (auto copyOp = dyn_cast<memref::CopyOp>(nestedOp)) {\n      auto src = copyOp.getOperand(0);\n      auto dst = copyOp.getOperand(1);\n      // Notice: GPU.memcpy has a different src dst order\n      (*builderPtr).setInsertionPointAfter(copyOp);\n      auto gpuMemcpyOp = gpu::MemcpyOp::create(\n          (*builderPtr), copyOp->getLoc(), TypeRange(), ValueRange(), dst, src);\n      src.replaceAllUsesWith(gpuMemcpyOp->getResult(1));\n      dst.replaceAllUsesWith(gpuMemcpyOp->getResult(0));\n      copyOp->erase();\n    }\n    // Allocate space on GPU and copy global memrefs to GPU, needs deallocation\n    else if (auto getGlobalOp = dyn_cast<memref::GetGlobalOp>(nestedOp)) {\n      (*builderPtr).setInsertionPointAfter(getGlobalOp);\n      auto result = getGlobalOp->getResult(0);\n      auto memrefType = dyn_cast<MemRefType>(result.getType());\n      auto gpuAllocOp = gpu::AllocOp::create(\n          (*builderPtr), getGlobalOp->getLoc(),\n          TypeRange({stripMemRefLayout(memrefType)}), ValueRange({}));\n      (*unDeallocatedValuePtr).push_back(gpuAllocOp->getResult(0));\n\n      auto src = result;\n      auto dst = gpuAllocOp->getResult(0);\n      auto gpuMemcpyOp = gpu::MemcpyOp::create(\n          (*builderPtr), gpuAllocOp->getLoc(), TypeRange(), ValueRange(), dst, src);\n      src.replaceAllUsesExcept(dst, gpuMemcpyOp);\n    }\n    // Copy data back to CPU, deallocate GPU, then return\n    else if (auto returnOp = dyn_cast<func::ReturnOp>(nestedOp)) {\n      (*builderPtr).setInsertionPoint(returnOp);\n      llvm::SmallVector<Type> outputTypes(\n          (*funcOpPtr).getFunctionType().getResults());\n      for (unsigned i = 0; i < returnOp.getNumOperands(); ++i) {\n        auto val = returnOp->getOperand(i);\n        if (auto memrefType = dyn_cast<MemRefType>(val.getType())) {\n          auto identityMemrefType = stripMemRefLayout(memrefType);\n          auto allocOp = memref::AllocOp::create((*builderPtr), returnOp->getLoc(),\n                                                 identityMemrefType);\n          gpu::MemcpyOp::create((*builderPtr), allocOp.getLoc(), TypeRange(),\n                                ValueRange(), allocOp->getResult(0), val);\n          // FIXME: may be leak memory\n          // auto gpuDeallocOp = builder.create<gpu::DeallocOp>(\n          //     gpuMemcpyOp->getLoc(), TypeRange(), ValueRange(), val);\n          outputTypes[i] = identityMemrefType;\n          returnOp->setOperand(i, allocOp->getResult(0));\n        }\n      }\n      {\n        auto &&rangeValues2 = (*unDeallocatedValuePtr);\n        auto rangeIt2 = rangeValues2.begin();\n        auto rangeEnd2 = rangeValues2.end();\n        for (; rangeIt2 != rangeEnd2; ++rangeIt2) {\n          auto value = *rangeIt2;\n          {\n        gpu::DeallocOp::create((*builderPtr), returnOp->getLoc(), TypeRange(),\n                               ValueRange(), value);\n      }\n        }\n      }\n      (*funcOpPtr).setType(\n          (*builderPtr).getFunctionType((*funcOpPtr).getArgumentTypes(), outputTypes));\n    }",
+      "column": 5,
+      "dependency_change": "Explicit contextual bool; no new library interface",
+      "insertion_order": -1,
+      "length": 5180,
+      "line": 127,
+      "offset": 4820,
+      "reason": "Preserve conditional construction, else priority and body scopes",
+      "rule": "if-condition",
+      "round": 3,
+      "input_sha256": "2881a2b6c1fe549bf8822dfe08f9a6026d2d319218c35ffb3c6c36000a17c913"
+    },
+    {
+      "after": "if (auto intMemorySpace = llvm::dyn_cast<IntegerAttr>(memorySpace)) {\n            if (intMemorySpace.getInt() != 0) {\n              return WalkResult::advance();\n            }\n          } else if (auto gpuMemorySpace =\n                         llvm::dyn_cast<gpu::AddressSpaceAttr>(memorySpace)) {\n            if (gpuMemorySpace.getValue() != gpu::AddressSpace::Global) {\n              return WalkResult::advance();\n            }\n          } else\n            {\n  return WalkResult::advance();\n}",
+      "before": "if (auto intMemorySpace = llvm::dyn_cast<IntegerAttr>(memorySpace)) {\n            if (intMemorySpace.getInt() != 0) {\n              return WalkResult::advance();\n            }\n          } else if (auto gpuMemorySpace =\n                         llvm::dyn_cast<gpu::AddressSpaceAttr>(memorySpace)) {\n            if (gpuMemorySpace.getValue() != gpu::AddressSpace::Global) {\n              return WalkResult::advance();\n            }\n          } else\n            return WalkResult::advance();",
+      "column": 11,
+      "dependency_change": "No new evaluation or library interface",
+      "insertion_order": -1,
+      "length": 488,
+      "line": 141,
+      "offset": 5333,
+      "reason": "Brace complete branches before desugaring on a fresh AST; keep else-if chains",
+      "rule": "if-condition-normalize",
+      "round": 4,
+      "input_sha256": "f50fb3e58c15216ca9d1e89861070b053627d88fe13fcf248d7cd115dbee6ab6"
+    },
+    {
+      "after": "{\n            auto deallocOp = dyn_cast<memref::DeallocOp>(user);\n            if (static_cast<bool>(deallocOp)) {\n              (*builderPtr).setInsertionPointAfter(deallocOp);\n              gpu::DeallocOp::create((*builderPtr), deallocOp->getLoc(), TypeRange(),\n                                     ValueRange(), gpuAllocOp.getResult(0));\n              deallocOp->erase();\n            } else {\n              {\n                auto &&rangeValues1 = user->getOpOperands();\n                auto rangeIt1 = rangeValues1.begin();\n                auto rangeEnd1 = rangeValues1.end();\n                for (; rangeIt1 != rangeEnd1; ++rangeIt1) {\n                  auto & opOperand = *rangeIt1;\n                  {\n                if (opOperand.is(result)) {\n                  opOperand.set(gpuAllocOp.getResult(0));\n                }\n              }\n                }\n              }\n            }\n          }",
+      "before": "if (auto deallocOp = dyn_cast<memref::DeallocOp>(user)) {\n            (*builderPtr).setInsertionPointAfter(deallocOp);\n            gpu::DeallocOp::create((*builderPtr), deallocOp->getLoc(), TypeRange(),\n                                   ValueRange(), gpuAllocOp.getResult(0));\n            deallocOp->erase();\n          } else {\n            {\n              auto &&rangeValues1 = user->getOpOperands();\n              auto rangeIt1 = rangeValues1.begin();\n              auto rangeEnd1 = rangeValues1.end();\n              for (; rangeIt1 != rangeEnd1; ++rangeIt1) {\n                auto & opOperand = *rangeIt1;\n                {\n              if (opOperand.is(result)) {\n                opOperand.set(gpuAllocOp.getResult(0));\n              }\n            }\n              }\n            }\n          }",
+      "column": 11,
+      "dependency_change": "Explicit contextual bool; no new library interface",
+      "insertion_order": -1,
+      "length": 796,
+      "line": 165,
+      "offset": 6289,
+      "reason": "Preserve conditional construction, else priority and body scopes",
+      "rule": "if-condition",
+      "round": 4,
+      "input_sha256": "f50fb3e58c15216ca9d1e89861070b053627d88fe13fcf248d7cd115dbee6ab6"
+    },
+    {
+      "after": "{\n                  auto memrefType = dyn_cast<MemRefType>(val.getType());\n                  if (static_cast<bool>(memrefType)) {\n                    auto identityMemrefType = stripMemRefLayout(memrefType);\n                    auto allocOp = memref::AllocOp::create((*builderPtr), returnOp->getLoc(),\n                                                           identityMemrefType);\n                    gpu::MemcpyOp::create((*builderPtr), allocOp.getLoc(), TypeRange(),\n                                          ValueRange(), allocOp->getResult(0), val);\n                    // FIXME: may be leak memory\n                    // auto gpuDeallocOp = builder.create<gpu::DeallocOp>(\n                    //     gpuMemcpyOp->getLoc(), TypeRange(), ValueRange(), val);\n                    outputTypes[i] = identityMemrefType;\n                    returnOp->setOperand(i, allocOp->getResult(0));\n                  }\n                }",
+      "before": "if (auto memrefType = dyn_cast<MemRefType>(val.getType())) {\n                  auto identityMemrefType = stripMemRefLayout(memrefType);\n                  auto allocOp = memref::AllocOp::create((*builderPtr), returnOp->getLoc(),\n                                                         identityMemrefType);\n                  gpu::MemcpyOp::create((*builderPtr), allocOp.getLoc(), TypeRange(),\n                                        ValueRange(), allocOp->getResult(0), val);\n                  // FIXME: may be leak memory\n                  // auto gpuDeallocOp = builder.create<gpu::DeallocOp>(\n                  //     gpuMemcpyOp->getLoc(), TypeRange(), ValueRange(), val);\n                  outputTypes[i] = identityMemrefType;\n                  returnOp->setOperand(i, allocOp->getResult(0));\n                }",
+      "column": 17,
+      "dependency_change": "Explicit contextual bool; no new library interface",
+      "insertion_order": -1,
+      "length": 814,
+      "line": 225,
+      "offset": 9051,
+      "reason": "Preserve conditional construction, else priority and body scopes",
+      "rule": "if-condition",
+      "round": 4,
+      "input_sha256": "f50fb3e58c15216ca9d1e89861070b053627d88fe13fcf248d7cd115dbee6ab6"
+    },
+    {
+      "after": "{\n            auto intMemorySpace = llvm::dyn_cast<IntegerAttr>(memorySpace);\n            if (static_cast<bool>(intMemorySpace)) {\n              if (intMemorySpace.getInt() != 0) {\n                return WalkResult::advance();\n              }\n            } else {\n              auto gpuMemorySpace =\n                         llvm::dyn_cast<gpu::AddressSpaceAttr>(memorySpace);\n              if (static_cast<bool>(gpuMemorySpace)) {\n                if (gpuMemorySpace.getValue() != gpu::AddressSpace::Global) {\n                  return WalkResult::advance();\n                }\n              } else {\n  return WalkResult::advance();\n}\n            }\n          }",
+      "before": "if (auto intMemorySpace = llvm::dyn_cast<IntegerAttr>(memorySpace)) {\n            if (intMemorySpace.getInt() != 0) {\n              return WalkResult::advance();\n            }\n          } else if (auto gpuMemorySpace =\n                         llvm::dyn_cast<gpu::AddressSpaceAttr>(memorySpace)) {\n            if (gpuMemorySpace.getValue() != gpu::AddressSpace::Global) {\n              return WalkResult::advance();\n            }\n          } else\n            {\n  return WalkResult::advance();\n}",
+      "column": 11,
+      "dependency_change": "Explicit contextual bool; no new library interface",
+      "insertion_order": -1,
+      "length": 494,
+      "line": 141,
+      "offset": 5333,
+      "reason": "Preserve conditional construction, else priority and body scopes",
+      "rule": "if-condition",
+      "round": 5,
+      "input_sha256": "3e0c1c051d5c6b4f17e868b7687037d18c43848792ffd3327794de46faed2853"
+    }
+  ],
+  "input": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MLIRGPU/ConvertMemcpyToGPU.cpp",
+  "output": "/home/ce/Desktop/BuddyCompiler/audits/remaining-rules-generalization-20261120-031609/verified/gpu-memcpy/rewritten.cpp",
+  "parsed": true,
+  "profile": "gpu-memcpy",
+  "rejections": [],
+  "rules": [
+    "namespace",
+    "capture",
+    "range-for",
+    "if-condition"
+  ],
+  "schema_version": 1,
+  "scope": "Audited pass compatibility rules; no general equivalence claim",
+  "status": "rewritten",
+  "rounds": [
+    {
+      "rule": "namespace",
+      "phases": [
+        "namespace",
+        "namespace-reference"
+      ],
+      "input_sha256": "9ec27a7c56878415133040a583ac925554f496946cb187263d75f9dcaf08548e",
+      "output_sha256": "5e4e165404d81a739b1dea7c03b83cdcd4c9cf1da16d82ae2f118991fb48e9b9",
+      "edit_count": 2
+    },
+    {
+      "rule": "capture",
+      "phases": [
+        "capture",
+        "capture-pointers"
+      ],
+      "input_sha256": "5e4e165404d81a739b1dea7c03b83cdcd4c9cf1da16d82ae2f118991fb48e9b9",
+      "output_sha256": "149384fca0bb5c0c22b1162c43840fdca98ff2f9672c400cbda84daee1d59285",
+      "edit_count": 2
+    },
+    {
+      "rule": "range-for",
+      "phases": [
+        "range-for"
+      ],
+      "input_sha256": "149384fca0bb5c0c22b1162c43840fdca98ff2f9672c400cbda84daee1d59285",
+      "output_sha256": "2881a2b6c1fe549bf8822dfe08f9a6026d2d319218c35ffb3c6c36000a17c913",
+      "edit_count": 2
+    },
+    {
+      "rule": "if-condition",
+      "phases": [
+        "if-condition"
+      ],
+      "input_sha256": "2881a2b6c1fe549bf8822dfe08f9a6026d2d319218c35ffb3c6c36000a17c913",
+      "output_sha256": "f50fb3e58c15216ca9d1e89861070b053627d88fe13fcf248d7cd115dbee6ab6",
+      "edit_count": 2
+    },
+    {
+      "rule": "if-condition",
+      "phases": [
+        "if-condition",
+        "if-condition-normalize"
+      ],
+      "input_sha256": "f50fb3e58c15216ca9d1e89861070b053627d88fe13fcf248d7cd115dbee6ab6",
+      "output_sha256": "3e0c1c051d5c6b4f17e868b7687037d18c43848792ffd3327794de46faed2853",
+      "edit_count": 3
+    },
+    {
+      "rule": "if-condition",
+      "phases": [
+        "if-condition"
+      ],
+      "input_sha256": "3e0c1c051d5c6b4f17e868b7687037d18c43848792ffd3327794de46faed2853",
+      "output_sha256": "0fd3b6c003ce6afa60e9ee060a66398d0542cb83e3e1e6f4cf2dfe9b09239526",
+      "edit_count": 1
+    },
+    {
+      "rule": "if-condition",
+      "phases": [],
+      "input_sha256": "0fd3b6c003ce6afa60e9ee060a66398d0542cb83e3e1e6f4cf2dfe9b09239526",
+      "output_sha256": "0fd3b6c003ce6afa60e9ee060a66398d0542cb83e3e1e6f4cf2dfe9b09239526",
+      "edit_count": 0
+    }
+  ],
+  "offset_basis": "UTF-8 bytes in the input of each numbered AST round"
+}

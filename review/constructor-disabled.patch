@@ -1,0 +1,191 @@
+--- before/01_frontend/FramaClangFrontend/experiment/profiles.py
++++ after/01_frontend/FramaClangFrontend/experiment/profiles.py
+@@ -82,12 +82,14 @@
+         reference_source=REPO / '03_manual_passes/four_pass_clang18/AssumeTightMemRefLayout/rewritten.cpp', reference_real_includes=True,
+         namespace_prefix='AssumeTightMemRefLayout', rounds=('namespace', 'capture', 'range-for', 'if-condition'),
+         compatibility_notes=('Imported reference differences audited in docs/FOUR_PASS_IMPORT.md',)),
++    # constructor is an opt-in compatibility rule; none of the nine defaults uses it.
++    # See docs/OPTIONAL_CONSTRUCTOR_RULE.md for the latent converter limitation.
+     'eliminate-copy': PassProfile(
+         name='eliminate-copy', source=REPO / '02_passes/eliminate-copy/original.cpp',
+-        reference=REPO / '03_manual_passes/four_pass_clang18/EliminateMemRefCopy', rules='namespace,constructor,range-for,if-condition,guard',
+-        expected={'namespace': 1, 'namespace-reference': 1, 'range-for': 5, 'if-condition-normalize': 3, 'if-condition': 6, 'guard': 2, 'constructor': 1}, require_reference_match=False,
++        reference=REPO / '03_manual_passes/four_pass_clang18/EliminateMemRefCopy', rules='namespace,range-for,if-condition,guard',
++        expected={'namespace': 1, 'namespace-reference': 1, 'range-for': 5, 'if-condition-normalize': 3, 'if-condition': 6, 'guard': 2}, require_reference_match=False,
+         reference_source=REPO / '03_manual_passes/four_pass_clang18/EliminateMemRefCopy/rewritten.cpp', reference_real_includes=True,
+-        namespace_prefix='EliminateMemRefCopy', rounds=('namespace', 'constructor', 'range-for', 'if-condition', 'guard'),
++        namespace_prefix='EliminateMemRefCopy', rounds=('namespace', 'range-for', 'if-condition', 'guard'),
+         compatibility_notes=('Imported reference differences audited in docs/FOUR_PASS_IMPORT.md',)),
+     'gpu-memcpy': PassProfile(
+         name='gpu-memcpy', source=REPO / '02_passes/gpu-memcpy/original.cpp',
+--- before/01_frontend/FramaClangFrontend/experiment/validation.py
++++ after/01_frontend/FramaClangFrontend/experiment/validation.py
+@@ -372,7 +372,7 @@
+             log = (c.out / "logs/frama_rewritten.log").read_text()
+             if c.shared_mini and "CXXInheritedCtorInitExpr" in log:
+                 self.summary["conversion_blockers"] = [
+-                    "Frama-Clang 0.0.20 (Clang 18.1.8) encountered an inherited constructor outside the audited expansion rules"
++                    "Frama-Clang 0.0.20 (Clang 18.1.8) encountered CXXInheritedCtorInitExpr; identify its owning type before considering the optional source constructor rule or a header adapter"
+                 ]
+             raise RuntimeError("Frama-Clang conversion failed")
+         converted = c.out / "converted.c"
+--- before/01_frontend/FramaClangFrontend/run.py
++++ after/01_frontend/FramaClangFrontend/run.py
+@@ -17,7 +17,7 @@
+     parser = argparse.ArgumentParser(description=__doc__)
+     parser.add_argument("--pass", dest="pass_name", choices=PASS_PROFILES, default="reshape")
+     parser.add_argument("--input", type=Path, help="Custom input; disables bundled counts/reference checks")
+-    parser.add_argument("--rules", help="Explicit comma-separated rules; disables bundled count/reference checks")
++    parser.add_argument("--rules", help="Explicit comma-separated rules; constructor is opt-in; disables bundled count/reference checks")
+     parser.add_argument("--parse-mode", choices=["model", "real"], default="model",
+                         help="model: bundled MiniMLIR; real: caller's compilation database")
+     parser.add_argument("--llvm-prefix", type=Path, default=FRONTEND_LLVM)
+--- before/01_frontend/FramaClangFrontend/tests/test_standalone.py
++++ after/01_frontend/FramaClangFrontend/tests/test_standalone.py
+@@ -30,6 +30,12 @@
+             self.assertTrue(p.source.is_relative_to(REPO))
+             self.assertTrue(p.source.is_file())
+             self.assertTrue(p.reference_source.is_file())
++
++    def test_constructor_is_opt_in_for_every_bundled_pass(self):
++        for profile in PASS_PROFILES.values():
++            self.assertNotIn("constructor", profile.rules.split(","))
++            self.assertNotIn("constructor", profile.ast_rounds)
++            self.assertNotIn("constructor", profile.expected)
+ 
+     def test_preset_retains_audited_namespace_prefix_and_checks(self):
+         c = parse_config([*self.args, "--pass", "matmul-scalar"])
+--- before/README.md
++++ after/README.md
+@@ -13,10 +13,10 @@
+ │   └── historical_interface_pilot/ # 早期探索代码，只作历史资料
+ ├── 02_passes/<pass>/
+ │   ├── original.cpp             # 当前九个原始 Buddy pass，未做源码改写
+-│   ├── rewritten.cpp            # 打包前已验证的前端自动改写结果
++│   ├── rewritten.cpp            # 当前默认规则的前端自动改写结果
+ │   ├── include/                 # 对应该 pass 的提取 mini 头文件
+ │   ├── conversion-include/      # 对应该 pass 的转换兼容头文件
+-│   └── provenance/              # 打包前的改写、头文件提取、转换记录及 C 产物
++│   └── provenance/              # 对应版本的改写、头文件提取、转换记录及 C 产物
+ ├── 03_manual_passes/
+ │   ├── buddy_four/<pass>/       # 原先四份人工 rewritten.cpp + 各自 mini_mlir.h
+ │   ├── four_pass_clang18/       # 桌面 four_pass(1).zip 的源码及完整 include/ 库
+@@ -27,7 +27,7 @@
+ └── run.py                      # 与当前工作目录无关的运行入口
+ ```
+ 
+-`03_manual_passes` 中的源码和头文件按原字节保存，包括原换行格式；没有用当前自动结果替换历史人工版本。`02_passes` 和 `03_manual_passes` 是两套独立资料。`provenance/` 中的旧绝对路径是打包前的证据，不是独立版的运行配置。
++`03_manual_passes` 中的源码和头文件按原字节保存，包括原换行格式；没有用当前自动结果替换历史人工版本。`02_passes` 和 `03_manual_passes` 是两套独立资料。`provenance/` 中的绝对路径是生成时的证据，不是独立版的运行配置。EliminateCopy 的结果已随源码 constructor 默认关闭而更新；其余八份源码保持。
+ 
+ | CLI pass 名 | 原 Buddy 文件 | 人工版本目录（03_manual_passes 下） |
+ | --- | --- | --- |
+@@ -60,6 +60,12 @@
+ ctest --test-dir 01_frontend/FramaClangFrontend/build-llvm18 --output-on-failure
+ python3 scripts/check_package.py
+ ```
++
++## 备用构造规则的状态
++
++**当前九个 pass 均不启用源码 `constructor` 规则。**它的实现、显式 `--rules` 入口和专门测试保留；当前输出保留原有继承构造 using，不增加该规则生成的转发构造。历史 Frama-Clang 对实际触发的 `CXXInheritedCtorInitExpr` 有兼容限制；当前声明型 mini 流程未触发这种 pattern 构造，不能把潜在风险描述为这九个 pass 已出现的错误。未来输入或模型真正构造对象时，先定位诊断，再决定是否显式启用。具体原因、启用方式及边界见 [备用构造规则说明](01_frontend/FramaClangFrontend/docs/OPTIONAL_CONSTRUCTOR_RULE.md)。
++
++MiniMLIR 头文件阶段的其他构造兼容规则独立保留；它们不是这里关闭的源码规则。
+ 
+ ## 运行内置九个 pass
+ 
+@@ -170,7 +176,7 @@
+ 
+ ## 本次适配与审查入口
+ 
+-本次完成独立源码构建、15 组 CTest、九个模型模式完整转换与回读；九份新生成源码与 `02_passes` 快照逐字节一致。另通过真实工程 Matmul 完整流程、带空格路径搬迁、自定义输入、相对编译数据库，以及九个人工改写版本与其原 mini 头文件的语法检查。
++本次完成独立源码构建、15 组 CTest、九个模型模式完整转换与回读。关闭源码 constructor 后重新验证，当前结果与 `02_passes` 一致；EliminateCopy 相比初次打包仅移除了该规则生成的转发构造，其余八份源码逐字节不变。另通过真实工程 Matmul 完整流程、带空格路径搬迁、自定义输入、相对编译数据库，以及九个人工改写版本与其原 mini 头文件的语法检查。
+ 
+ - [适配变更说明](review/CHANGELOG.md)：路径、调度及一处构造 AST 默认参数读取的具体调整。
+ - [适配前后 patch](review/adaptation.patch)：相对于拆包初始源码的变化。
+--- before/review/CHANGELOG.md
++++ after/review/CHANGELOG.md
+@@ -1,3 +1,11 @@
++# 当前修订：源码 constructor 默认关闭
++
++按用户确认，从 EliminateCopy 的 rules、rounds 和 expected 中移除 constructor；其余八个原本就未启用。实现与测试保留为备用，未来实际触发 CXXInheritedCtorInitExpr 时再按诊断考虑显式启用。详见 [备用规则说明](../01_frontend/FramaClangFrontend/docs/OPTIONAL_CONSTRUCTOR_RULE.md)。
++
++关闭前的配置、EliminateCopy 产物、来源清单和源码压缩包保存在本机 before-disable-constructor/，不进入新源码压缩包。最新完整验证位于 validation/constructor-disabled/。历史人工源码及原 mini 头文件不修改。
++
++---
++
+ # 独立仓库适配说明
+ 
+ 本次只在桌面新目录适配；原 Buddy 中的前端、九个 pass 和历史人工版本未修改。
+@@ -15,10 +23,10 @@
+ | ExtractMiniMLIR/run.py | 默认使用本机绝对工具路径 | 复用独立版工具发现；可单独传外部参数 |
+ | 文档与历史探针 | 新旧运行方式混杂 | 原文移入 docs/history，早期探针移出运行包；新 README 指明维护入口 |
+ 
+-构造规则的改动是本次唯一 C++ 规则调整：声明型 mini 头不会像真实 MLIR 模板实现那样触发所有默认参数的实例化，因此旧读取返回空值。现在只接纳原有 portable-default 检查允许的非依赖表达式；宏、依赖表达式、名称作用域和对象身份限制仍保留。新增正反两类用例。九个最终输出均与打包前真实头文件模式的输出逐字节相同。
++构造规则的改动是本次唯一 C++ 规则调整：声明型 mini 头不会像真实 MLIR 模板实现那样触发所有默认参数的实例化，因此旧读取返回空值。现在只接纳原有 portable-default 检查允许的非依赖表达式；宏、依赖表达式、名称作用域和对象身份限制仍保留。新增正反两类用例。初次打包时九个输出均与此前真实头文件模式的输出逐字节相同；之后按用户确认关闭了默认源码 constructor，当前 EliminateCopy 输出已更新。
+ 
+ `adaptation.patch` 包含具体实现差异；`adaptation-files.json` 额外记录未改内容的文档/历史代码移动。根入口、README 和完整性脚本为本次新增文件。`before-adaptation/` 是本机审查用初始副本，未放入源码压缩包。
+ 
+-`02_passes` 的原始/自动源码与专用头库来自前一轮完整验证；`03_manual_passes` 保留用户原始人工资料。两个资料目录没有用本次模型运行结果覆盖。本次重新运行的结果位于本机 `validation/model/`，最终结论见 `VALIDATION.json`。
++`02_passes` 的原始/自动源码与专用头库来自前一轮完整验证；`03_manual_passes` 保留用户原始人工资料。关闭默认源码 constructor 后，02_passes/eliminate-copy 的自动结果及配套生成记录随验证更新；03_manual_passes 仍按原字节保留。本次重新运行的结果位于本机 `validation/model/`，最终结论见 `VALIDATION.json`。
+ 
+ 原始验证记录中的绝对路径、历史文档和探针中的旧路径只作为历史证据。当前运行包的 Python 入口中不含 /home/ce 等开发机器路径。构建目录、运行日志与适配前快照由 .gitignore 排除；源码压缩包只包含源文件、配套资料和精简审查记录。
+--- before/02_passes/eliminate-copy/rewritten.cpp
++++ after/02_passes/eliminate-copy/rewritten.cpp
+@@ -87,8 +87,6 @@
+ // Pattern to eliminate memref.copy from function arguments to allocations
+ struct EliminateMemRefCopyPattern : public OpRewritePattern<memref::CopyOp> {
+   using OpRewritePattern<memref::CopyOp>::OpRewritePattern;
+-  EliminateMemRefCopyPattern(mlir::MLIRContext *argument, mlir::PatternBenefit argument1 = 1, llvm::ArrayRef<llvm::StringRef> argument2 = {})
+-      : mlir::OpRewritePattern<mlir::memref::CopyOp>(argument, argument1, argument2) {}
+ 
+   LogicalResult matchAndRewrite(memref::CopyOp copyOp,
+                                 PatternRewriter &rewriter) const override {
+--- before/01_frontend/FramaClangFrontend/docs/OPTIONAL_CONSTRUCTOR_RULE.md
++++ after/01_frontend/FramaClangFrontend/docs/OPTIONAL_CONSTRUCTOR_RULE.md
+@@ -0,0 +1,47 @@
++# 备用源码规则 constructor：当前九个 pass 不启用
++
++状态：源码规则 `src/rules/ConstructorRule.cpp` 保留实现、命令行名称和专门测试，作为显式启用的备用兼容规则。当前九个内置 pass 的 rules、分轮顺序和预期编辑数均不包含 constructor，默认输出不增加源码级的转发构造函数。
++
++## 原代码及当前为何不需要改
++
++EliminateCopy 的原写法是合法 C++：
++
++```cpp
++struct EliminateMemRefCopyPattern : public OpRewritePattern<memref::CopyOp> {
++  using OpRewritePattern<memref::CopyOp>::OpRewritePattern;
++  // matchAndRewrite ...
++};
++// runOnOperation 中：
++patterns.add<EliminateMemRefCopyPattern>(ctx);
++```
++
++Matmul、Reshape、SiLU 同样通过 using 继承 OpRewritePattern 的构造函数。不能根据具体 pass 名字判断这种语法必须展开。当前声明型 MiniMLIR 中，RewritePatternSet::add 只有声明，未展开真实 add/create/分配函数体；以上注册调用不会像完整真实实现那样沿函数体构造 pattern。当前这些 pass 的模型转换路径无需启用此源码兼容规则。
++
++此前 EliminateCopy 单独启用 constructor，是从历史人工参考继承的潜在兼容安排，不是当前九个 pass 都已触发的错误。现在关闭这项默认安排，并在关闭后重新验证。
++
++## 未来什么情况下可能出错
++
++继承构造声明本身没有错误。若未来输入直接构造派生对象，或头文件模型加入并实例化真实 add/create/分配实现，Clang 可能生成实际继承构造的 CXXInheritedCtorInitExpr。历史 Frama-Clang 0.0.20 / Clang 18 对这种表达式曾报 Unsupported expression: CXXInheritedCtorInitExpr；原历史包也将它标为“潜伏，一旦真正构造对象”。不能据此断言任意继承构造或其他版本转换器都必然失败。
++
++遇到此错误，应先从诊断定位具体对象类型和触发构造的调用。只有问题属于源码中这条规则支持的继承构造形状时，才考虑手动启用 constructor；它不支持任意模板构造、重载组合或生命周期语义。
++
++## 显式启用方式
++
++例如将 EliminateCopy 的当前默认规则补上 constructor：
++
++```sh
++python3 run.py --pass eliminate-copy \
++  --rules namespace,constructor,range-for,if-condition,guard \
++  --llvm-prefix "$LLVM_PREFIX" \
++  --skip-frama --output-dir results/eliminate-constructor-opt-in
++```
++
++这会关闭该样例固定编辑数及参考文本验收，仍执行规则的拒绝条件和其余检查。去掉 --skip-frama 并指定 Frama 工具，才能检验是否解决实际转换问题。
++
++## 之前打包时的读取错误是另一回事
++
++该备用规则读取基类构造的默认参数时，旧实现只调用 getDefaultArg()。声明型 mini 头中，Clang 可能尚未实例化默认参数，必须通过 hasUninstantiatedDefaultArg()/getUninstantiatedDefaultArg() 读取其保存的非依赖表达式。这个读取遗漏已经修复；依赖模板参数、宏、不可搬移的默认值和不安全的值参数仍拒绝。保留的正反用例验证规则自身能力，不表示九个 pass 的默认流程使用了它。
++
++## 与头文件改写的区别
++
++MiniMLIR 的转换兼容阶段另有 typed-attr-constructor-expansion 等头文件规则，它们处理库类型而非 pass 源码中的 pattern 派生类。这次关闭的是源码 constructor 规则；头文件转换规则保持原有行为，不能把报告中其他 constructor-expansion 名称误读为此源码规则仍在运行。

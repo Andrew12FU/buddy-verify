@@ -1,0 +1,48 @@
+{
+  "backup": "/home/ce/Desktop/FramaClangFrontend-standalone-20261120/review/before-disable-constructor",
+  "changes": [
+    {
+      "file": "01_frontend/FramaClangFrontend/experiment/profiles.py",
+      "before_sha256": "393528c8f1f0367c3a365dbc6c47c03f918ba5c9841aed700561e5f8a23d1e3d",
+      "after_sha256": "dbd75e597fa1f6827c2b450951ce1a7b6c621423cc4fef211c96b5d558920f43"
+    },
+    {
+      "file": "01_frontend/FramaClangFrontend/experiment/validation.py",
+      "before_sha256": "a4853e3592b8ab48a0e2b93fb196f0f8844b65527d7c5cd6617611dcbe6ea39d",
+      "after_sha256": "6ab6bf57a780943343ae5856a6b16cc723e9a106a1962eeb3d8d9b3470a4573c"
+    },
+    {
+      "file": "01_frontend/FramaClangFrontend/run.py",
+      "before_sha256": "3d87921ce3ea0372de87a22db39eb888237ad6bda7380644e17fc0ad0ad532dd",
+      "after_sha256": "24b1f2bbf4f9876ff756f6c5da06e0b8f3605e688cad545ac01df8d209bd1ac6"
+    },
+    {
+      "file": "01_frontend/FramaClangFrontend/tests/test_standalone.py",
+      "before_sha256": "69e80d0f145b1f100b986249fc98f67229c4dd07d212faa6bd159d655455fb02",
+      "after_sha256": "33452ad4c322ed65565bc63947cc622a659db9343ef6d4c612248545b70535dc"
+    },
+    {
+      "file": "README.md",
+      "before_sha256": "37f9368c7482c479b201cf13cf07da30fab0ef5f55f7460f84181e7035fb2b90",
+      "after_sha256": "1b83356db8ad779d51570c4045e4bf448051012e3d499fef49d14e642ffd83d3"
+    },
+    {
+      "file": "review/CHANGELOG.md",
+      "before_sha256": "1f82086bc227b4e772d449008c1de168b8549d02c0660c35c18bdeec99352ff5",
+      "after_sha256": "3640494a568db19c6db6ab07b22f41b2347c03e1c3db8e43924cfe203867bade"
+    },
+    {
+      "file": "02_passes/eliminate-copy/rewritten.cpp",
+      "before_sha256": "29584b5bc4bee6f2b26ef69ca2afbefdbff530222ccc6dc77a7d75078697ab3b",
+      "after_sha256": "3c7b50b06765ed38116a30d9d5407eef38192379b600127b234533c92f7ea975"
+    },
+    {
+      "file": "01_frontend/FramaClangFrontend/docs/OPTIONAL_CONSTRUCTOR_RULE.md",
+      "before_sha256": null,
+      "after_sha256": "6b643cdb06282aa191587279358702277a29269afcc1e63f1a0823a04c31de66"
+    }
+  ],
+  "result": "All nine defaults have zero source constructor edits; explicit opt-in remains available.",
+  "default_results": "validation/constructor-disabled/model/results.json",
+  "validation": "VALIDATION.json"
+}

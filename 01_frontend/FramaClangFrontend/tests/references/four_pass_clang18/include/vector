@@ -1,0 +1,39 @@
+#ifndef FC_STD_VECTOR
+#define FC_STD_VECTOR
+
+#include <initializer_list>
+
+#include "llvm/Support/Compiler.h"
+
+/* Stand-in for the C++ standard <vector> header: the front-end ships no such
+ * header, so the subset the passes use is modelled here. */
+namespace std {
+
+template <class T>
+class vector {
+public:
+  typedef T *iterator;
+  typedef const T *const_iterator;
+
+  int reserved;
+
+  vector();
+  vector(const vector &other);
+  vector &operator=(const vector &other);
+
+  iterator begin();
+  iterator end();
+  const_iterator begin() const;
+  const_iterator end() const;
+
+  bool empty() const;
+  fc_size_t size() const;
+
+  T &operator[](fc_size_t index);
+  const T &operator[](fc_size_t index) const;
+
+  void push_back(const T &value);
+};
+
+} // namespace std
+#endif

@@ -1,0 +1,202 @@
+{
+  "clang_version": "clang version 18.1.8 (https://github.com/conda-forge/clangdev-feedstock 3c15221e001c9fe87fcc807876aa06d599616b01)",
+  "edits": [
+    {
+      "after": "namespace AssumeTightMemRefLayout_anonymousNamespace_01 {} using namespace AssumeTightMemRefLayout_anonymousNamespace_01;\nnamespace AssumeTightMemRefLayout_anonymousNamespace_01",
+      "before": "namespace",
+      "column": 1,
+      "dependency_change": "Changes internal linkage; single-TU compatibility workaround",
+      "insertion_order": -1,
+      "length": 9,
+      "line": 34,
+      "offset": 1322,
+      "reason": "Name an anonymous namespace and preserve its implicit using-directive; reopened declarations share one name",
+      "rule": "namespace",
+      "round": 0,
+      "input_sha256": "59d4d574b78b8d740fd3d57051cdc3c3f59e6e0ae73c095a5186d5f06ad20fe9"
+    },
+    {
+      "after": "AssumeTightMemRefLayout_anonymousNamespace_01::AssumeTightMemRefLayoutPass",
+      "before": "AssumeTightMemRefLayoutPass",
+      "column": 20,
+      "dependency_change": "none",
+      "insertion_order": -1,
+      "length": 27,
+      "line": 172,
+      "offset": 5920,
+      "reason": "Preserve the bound class reference outside the renamed namespace",
+      "rule": "namespace-reference",
+      "round": 0,
+      "input_sha256": "59d4d574b78b8d740fd3d57051cdc3c3f59e6e0ae73c095a5186d5f06ad20fe9"
+    },
+    {
+      "after": "auto *worklistPtr = &worklist;\n    ",
+      "before": "",
+      "column": 5,
+      "dependency_change": "Original object lifetimes remain the caller's responsibility",
+      "insertion_order": 20,
+      "length": 0,
+      "line": 78,
+      "offset": 2914,
+      "reason": "Take original-object addresses before the outer lambda",
+      "rule": "capture-pointers",
+      "round": 1,
+      "input_sha256": "d11007c1a5a76d6047eca81543c14715e805139ae239e7094e3c2697664346c8"
+    },
+    {
+      "after": "[worklistPtr](Operation *op) {\n      for (Value result : op->getResults())\n        if (isa<MemRefType>(result.getType()))\n          (*worklistPtr).push_back(result);\n    }",
+      "before": "[&](Operation *op) {\n      for (Value result : op->getResults())\n        if (isa<MemRefType>(result.getType()))\n          worklist.push_back(result);\n    }",
+      "column": 15,
+      "dependency_change": "Nested by-value pointer captures and local aliases; no library API or ownership added",
+      "insertion_order": -1,
+      "length": 155,
+      "line": 78,
+      "offset": 2924,
+      "reason": "Compose 1 nested lambdas; materialize local pointer copies at each boundary",
+      "rule": "capture",
+      "round": 1,
+      "input_sha256": "d11007c1a5a76d6047eca81543c14715e805139ae239e7094e3c2697664346c8"
+    },
+    {
+      "after": "{\n      auto &&rangeValues = func;\n      auto rangeIt = rangeValues.begin();\n      auto rangeEnd = rangeValues.end();\n      for (; rangeIt != rangeEnd; ++rangeIt) {\n        Block & block = *rangeIt;\n        {\n        auto &&rangeValues1 = block.getArguments();\n        auto rangeIt1 = rangeValues1.begin();\n        auto rangeEnd1 = rangeValues1.end();\n        for (; rangeIt1 != rangeEnd1; ++rangeIt1) {\n          BlockArgument arg = *rangeIt1;\n          if (isa<MemRefType>(arg.getType()))\n          worklist.push_back(arg);\n        }\n      }\n      }\n    }",
+      "before": "for (Block &block : func)\n      for (BlockArgument arg : block.getArguments())\n        if (isa<MemRefType>(arg.getType()))\n          worklist.push_back(arg);",
+      "column": 5,
+      "dependency_change": "none",
+      "insertion_order": -1,
+      "length": 157,
+      "line": 72,
+      "offset": 2724,
+      "reason": "Desugar 2 range loops; preserve one-time evaluation, lifetime and early increment",
+      "rule": "range-for",
+      "round": 2,
+      "input_sha256": "a54e6d82dc7f89a50fa2ce3b5bdda18c0d48bf1b4e15b6ff20cbd96a81fbc965"
+    },
+    {
+      "after": "{\n        auto &&rangeValues2 = op->getResults();\n        auto rangeIt2 = rangeValues2.begin();\n        auto rangeEnd2 = rangeValues2.end();\n        for (; rangeIt2 != rangeEnd2; ++rangeIt2) {\n          Value result = *rangeIt2;\n          if (isa<MemRefType>(result.getType()))\n          (*worklistPtr).push_back(result);\n        }\n      }",
+      "before": "for (Value result : op->getResults())\n        if (isa<MemRefType>(result.getType()))\n          (*worklistPtr).push_back(result);",
+      "column": 7,
+      "dependency_change": "none",
+      "insertion_order": -1,
+      "length": 128,
+      "line": 80,
+      "offset": 2996,
+      "reason": "Desugar 1 range loops; preserve one-time evaluation, lifetime and early increment",
+      "rule": "range-for",
+      "round": 2,
+      "input_sha256": "a54e6d82dc7f89a50fa2ce3b5bdda18c0d48bf1b4e15b6ff20cbd96a81fbc965"
+    },
+    {
+      "after": "{\n      auto &&rangeValues3 = worklist;\n      auto rangeIt3 = rangeValues3.begin();\n      auto rangeEnd3 = rangeValues3.end();\n      for (; rangeIt3 != rangeEnd3; ++rangeIt3) {\n        Value value = *rangeIt3;\n        {\n      auto type = dyn_cast<MemRefType>(value.getType());\n      if (!type || !hasLooseTrailingStride(type))\n        continue;\n\n      SmallVector<OpOperand *> toUpdate;\n      {\n        auto &&rangeValues4 = value.getUses();\n        auto rangeIt4 = rangeValues4.begin();\n        auto rangeEnd4 = rangeValues4.end();\n        for (; rangeIt4 != rangeEnd4; ++rangeIt4) {\n          OpOperand & use = *rangeIt4;\n          {\n        Operation *owner = use.getOwner();\n        if (isa<func::ReturnOp>(owner))\n          continue;\n        if (isa<CallOpInterface>(owner))\n          continue;\n        if (isa<BranchOpInterface>(owner))\n          continue;\n        if (isa<RegionBranchOpInterface>(owner))\n          continue;\n        toUpdate.push_back(&use);\n      }\n        }\n      }\n\n      if (toUpdate.empty())\n        continue;\n\n      OpBuilder builder(func.getContext());\n      if (Operation *def = value.getDefiningOp())\n        builder.setInsertionPointAfter(def);\n      else\n        builder.setInsertionPointToStart(value.getParentBlock());\n\n      // Extract the current layout metadata so we can rebuild a tighter view.\n      auto metadata = memref::ExtractStridedMetadataOp::create(\n          builder, value.getLoc(), value);\n\n      SmallVector<OpFoldResult> sizes;\n      sizes.reserve(type.getRank());\n      auto metadataSizes = metadata.getSizes();\n      {\n        auto rangeValues5 = type.getShape();\n        unsigned long rangeSize = rangeValues5.size();\n        for (unsigned long idx = 0; idx < rangeSize; ++idx) {\n          auto &&dim = rangeValues5[idx];\n          {\n        if (ShapedType::isDynamic(dim))\n          sizes.push_back(metadataSizes[idx]);\n        else\n          sizes.push_back(builder.getIndexAttr(dim));\n      }\n        }\n      }\n\n      auto layout = cast<StridedLayoutAttr>(type.getLayout());\n      ArrayRef<int64_t> strides = layout.getStrides();\n\n      SmallVector<OpFoldResult> stridesOfr;\n      stridesOfr.reserve(type.getRank());\n      auto metadataStrides = metadata.getStrides();\n      {\n        auto rangeValues6 = strides;\n        unsigned long rangeSize1 = rangeValues6.size();\n        for (unsigned long idx = 0; idx < rangeSize1; ++idx) {\n          auto &&stride = rangeValues6[idx];\n          {\n        if (idx == static_cast<int64_t>(type.getRank()) - 1) {\n          stridesOfr.push_back(builder.getIndexAttr(1));\n          continue;\n        }\n        if (ShapedType::isDynamic(stride))\n          stridesOfr.push_back(metadataStrides[idx]);\n        else\n          stridesOfr.push_back(builder.getIndexAttr(stride));\n      }\n        }\n      }\n\n      OpFoldResult offset;\n      if (ShapedType::isDynamic(layout.getOffset()))\n        offset = metadata.getOffset();\n      else\n        offset = builder.getIndexAttr(layout.getOffset());\n\n      SmallVector<int64_t> tightenedStrides(strides.begin(), strides.end());\n      tightenedStrides.back() = 1;\n      auto tightenedLayout = StridedLayoutAttr::get(\n          type.getContext(), layout.getOffset(), tightenedStrides);\n      auto tightenedType =\n          MemRefType::get(type.getShape(), type.getElementType(),\n                          tightenedLayout, type.getMemorySpace());\n\n      auto reinterpret = memref::ReinterpretCastOp::create(\n          builder, value.getLoc(), tightenedType, metadata.getBaseBuffer(),\n          offset, sizes, stridesOfr);\n\n      {\n        auto &&rangeValues7 = toUpdate;\n        auto rangeIt7 = rangeValues7.begin();\n        auto rangeEnd7 = rangeValues7.end();\n        for (; rangeIt7 != rangeEnd7; ++rangeIt7) {\n          OpOperand * operand = *rangeIt7;\n          operand->set(reinterpret);\n        }\n      }\n    }\n      }\n    }",
+      "before": "for (Value value : worklist) {\n      auto type = dyn_cast<MemRefType>(value.getType());\n      if (!type || !hasLooseTrailingStride(type))\n        continue;\n\n      SmallVector<OpOperand *> toUpdate;\n      for (OpOperand &use : value.getUses()) {\n        Operation *owner = use.getOwner();\n        if (isa<func::ReturnOp>(owner))\n          continue;\n        if (isa<CallOpInterface>(owner))\n          continue;\n        if (isa<BranchOpInterface>(owner))\n          continue;\n        if (isa<RegionBranchOpInterface>(owner))\n          continue;\n        toUpdate.push_back(&use);\n      }\n\n      if (toUpdate.empty())\n        continue;\n\n      OpBuilder builder(func.getContext());\n      if (Operation *def = value.getDefiningOp())\n        builder.setInsertionPointAfter(def);\n      else\n        builder.setInsertionPointToStart(value.getParentBlock());\n\n      // Extract the current layout metadata so we can rebuild a tighter view.\n      auto metadata = memref::ExtractStridedMetadataOp::create(\n          builder, value.getLoc(), value);\n\n      SmallVector<OpFoldResult> sizes;\n      sizes.reserve(type.getRank());\n      auto metadataSizes = metadata.getSizes();\n      for (auto [idx, dim] : llvm::enumerate(type.getShape())) {\n        if (ShapedType::isDynamic(dim))\n          sizes.push_back(metadataSizes[idx]);\n        else\n          sizes.push_back(builder.getIndexAttr(dim));\n      }\n\n      auto layout = cast<StridedLayoutAttr>(type.getLayout());\n      ArrayRef<int64_t> strides = layout.getStrides();\n\n      SmallVector<OpFoldResult> stridesOfr;\n      stridesOfr.reserve(type.getRank());\n      auto metadataStrides = metadata.getStrides();\n      for (auto [idx, stride] : llvm::enumerate(strides)) {\n        if (idx == static_cast<int64_t>(type.getRank()) - 1) {\n          stridesOfr.push_back(builder.getIndexAttr(1));\n          continue;\n        }\n        if (ShapedType::isDynamic(stride))\n          stridesOfr.push_back(metadataStrides[idx]);\n        else\n          stridesOfr.push_back(builder.getIndexAttr(stride));\n      }\n\n      OpFoldResult offset;\n      if (ShapedType::isDynamic(layout.getOffset()))\n        offset = metadata.getOffset();\n      else\n        offset = builder.getIndexAttr(layout.getOffset());\n\n      SmallVector<int64_t> tightenedStrides(strides.begin(), strides.end());\n      tightenedStrides.back() = 1;\n      auto tightenedLayout = StridedLayoutAttr::get(\n          type.getContext(), layout.getOffset(), tightenedStrides);\n      auto tightenedType =\n          MemRefType::get(type.getShape(), type.getElementType(),\n                          tightenedLayout, type.getMemorySpace());\n\n      auto reinterpret = memref::ReinterpretCastOp::create(\n          builder, value.getLoc(), tightenedType, metadata.getBaseBuffer(),\n          offset, sizes, stridesOfr);\n\n      for (OpOperand *operand : toUpdate)\n        operand->set(reinterpret);\n    }",
+      "column": 5,
+      "dependency_change": "none",
+      "insertion_order": -1,
+      "length": 2876,
+      "line": 85,
+      "offset": 3138,
+      "reason": "Desugar 5 range loops; preserve one-time evaluation, lifetime and early increment",
+      "rule": "range-for",
+      "round": 2,
+      "input_sha256": "a54e6d82dc7f89a50fa2ce3b5bdda18c0d48bf1b4e15b6ff20cbd96a81fbc965"
+    },
+    {
+      "after": "if (Operation *def = value.getDefiningOp())\n        {\n        builder.setInsertionPointAfter(def);\n      }\n      else\n        {\n        builder.setInsertionPointToStart(value.getParentBlock());\n      }",
+      "before": "if (Operation *def = value.getDefiningOp())\n        builder.setInsertionPointAfter(def);\n      else\n        builder.setInsertionPointToStart(value.getParentBlock());",
+      "column": 7,
+      "dependency_change": "No new evaluation or library interface",
+      "insertion_order": -1,
+      "length": 165,
+      "line": 143,
+      "offset": 4839,
+      "reason": "Brace complete branches before desugaring on a fresh AST; keep else-if chains",
+      "rule": "if-condition-normalize",
+      "round": 3,
+      "input_sha256": "648ef6bbbbd950a625893f02b1e9dc5cbed4a41442aeb16ef3906d72f586fa70"
+    },
+    {
+      "after": "{\n        Operation *def = value.getDefiningOp();\n        if (static_cast<bool>(def)) {\n          builder.setInsertionPointAfter(def);\n        } else {\n          builder.setInsertionPointToStart(value.getParentBlock());\n        }\n      }",
+      "before": "if (Operation *def = value.getDefiningOp())\n        {\n        builder.setInsertionPointAfter(def);\n      }\n      else\n        {\n        builder.setInsertionPointToStart(value.getParentBlock());\n      }",
+      "column": 7,
+      "dependency_change": "Explicit contextual bool; no new library interface",
+      "insertion_order": -1,
+      "length": 201,
+      "line": 143,
+      "offset": 4839,
+      "reason": "Preserve conditional construction, else priority and body scopes",
+      "rule": "if-condition",
+      "round": 4,
+      "input_sha256": "c615fb4b722d8eddf5c4e8a5bbef1215a07ccd857360be6f7aec0a68b3fa25d5"
+    }
+  ],
+  "input": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/AssumeTightMemRefLayout/AssumeTightMemRefLayout.cpp",
+  "output": "/home/ce/Desktop/BuddyCompiler/audits/remaining-rules-generalization-20261120-031609/verified/assume-tight/rewritten.cpp",
+  "parsed": true,
+  "profile": "assume-tight",
+  "rejections": [],
+  "rules": [
+    "namespace",
+    "capture",
+    "range-for",
+    "if-condition"
+  ],
+  "schema_version": 1,
+  "scope": "Audited pass compatibility rules; no general equivalence claim",
+  "status": "rewritten",
+  "rounds": [
+    {
+      "rule": "namespace",
+      "phases": [
+        "namespace",
+        "namespace-reference"
+      ],
+      "input_sha256": "59d4d574b78b8d740fd3d57051cdc3c3f59e6e0ae73c095a5186d5f06ad20fe9",
+      "output_sha256": "d11007c1a5a76d6047eca81543c14715e805139ae239e7094e3c2697664346c8",
+      "edit_count": 2
+    },
+    {
+      "rule": "capture",
+      "phases": [
+        "capture",
+        "capture-pointers"
+      ],
+      "input_sha256": "d11007c1a5a76d6047eca81543c14715e805139ae239e7094e3c2697664346c8",
+      "output_sha256": "a54e6d82dc7f89a50fa2ce3b5bdda18c0d48bf1b4e15b6ff20cbd96a81fbc965",
+      "edit_count": 2
+    },
+    {
+      "rule": "range-for",
+      "phases": [
+        "range-for"
+      ],
+      "input_sha256": "a54e6d82dc7f89a50fa2ce3b5bdda18c0d48bf1b4e15b6ff20cbd96a81fbc965",
+      "output_sha256": "648ef6bbbbd950a625893f02b1e9dc5cbed4a41442aeb16ef3906d72f586fa70",
+      "edit_count": 3
+    },
+    {
+      "rule": "if-condition",
+      "phases": [
+        "if-condition-normalize"
+      ],
+      "input_sha256": "648ef6bbbbd950a625893f02b1e9dc5cbed4a41442aeb16ef3906d72f586fa70",
+      "output_sha256": "c615fb4b722d8eddf5c4e8a5bbef1215a07ccd857360be6f7aec0a68b3fa25d5",
+      "edit_count": 1
+    },
+    {
+      "rule": "if-condition",
+      "phases": [
+        "if-condition"
+      ],
+      "input_sha256": "c615fb4b722d8eddf5c4e8a5bbef1215a07ccd857360be6f7aec0a68b3fa25d5",
+      "output_sha256": "b8008f57a8de18573cc0a7a76415d9ff62711f1be67eea4f01b1162949002e95",
+      "edit_count": 1
+    },
+    {
+      "rule": "if-condition",
+      "phases": [],
+      "input_sha256": "b8008f57a8de18573cc0a7a76415d9ff62711f1be67eea4f01b1162949002e95",
+      "output_sha256": "b8008f57a8de18573cc0a7a76415d9ff62711f1be67eea4f01b1162949002e95",
+      "edit_count": 0
+    }
+  ],
+  "offset_basis": "UTF-8 bytes in the input of each numbered AST round"
+}

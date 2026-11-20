@@ -1,7 +1,0 @@
-$ /home/ce/.opam/framac-study/bin/frama-c /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/eliminate-copy/converted.c -machdep gcc_x86_64
-cwd: /home/ce/Desktop/BuddyCompiler/build-v0.0.4/buddy
-exit_code: 0
---- stdout ---
-[kernel] Parsing /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/MiniMLIR/current/eliminate-copy/converted.c (with preprocessing)
-
---- stderr ---

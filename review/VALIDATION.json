@@ -1,0 +1,306 @@
+{
+  "status": "passed",
+  "revision": "source constructor disabled in every bundled default",
+  "default_profiles_without_constructor": [
+    "reshape",
+    "matmul-scalar",
+    "lower-ime",
+    "silu-fusion",
+    "assume-tight",
+    "eliminate-copy",
+    "gpu-memcpy",
+    "depthwise-conv",
+    "builtin-transpose"
+  ],
+  "ctest_groups": 15,
+  "new_cli_cases": 7,
+  "structural_cases": 22,
+  "frontend_tool_sha256": "eab9e24af7850d105ef24259360a8b82dc85705cf57afc5b67530037b90967ef",
+  "implementation_sha256": {
+    "CMakeLists.txt": "2da599fa581e91c433a0162335af6a589a68ade60941b748fedb9345e543553d",
+    "build_frontend.py": "0ae350af373339621167c9d7a5ff2f337226370873a46918741cafe8e3d6796c",
+    "experiment/__init__.py": "6276af1670f969e34ad5aea54009b12e481af903eb82312e0b5da96d53bce80b",
+    "experiment/artifacts.py": "473762348973d10e59deee83a34839e2e267af5e5f7918e4eecc2e6300b1411d",
+    "experiment/interface_plans.py": "5e8e9f95b6e6a92744f62370dd5a08a6155231b9fc4534e0d49d0726001cea8a",
+    "experiment/inventory.py": "bedfa423e3133ab4d85a75fe1bf82e1a48589cbc5dd6e2df37f61776de8b9c57",
+    "experiment/output.py": "39465e93e30a3f4d9538af35d64abc6ffbdff9b256510f6d2c1765f77458fcb8",
+    "experiment/paths.py": "43c5e59674cdf7618c42f95136942038226b1278b3d3cadef8c7b8c6815016a0",
+    "experiment/profiles.py": "dbd75e597fa1f6827c2b450951ce1a7b6c621423cc4fef211c96b5d558920f43",
+    "experiment/toolchain.py": "182f04e5dbc0364687cd925d37bef69b0b8ab64e0240af1aa193d08cb626a5db",
+    "experiment/validation.py": "6ab6bf57a780943343ae5856a6b16cc723e9a106a1962eeb3d8d9b3470a4573c",
+    "include/frontend/FrontendOptions.h": "186d5fded41508788be7755408c5b062190a5f613b6b1e82001184188dbbd55a",
+    "include/frontend/RewritePipeline.h": "c36e7a62d0e0c924ccc9e8c0bf502342f31f03da9d43a4f1c5a463ff20138c03",
+    "include/interface/Analysis.h": "31bce3641199ea702493c083552eb771dea0a7483b026bc83d24cfc58c3a9ae7",
+    "include/interface/MiniSlice.h": "2380582bf7246ee1f2269ff085b972cdf168149d50cb9c6b5d42e911c65b95d3",
+    "include/interface/Probe.h": "ac85fa6faa770676b55b5dc22e32a4e2b621e879d61f101de3e41333516ece55",
+    "include/rewrite/RewritePlan.h": "cfa85b85be20fba20bf8095600fc2e078b22ae8e85e8da63f13cf43a6c2746d2",
+    "include/rules/CaptureRule.h": "ac47c25d2981ab4b1fb85d68b4a8f96ebb5074ed76050f8c9ff56aa3e0a30100",
+    "include/rules/ConstLocalRule.h": "8a0872f048094d459433a79b2511b0fe5812a865bcfe18840778b7419881d1e2",
+    "include/rules/ConstructorRule.h": "f3791c400da482e1ef6f66cfa9eb8785d2251707a7acd4148c121a447bef5147",
+    "include/rules/GuardRule.h": "fb9ad1ea6a81a724dba88ebb043245ad93f3dfc75d2db7cbe0d057d8fa618e64",
+    "include/rules/IfConditionRule.h": "9c25fafd3ebdd00c2f038f767cba0e52e751dcba7b465a1d67305038905097da",
+    "include/rules/InitializerListRule.h": "40e63419fa7ebb686d615286aa637a3ade8e0a6b3383e8b24aa1c00a94b55ea6",
+    "include/rules/NamespaceRule.h": "5df8c569174c20bc98de46b21ed5fd08cf99079d009835b9de537e4672446d01",
+    "include/rules/NestedCapture.h": "9eadf0672104e019053c52da3ce03d96a04cf02f1d7c1dcfd8dd77ee9c47c92e",
+    "include/rules/RangeForRule.h": "532af55f3bd11c0cc93b80705d108b8f67a575dfcf842b51f8b5f6f7cbe09884",
+    "include/rules/ValueRangeRule.h": "a24e2f3542adabdb3124053ae0e190e99172c92c711955ed054bd4aea7e4af17",
+    "include/rules/WhileRule.h": "c218c9a02d0b23a1833fb96f489ddf5bd71a7aaef30570e693ed76e2c40af17e",
+    "include/support/AstSupport.h": "4d2b6835c82286d3986cc57530508192442d544fb94baeebcdde1fb7ab917c0b",
+    "include/support/FrontendOutput.h": "253aaf86e71d8d84413cc79c155e9c56333b18b5493305389e2269e4aa03ba5d",
+    "run.py": "24b1f2bbf4f9876ff756f6c5da06e0b8f3605e688cad545ac01df8d209bd1ac6",
+    "src/frontend/FrontendOptions.cpp": "b76ad262a8f246e5d0e84b17221fb8e29c815ddfa95b503d5b0ef6b61ebf95b0",
+    "src/frontend/RewriteFrontend.cpp": "65e8740177f2debfc88e06d9e756926c582a8c317a4e87f69775f2f5dafd54bc",
+    "src/frontend/RewritePipeline.cpp": "705b8914fd5a6f3b1686727c47ef51e943c831c83d263ab59e73908a540a07e2",
+    "src/interface/Inventory.cpp": "f274ee5924ab354f73a2552e0b6e376c6fe1e42d4d9f03eb36337db5c32b650d",
+    "src/interface/LibrarySlice.cpp": "735ac3d386332bd9f1454e087342a409028fad50dd96689e7f321547a373177a",
+    "src/interface/MiniSlice.cpp": "3ff437a5482c1ecd0eabed5a4e3e5459fa4946f7ebef58979af5a447ab913d67",
+    "src/interface/MiniSliceMain.cpp": "1d7c8a5f2b7e30fea80a72f58e2c3fce901e97b682c8a2361e4e90429902e221",
+    "src/interface/Probe.cpp": "89853bfe9b7b0bc3b4e8667129d30ae99776e23a0065965306555d22d5ccd02e",
+    "src/interface/ProbeMain.cpp": "17086e8a803ec9af8ee8d30903c92d6a167979783711f712daf3a42f39d41765",
+    "src/rewrite/RewritePlan.cpp": "a7d5a4aafea9b45aa30f04e9580d905b1f6f31383961b8bc5e311a9d4842be06",
+    "src/rules/CaptureRule.cpp": "2b4aea4d08a0339cb3e2d7d46ea1f737b4f6b062cfab64a0c1eb00544b1d31f4",
+    "src/rules/ConstLocalRule.cpp": "9d13d9696322e296a3661c382556ba28d2a7a9ad5e49f78e6bd9c66427cf325a",
+    "src/rules/ConstructorRule.cpp": "7b368e8a378ebe7e0216f293e2084784190209a029cb3bf21e13f44e7e72fdd7",
+    "src/rules/GuardRule.cpp": "ba8154795b44c62a41e6e2c91b0dd77ea0e1c65fce50fd3598420dbe49ee4b80",
+    "src/rules/IfConditionRule.cpp": "cddce01a0d7da8872561c419618c0bdb85c037ac5e2bd59523309b445e57e2f9",
+    "src/rules/InitializerListRule.cpp": "b72be13ac73074b45bfa69774921c66e8ef17ba8aa15500e0d410e1721c8005f",
+    "src/rules/NamespaceRule.cpp": "1990a7dc14c0b2a60e6c1e207f2597c82aee13fe15f78722695385d3a4a6d267",
+    "src/rules/NestedCapture.cpp": "4476771fbdf621fc418aed497b54508446c4338f07cc56db008d03edfa966042",
+    "src/rules/RangeForRule.cpp": "b0b811f669ad4fcd7808aef819e49db97354a0aa98012ce4e5c2bfe1ea431809",
+    "src/rules/ValueRangeRule.cpp": "11460f6a32106d6e0512fbd7d5d4c03957a2fe5f26dbbaa4a4102aa1d28c0577",
+    "src/rules/WhileRule.cpp": "c34dd8398215f3726630671d35782b9f779b4f9e378e169baed369f80d244c00",
+    "src/support/AstSupport.cpp": "b760289df174e9c377c1bd4afef33c86400389afcb97599822737b52dc31c072",
+    "src/support/FrontendOutput.cpp": "bf27a0c66cbfe511fb6cda3471bf1032f89205f3e28949cd504c3df0b6f47ce8",
+    "tests/fixtures/nested_capture/local_object.cpp": "2d2b1fd3f23611897f867070b850db306b9c79788eb8cf778273971d7f7e412d",
+    "tests/fixtures/nested_capture/returned_three_levels.cpp": "eaf57334e835ff2f8db5d9bce8dbaeffe60e777a446c4ea9f926306e3267c58f",
+    "tests/fixtures/nested_capture/two_levels.cpp": "4272b8f1897c0afc238e821105fdd3c4de45fc9a0a0f237c2f85ac47d2f9fc29",
+    "tests/references/matmul-scalar-generic-guard.cpp": "ffb560327536979f8bbee5ef4e670a41cb8eb80891ee540002815dc1b0ec560e",
+    "tests/references/matmul-scalar-guard-binding.cpp": "56edd2ac48550ba73ac8f95bc829c6eb6e8b3ccc5cb321498a1dfee128979f8d",
+    "tests/references/matmul-scalar-structural-rules.cpp": "7da7091b4c079380a191090f3b236e817c27611ca0afea93717049a8025dfc2d",
+    "tests/rewrite_support.py": "95658b6eb7e1aebc2970c2fad1f471aeed2b1b66531ebc5f735f26770e208f43",
+    "tests/run_nested_capture.py": "9b3ca0955a234d232dd4af960c1853bc5c4855e929dc429c77e358dd47ee96a6",
+    "tests/test_capture.py": "446d0c056c51b7cd4a1105571772f3db85dfd32f4347125c4bafb0d051386af7",
+    "tests/test_guard.py": "1994e8e0170fd904d2265900087966814e9c7f3bf5fe68458b2fccd0a0d18f0d",
+    "tests/test_if_condition.py": "80ec9e62c2347d1a0bdaa9cd4818e094d680fcb597a5f3323394b9cdb20e0ad6",
+    "tests/test_imported_passes.py": "2110dd56f4663009dcc08ca5f5e8c9943c49f2b7e2cab4746378d5a91333ead5",
+    "tests/test_mini_headers.py": "25e4b47f19a63a5192f7a9e60af5428f5ed81a0d145d6808d2078f36869f9579",
+    "tests/test_mini_slice.py": "02afb11dd3b787344618dca7711fad863fb6ca95e8c46456b9a60adf08a253c0",
+    "tests/test_nested_capture.py": "1077a2dd9a7fcef3eb5b020a61b57b76ba283476b93636032df371655295d829",
+    "tests/test_output.py": "e65163e9f885f9fa8cada5ec34dccadfb771f799501e52dfb4f5962e3e074c46",
+    "tests/test_parser_version.py": "23fb2d54b987cd606a2ffd6c5663e952f66fe162098da4eb8f89db1782cd0412",
+    "tests/test_range_for.py": "16155b3e8204d561b5cf8f3450ed936c94dace7ae03b63703a94b1c95db9d4b7",
+    "tests/test_rewrite.py": "5ed5291882a024da55de768eec06aa8e269f2e8b7f7060802c7e5d81ad0bfad6",
+    "tests/test_rule_generalization.py": "006e08caafc73a94cfaef30899c2db9e4956a6267a19a42233c5ed857a779246",
+    "tests/test_silu.py": "91e87882a32d7124f89fc05afa43ca06e0254587db39b20cbe3dcf8dee176fc3",
+    "tests/test_standalone.py": "33452ad4c322ed65565bc63947cc622a659db9343ef6d4c612248545b70535dc",
+    "../MiniMLIR/extract.py": "7342e1bbf7cade8954956d1064561bae44a4f9693b05417bd0b0ad3bf10a4a5d",
+    "../MiniMLIR/rewrite_headers.py": "addea700fd60d76c1cd956a6a73967365394f4cd6f542f062986a3586d258678",
+    "../MiniMLIR/python/__init__.py": "6839685634279aa1b47e32d57a192e6f22b1d3dfcb651a7a356d3c12cac223c2",
+    "../MiniMLIR/python/emission.py": "2289bf33341a9c89d05d29fb9eacb4a213278ae8de0d48beff77e029b63a9041",
+    "../MiniMLIR/python/rewrites/__init__.py": "45c169ab90a00fbe961b3b67d6151ab4a2b428169213989d8dd4c8713ea79b8c",
+    "../MiniMLIR/python/rewrites/bounded_interfaces.py": "81befd4a476e5a22e46a384e6722b3ea75f297f162b431847e5e243095cad0b6",
+    "../MiniMLIR/python/rewrites/constructors.py": "1b48cad2d05544cf87d0a70c051d69b2f58ab5fdac5addc5973940cb75865d39",
+    "../MiniMLIR/python/rewrites/conversion_pattern.py": "bbaeb94e5c4a9755c7129ce8f1e9fd7b6b953f2e790faf545a1fbf4b6e7785cf",
+    "../MiniMLIR/python/rewrites/indexed_ranges.py": "1d8a45c778e10d095048289fb53d4c987ab26e3a35475b0c5624aeb4fbab528e",
+    "../MiniMLIR/python/rewrites/nested_records.py": "c5fc676ac866a30a1ac904a8345dbc5cfa95abcd474989adb45012e3e77ca14d",
+    "../MiniMLIR/python/rewrites/pipeline.py": "ca45423e70008af3da1da545ace1e1eca4a28178fbad40889b9d0e7dc96998cb",
+    "../MiniMLIR/python/rewrites/typed_attr.py": "8d30881c2cd1d93038af77aa297e50147c5d48699b1503c284216214ce921f09",
+    "../MiniMLIR/python/rewrites/walk.py": "e8d2d3b374d7426fada71f2ce5d1cbf46e2acb124e65229c6459ff66f38dcbf0"
+  },
+  "model_runs": [
+    {
+      "pass": "reshape",
+      "status": "converted",
+      "source_constructor_edit_count": 0,
+      "idempotent": true,
+      "readback_exit_code": 0,
+      "unchanged_from_initial_package": true,
+      "summary": "review/validation/constructor-disabled/model/reshape/summary.json"
+    },
+    {
+      "pass": "matmul-scalar",
+      "status": "converted",
+      "source_constructor_edit_count": 0,
+      "idempotent": true,
+      "readback_exit_code": 0,
+      "unchanged_from_initial_package": true,
+      "summary": "review/validation/constructor-disabled/model/matmul-scalar/summary.json"
+    },
+    {
+      "pass": "lower-ime",
+      "status": "converted",
+      "source_constructor_edit_count": 0,
+      "idempotent": true,
+      "readback_exit_code": 0,
+      "unchanged_from_initial_package": true,
+      "summary": "review/validation/constructor-disabled/model/lower-ime/summary.json"
+    },
+    {
+      "pass": "silu-fusion",
+      "status": "converted",
+      "source_constructor_edit_count": 0,
+      "idempotent": true,
+      "readback_exit_code": 0,
+      "unchanged_from_initial_package": true,
+      "summary": "review/validation/constructor-disabled/model/silu-fusion/summary.json"
+    },
+    {
+      "pass": "assume-tight",
+      "status": "converted",
+      "source_constructor_edit_count": 0,
+      "idempotent": true,
+      "readback_exit_code": 0,
+      "unchanged_from_initial_package": true,
+      "summary": "review/validation/constructor-disabled/model/assume-tight/summary.json"
+    },
+    {
+      "pass": "eliminate-copy",
+      "status": "converted",
+      "source_constructor_edit_count": 0,
+      "idempotent": true,
+      "readback_exit_code": 0,
+      "unchanged_from_initial_package": false,
+      "summary": "review/validation/constructor-disabled/model/eliminate-copy/summary.json"
+    },
+    {
+      "pass": "gpu-memcpy",
+      "status": "converted",
+      "source_constructor_edit_count": 0,
+      "idempotent": true,
+      "readback_exit_code": 0,
+      "unchanged_from_initial_package": true,
+      "summary": "review/validation/constructor-disabled/model/gpu-memcpy/summary.json"
+    },
+    {
+      "pass": "depthwise-conv",
+      "status": "converted",
+      "source_constructor_edit_count": 0,
+      "idempotent": true,
+      "readback_exit_code": 0,
+      "unchanged_from_initial_package": true,
+      "summary": "review/validation/constructor-disabled/model/depthwise-conv/summary.json"
+    },
+    {
+      "pass": "builtin-transpose",
+      "status": "converted",
+      "source_constructor_edit_count": 0,
+      "idempotent": true,
+      "readback_exit_code": 0,
+      "unchanged_from_initial_package": true,
+      "summary": "review/validation/constructor-disabled/model/builtin-transpose/summary.json"
+    }
+  ],
+  "explicit_constructor_opt_in": {
+    "status": "converted",
+    "source_constructor_edit_count": 1,
+    "matches_previous_eliminate_output": true,
+    "summary": "review/validation/constructor-disabled/explicit-opt-in/summary.json"
+  },
+  "historical_checks_before_this_revision": {
+    "real_matmul": {
+      "status": "converted",
+      "real_dependencies_checked": true,
+      "cpp_matches_snapshot": true,
+      "summary": "validation/real-matmul/summary.json"
+    },
+    "relocation_tests": [
+      {
+        "test": "relocated-matmul",
+        "exit_code": 0,
+        "status": "native_checked",
+        "error": null,
+        "summary": "/tmp/frontend relocation 20261120/outputs/relocated-matmul/summary.json"
+      },
+      {
+        "test": "custom-input",
+        "exit_code": 0,
+        "status": "converted",
+        "error": null,
+        "summary": "/tmp/frontend relocation 20261120/outputs/custom-input/summary.json"
+      },
+      {
+        "test": "custom-relative-database",
+        "exit_code": 0,
+        "status": "native_checked",
+        "error": null,
+        "summary": "/tmp/frontend relocation 20261120/outputs/custom-relative-database/summary.json"
+      }
+    ],
+    "manual_rewritten_headers": [
+      {
+        "source": "03_manual_passes/buddy_four/lower-ime/rewritten.cpp",
+        "include": "03_manual_passes/buddy_four/lower-ime",
+        "exit_code": 0,
+        "diagnostics": null
+      },
+      {
+        "source": "03_manual_passes/buddy_four/matmul-scalar/rewritten.cpp",
+        "include": "03_manual_passes/buddy_four/matmul-scalar",
+        "exit_code": 0,
+        "diagnostics": null
+      },
+      {
+        "source": "03_manual_passes/buddy_four/reshape/rewritten.cpp",
+        "include": "03_manual_passes/buddy_four/reshape",
+        "exit_code": 0,
+        "diagnostics": null
+      },
+      {
+        "source": "03_manual_passes/buddy_four/silu-fusion/rewritten.cpp",
+        "include": "03_manual_passes/buddy_four/silu-fusion",
+        "exit_code": 0,
+        "diagnostics": null
+      },
+      {
+        "source": "03_manual_passes/builtin-transpose/rewritten.cpp",
+        "include": "03_manual_passes/builtin-transpose",
+        "exit_code": 0,
+        "diagnostics": null
+      },
+      {
+        "source": "03_manual_passes/four_pass_clang18/AssumeTightMemRefLayout/rewritten.cpp",
+        "include": "03_manual_passes/four_pass_clang18/include",
+        "exit_code": 0,
+        "diagnostics": null
+      },
+      {
+        "source": "03_manual_passes/four_pass_clang18/ConvertMemcpyToGPU/rewritten.cpp",
+        "include": "03_manual_passes/four_pass_clang18/include",
+        "exit_code": 0,
+        "diagnostics": null
+      },
+      {
+        "source": "03_manual_passes/four_pass_clang18/DepthwiseConvNhwcHwc/rewritten.cpp",
+        "include": "03_manual_passes/four_pass_clang18/include",
+        "exit_code": 0,
+        "diagnostics": null
+      },
+      {
+        "source": "03_manual_passes/four_pass_clang18/EliminateMemRefCopy/rewritten.cpp",
+        "include": "03_manual_passes/four_pass_clang18/include",
+        "exit_code": 0,
+        "diagnostics": null
+      }
+    ],
+    "note": "Historical evidence; code fingerprints belong to the initial standalone adaptation."
+  },
+  "original_buddy_inputs_unmodified": true,
+  "manual_sources_and_original_headers_unmodified": true,
+  "source_constructor_implementation_retained": true,
+  "default_source_constructor_usage": false,
+  "header_constructor_adapters_changed": false,
+  "uploaded": false,
+  "limits": [
+    "Model-mode conversions do not check real Buddy/MLIR dependencies.",
+    "Real-header mode still uses the bounded MiniMLIR extraction/conversion stage.",
+    "Conversion/readback and sample behavior comparisons do not prove general semantic equivalence."
+  ],
+  "original_single_header_reproduction": {
+    "status": "passed",
+    "report": "ORIGINAL_MINI_VALIDATION.json",
+    "reshape_v1_c_lines": 1859,
+    "reshape_v2_c_lines": 8513,
+    "readme_two_stage_flow": "passed",
+    "main_frontend_unchanged": true
+  }
+}

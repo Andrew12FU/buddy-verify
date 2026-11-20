@@ -1,0 +1,225 @@
+{
+  "clang_version": "clang version 18.1.8 (https://github.com/conda-forge/clangdev-feedstock 3c15221e001c9fe87fcc807876aa06d599616b01)",
+  "edits": [
+    {
+      "after": "namespace SiLUFusion_anonymousNamespace_01 {} using namespace SiLUFusion_anonymousNamespace_01;\nnamespace SiLUFusion_anonymousNamespace_01",
+      "before": "namespace",
+      "column": 1,
+      "dependency_change": "Changes internal linkage; single-TU compatibility workaround",
+      "insertion_order": -1,
+      "length": 9,
+      "line": 41,
+      "offset": 1613,
+      "reason": "Name an anonymous namespace and preserve its implicit using-directive; reopened declarations share one name",
+      "rule": "namespace",
+      "round": 0,
+      "input_sha256": "48542532ac27629c2a214cb8ccea059d6d4bf5e6468e8596057a59d752d43c43"
+    },
+    {
+      "after": "namespace SiLUFusion_anonymousNamespace_01 {} using namespace SiLUFusion_anonymousNamespace_01;\nnamespace SiLUFusion_anonymousNamespace_01",
+      "before": "namespace",
+      "column": 1,
+      "dependency_change": "Changes internal linkage; single-TU compatibility workaround",
+      "insertion_order": -1,
+      "length": 9,
+      "line": 137,
+      "offset": 4986,
+      "reason": "Name an anonymous namespace and preserve its implicit using-directive; reopened declarations share one name",
+      "rule": "namespace",
+      "round": 0,
+      "input_sha256": "48542532ac27629c2a214cb8ccea059d6d4bf5e6468e8596057a59d752d43c43"
+    },
+    {
+      "after": "SiLUFusion_anonymousNamespace_01::SiLUFusionPass",
+      "before": "SiLUFusionPass",
+      "column": 50,
+      "dependency_change": "none",
+      "insertion_order": -1,
+      "length": 14,
+      "line": 168,
+      "offset": 5969,
+      "reason": "Preserve the bound class reference outside the renamed namespace",
+      "rule": "namespace-reference",
+      "round": 0,
+      "input_sha256": "48542532ac27629c2a214cb8ccea059d6d4bf5e6468e8596057a59d752d43c43"
+    },
+    {
+      "after": "{\n      auto lhsSigmoid = lhs.getDefiningOp<tosa::SigmoidOp>();\n      if (static_cast<bool>(lhsSigmoid)) {\n        if (lhsSigmoid.getInput() == rhs) {\n          sigmoidOp = lhsSigmoid;\n          inputValue = rhs;\n        }\n      } else {\n        auto rhsSigmoid = rhs.getDefiningOp<tosa::SigmoidOp>();\n        if (static_cast<bool>(rhsSigmoid)) {\n          if (rhsSigmoid.getInput() == lhs) {\n            sigmoidOp = rhsSigmoid;\n            inputValue = lhs;\n          }\n        }\n      }\n    }",
+      "before": "if (auto lhsSigmoid = lhs.getDefiningOp<tosa::SigmoidOp>()) {\n      if (lhsSigmoid.getInput() == rhs) {\n        sigmoidOp = lhsSigmoid;\n        inputValue = rhs;\n      }\n    } else if (auto rhsSigmoid = rhs.getDefiningOp<tosa::SigmoidOp>()) {\n      if (rhsSigmoid.getInput() == lhs) {\n        sigmoidOp = rhsSigmoid;\n        inputValue = lhs;\n      }\n    }",
+      "column": 5,
+      "dependency_change": "Explicit contextual bool; no new library interface",
+      "insertion_order": -1,
+      "length": 356,
+      "line": 59,
+      "offset": 2253,
+      "reason": "Preserve conditional construction, else priority and body scopes",
+      "rule": "if-condition",
+      "round": 1,
+      "input_sha256": "b78f4f2efe7e1310088aabdc4ed3621cc770688ba56639b1d253d522387007e5"
+    },
+    {
+      "after": "{\n      bool guardFailed = (!sigmoidOp || !inputValue);\n      if (guardFailed) {\n      return failure();\n    }\n    }",
+      "before": "if (!sigmoidOp || !inputValue) {\n      return failure();\n    }",
+      "column": 5,
+      "dependency_change": "One fresh block-local bool; if-init lifetime and short-circuit evaluation remain scoped to the original if",
+      "insertion_order": -1,
+      "length": 62,
+      "line": 77,
+      "offset": 2753,
+      "reason": "Bind a built-in || condition once; preserve the complete if and both branches independently of profile, method and return value",
+      "rule": "guard",
+      "round": 3,
+      "input_sha256": "20a6e92917ad08367d323d2fbec93301c55cb21b49295522b1163bcf2c44559d"
+    },
+    {
+      "after": "mlir::Value rangeValues[] = {inputValue};\n    llvm::ArrayRef<mlir::Value> rangeRef(rangeValues, sizeof(rangeValues) / sizeof(rangeValues[0]));\n    mlir::ValueRange valueRange(rangeRef);\n    mlir::Value rangeValues1[] = {emptyTensor};\n    llvm::ArrayRef<mlir::Value> rangeRef1(rangeValues1, sizeof(rangeValues1) / sizeof(rangeValues1[0]));\n    mlir::ValueRange valueRange1(rangeRef1);\n    ",
+      "before": "",
+      "column": 5,
+      "dependency_change": "No fixed callee, argument position/count, callback slot or profile",
+      "insertion_order": 10,
+      "length": 0,
+      "line": 113,
+      "offset": 3998,
+      "reason": "Own Value elements in the original call block",
+      "rule": "value-range-preamble",
+      "round": 5,
+      "input_sha256": "eade3ba1242bd64d7f658e9d1ec7f3929dc4526541e99c03788fa9507109a8ae"
+    },
+    {
+      "after": "valueRange",
+      "before": "ValueRange{inputValue}",
+      "column": 36,
+      "dependency_change": "Selects ValueRange(ArrayRef<Value>), not initializer_list",
+      "insertion_order": -1,
+      "length": 22,
+      "line": 114,
+      "offset": 4088,
+      "reason": "Use an array-backed ValueRange argument identified by AST type",
+      "rule": "value-range",
+      "round": 5,
+      "input_sha256": "eade3ba1242bd64d7f658e9d1ec7f3929dc4526541e99c03788fa9507109a8ae"
+    },
+    {
+      "after": "valueRange1",
+      "before": "ValueRange{emptyTensor}",
+      "column": 9,
+      "dependency_change": "Selects ValueRange(ArrayRef<Value>), not initializer_list",
+      "insertion_order": -1,
+      "length": 23,
+      "line": 115,
+      "offset": 4120,
+      "reason": "Use an array-backed ValueRange argument identified by AST type",
+      "rule": "value-range",
+      "round": 5,
+      "input_sha256": "eade3ba1242bd64d7f658e9d1ec7f3929dc4526541e99c03788fa9507109a8ae"
+    },
+    {
+      "after": "auto *elementTypePtr = &elementType;\n    ",
+      "before": "",
+      "column": 5,
+      "dependency_change": "Original object lifetimes remain the caller's responsibility",
+      "insertion_order": 20,
+      "length": 0,
+      "line": 119,
+      "offset": 4386,
+      "reason": "Take original-object addresses before the outer lambda",
+      "rule": "capture-pointers",
+      "round": 6,
+      "input_sha256": "71cb5179da3af6fe915eb676a717a6a39449f761843ff9f5c8cd1c746463ad82"
+    },
+    {
+      "after": "[elementTypePtr](OpBuilder &b, Location loc, ValueRange args) {\n          Value input = args[0];\n\n          // SiLU: x * sigmoid(x) = x * (1 / (1 + exp(-x)))\n          Value one = arith::ConstantOp::create(\n              b, loc, b.getFloatAttr((*elementTypePtr), 1.0));\n          Value negInput = arith::NegFOp::create(b, loc, input);\n          Value expNegInput = math::ExpOp::create(b, loc, negInput);\n          Value onePlusExp = arith::AddFOp::create(b, loc, one, expNegInput);\n          Value sigmoid = arith::DivFOp::create(b, loc, one, onePlusExp);\n          Value silu = arith::MulFOp::create(b, loc, input, sigmoid);\n\n          linalg::YieldOp::create(b, loc, silu);\n        }",
+      "before": "[&](OpBuilder &b, Location loc, ValueRange args) {\n          Value input = args[0];\n\n          // SiLU: x * sigmoid(x) = x * (1 / (1 + exp(-x)))\n          Value one = arith::ConstantOp::create(\n              b, loc, b.getFloatAttr(elementType, 1.0));\n          Value negInput = arith::NegFOp::create(b, loc, input);\n          Value expNegInput = math::ExpOp::create(b, loc, negInput);\n          Value onePlusExp = arith::AddFOp::create(b, loc, one, expNegInput);\n          Value sigmoid = arith::DivFOp::create(b, loc, one, onePlusExp);\n          Value silu = arith::MulFOp::create(b, loc, input, sigmoid);\n\n          linalg::YieldOp::create(b, loc, silu);\n        }",
+      "column": 9,
+      "dependency_change": "Nested by-value pointer captures and local aliases; no library API or ownership added",
+      "insertion_order": -1,
+      "length": 666,
+      "line": 122,
+      "offset": 4546,
+      "reason": "Compose 1 nested lambdas; materialize local pointer copies at each boundary",
+      "rule": "capture",
+      "round": 6,
+      "input_sha256": "71cb5179da3af6fe915eb676a717a6a39449f761843ff9f5c8cd1c746463ad82"
+    }
+  ],
+  "input": "/home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/TosaElementwiseFusion/SiLUFusion.cpp",
+  "output": "/home/ce/Desktop/BuddyCompiler/audits/remaining-rules-generalization-20261120-031609/verified/silu-fusion/rewritten.cpp",
+  "parsed": true,
+  "profile": "silu-fusion",
+  "rejections": [],
+  "rules": [
+    "namespace",
+    "if-condition",
+    "guard",
+    "value-range",
+    "capture"
+  ],
+  "schema_version": 1,
+  "scope": "Audited pass compatibility rules; no general equivalence claim",
+  "status": "rewritten",
+  "rounds": [
+    {
+      "rule": "namespace",
+      "phases": [
+        "namespace",
+        "namespace-reference"
+      ],
+      "input_sha256": "48542532ac27629c2a214cb8ccea059d6d4bf5e6468e8596057a59d752d43c43",
+      "output_sha256": "b78f4f2efe7e1310088aabdc4ed3621cc770688ba56639b1d253d522387007e5",
+      "edit_count": 3
+    },
+    {
+      "rule": "if-condition",
+      "phases": [
+        "if-condition"
+      ],
+      "input_sha256": "b78f4f2efe7e1310088aabdc4ed3621cc770688ba56639b1d253d522387007e5",
+      "output_sha256": "20a6e92917ad08367d323d2fbec93301c55cb21b49295522b1163bcf2c44559d",
+      "edit_count": 1
+    },
+    {
+      "rule": "if-condition",
+      "phases": [],
+      "input_sha256": "20a6e92917ad08367d323d2fbec93301c55cb21b49295522b1163bcf2c44559d",
+      "output_sha256": "20a6e92917ad08367d323d2fbec93301c55cb21b49295522b1163bcf2c44559d",
+      "edit_count": 0
+    },
+    {
+      "rule": "guard",
+      "phases": [
+        "guard"
+      ],
+      "input_sha256": "20a6e92917ad08367d323d2fbec93301c55cb21b49295522b1163bcf2c44559d",
+      "output_sha256": "eade3ba1242bd64d7f658e9d1ec7f3929dc4526541e99c03788fa9507109a8ae",
+      "edit_count": 1
+    },
+    {
+      "rule": "guard",
+      "phases": [],
+      "input_sha256": "eade3ba1242bd64d7f658e9d1ec7f3929dc4526541e99c03788fa9507109a8ae",
+      "output_sha256": "eade3ba1242bd64d7f658e9d1ec7f3929dc4526541e99c03788fa9507109a8ae",
+      "edit_count": 0
+    },
+    {
+      "rule": "value-range",
+      "phases": [
+        "value-range",
+        "value-range-preamble"
+      ],
+      "input_sha256": "eade3ba1242bd64d7f658e9d1ec7f3929dc4526541e99c03788fa9507109a8ae",
+      "output_sha256": "71cb5179da3af6fe915eb676a717a6a39449f761843ff9f5c8cd1c746463ad82",
+      "edit_count": 3
+    },
+    {
+      "rule": "capture",
+      "phases": [
+        "capture",
+        "capture-pointers"
+      ],
+      "input_sha256": "71cb5179da3af6fe915eb676a717a6a39449f761843ff9f5c8cd1c746463ad82",
+      "output_sha256": "e249124108bd5def7b0c227ece4b7e28c3bd34ddbdcb8cd3c1dc9c2d8987c6a3",
+      "edit_count": 2
+    }
+  ],
+  "offset_basis": "UTF-8 bytes in the input of each numbered AST round"
+}

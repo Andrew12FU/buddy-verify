@@ -1,0 +1,29 @@
+--- /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/LowerIME/LowerIMEPass.cpp
++++ /home/ce/Desktop/BuddyCompiler/audits/remaining-rules-generalization-20261120-031609/verified/lower-ime/rewritten.cpp
+@@ -33,7 +33,8 @@
+ using namespace mlir;
+ using namespace buddy::ime;
+ 
+-namespace {
++namespace LowerIMEPass_anonymousNamespace_01 {} using namespace LowerIMEPass_anonymousNamespace_01;
++namespace LowerIMEPass_anonymousNamespace_01 {
+ class LowerIMEToLLVMPass
+     : public PassWrapper<LowerIMEToLLVMPass, OperationPass<ModuleOp>> {
+ public:
+@@ -56,7 +57,7 @@
+ };
+ } // namespace
+ 
+-void LowerIMEToLLVMPass::runOnOperation() {
++void LowerIMEPass_anonymousNamespace_01::LowerIMEToLLVMPass::runOnOperation() {
+   MLIRContext *context = &getContext();
+   ModuleOp module = getOperation();
+ 
+@@ -73,6 +74,6 @@
+ 
+ namespace mlir {
+ namespace buddy {
+-void registerLowerIMEPass() { PassRegistration<LowerIMEToLLVMPass>(); }
++void registerLowerIMEPass() { PassRegistration<LowerIMEPass_anonymousNamespace_01::LowerIMEToLLVMPass>(); }
+ } // namespace buddy
+ } // namespace mlir

@@ -1,0 +1,188 @@
+//===- SiLUFusion.cpp ----------------------------------------------------===//
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+//===----------------------------------------------------------------------===//
+//
+// This file implements the SiLU fusion pass that automatically detects and
+// fuses tosa.sigmoid + tosa.mul patterns into a single linalg.generic
+// operation.
+//
+//===----------------------------------------------------------------------===//
+
+#include <mlir/Dialect/Arith/IR/Arith.h>
+#include <mlir/Dialect/Func/IR/FuncOps.h>
+#include <mlir/Dialect/Linalg/IR/Linalg.h>
+#include <mlir/Dialect/Math/IR/Math.h>
+#include <mlir/Dialect/Tensor/IR/Tensor.h>
+#include <mlir/Dialect/Tosa/IR/TosaOps.h>
+#include <mlir/IR/Builders.h>
+#include <mlir/IR/BuiltinTypes.h>
+#include <mlir/IR/PatternMatch.h>
+#include <mlir/Pass/Pass.h>
+#include <mlir/Transforms/GreedyPatternRewriteDriver.h>
+
+using namespace mlir;
+
+//===----------------------------------------------------------------------===//
+// SiLU Fusion Pattern
+//===----------------------------------------------------------------------===//
+
+namespace SiLUFusion_anonymousNamespace_01 {} using namespace SiLUFusion_anonymousNamespace_01;
+namespace SiLUFusion_anonymousNamespace_01 {
+
+class SiLUFusionPattern : public OpRewritePattern<tosa::MulOp> {
+public:
+  using OpRewritePattern<tosa::MulOp>::OpRewritePattern;
+
+  LogicalResult matchAndRewrite(tosa::MulOp mulOp,
+                                PatternRewriter &rewriter) const override {
+    auto loc = mulOp.getLoc();
+
+    Value lhs = mulOp.getInput1();
+    Value rhs = mulOp.getInput2();
+
+    // Check for pattern: x * sigmoid(x) or sigmoid(x) * x
+    tosa::SigmoidOp sigmoidOp = nullptr;
+    Value inputValue = nullptr;
+
+    {
+      auto lhsSigmoid = lhs.getDefiningOp<tosa::SigmoidOp>();
+      if (static_cast<bool>(lhsSigmoid)) {
+        if (lhsSigmoid.getInput() == rhs) {
+          sigmoidOp = lhsSigmoid;
+          inputValue = rhs;
+        }
+      } else {
+        auto rhsSigmoid = rhs.getDefiningOp<tosa::SigmoidOp>();
+        if (static_cast<bool>(rhsSigmoid)) {
+          if (rhsSigmoid.getInput() == lhs) {
+            sigmoidOp = rhsSigmoid;
+            inputValue = lhs;
+          }
+        }
+      }
+    }
+
+    {
+      bool guardFailed = (!sigmoidOp || !inputValue);
+      if (guardFailed) {
+      return failure();
+    }
+    }
+
+    // Check if sigmoid has only one use (the multiply operation)
+    if (!sigmoidOp.getResult().hasOneUse()) {
+      return failure();
+    }
+
+    // Get tensor type information
+    auto inputType = mlir::cast<RankedTensorType>(inputValue.getType());
+    auto outputType = mlir::cast<RankedTensorType>(mulOp.getResult().getType());
+    Type elementType = inputType.getElementType();
+
+    // Create affine maps for linalg.generic
+    int64_t rank = inputType.getRank();
+    SmallVector<AffineExpr> exprs;
+    for (int64_t i = 0; i < rank; ++i) {
+      exprs.push_back(rewriter.getAffineDimExpr(i));
+    }
+    AffineMap identityMap =
+        AffineMap::get(rank, 0, exprs, rewriter.getContext());
+    SmallVector<AffineMap> indexingMaps = {identityMap, identityMap};
+
+    // Create iterator types (all parallel)
+    SmallVector<utils::IteratorType> iteratorTypes(
+        rank, utils::IteratorType::parallel);
+
+    // Create empty tensor for output
+    tensor::EmptyOp emptyTensor = tensor::EmptyOp::create(
+        rewriter, loc, outputType.getShape(), elementType);
+
+    // Create fused SiLU operation using linalg.generic
+    mlir::Value rangeValues[] = {inputValue};
+    llvm::ArrayRef<mlir::Value> rangeRef(rangeValues, sizeof(rangeValues) / sizeof(rangeValues[0]));
+    mlir::ValueRange valueRange(rangeRef);
+    mlir::Value rangeValues1[] = {emptyTensor};
+    llvm::ArrayRef<mlir::Value> rangeRef1(rangeValues1, sizeof(rangeValues1) / sizeof(rangeValues1[0]));
+    mlir::ValueRange valueRange1(rangeRef1);
+    auto *elementTypePtr = &elementType;
+    linalg::GenericOp fusedOp = linalg::GenericOp::create(
+        rewriter, loc, outputType, valueRange,
+        valueRange1, indexingMaps, iteratorTypes,
+        [elementTypePtr](OpBuilder &b, Location loc, ValueRange args) {
+          Value input = args[0];
+
+          // SiLU: x * sigmoid(x) = x * (1 / (1 + exp(-x)))
+          Value one = arith::ConstantOp::create(
+              b, loc, b.getFloatAttr((*elementTypePtr), 1.0));
+          Value negInput = arith::NegFOp::create(b, loc, input);
+          Value expNegInput = math::ExpOp::create(b, loc, negInput);
+          Value onePlusExp = arith::AddFOp::create(b, loc, one, expNegInput);
+          Value sigmoid = arith::DivFOp::create(b, loc, one, onePlusExp);
+          Value silu = arith::MulFOp::create(b, loc, input, sigmoid);
+
+          linalg::YieldOp::create(b, loc, silu);
+        });
+
+    // Replace the original multiply operation
+    rewriter.replaceOp(mulOp, fusedOp.getResult(0));
+
+    // Erase the sigmoid operation (we already verified it has only one use)
+    rewriter.eraseOp(sigmoidOp);
+
+    return success();
+  }
+};
+
+} // end anonymous namespace
+
+//===----------------------------------------------------------------------===//
+// SiLU Fusion Pass
+//===----------------------------------------------------------------------===//
+
+namespace SiLUFusion_anonymousNamespace_01 {} using namespace SiLUFusion_anonymousNamespace_01;
+namespace SiLUFusion_anonymousNamespace_01 {
+class SiLUFusionPass
+    : public PassWrapper<SiLUFusionPass, OperationPass<func::FuncOp>> {
+public:
+  MLIR_DEFINE_EXPLICIT_INTERNAL_INLINE_TYPE_ID(SiLUFusionPass)
+
+  StringRef getArgument() const final { return "silu-fusion"; }
+  StringRef getDescription() const final {
+    return "Fuse TOSA sigmoid and multiply operations into SiLU activation.";
+  }
+
+  void runOnOperation() override {
+    func::FuncOp funcOp = getOperation();
+    MLIRContext *context = &getContext();
+
+    RewritePatternSet patterns(context);
+    patterns.add<SiLUFusionPattern>(context);
+
+    if (failed(applyPatternsGreedily(funcOp, std::move(patterns)))) {
+      signalPassFailure();
+    }
+  }
+};
+} // end anonymous namespace
+
+//===----------------------------------------------------------------------===//
+// Pass Registration
+//===----------------------------------------------------------------------===//
+
+namespace mlir {
+namespace buddy {
+void registerSiLUFusionPass() { PassRegistration<SiLUFusion_anonymousNamespace_01::SiLUFusionPass>(); }
+} // namespace buddy
+} // namespace mlir

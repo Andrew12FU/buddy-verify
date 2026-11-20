@@ -1,0 +1,56 @@
+[
+  {
+    "source": "03_manual_passes/buddy_four/lower-ime/rewritten.cpp",
+    "include": "03_manual_passes/buddy_four/lower-ime",
+    "exit_code": 0,
+    "diagnostics": null
+  },
+  {
+    "source": "03_manual_passes/buddy_four/matmul-scalar/rewritten.cpp",
+    "include": "03_manual_passes/buddy_four/matmul-scalar",
+    "exit_code": 0,
+    "diagnostics": null
+  },
+  {
+    "source": "03_manual_passes/buddy_four/reshape/rewritten.cpp",
+    "include": "03_manual_passes/buddy_four/reshape",
+    "exit_code": 0,
+    "diagnostics": null
+  },
+  {
+    "source": "03_manual_passes/buddy_four/silu-fusion/rewritten.cpp",
+    "include": "03_manual_passes/buddy_four/silu-fusion",
+    "exit_code": 0,
+    "diagnostics": null
+  },
+  {
+    "source": "03_manual_passes/builtin-transpose/rewritten.cpp",
+    "include": "03_manual_passes/builtin-transpose",
+    "exit_code": 0,
+    "diagnostics": null
+  },
+  {
+    "source": "03_manual_passes/four_pass_clang18/AssumeTightMemRefLayout/rewritten.cpp",
+    "include": "03_manual_passes/four_pass_clang18/include",
+    "exit_code": 0,
+    "diagnostics": null
+  },
+  {
+    "source": "03_manual_passes/four_pass_clang18/ConvertMemcpyToGPU/rewritten.cpp",
+    "include": "03_manual_passes/four_pass_clang18/include",
+    "exit_code": 0,
+    "diagnostics": null
+  },
+  {
+    "source": "03_manual_passes/four_pass_clang18/DepthwiseConvNhwcHwc/rewritten.cpp",
+    "include": "03_manual_passes/four_pass_clang18/include",
+    "exit_code": 0,
+    "diagnostics": null
+  },
+  {
+    "source": "03_manual_passes/four_pass_clang18/EliminateMemRefCopy/rewritten.cpp",
+    "include": "03_manual_passes/four_pass_clang18/include",
+    "exit_code": 0,
+    "diagnostics": null
+  }
+]

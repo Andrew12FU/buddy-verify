@@ -1,0 +1,1030 @@
+--- before/01_frontend/ExtractMiniMLIR/run.py
++++ after/01_frontend/ExtractMiniMLIR/run.py
+@@ -16,6 +16,7 @@
+ ROOT=Path(__file__).resolve().parent
+ FRONTEND=ROOT.parent/'FramaClangFrontend'
+ sys.path.insert(0,str(FRONTEND))
++from experiment.paths import FRONTEND_LLVM, executable_path
+ from experiment.toolchain import compiler_arguments, compiler_environment, mini_arguments, run_command
+ from python.diagnostics import diagnose
+ 
+@@ -33,11 +34,11 @@
+     p.add_argument('--rules',default='namespace,guard')
+     p.add_argument('--profile',default='matmul-scalar',help='Rewrite frontend profile only')
+     p.add_argument('--compile-commands',type=Path,required=True)
+-    p.add_argument('--llvm-prefix',type=Path,default=Path('/home/ce/Desktop/framaclang/environment/llvm18'))
++    p.add_argument('--llvm-prefix',type=Path,default=FRONTEND_LLVM)
+     p.add_argument('--output-dir',type=Path,default=ROOT/'current/tosa-matmul')
+     p.add_argument('--tool',type=Path,default=FRONTEND/'build-llvm18/ExtractMiniMLIR/buddy-extract-minimlir')
+-    p.add_argument('--frama-c',type=Path,default=Path.home()/'.opam/framac-study/bin/frama-c')
+-    p.add_argument('--converter',type=Path,default=Path.home()/'.opam/framac-study/bin/framaCIRGen')
++    p.add_argument('--frama-c',type=Path,default=executable_path('FRAMA_C','frama-c'))
++    p.add_argument('--converter',type=Path,default=executable_path('FRAMA_CIRGEN','framaCIRGen'))
+     a=p.parse_args()
+     out=a.output_dir.resolve()
+     # Do not erase any arbitrary caller directory; own exactly one current result.
+@@ -49,7 +50,7 @@
+         shutil.rmtree(out)
+     out.mkdir(parents=True,exist_ok=True);(out/'.extract-owned').write_text('ExtractMiniMLIR current result\n')
+     (out/'logs').mkdir()
+-    flags,cwd,_=compiler_arguments(a.compile_commands,a.source,a.llvm_prefix,a.llvm_prefix)
++    flags,cwd,_=compiler_arguments(a.compile_commands,a.source,a.llvm_prefix)
+     env=compiler_environment(a.llvm_prefix)
+     summary={'stages':{},'generation_source':'real Clang AST only',
+              'semantic_equivalence_proved':False,'callback_execution_model':False}
+--- before/01_frontend/FramaClangFrontend/CMakeLists.txt
++++ after/01_frontend/FramaClangFrontend/CMakeLists.txt
+@@ -65,6 +65,8 @@
+ include(CTest)
+ if(BUILD_TESTING)
+   find_package(Python3 REQUIRED COMPONENTS Interpreter)
++  add_test(NAME standalone-cli-regressions COMMAND ${Python3_EXECUTABLE}
++    ${CMAKE_CURRENT_SOURCE_DIR}/tests/test_standalone.py)
+   add_test(NAME structural-rule-regressions COMMAND ${Python3_EXECUTABLE}
+     ${CMAKE_CURRENT_SOURCE_DIR}/tests/test_rule_generalization.py
+     --tool $<TARGET_FILE:buddy-framac-rewrite>
+--- before/01_frontend/FramaClangFrontend/README.md
++++ after/01_frontend/FramaClangFrontend/README.md
+@@ -1,164 +1,4 @@
+-# Buddy 的 Frama-Clang 前端：源码改写与接口抽象
++# 独立前端
+ 
+-2026-11-20 源码规则通用化及逐规则备份/验证见 [剩余规则改写记录](docs/REMAINING_RULE_GENERALIZATION.md)。规则层不再按 profile 名称分支；下文旧 profile 限制以该记录和当前实现为准。
+-
+-独立的 [ExtractMiniMLIR](../ExtractMiniMLIR/README.md) 正在开发从真实 AST 从零生成接口骨架的链路，
+-不使用下述共享 MiniMLIR 填补生成声明。简单案例已通过转换；TosaMatmul 候选仍有明确的模板等阻塞。
+-
+-当前源码解析、AST 改写和接口抽取默认使用 **Clang/LibTooling 18.1.8**；最终 C++→C 转换使用 **基于 Clang 18.1.8 的 Frama-Clang 0.0.20**，由 Frama-C 33.0 驱动。普通 Clang 18 负责解析和检查，C++→C 仍由 Frama-Clang 执行。2026-11-18 按用户要求备份 23 前端后恢复 18；新增四个 pass 以 `tests/references/four_pass_clang18/` 中的 `four_pass(1).zip` 原始快照为基线。恢复与对齐结果见 [Clang 18 恢复记录](docs/CLANG18_RETURN.md)。[23 前端迁移](docs/CLANG23_MIGRATION.md)与 [23 转换器实验](docs/FRAMA_CLANG23_MIGRATION.md)仅作历史记录。
+-
+-本目录包含同一个前端的两部分能力：**源码兼容性改写**与**接口抽取和抽象**。C++ / Clang LibTooling 负责 AST 分析，Python 负责实验调度和有界模型生成。四个 pass 默认从相邻 [MiniMLIR](../MiniMLIR/README.md) 的唯一共享模型中按声明/成员生成专用 include 库，源码保留原 include 路径。共享模型仍是经过人工审计的有限抽象；这不表示已经自动从任意真实 MLIR 库生成抽象模型。
+-
+-接口抽象入口及实测经验见 [接口抽象先驱模块](experiment/interface_pilot/README.md)，本次统一目录的映射和验证见 [目录整合记录](docs/INTERFACE_LAYOUT.md)。
+-
+-准备审查代码时，先读 [代码审查与扩展指南](ARCHITECTURE.md)：其中给出阅读顺序、层次边界、参数/返回值约定和扩展位置。公开接口和关键算法现已补充中文解释性注释，入口不再承载全部业务逻辑。
+-
+-当前源码/头文件规则、四个 pass 的分别计数、额外不适配及下一步提取入口统一见
+-[改写清单](docs/REWRITE_INVENTORY.md)。每轮自动生成 `rewrite-inventory.json`，失败轮次也保留已应用的修改。
+-
+-原始 pass、真实 LLVM/MLIR 头文件和已有人工实验均不修改。自动改写结果更新固定的当前通过目录。没有将工具加入父级 `Conversion/CMakeLists.txt`：前端开发库、Buddy 构建及外部 Frama-Clang 转换器分别配置。
+-
+-实现文件采用对应的职责目录：头文件在 `include/`，实现文件在 `src/`，不混放。规则以语法能力命名，pass 的来源和验收范围集中在配置层。
+-
+-```text
+-FramaClangFrontend/
+-  include/                    C++ 声明
+-    frontend/                 配置、改写解析流程
+-    rewrite/                  文本修改计划
+-    rules/                    按规则拆分的兼容性改写
+-    support/                  AST/源码工具、报告输出
+-    interface/                接口抽取、调用观察、有界分析的声明
+-  src/                        与 include/ 对应的 C++ 实现及两个工具入口
+-    frontend/  rewrite/  rules/  support/  interface/
+-  experiment/                 实验编排
+-    *.py                      改写的 pass 配置、工具链、产物、验证流程
+-    interface_pilot/          接口抽象先驱脚本、样例、经验、历史及新结果
+-  tests/                      改写规则行为和拒绝路径回归
+-  docs/                       前端结构、改写接入及迁移验证
+-  run.py                      完整 pass 改写回归入口
+-  CMakeLists.txt              构建改写工具、接口探针与共享库成员提取器
+-  build/                      两个工具共用的构建目录（忽略）
+-  ../MiniMLIR/current/<pass>/  每个 pass 唯一的当前通过结果（忽略）
+-```
+-
+-**完整 pass + mini 是独立回归层**：四种 `--pass` 均处理完整文件，执行原生检查、Frama-Clang 转换及幂等性检查；另检查真实依赖下的原生解析。小用例不能替代完整文件回归。当前共享库回归及明确保留的转换障碍见 [MiniMLIR 回归记录](../MiniMLIR/docs/VALIDATION.md)。嵌套捕获记录见 [嵌套 lambda](docs/NESTED_CAPTURE.md)；历史结果仍保留。
+-
+-调用命令、迁移依赖、Gitee 上传清单及已有结果的独立复现见 [使用与分享说明](docs/USAGE_AND_SHARING.md)。
+-
+-## 当前实现
+-
+-| 文件 | 职责 |
+-| --- | --- |
+-| `src/frontend/RewriteFrontend.cpp` | 仅负责 C++ 命令行、路径保护和顶层串联 |
+-| `FrontendOptions` / `RewritePipeline` | 配置与 Clang 回调、两遍 AST 扫描、规则分发 |
+-| `AstSupport` / `RewritePlan` / `FrontendOutput` | 源码/AST 公共工具、内存修改计划、JSON 和文件输出 |
+-| `include/rules/*.h` / `src/rules/*.cpp` | 独立规则的接口及实现，不直接修改 AST 或写文件 |
+-| `include/interface/*.h` / `src/interface/*.cpp` | 接口抽取探针、真实调用/类型观察及两个 LLVM 类型的有界切片 |
+-| `MiniSlice.h` / `MiniSlice*.cpp` | 共享模型上的声明/成员依赖闭包和裁剪计划 |
+-| `experiment/interface_pilot/` | 接口抽象实验编排、对照、经验、迁移映射和结果 |
+-| `run.py` | 仅负责改写回归的 Python 命令行、文件检查和运行配置 |
+-| `experiment/*.py` | pass 配置、编译数据库、进程、产物和分阶段验证 |
+-| `tests/rewrite_support.py` / `tests/test_*.py` | 行为对照、拒绝路径、幂等性及原文件保护测试 |
+-| `VALIDATION.md` | 第一轮 Reshape 的实测结果与产物位置 |
+-| `VALIDATION_MATMUL_SCALAR.md` | 第二轮 MatmulScalar 的实测结果及 Reshape 复测 |
+-| `ARCHITECTURE.md` / `VALIDATION_REFACTOR.md` | 分层审查指南与本轮重构回归 |
+-
+-原有六类源码规则如下；四个新增 pass 的范围循环、构造、const-local 和列表规则见 [Clang 18 接入记录](docs/CLANG18_RETURN.md)：
+-
+-1. 匿名命名空间具名化，并限定外部类类型引用。重开的同一匿名空间复用名称；命名冲突时选择新名称。**这改变内部链接属性，只用于单翻译单元转换副本。**
+-2. while 条件声明变为每轮声明、显式 bool 判断和原循环体。保留原循环体的嵌套块，避免改变遮蔽关系；`continue` 仍重新执行初始化。非平凡析构、初始化清理、goto/label、引用/volatile 条件变量及非复合循环体暂时拒绝。
+-3. `capture`：所有 profile 共用捕获树规划器。对象、标量、引用变量等的引用捕获改为原存储地址的值捕获，普通值捕获保留副本语义；同块表达式及单个自动局部声明均按 AST 结构接受。嵌套逐层传递地址，`this` 的普通整数字段访问统一转换为该实例的成员地址。初始化捕获、跨已改写引用的值捕获、泛型、宏、未求值使用及重载取地址等仍拒绝，不延长原对象寿命。详见 [通用 capture](docs/GENERIC_CAPTURE.md)。
+-4. `guard`：统一识别运行期 `if + 内建 ||`，不依赖 profile、类名、方法名、分支形状或返回值。块内 bool 保存完整原条件，then/else 原文完整保留；支持循环内、无花括号分支和 if 初始化语句。嵌套及 else-if 候选分轮重新解析，防止重叠并保持求值路径；宏、goto/label 拒绝，`if constexpr` 和重载 `||` 跳过。规则、当前命中数和验证范围见 [通用 guard](docs/GENERIC_GUARD.md)。
+-
+-5. `if-condition`：SiLU、AssumeTight、EliminateCopy、GPU Memcpy 共用“分支补块 → fresh AST → 条件声明展开”的流程。无花括号的 then 和普通 else 先规范化，else-if 链保持直连；每个根每轮只规范化或展开之一。所有 profile 使用同一祖先检查，一般嵌套延后到后续轮次，直接 else-if 由根递归展开。右侧查询只在左条件为假时执行；宏、跳转、引用/volatile 条件变量、非平凡析构及可观察的临时清理拒绝。详见 [规范化与分轮说明](docs/IF_CONDITION_NORMALIZATION.md)。
+-6. `value-range`：SiLU 的 `GenericOp::create` 两个列表实参改用具名 `Value` 数组、指针/长度 `ArrayRef` 和 `ValueRange`。支持多个元素，数组覆盖原调用的生命周期。仅接受已审计的局部 Value/EmptyOp 元素及调用形状；空列表、有副作用实参、捕获初始化等情况拒绝。所选构造重载变化会写入报告。
+-
+-`--interface-header` 保留为历史单头文件模式：先解析真实头文件，再替换已审计 includes。默认 runner 不启用此选项，而是保留 include 并调用 `buddy-mini-slice`。提取规则见 [MiniMLIR 提取说明](../MiniMLIR/docs/EXTRACTION.md)，原有真实 LLVM 先驱实验仍独立保留。
+-
+-这些规则只在列明的四个 pass 和回归样本上验证，尚不是任意 C++ 的通用语义保持转换器。若规则相互覆盖、源范围不可编辑或发现不支持的候选，整次计划拒绝；以后可分轮执行，再接入其他 pass 的规则。
+-
+-## 构建与回归
+-
+-当前默认工具链为 `/home/ce/Desktop/framaclang/environment/llvm18` 中的 LLVM/Clang 18.1.8。它不改变 Buddy 的 LLVM/MLIR 23.0.0git 子模块。23 工具链、构建目录及切换前快照均保留。
+-
+-```bash
+-python3 /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/build_frontend.py
+-/home/ce/Desktop/BuddyCompiler/environment-v0.0.4/env/bin/ctest \
+-  --test-dir /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/build-llvm18 \
+-  --output-on-failure
+-```
+-
+-`build_frontend.py` 默认单任务，在 `build-llvm18/` 使用 Clang 18 编译并链接同套 18 开发库，拒绝覆盖历史 `build/`。若需试验 23，须同时显式指定 `--llvm-major 23 --llvm-prefix /home/ce/Desktop/BuddyCompiler/environment-v0.0.4/llvm23/root/usr/lib/llvm-23 --build-dir <另一个新目录>`，不覆盖原 `build-llvm23/`。
+-
+-## 逐个运行 pass
+-
+-```bash
+-python3 /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/run.py --pass reshape
+-python3 /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/run.py --pass matmul-scalar
+-python3 /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/run.py --pass lower-ime
+-python3 /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/run.py --pass silu-fusion
+-```
+-
+-默认使用工作区 `build-v0.0.4/buddy/compile_commands.json` 中当前 pass 的条目。四个 pass 共用 `../MiniMLIR/include`，每轮根据改写后的 AST 生成自己的 `include/`；下面列出的旧 mini 只作为只读历史参考，显式传入 `--interface` 才启用历史模式：
+-
+-| pass 参数 | 参考目录，相对于 Conversion | 启用规则 |
+-| --- | --- | --- |
+-| `reshape`（默认） | `GraphRedundancyElimination/test_framaclang/simplify_tosa_reshape/full_pass_v2/final/` | namespace、while、capture、guard |
+-| `matmul-scalar` | `GraphRedundancyElimination/test_framaclang/simplify_tosa_matmul_scalar/full_pass/steps/100_complete_pass/` | namespace、guard |
+-| `lower-ime` | `LowerIME/test_framaclang/steps/072_complete_pass/` | namespace |
+-| `silu-fusion` | `TosaElementwiseFusion/test_framaclang/steps/104_arrayref_complete_pass/` | namespace、if-condition、guard、value-range、capture |
+-| `assume-tight` | `FramaClangFrontend/tests/references/four_pass_clang18/AssumeTightMemRefLayout/` | namespace、capture、range-for、if-condition |
+-| `eliminate-copy` | `FramaClangFrontend/tests/references/four_pass_clang18/EliminateMemRefCopy/` | namespace、constructor、range-for、if-condition、guard |
+-| `gpu-memcpy` | `FramaClangFrontend/tests/references/four_pass_clang18/ConvertMemcpyToGPU/` | namespace、capture、range-for、if-condition |
+-| `builtin-transpose` | `FramaClangFrontend/tests/references/builtin-transpose/` | namespace、const-local、init-list、capture |
+-| `depthwise-conv` | `FramaClangFrontend/tests/references/four_pass_clang18/DepthwiseConvNhwcHwc/` | namespace、const-local、init-list、capture |
+-
+-真实编译条目的语法检查调整、目标、sysroot 和标准库搜索参数全部记录。当前配置限定于已审计的 x86_64 Conda/GCC 环境，不是跨平台探测器。直接调用 C++ 工具时，通过同名 `--profile` 选择实验配置和 include 白名单；guard 和 capture 的 AST 匹配不依赖 profile；runner 会同步设置 profile 和启用规则，重复改写检查也使用同一配置。
+-
+-常用参数：`--llvm-prefix`（解析/原生检查，默认 18）、`--frama-llvm-prefix`（转换器配套环境，默认 18）、`--frama-cirgen`（独立 C++ 转换器，默认原 OPAM 中的 18 版）、`--system-prefix`（已审计标准库/sysroot）、`--tool`、`--compile-commands`、`--interface`、`--frama-c`、`--output-dir`。若显式试用其他转换器，必须同时选择其配套 LLVM 前缀。`--skip-frama` 明确跳过转换，结果只能记作 `native_checked`。
+-
+-默认更新 `../MiniMLIR/current/<pass参数>/`，每个 pass 只保留一份完整通过的源码和头文件库结果。转换及 C 回读通过后替换；失败或 `--skip-frama` 保留上一份通过版本，不累计快照。只有显式 `--output-dir` 才保留额外诊断目录，该目录必须全新或为空。
+-
+-```text
+-original.cpp            原始源码快照
+-include/                从共享库按声明/成员提取的本轮专用库
+-interface-plan.json     AST 依赖闭包、声明范围及保留理由
+-interface-manifest.json 共享来源、删除清单和生成头文件哈希
+-interface-abstractions.json 共享模型外部接口抽象调整的快照及来源（独立于兼容规则）
+-conversion-include/     从专用库自动生成的转换用头文件副本
+-header-rewrite.json     头文件规则、模板来源、UTF-8 字节编辑和输入/输出哈希
+-header-rewrite.patch    头文件兼容改写的完整差异
+-rewrite-inventory.json  源码/头文件分别统计、完整编辑及后续提取的产物索引
+-rewritten.cpp           自动改写输入，保留原 include 路径
+-rewrite.patch           原始源码到自动结果的完整差异
+-rewrite.json            规则、原始字节偏移/行列、前后文本、依据及依赖变化
+-converted.c            本次成功转换的 C
+-logs/                  原始转换对照、改写转换与 C 回读的完整日志
+-summary.json           各阶段独立结果、输入/工具/实现/产物哈希和限制
+-```
+-
+-成功检查后自动删除 `baseline_mini.cpp`、`second.cpp/second.json` 等检查副本。共享模式的真实依赖检查直接使用 `rewritten.cpp`，不再复制 `rewritten_real.cpp`。幂等性结论、工具版本和所有阶段的命令/退出码保存在 `summary.json`；普通成功阶段的重复日志删除。显式输出目录中的失败运行保留已有诊断，统一在 `logs/`。
+-
+-`rewrite.json` 的偏移以原始 UTF-8 文件的字节为单位；全部修改都针对同一原始缓冲区。保留的前后文本与顺序可用于后续建立源码映射、分析依赖变化，不导出不稳定的 AST 内存地址。
+-
+-summary 分别记录两套工具链路径、原生检查参数和 Frama-Clang 参数；JSON 中的解析器主版本必须与原生编译器一致，否则停止，防止误用旧二进制。
+-
+-默认顺序为：真实依赖解析和改写 → 共享库成员提取 → 原始/改写源码在专用库下检查 → 真实依赖检查 → 独立头文件兼容改写及原生检查 → 幂等性 → Frama-Clang 原始对照及改写转换 → 生成 C 的独立回读。最终转换使用 `conversion-include/`。头文件规则及审查入口见 [HEADER_REWRITES.md](../MiniMLIR/docs/HEADER_REWRITES.md)。原始对照的失败只记录；其余阶段失败不会记作完整通过。保留真实继承构造导致的已知转换阻塞记作 `conversion_blocked`，日志和两份专用库照常保存。
+-
+-四个 pass 均要求规则命中数量与审阅过的结构一致；共享模式只从期望计数中移除 include 替换项。MatmulScalar 严格比较已审阅的通用 guard 参考（旧人工版本保留）：共享模式先恢复参考文件的原 include 块，然后逐字节比较其余输出；历史模式直接比较原参考。其他三个 pass 保留已记录的表达形式或空白差别，不强制参考完全一致。新增 pass 应先建立自己的证据和命中范围。
+-
+-## 接口抽取和抽象的当前边界
+-
+-接口分析与兼容性改写使用独立 Clang action。当前已接入人工审计的共享 MiniMLIR 模型上的声明/成员提取，保留结构和重载依赖；它不会自动从任意真实 MLIR 库构造抽象模型。先驱模块对真实调用、类型性质、LogicalResult 短实现和 ArrayRef 成员的试验继续保留，供后续扩展抽象模型参考。
+-
+-新增规则需要同时说明适用前提、拒绝条件、依赖变化和证据；用现有最小失败与成功对照回归，再放回完整 pass。接口模型修正应单独记录，不能隐藏在 Buddy 源码改写中。
+-
+-原生检查不验证链接、执行或完整接口绑定等价。Frama-Clang 退出 0 且生成非空 C 只表示本次模型和配置下可转换；不代表真实 MLIR 实现已转换、一般语义等价或形式化证明完成。保留的转换日志包含现有接口模型的警告。
+-
+-接口抽象先驱实验使用同一次构建生成的 `build-llvm18/header-extraction-probe`：
+-
+-```bash
+-python3 /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/FramaClangFrontend/experiment/interface_pilot/run.py
+-```
+-
+-BuiltinTransposeVectorization 的 Clang 18 头文件对照、源码规则、旧规则不适配与外部接口抽象边界见 [接入记录](docs/BUILTIN_TRANSPOSE.md)。
++运行和构建说明见仓库根目录 [README](../../README.md)。
++历史开发文档保存在 docs/history/，其中旧 Buddy 路径只作为历史证据。
+--- before/01_frontend/FramaClangFrontend/build_frontend.py
++++ after/01_frontend/FramaClangFrontend/build_frontend.py
+@@ -4,6 +4,7 @@
+ import argparse
+ from pathlib import Path
+ import subprocess
++import shutil
+ 
+ from experiment.profiles import FRONTEND_LLVM, FRONTEND_ROOT, WORKSPACE
+ from experiment.toolchain import compiler_environment
+@@ -15,12 +16,14 @@
+     parser.add_argument("--llvm-major", choices=["18", "23"], default="18")
+     parser.add_argument("--build-dir", type=Path, default=FRONTEND_ROOT / "build-llvm18")
+     parser.add_argument("--jobs", type=int, default=1)
++    parser.add_argument("--cmake", default=shutil.which("cmake"))
++    parser.add_argument("--ninja", default=shutil.which("ninja"))
+     args = parser.parse_args()
++    if not args.cmake or not args.ninja: parser.error("Install CMake/Ninja or pass --cmake and --ninja")
+     llvm, build = args.llvm_prefix.resolve(), args.build_dir.resolve()
+     if build == (FRONTEND_ROOT / "build").resolve():
+         parser.error("Keep the historical build/ baseline; choose a separate build directory")
+-    cmake = WORKSPACE / "environment-v0.0.4/env/bin/cmake"
+-    ninja = WORKSPACE / "environment-v0.0.4/env/bin/ninja"
++    cmake, ninja = args.cmake, args.ninja
+     env = compiler_environment(llvm)
+     subprocess.run([str(cmake), "-S", str(FRONTEND_ROOT), "-B", str(build), "-G", "Ninja",
+                     f"-DCMAKE_MAKE_PROGRAM={ninja}", "-DCMAKE_BUILD_TYPE=Release",
+--- before/01_frontend/FramaClangFrontend/docs/OPTIONAL_CONSTRUCTOR_RULE.md
++++ after/01_frontend/FramaClangFrontend/docs/OPTIONAL_CONSTRUCTOR_RULE.md
+@@ -0,0 +1,47 @@
++# 备用源码规则 constructor：当前九个 pass 不启用
++
++状态：源码规则 `src/rules/ConstructorRule.cpp` 保留实现、命令行名称和专门测试，作为显式启用的备用兼容规则。当前九个内置 pass 的 rules、分轮顺序和预期编辑数均不包含 constructor，默认输出不增加源码级的转发构造函数。
++
++## 原代码及当前为何不需要改
++
++EliminateCopy 的原写法是合法 C++：
++
++```cpp
++struct EliminateMemRefCopyPattern : public OpRewritePattern<memref::CopyOp> {
++  using OpRewritePattern<memref::CopyOp>::OpRewritePattern;
++  // matchAndRewrite ...
++};
++// runOnOperation 中：
++patterns.add<EliminateMemRefCopyPattern>(ctx);
++```
++
++Matmul、Reshape、SiLU 同样通过 using 继承 OpRewritePattern 的构造函数。不能根据具体 pass 名字判断这种语法必须展开。当前声明型 MiniMLIR 中，RewritePatternSet::add 只有声明，未展开真实 add/create/分配函数体；以上注册调用不会像完整真实实现那样沿函数体构造 pattern。当前这些 pass 的模型转换路径无需启用此源码兼容规则。
++
++此前 EliminateCopy 单独启用 constructor，是从历史人工参考继承的潜在兼容安排，不是当前九个 pass 都已触发的错误。现在关闭这项默认安排，并在关闭后重新验证。
++
++## 未来什么情况下可能出错
++
++继承构造声明本身没有错误。若未来输入直接构造派生对象，或头文件模型加入并实例化真实 add/create/分配实现，Clang 可能生成实际继承构造的 CXXInheritedCtorInitExpr。历史 Frama-Clang 0.0.20 / Clang 18 对这种表达式曾报 Unsupported expression: CXXInheritedCtorInitExpr；原历史包也将它标为“潜伏，一旦真正构造对象”。不能据此断言任意继承构造或其他版本转换器都必然失败。
++
++遇到此错误，应先从诊断定位具体对象类型和触发构造的调用。只有问题属于源码中这条规则支持的继承构造形状时，才考虑手动启用 constructor；它不支持任意模板构造、重载组合或生命周期语义。
++
++## 显式启用方式
++
++例如将 EliminateCopy 的当前默认规则补上 constructor：
++
++```sh
++python3 run.py --pass eliminate-copy \
++  --rules namespace,constructor,range-for,if-condition,guard \
++  --llvm-prefix "$LLVM_PREFIX" \
++  --skip-frama --output-dir results/eliminate-constructor-opt-in
++```
++
++这会关闭该样例固定编辑数及参考文本验收，仍执行规则的拒绝条件和其余检查。去掉 --skip-frama 并指定 Frama 工具，才能检验是否解决实际转换问题。
++
++## 之前打包时的读取错误是另一回事
++
++该备用规则读取基类构造的默认参数时，旧实现只调用 getDefaultArg()。声明型 mini 头中，Clang 可能尚未实例化默认参数，必须通过 hasUninstantiatedDefaultArg()/getUninstantiatedDefaultArg() 读取其保存的非依赖表达式。这个读取遗漏已经修复；依赖模板参数、宏、不可搬移的默认值和不安全的值参数仍拒绝。保留的正反用例验证规则自身能力，不表示九个 pass 的默认流程使用了它。
++
++## 与头文件改写的区别
++
++MiniMLIR 的转换兼容阶段另有 typed-attr-constructor-expansion 等头文件规则，它们处理库类型而非 pass 源码中的 pattern 派生类。这次关闭的是源码 constructor 规则；头文件转换规则保持原有行为，不能把报告中其他 constructor-expansion 名称误读为此源码规则仍在运行。
+--- before/01_frontend/FramaClangFrontend/docs/REMAINING_RULE_GENERALIZATION.md
++++ after/01_frontend/FramaClangFrontend/docs/REMAINING_RULE_GENERALIZATION.md
+@@ -1,3 +1,5 @@
++> 当前独立版状态：下文 constructor 是实现通用化的历史记录。九个内置 pass 的默认流程现均不启用这条源码规则，实现与测试仅作备用。见 [OPTIONAL_CONSTRUCTOR_RULE.md](OPTIONAL_CONSTRUCTOR_RULE.md)。
++
+ # 剩余源码规则去除样例绑定（2026-11-20）
+ 
+ 按规则分别备份、修改、验证和记录。pass 配置决定启用哪些能力；规则层以 AST 结构判断。
+--- before/01_frontend/FramaClangFrontend/examples/custom_input.cpp
++++ after/01_frontend/FramaClangFrontend/examples/custom_input.cpp
+@@ -0,0 +1,9 @@
++// A self-contained input for the standalone --input workflow.
++namespace {
++int adjust(int input) {
++  if (input < 0 || input == 0)
++    return 1;
++  return input + 2;
++}
++}
++int main() { return adjust(1) != 3; }
+--- before/01_frontend/FramaClangFrontend/experiment/artifacts.py
++++ after/01_frontend/FramaClangFrontend/experiment/artifacts.py
+@@ -30,10 +30,11 @@
+     """
+     shutil.copyfile(config.source, config.out / "original.cpp")
+     originals = [config.source]
+-    if not config.profile.reference_real_includes:
+-        originals.extend([config.reference / "input.cpp", config.reference / "mini_mlir.h"])
+-    else:
+-        originals.append(config.reference / "original.cpp")
++    if config.reference is not None:
++        if not config.profile.reference_real_includes:
++            originals.append(config.reference / "mini_mlir.h")
++        else:
++            originals.append(config.reference / "original.cpp")
+     if config.profile.reference_source is not None:
+         originals.append(config.profile.reference_source)
+     if config.shared_mini:
+--- before/01_frontend/FramaClangFrontend/experiment/paths.py
++++ after/01_frontend/FramaClangFrontend/experiment/paths.py
+@@ -0,0 +1,31 @@
++"""Repository-relative data paths and explicit/discovered external tool defaults."""
++import os
++from pathlib import Path
++import shutil
++import subprocess
++
++FRONTEND_ROOT = Path(__file__).resolve().parents[1]
++REPO = FRONTEND_ROOT.parents[1]
++WORKSPACE = REPO
++MINI_ROOT = FRONTEND_ROOT.parent / "MiniMLIR"
++
++def llvm_prefix():
++    if os.environ.get("LLVM_PREFIX"):
++        return Path(os.environ["LLVM_PREFIX"]).expanduser()
++    for name in ("llvm-config-18", "llvm-config"):
++        executable = shutil.which(name)
++        if executable:
++            result = subprocess.run([executable, "--prefix"], text=True, capture_output=True)
++            if result.returncode == 0:
++                return Path(result.stdout.strip())
++    return Path("/usr")
++
++def executable_path(variable, name):
++    value = os.environ.get(variable) or shutil.which(name)
++    return Path(value).expanduser() if value else Path(name)
++
++FRONTEND_LLVM = llvm_prefix()
++CONVERSION_LLVM = Path(os.environ.get("FRAMA_LLVM_PREFIX", str(FRONTEND_LLVM)))
++SYSTEM_PREFIX = None
++CONVERSION_CIRGEN = executable_path("FRAMA_CIRGEN", "framaCIRGen")
++FRONTEND_TOOL = FRONTEND_ROOT / "build-llvm18/buddy-framac-rewrite"
+--- before/01_frontend/FramaClangFrontend/experiment/profiles.py
++++ after/01_frontend/FramaClangFrontend/experiment/profiles.py
+@@ -4,18 +4,8 @@
+ from pathlib import Path
+ from typing import Mapping
+ 
+-FRONTEND_ROOT = Path(__file__).resolve().parents[1]
+-REPO = FRONTEND_ROOT.parents[3]
+-WORKSPACE = REPO.parent
+-GRAPH = FRONTEND_ROOT.parent / "GraphRedundancyElimination"
+-SYSTEM_PREFIX = Path("/home/ce/Desktop/framaclang/environment/llvm18")
+-FRONTEND_LLVM = SYSTEM_PREFIX
+-# 默认解析、改写、提取和转换均使用 18；两个阶段仍可独立指定工具链。
+-# 23 的源码、配置和产物已备份，原 build-llvm23/ 保留为历史实验。
+-CONVERSION_LLVM = SYSTEM_PREFIX
+-CONVERSION_CIRGEN = Path.home() / ".opam/framac-study/bin/framaCIRGen"
+-FRONTEND_TOOL = FRONTEND_ROOT / "build-llvm18/buddy-framac-rewrite"
+-MINI_ROOT = FRONTEND_ROOT.parent / "MiniMLIR"
++from .paths import (FRONTEND_ROOT, REPO, WORKSPACE, MINI_ROOT, SYSTEM_PREFIX,
++                    FRONTEND_LLVM, CONVERSION_LLVM, CONVERSION_CIRGEN, FRONTEND_TOOL)
+ 
+ 
+ @dataclass(frozen=True)
+@@ -36,13 +26,14 @@
+ 
+     name: str
+     source: Path
+-    reference: Path
++    reference: Path | None
+     rules: str
+-    expected: Mapping[str, int]
++    expected: Mapping[str, int] | None
+     require_reference_match: bool = False
+     compatibility_notes: tuple[str, ...] = ()
+     reference_source: Path | None = None  # Audited updated source; historical inputs stay immutable.
+     rounds: tuple[str, ...] = ()  # Fresh AST between rules with enclosing replacements.
++    namespace_prefix: str = ""
+     reference_real_includes: bool = False  # Imported references keep MLIR include paths.
+ 
+     @property
+@@ -54,84 +45,74 @@
+         return rules if {"if-condition", "guard", "init-list"}.intersection(rules) else ()
+ 
+ 
+-# 新增 pass 先登记自己的证据；不能只放宽 expected 以绕过失败。
++# Audit profiles select rules and repository-relative input/reference data.
+ PASS_PROFILES = {
+-    "reshape": PassProfile(
+-        "reshape", GRAPH / "SimplifyTosaReshape.cpp",
+-        GRAPH / "test_framaclang/simplify_tosa_reshape/full_pass_v2/final",
+-        "namespace,while,capture,guard",
+-        {"interface-substitution": 5, "namespace": 1, "namespace-reference": 1,
+-         "while": 1, "capture-pointers": 2, "capture": 2, "guard": 1},
+-    ),
+-    "matmul-scalar": PassProfile(
+-        "matmul-scalar", GRAPH / "SimplifyTosaMatmulScalar.cpp",
+-        GRAPH / ("test_framaclang/simplify_tosa_matmul_scalar/full_pass/"
+-                 "steps/100_complete_pass"),
+-        "namespace,guard",
+-        {"interface-substitution": 8, "namespace": 1,
+-         "namespace-reference": 1, "guard": 7},
+-        require_reference_match=True,
+-        reference_source=FRONTEND_ROOT / "tests/references/matmul-scalar-structural-rules.cpp",
+-        compatibility_notes=(
+-            "guard: match every runtime if + built-in ||, including the loop check; preserve both branches and bind the complete condition once",
+-        ),
+-    ),
+-    "lower-ime": PassProfile(
+-        "lower-ime", FRONTEND_ROOT.parent / "LowerIME/LowerIMEPass.cpp",
+-        FRONTEND_ROOT.parent / "LowerIME/test_framaclang/steps/072_complete_pass",
+-        "namespace",
+-        {"interface-substitution": 10, "namespace": 1, "namespace-reference": 2},
+-    ),
+-    "silu-fusion": PassProfile(
+-        "silu-fusion", FRONTEND_ROOT.parent / "TosaElementwiseFusion/SiLUFusion.cpp",
+-        FRONTEND_ROOT.parent / ("TosaElementwiseFusion/test_framaclang/steps/"
+-                                "104_arrayref_complete_pass"),
+-        "namespace,if-condition,guard,value-range,capture",
+-        {"interface-substitution": 11, "namespace": 2, "namespace-reference": 1,
+-         "if-condition": 1, "guard": 1, "value-range-preamble": 1,
+-         "value-range": 2, "capture-pointers": 1, "capture": 1},
+-        compatibility_notes=(
+-            "capture: all profiles use structural capture-tree planning, including single automatic local declarations",
+-            "guard: the same structural rule preserves arbitrary then/else bodies in every profile",
+-            "plan: independently generated preludes share an offset; explicit insertion orders 10/20 compose them, other overlaps still reject",
+-        ),
+-    ),
++    'reshape': PassProfile(
++        name='reshape', source=REPO / '02_passes/reshape/original.cpp',
++        reference=REPO / '03_manual_passes/buddy_four/reshape', rules='namespace,while,capture,guard',
++        expected={'interface-substitution': 5, 'namespace': 1, 'namespace-reference': 1, 'while': 1, 'capture-pointers': 2, 'capture': 2, 'guard': 1}, require_reference_match=False,
++        reference_source=REPO / '03_manual_passes/buddy_four/reshape/rewritten.cpp', reference_real_includes=False,
++        namespace_prefix='SimplifyTosaReshape', rounds=(),
++        compatibility_notes=()),
++    'matmul-scalar': PassProfile(
++        name='matmul-scalar', source=REPO / '02_passes/matmul-scalar/original.cpp',
++        reference=REPO / '03_manual_passes/buddy_four/matmul-scalar', rules='namespace,guard',
++        expected={'interface-substitution': 8, 'namespace': 1, 'namespace-reference': 1, 'guard': 7}, require_reference_match=True,
++        reference_source=FRONTEND_ROOT / "tests/references/matmul-scalar-structural-rules.cpp", reference_real_includes=False,
++        namespace_prefix='SimplifyTosaMatmulScalar', rounds=(),
++        compatibility_notes=('guard: match every runtime if + built-in ||, including the loop check; preserve both branches and bind the complete condition once',)),
++    'lower-ime': PassProfile(
++        name='lower-ime', source=REPO / '02_passes/lower-ime/original.cpp',
++        reference=REPO / '03_manual_passes/buddy_four/lower-ime', rules='namespace',
++        expected={'interface-substitution': 10, 'namespace': 1, 'namespace-reference': 2}, require_reference_match=False,
++        reference_source=REPO / '03_manual_passes/buddy_four/lower-ime/rewritten.cpp', reference_real_includes=False,
++        namespace_prefix='LowerIMEPass', rounds=(),
++        compatibility_notes=()),
++    'silu-fusion': PassProfile(
++        name='silu-fusion', source=REPO / '02_passes/silu-fusion/original.cpp',
++        reference=REPO / '03_manual_passes/buddy_four/silu-fusion', rules='namespace,if-condition,guard,value-range,capture',
++        expected={'interface-substitution': 11, 'namespace': 2, 'namespace-reference': 1, 'if-condition': 1, 'guard': 1, 'value-range-preamble': 1, 'value-range': 2, 'capture-pointers': 1, 'capture': 1}, require_reference_match=False,
++        reference_source=REPO / '03_manual_passes/buddy_four/silu-fusion/rewritten.cpp', reference_real_includes=False,
++        namespace_prefix='SiLUFusion', rounds=(),
++        compatibility_notes=('capture: all profiles use structural capture-tree planning, including single automatic local declarations', 'guard: the same structural rule preserves arbitrary then/else bodies in every profile', 'plan: independently generated preludes share an offset; explicit insertion orders 10/20 compose them, other overlaps still reject')),
++    'assume-tight': PassProfile(
++        name='assume-tight', source=REPO / '02_passes/assume-tight/original.cpp',
++        reference=REPO / '03_manual_passes/four_pass_clang18/AssumeTightMemRefLayout', rules='namespace,capture,range-for,if-condition',
++        expected={'namespace': 1, 'namespace-reference': 1, 'capture-pointers': 1, 'capture': 1, 'range-for': 3, 'if-condition-normalize': 1, 'if-condition': 1}, require_reference_match=False,
++        reference_source=REPO / '03_manual_passes/four_pass_clang18/AssumeTightMemRefLayout/rewritten.cpp', reference_real_includes=True,
++        namespace_prefix='AssumeTightMemRefLayout', rounds=('namespace', 'capture', 'range-for', 'if-condition'),
++        compatibility_notes=('Imported reference differences audited in docs/FOUR_PASS_IMPORT.md',)),
++    # constructor is an opt-in compatibility rule; none of the nine defaults uses it.
++    # See docs/OPTIONAL_CONSTRUCTOR_RULE.md for the latent converter limitation.
++    'eliminate-copy': PassProfile(
++        name='eliminate-copy', source=REPO / '02_passes/eliminate-copy/original.cpp',
++        reference=REPO / '03_manual_passes/four_pass_clang18/EliminateMemRefCopy', rules='namespace,range-for,if-condition,guard',
++        expected={'namespace': 1, 'namespace-reference': 1, 'range-for': 5, 'if-condition-normalize': 3, 'if-condition': 6, 'guard': 2}, require_reference_match=False,
++        reference_source=REPO / '03_manual_passes/four_pass_clang18/EliminateMemRefCopy/rewritten.cpp', reference_real_includes=True,
++        namespace_prefix='EliminateMemRefCopy', rounds=('namespace', 'range-for', 'if-condition', 'guard'),
++        compatibility_notes=('Imported reference differences audited in docs/FOUR_PASS_IMPORT.md',)),
++    'gpu-memcpy': PassProfile(
++        name='gpu-memcpy', source=REPO / '02_passes/gpu-memcpy/original.cpp',
++        reference=REPO / '03_manual_passes/four_pass_clang18/ConvertMemcpyToGPU', rules='namespace,capture,range-for,if-condition',
++        expected={'namespace': 1, 'namespace-reference': 1, 'capture-pointers': 1, 'capture': 1, 'range-for': 2, 'if-condition-normalize': 1, 'if-condition': 5}, require_reference_match=False,
++        reference_source=REPO / '03_manual_passes/four_pass_clang18/ConvertMemcpyToGPU/rewritten.cpp', reference_real_includes=True,
++        namespace_prefix='ConvertMemcpyToGPU', rounds=('namespace', 'capture', 'range-for', 'if-condition'),
++        compatibility_notes=('Imported reference differences audited in docs/FOUR_PASS_IMPORT.md',)),
++    'depthwise-conv': PassProfile(
++        name='depthwise-conv', source=REPO / '02_passes/depthwise-conv/original.cpp',
++        reference=REPO / '03_manual_passes/four_pass_clang18/DepthwiseConvNhwcHwc', rules='namespace,const-local,init-list,capture',
++        expected={'namespace': 2, 'namespace-reference': 3, 'const-local': 6, 'init-list': 24, 'init-list-preamble': 23, 'capture-pointers': 1, 'capture': 1}, require_reference_match=False,
++        reference_source=REPO / '03_manual_passes/four_pass_clang18/DepthwiseConvNhwcHwc/rewritten.cpp', reference_real_includes=True,
++        namespace_prefix='DepthwiseConvNhwcHwc', rounds=('namespace', 'const-local', 'init-list', 'capture'),
++        compatibility_notes=('Imported reference differences audited in docs/FOUR_PASS_IMPORT.md',)),
++    'builtin-transpose': PassProfile(
++        name='builtin-transpose', source=REPO / '02_passes/builtin-transpose/original.cpp',
++        reference=REPO / '03_manual_passes/builtin-transpose', rules='namespace,const-local,init-list,capture',
++        expected={'namespace': 2, 'namespace-reference': 3, 'const-local': 7, 'init-list': 84, 'init-list-preamble': 33, 'capture-pointers': 2, 'capture': 2}, require_reference_match=False,
++        reference_source=REPO / '03_manual_passes/builtin-transpose/rewritten.cpp', reference_real_includes=True,
++        namespace_prefix='BuiltinTransposeVectorization', rounds=('namespace', 'const-local', 'init-list', 'capture'),
++        compatibility_notes=('capture: generic capture-tree planner retains reference referents, value snapshots and per-instance integer field identity', 'reference: archived globalized member and [=] copies are deliberately not adopted; see docs/BUILTIN_TRANSPOSE.md')),
+ }
+-
+-
+-# four_pass(1).zip is the user's authoritative LLVM 18 reference. Its immutable
+-# source/header snapshot remains distinct from the generated shared model.
+-_IMPORTED = FRONTEND_ROOT / "tests/references/four_pass_clang18"
+-for _name, _folder, _source, _rules in (
+-    ("assume-tight", "AssumeTightMemRefLayout", "AssumeTightMemRefLayout/AssumeTightMemRefLayout.cpp", ("namespace", "capture", "range-for", "if-condition")),
+-    ("eliminate-copy", "EliminateMemRefCopy", "EliminateMemRefCopy/EliminateMemRefCopy.cpp", ("namespace", "constructor", "range-for", "if-condition", "guard")),
+-    ("gpu-memcpy", "ConvertMemcpyToGPU", "MLIRGPU/ConvertMemcpyToGPU.cpp", ("namespace", "capture", "range-for", "if-condition")),
+-    ("depthwise-conv", "DepthwiseConvNhwcHwc", "DepthwiseConvOptimization/DepthwiseConvNhwcHwc.cpp", ("namespace", "const-local", "init-list", "capture")),
+-):
+-    PASS_PROFILES[_name] = PassProfile(
+-        _name, FRONTEND_ROOT.parent / _source, _IMPORTED / _folder,
+-        ",".join(_rules), {
+-            "assume-tight": {"namespace": 1, "namespace-reference": 1, "capture-pointers": 1, "capture": 1, "range-for": 3, "if-condition-normalize": 1, "if-condition": 1},
+-            "eliminate-copy": {"namespace": 1, "namespace-reference": 1, "range-for": 5, "if-condition-normalize": 3, "if-condition": 6, "guard": 2, "constructor": 1},
+-            "gpu-memcpy": {"namespace": 1, "namespace-reference": 1, "capture-pointers": 1, "capture": 1, "range-for": 2, "if-condition-normalize": 1, "if-condition": 5},
+-            "depthwise-conv": {"namespace": 2, "namespace-reference": 3, "const-local": 6, "init-list": 24, "init-list-preamble": 23, "capture-pointers": 1, "capture": 1},
+-        }[_name], reference_source=_IMPORTED / _folder / "rewritten.cpp",
+-        rounds=_rules, reference_real_includes=True,
+-        compatibility_notes=("Imported reference differences audited in docs/FOUR_PASS_IMPORT.md",),
+-    )
+-
+-
+-PASS_PROFILES["builtin-transpose"] = PassProfile(
+-    "builtin-transpose", FRONTEND_ROOT.parent / "TransposeOptimization/BuiltinTransposeVectorization.cpp",
+-    FRONTEND_ROOT / "tests/references/builtin-transpose", "namespace,const-local,init-list,capture",
+-    {"namespace": 2, "namespace-reference": 3, "const-local": 7, "init-list": 84, "init-list-preamble": 33, "capture-pointers": 2, "capture": 2},
+-    reference_source=FRONTEND_ROOT / "tests/references/builtin-transpose/rewritten.cpp",
+-    rounds=("namespace", "const-local", "init-list", "capture"), reference_real_includes=True,
+-    compatibility_notes=(
+-        "capture: generic capture-tree planner retains reference referents, value snapshots and per-instance integer field identity",
+-        "reference: archived globalized member and [=] copies are deliberately not adopted; see docs/BUILTIN_TRANSPOSE.md",
+-    ),
+-)
+ 
+ 
+ @dataclass(frozen=True)
+@@ -149,14 +130,17 @@
+     llvm: Path
+     tool: Path
+     interface: Path | None
+-    database: Path
++    database: Path | None
+     frama_c: Path
+     out: Path
+     skip_frama: bool = False
+     frama_llvm: Path = CONVERSION_LLVM
+-    system_prefix: Path = SYSTEM_PREFIX
++    system_prefix: Path | None = SYSTEM_PREFIX
+     frama_cirgen: Path | None = CONVERSION_CIRGEN
+     replace_output: bool = False
++    parse_mode: str = "model"
++    compile_source: Path | None = None
++    extra_arguments: tuple[str, ...] = ()
+ 
+     @property
+     def shared_mini(self) -> bool:
+--- before/01_frontend/FramaClangFrontend/experiment/toolchain.py
++++ after/01_frontend/FramaClangFrontend/experiment/toolchain.py
+@@ -96,7 +96,7 @@
+ 
+ 
+ def compiler_arguments(database: Path, source: Path, llvm: Path,
+-                       system_prefix: Path = SYSTEM_PREFIX) -> tuple[list[str], Path, dict]:
++                       system_prefix: Path | None = SYSTEM_PREFIX) -> tuple[list[str], Path, dict]:
+     """从真实构建条目提取用于解析/语法检查的参数。
+ 
+     Args:
+@@ -112,11 +112,15 @@
+         OSError: 输入读取失败。
+     """
+     entries = json.loads(database.read_text())
+-    matches = [e for e in entries if Path(e["file"]).resolve() == source.resolve()]
++    def entry_directory(e):
++        directory = Path(e["directory"])
++        return directory.resolve() if directory.is_absolute() else (database.parent / directory).resolve()
++    matches = [e for e in entries if (entry_directory(e) / e["file"]).resolve() == source.resolve()]
+     if len(matches) != 1:
+         raise ValueError(f"Expected exactly one compilation database entry for {source.name}")
+     entry = matches[0]
+     argv = entry.get("arguments") or shlex.split(entry["command"])
++    directory = entry_directory(entry)
+     arguments = []
+     skip = False
+     for arg in argv[1:]:
+@@ -126,9 +130,11 @@
+         if arg in {"-o", "-MF", "-MT", "-MQ", "-MJ"}:
+             skip = True
+         elif arg not in {"-c", "-MD", "-MMD", "-MP", "-fsyntax-only"}:
+-            candidate = Path(entry["directory"]) / arg
++            candidate = directory / arg
+             if candidate.resolve() != source.resolve():
+                 arguments.append(arg)
++    if system_prefix is None:
++        return [*arguments, "-fno-color-diagnostics", f"-resource-dir={resource_directory(llvm)}"], directory, entry
+     roots = list((system_prefix / "lib/gcc/x86_64-conda-linux-gnu").glob("*/include/c++"))
+     if len(roots) != 1:
+         raise ValueError("Expected one audited GCC C++ header root in LLVM prefix")
+@@ -141,7 +147,7 @@
+         "-isystem", str(root), "-isystem", str(root / "x86_64-conda-linux-gnu"),
+         "-isystem", str(root / "backward"),
+     ]
+-    return arguments, Path(entry["directory"]), entry
++    return arguments, directory, entry
+ 
+ 
+ def create_environment(config: RunConfig, *, conversion: bool = False) -> dict[str, str]:
+--- before/01_frontend/FramaClangFrontend/experiment/validation.py
++++ after/01_frontend/FramaClangFrontend/experiment/validation.py
+@@ -18,6 +18,15 @@
+ from .toolchain import verify_converter_version
+ 
+ 
++def repository_head():
++    try:
++        result = subprocess.run(["git", "-C", str(REPO), "rev-parse", "HEAD"],
++                                capture_output=True, text=True)
++        return result.stdout.strip() if result.returncode == 0 else None
++    except FileNotFoundError:
++        return None
++
++
+ class ExperimentRunner:
+     """持有一轮实验状态，不持有 AST，也不实现 C++ 改写。
+ 
+@@ -35,8 +44,15 @@
+             摘要可能尚未建立，由入口报告，不伪造已执行的阶段。
+         """
+         self.config = config
+-        self.flags, self.cwd, entry = compiler_arguments(config.database, config.source, config.llvm,
+-                                                        config.system_prefix)
++        if config.parse_mode == "real":
++            self.flags, self.cwd, entry = compiler_arguments(config.database,
++                config.compile_source or config.source, config.llvm, config.system_prefix)
++            self.flags += ["-iquote", str((config.compile_source or config.source).parent), *config.extra_arguments]
++        else:
++            from .toolchain import resource_directory
++            self.flags = ["-std=c++17", "-I" + str(MINI_ROOT / "include"),
++                          "-resource-dir=" + str(resource_directory(config.llvm)), *config.extra_arguments]
++            self.cwd, entry = config.source.parent, None
+         self.frama_flags = (conversion_arguments(self.flags, config.frama_llvm)
+                             if not config.skip_frama else None)
+         self.env = create_environment(config)
+@@ -49,20 +65,20 @@
+             "interface": str(MINI_ROOT / "include") if config.shared_mini else str(config.interface),
+             "interface_mode": "shared_member_extraction" if config.shared_mini else "legacy_single_header",
+             "reference": str(config.reference), "rules": config.profile.rules,
+-            "expected_rewrite_counts": {k: v for k, v in config.profile.expected.items()
++            "expected_rewrite_counts": {k: v for k, v in (config.profile.expected or {}).items()
+                                         if not config.shared_mini or k != "interface-substitution"},
+             "compatibility_notes": list(config.profile.compatibility_notes),
+             "original_sha256": self.originals, "compile_database_entry": entry,
+             "tool_sha256": digest(config.tool),
+             "frontend_sources_sha256": implementation_hashes(),
+-            "repository_head": subprocess.run(
+-                ["git", "-C", str(REPO), "rev-parse", "HEAD"], capture_output=True,
+-                text=True, check=True,
+-            ).stdout.strip(),
++            "repository_head": repository_head(),
++            "parse_mode": config.parse_mode,
++            "real_dependencies_checked": config.parse_mode == "real",
++            "bundled_audit_checks": config.profile.expected is not None,
+             "effective_arguments": self.flags, "stages": {},
+             "effective_frama_arguments": self.frama_flags,
+             "toolchains": {"frontend": str(config.llvm), "conversion": str(config.frama_llvm),
+-                           "system_headers": str(config.system_prefix),
++                           "system_headers": str(config.system_prefix) if config.system_prefix else "compiler defaults",
+                            "converter": str(config.converter)},
+             "limits": ["Bounded shared library member extraction; not arbitrary MLIR header extraction"
+                        if config.shared_mini else "Legacy interface model explicitly selected",
+@@ -112,7 +128,7 @@
+         else:
+             if not self.stage("rewrite", [c.tool, c.source, "--output", c.out / "rewritten.cpp",
+                                           "--report", c.out / "rewrite.json", "--profile", p.name,
+-                                          "--rules", p.rules, *substitution,
++                                          "--rules", p.rules, "--namespace-prefix", p.namespace_prefix or c.source.stem, *substitution,
+                                           "--", *self.flags]):
+                 raise RuntimeError("C++ parsing or rewrite rejected; inspect logs/rewrite.log and rewrite.json")
+             self.report = json.loads((c.out / "rewrite.json").read_text())
+@@ -122,8 +138,13 @@
+         actual = Counter(edit["rule"] for edit in self.report["edits"])
+         self.summary["rewrite_counts"] = dict(actual)
+         expected = Counter(self.summary["expected_rewrite_counts"])
+-        if actual != expected:
++        if p.expected is not None and actual != expected:
+             raise RuntimeError(f"{p.name} rule coverage changed: {dict(actual)}; review before proceeding")
++        if p.reference is None:
++            self.summary["reference_source_byte_equal"] = None
++            write_baseline_and_patch(c, self.report)
++            self.record_inventory()
++            return
+         reference_path = p.reference_source or c.reference / "input.cpp"
+         self.summary["reference_source"] = str(reference_path)
+         reference = reference_path.read_bytes()
+@@ -162,7 +183,7 @@
+                     output, detail = root / f"round-{n}.cpp", root / f"round-{n}.json"
+                     if not self.stage(f"rewrite_{rule}_{attempt}", [c.tool, current,
+                             "--output", output, "--report", detail, "--profile", p.name,
+-                            "--namespace-prefix", c.source.stem, "--rules", rule,
++                            "--namespace-prefix", p.namespace_prefix or c.source.stem, "--rules", rule,
+                             "--", *self.flags]):
+                         if detail.is_file():
+                             (c.out / "rewrite.json").write_bytes(detail.read_bytes())
+@@ -185,7 +206,7 @@
+                 output, detail = root / f"round-{n}.cpp", root / f"round-{n}.json"
+                 if not self.stage("rewrite_interface_substitution", [c.tool, current,
+                         "--output", output, "--report", detail, "--profile", p.name,
+-                        "--namespace-prefix", c.source.stem, "--rules", p.rules,
++                        "--namespace-prefix", p.namespace_prefix or c.source.stem, "--rules", p.rules,
+                         "--interface-header", "mini_mlir.h", "--", *self.flags]):
+                     raise RuntimeError("Final interface substitution rejected")
+                 report = json.loads(detail.read_text())
+@@ -267,6 +288,11 @@
+         ]:
+             if not self.stage(name, [c.llvm / "bin/clang++", *flags, "-fsyntax-only", c.out / file]):
+                 raise RuntimeError(error)
++        if c.parse_mode != "real":
++            self.summary["stages"]["native_rewritten_real"] = {
++                "status": "not_run", "reason": "Model mode; external real dependencies were not supplied"}
++            self.save()
++            return
+         real_source = restore_real_includes(c, self.report)
+         if not self.stage("native_rewritten_real", [c.llvm / "bin/clang++", *self.flags,
+                                                     "-fsyntax-only", real_source]):
+@@ -346,7 +372,7 @@
+             log = (c.out / "logs/frama_rewritten.log").read_text()
+             if c.shared_mini and "CXXInheritedCtorInitExpr" in log:
+                 self.summary["conversion_blockers"] = [
+-                    "Frama-Clang 0.0.20 (Clang 18.1.8) encountered an inherited constructor outside the audited expansion rules"
++                    "Frama-Clang 0.0.20 (Clang 18.1.8) encountered CXXInheritedCtorInitExpr; identify its owning type before considering the optional source constructor rule or a header adapter"
+                 ]
+             raise RuntimeError("Frama-Clang conversion failed")
+         converted = c.out / "converted.c"
+--- before/01_frontend/FramaClangFrontend/run.py
++++ after/01_frontend/FramaClangFrontend/run.py
+@@ -1,88 +1,79 @@
+ #!/usr/bin/env python3
+-"""运行已审计 pass 的自动改写及验证；本文件仅处理命令行和运行配置。
+-
+-阅读阶段流程见 experiment/validation.py，C++ 规则见 src/rules/*Rule.cpp。原有参数保持兼容。
+-"""
+-
++"""Rewrite a bundled pass or an explicit input, optionally convert and read back C."""
+ import argparse
++import os
++from dataclasses import replace
+ from pathlib import Path
+ import subprocess
+ import sys
+-
+ from experiment.profiles import (CONVERSION_CIRGEN, CONVERSION_LLVM, FRONTEND_LLVM,
+-                                 FRONTEND_ROOT, FRONTEND_TOOL, PASS_PROFILES,
+-                                 MINI_ROOT, SYSTEM_PREFIX, WORKSPACE, RunConfig)
++    FRONTEND_ROOT, FRONTEND_TOOL, PASS_PROFILES, SYSTEM_PREFIX, RunConfig)
++from experiment.paths import executable_path
+ from experiment.validation import ExperimentRunner
+ from experiment.output import output_directory
+ 
+ 
+-def parse_config(argv: list[str] | None = None) -> RunConfig:
+-    """解析参数并建立运行配置；输出目录由成功替换策略管理。
+-
+-    Args:
+-        argv: 显式参数列表；None 时使用进程命令行，便于独立测试入口。
+-    Returns:
+-        RunConfig，尚未创建/替换输出目录或运行工具。
+-    Raises:
+-        SystemExit(2): 必需文件缺失或目录非空，沿用 argparse 的错误语义。
+-        OSError: 目录创建失败，由 main 统一报告。
+-    """
++def parse_config(argv=None):
+     parser = argparse.ArgumentParser(description=__doc__)
+     parser.add_argument("--pass", dest="pass_name", choices=PASS_PROFILES, default="reshape")
+-    parser.add_argument("--llvm-prefix", type=Path, default=FRONTEND_LLVM,
+-                        help="LLVM/Clang used by the frontend and native checks (default: 18)")
+-    parser.add_argument("--frama-llvm-prefix", type=Path, default=CONVERSION_LLVM,
+-                        help="LLVM/Clang paired with Frama-Clang (default: original 18)")
++    parser.add_argument("--input", type=Path, help="Custom input; disables bundled counts/reference checks")
++    parser.add_argument("--rules", help="Explicit comma-separated rules; constructor is opt-in; disables bundled count/reference checks")
++    parser.add_argument("--parse-mode", choices=["model", "real"], default="model",
++                        help="model: bundled MiniMLIR; real: caller's compilation database")
++    parser.add_argument("--llvm-prefix", type=Path, default=FRONTEND_LLVM)
++    parser.add_argument("--frama-llvm-prefix", type=Path, default=Path(os.environ["FRAMA_LLVM_PREFIX"]) if os.environ.get("FRAMA_LLVM_PREFIX") else None)
+     parser.add_argument("--system-prefix", type=Path, default=SYSTEM_PREFIX,
+-                        help="Audited Conda sysroot/GCC C++ headers shared by both parsers")
++                        help="Optional audited Conda sysroot/GCC prefix; omitted uses compiler defaults")
+     parser.add_argument("--tool", type=Path, default=FRONTEND_TOOL)
+-    parser.add_argument("--compile-commands", type=Path,
+-                        default=WORKSPACE / "build-v0.0.4/buddy/compile_commands.json")
+-    parser.add_argument("--interface", type=Path, help="Explicit legacy single-header model; default extracts shared MiniMLIR")
+-    parser.add_argument("--frama-c", type=Path, default=Path.home() / ".opam/framac-study/bin/frama-c")
+-    parser.add_argument("--frama-cirgen", type=Path, default=CONVERSION_CIRGEN,
+-                        help="Independent framaCIRGen binary (default: original Clang 18 build)")
+-    parser.add_argument("--output-dir", type=Path)
+-    parser.add_argument("--skip-frama", action="store_true", help="Explicitly leave conversion unverified")
++    parser.add_argument("--compile-commands", type=Path)
++    parser.add_argument("--database-source", type=Path,
++                        help="Original file key in the external database when input is a copied snapshot")
++    parser.add_argument("--extra-arg", action="append", default=[], help="Repeat; use --extra-arg=-DFLAG")
++    parser.add_argument("--extra-include", type=Path, action="append", default=[])
++    parser.add_argument("--frama-c", type=Path, default=executable_path("FRAMA_C", "frama-c"))
++    parser.add_argument("--frama-cirgen", type=Path, default=CONVERSION_CIRGEN)
++    parser.add_argument("--output-dir", type=Path, required=True, help="New or empty output directory")
++    parser.add_argument("--skip-frama", action="store_true", help="Native checks only; conversion remains unverified")
+     args = parser.parse_args(argv)
++    args.frama_llvm_prefix = args.frama_llvm_prefix or args.llvm_prefix
+     profile = PASS_PROFILES[args.pass_name]
+-    llvm, tool = args.llvm_prefix.resolve(), args.tool.resolve()
+-    interface = args.interface.resolve() if args.interface else None
+-    out = args.output_dir.resolve() if args.output_dir else MINI_ROOT / "current" / profile.name
+-    if args.output_dir and out.exists() and (not out.is_dir() or any(out.iterdir())):
+-        parser.error("Explicit output directory must be new or empty")
+-    required = ([interface] if interface else [tool.parent / "buddy-mini-slice", MINI_ROOT / "extract.py"])
+-    for path in [tool, profile.source.resolve(), *required, args.compile_commands, llvm / "bin/clang++",
+-                 *([] if args.skip_frama else [args.frama_llvm_prefix / "bin/clang++"])]:
+-        if not path.is_file():
+-            parser.error(f"Required file is missing: {path}")
+-    return RunConfig(profile, llvm, tool, interface, args.compile_commands, args.frama_c,
+-                     out, args.skip_frama, args.frama_llvm_prefix.resolve(), args.system_prefix.resolve(),
+-                     args.frama_cirgen.resolve() if args.frama_cirgen else None,
+-                     replace_output=args.output_dir is None)
++    if args.input or args.rules is not None:
++        profile = replace(profile, source=args.input.resolve() if args.input else profile.source,
++            rules=args.rules if args.rules is not None else profile.rules, expected=None,
++            reference=None, reference_source=None, require_reference_match=False, rounds=(),
++            namespace_prefix=args.input.stem if args.input else profile.namespace_prefix)
++    if args.parse_mode == "real" and args.compile_commands is None:
++        parser.error("--parse-mode real requires --compile-commands")
++    if args.parse_mode == "model" and (args.compile_commands or args.database_source):
++        parser.error("Compilation databases require --parse-mode real")
++    llvm, tool, out = args.llvm_prefix.resolve(), args.tool.resolve(), args.output_dir.resolve()
++    if out.exists() and (not out.is_dir() or any(out.iterdir())):
++        parser.error("Output directory must be new or empty")
++    if out == profile.source.resolve() or out in profile.source.resolve().parents:
++        parser.error("Input must be outside the output directory")
++    required = [tool, profile.source, tool.parent / "buddy-mini-slice", llvm / "bin/clang++"]
++    if args.parse_mode == "real": required.append(args.compile_commands)
++    if not args.skip_frama:
++        required += [args.frama_llvm_prefix / "bin/clang++", args.frama_c, args.frama_cirgen]
++    for path in required:
++        if not path.is_file(): parser.error(f"Required file is missing: {path}")
++    extra = tuple(args.extra_arg) + tuple("-I" + str(p.resolve()) for p in args.extra_include)
++    return RunConfig(profile=profile, llvm=llvm, tool=tool, interface=None,
++        database=args.compile_commands.resolve() if args.compile_commands else None,
++        frama_c=args.frama_c.resolve(), out=out, skip_frama=args.skip_frama,
++        frama_llvm=args.frama_llvm_prefix.resolve(),
++        system_prefix=args.system_prefix.resolve() if args.system_prefix else None,
++        frama_cirgen=args.frama_cirgen.resolve(), replace_output=False, parse_mode=args.parse_mode,
++        compile_source=args.database_source.resolve() if args.database_source else None, extra_arguments=extra)
+ 
+ 
+-def main(argv: list[str] | None = None) -> int:
+-    """CLI 总入口。
+-
+-    Args:
+-        argv: 可选参数列表，语义同 parse_config。
+-    Returns:
+-        0=所有要求阶段通过；1=初始化/实验失败；参数错误由 argparse 退出 2。
+-        初始化失败可能尚无摘要，阶段失败由 Runner 保留已完成的证据。
+-    """
++def main(argv=None):
+     try:
+         config = parse_config(argv)
+-        with output_directory(config.out, replace=config.replace_output):
+-            result = ExperimentRunner(config).run()
+-        if config.replace_output and (result or config.skip_frama):
+-            print("Current verified result retained; temporary run output discarded. "
+-                  "Use --output-dir only when diagnostics need to be saved.")
+-        return result
++        with output_directory(config.out, replace=False):
++            return ExperimentRunner(config).run()
+     except (OSError, ValueError, subprocess.SubprocessError) as error:
+-        print(f"Failed to initialize experiment: {error}", file=sys.stderr)
++        print(f"Failed to initialize frontend: {error}", file=sys.stderr)
+         return 1
+ 
+-
+-if __name__ == "__main__":
+-    sys.exit(main())
++if __name__ == "__main__": sys.exit(main())
+--- before/01_frontend/FramaClangFrontend/src/rules/ConstructorRule.cpp
++++ after/01_frontend/FramaClangFrontend/src/rules/ConstructorRule.cpp
+@@ -135,8 +135,14 @@
+       TypeName::getFullyQualifiedType(Q.getCanonicalType(), R.AST).print(Stream, Policy, Name);
+       Stream.flush();
+       if (Param->hasDefaultArg()) {
+-        auto *Default = Param->getDefaultArg();
+-        if (!Default || Default->getBeginLoc().isMacroID() ||
++        // Declaration-only model headers need not instantiate inherited defaults.
++        // A nondependent stored expression still has the original spelling and
++        // the same scope checks. Dependent defaults require Sema, so reject them.
++        auto *Default = Param->hasUninstantiatedDefaultArg()
++                            ? Param->getUninstantiatedDefaultArg()
++                            : Param->getDefaultArg();
++        if (!Default || Default->isTypeDependent() || Default->isValueDependent() ||
++            Default->getBeginLoc().isMacroID() ||
+             Default->getEndLoc().isMacroID() || !portableDefault(Default)) {
+           Supported = false;
+           break;
+--- before/01_frontend/FramaClangFrontend/tests/test_rule_generalization.py
++++ after/01_frontend/FramaClangFrontend/tests/test_rule_generalization.py
+@@ -211,5 +211,23 @@
+ int main(){Token t;Derived d(&t);return !d.same;}
+ ''', 'constructor', expected=1)
+ 
++    def test_constructor_uninstantiated_nondependent_default(self):
++        output, report = self.rewrite("""
++template<class T> struct Base { Base(int *p, unsigned count = 1) {} };
++struct Derived : Base<int> { using Base<int>::Base; };
++int main() { return 0; }
++""", "constructor")
++        self.assertEqual(len(report["edits"]), 1)
++        self.assertIn("= 1", output.read_text())
++        self.compare_behavior(output)
++
++    def test_constructor_uninstantiated_dependent_default_rejected(self):
++        self.rewrite("""
++template<int N> struct Base { Base(int *p, int count = N) {} };
++struct Derived : Base<2> { using Base<2>::Base; };
++int main() { return 0; }
++""", "constructor", expected=1)
++
++
+ if __name__ == '__main__':
+     unittest.main(argv=[__file__, *rest])
+--- before/01_frontend/FramaClangFrontend/tests/test_standalone.py
++++ after/01_frontend/FramaClangFrontend/tests/test_standalone.py
+@@ -0,0 +1,78 @@
++"""Standalone path/config regressions; no installed Buddy checkout required."""
++import contextlib
++import io
++import json
++from pathlib import Path
++import sys
++import tempfile
++import unittest
++from unittest.mock import patch
++sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
++from run import parse_config
++from experiment.profiles import PASS_PROFILES, REPO
++from experiment.toolchain import compiler_arguments
++
++class StandaloneTests(unittest.TestCase):
++    def setUp(self):
++        self.temp = tempfile.TemporaryDirectory(prefix="frontend cli ")
++        self.addCleanup(self.temp.cleanup)
++        self.root = Path(self.temp.name)
++        self.llvm = self.root / "llvm"
++        self.tool = self.root / "build/buddy-framac-rewrite"
++        for p in [self.llvm / "bin/clang++", self.tool, self.tool.parent / "buddy-mini-slice"]:
++            p.parent.mkdir(parents=True, exist_ok=True); p.touch()
++        self.args = ["--llvm-prefix", str(self.llvm), "--tool", str(self.tool),
++                     "--skip-frama", "--output-dir", str(self.root / "new output")]
++
++    def test_all_bundled_paths_are_repository_relative_and_exist(self):
++        self.assertEqual(len(PASS_PROFILES), 9)
++        for p in PASS_PROFILES.values():
++            self.assertTrue(p.source.is_relative_to(REPO))
++            self.assertTrue(p.source.is_file())
++            self.assertTrue(p.reference_source.is_file())
++
++    def test_constructor_is_opt_in_for_every_bundled_pass(self):
++        for profile in PASS_PROFILES.values():
++            self.assertNotIn("constructor", profile.rules.split(","))
++            self.assertNotIn("constructor", profile.ast_rounds)
++            self.assertNotIn("constructor", profile.expected)
++
++    def test_preset_retains_audited_namespace_prefix_and_checks(self):
++        c = parse_config([*self.args, "--pass", "matmul-scalar"])
++        self.assertEqual(c.profile.namespace_prefix, "SimplifyTosaMatmulScalar")
++        self.assertTrue(c.profile.require_reference_match)
++        self.assertIsNotNone(c.profile.expected)
++        self.assertEqual(c.frama_llvm, self.llvm.resolve())
++        self.assertFalse(c.out.exists())
++
++    def test_custom_input_has_own_name_and_no_bundled_reference(self):
++        source = self.root / "user input.cpp"; source.write_text("int main() {}")
++        c = parse_config([*self.args, "--input", str(source), "--rules", "namespace"])
++        self.assertEqual(c.source, source)
++        self.assertEqual(c.profile.namespace_prefix, "user input")
++        self.assertIsNone(c.profile.expected)
++        self.assertIsNone(c.reference)
++
++    def test_real_mode_requires_explicit_database(self):
++        with contextlib.redirect_stderr(io.StringIO()), self.assertRaises(SystemExit) as e:
++            parse_config([*self.args, "--parse-mode", "real"])
++        self.assertEqual(e.exception.code, 2)
++
++    def test_nonempty_output_is_preserved(self):
++        out = self.root / "new output"; out.mkdir(); p = out / "keep"; p.write_text("keep")
++        with contextlib.redirect_stderr(io.StringIO()), self.assertRaises(SystemExit):
++            parse_config(self.args)
++        self.assertEqual(p.read_text(), "keep")
++
++    def test_relative_database_source_and_output_flags(self):
++        source = self.root / "source.cpp"; source.touch()
++        db = self.root / "compile_commands.json"
++        db.write_text(json.dumps([{"directory": ".", "file": "source.cpp",
++             "arguments": ["clang++", "-std=c++17", "-c", "source.cpp", "-o", "danger.o"]}]))
++        with patch("experiment.toolchain.resource_directory", return_value=self.llvm / "resource"):
++            flags, cwd, entry = compiler_arguments(db, source, self.llvm)
++        self.assertEqual(cwd, self.root)
++        self.assertNotIn("-c", flags); self.assertNotIn("danger.o", flags)
++        self.assertFalse(any("conda" in f for f in flags))
++
++if __name__ == "__main__": unittest.main()
+--- before/01_frontend/historical_interface_pilot/README-STANDALONE.md
++++ after/01_frontend/historical_interface_pilot/README-STANDALONE.md
+@@ -0,0 +1,3 @@
++# 历史探针
++
++此目录是旧工程环境下的探索代码，不参与独立版入口、构建和验证；其绝对目录和原工程布局保持为历史记录。当前接口提取见 MiniMLIR/ 与 ExtractMiniMLIR/。

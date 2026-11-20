@@ -1,0 +1,87 @@
+{
+  "status": "passed",
+  "workflow": "existing frontend output plus unmodified original mini header",
+  "main_frontend_defaults_changed": false,
+  "source_constructor_enabled_by_default": false,
+  "results": [
+    {
+      "case": "reshape-v1",
+      "status": "converted",
+      "c_lines": 1859,
+      "source_sha256": "bf3cc7e111fdac5cc3c0d1840ed413f54e73eb448a05d8cb42aba5213e3c79ed",
+      "header": "03_manual_passes/buddy_four/reshape/v1/mini_mlir.h",
+      "header_sha256": "aca222084719e9d0300f0600e6633ca861869ca4093548e9dd399cd6e7c799a8",
+      "all_stage_exit_codes": {
+        "native_syntax": 0,
+        "frama_conversion": 0,
+        "frama_c_readback": 0
+      },
+      "summary": "review/validation/original-mini-reproduction/reshape-v1/summary.json"
+    },
+    {
+      "case": "reshape-v2",
+      "status": "converted",
+      "c_lines": 8513,
+      "source_sha256": "bf3cc7e111fdac5cc3c0d1840ed413f54e73eb448a05d8cb42aba5213e3c79ed",
+      "header": "03_manual_passes/buddy_four/reshape/mini_mlir.h",
+      "header_sha256": "8e1d13f2b134d2d093b663e300aa5f8b5aef18862578a2f615415de98979aa8a",
+      "all_stage_exit_codes": {
+        "native_syntax": 0,
+        "frama_conversion": 0,
+        "frama_c_readback": 0
+      },
+      "summary": "review/validation/original-mini-reproduction/reshape-v2/summary.json"
+    },
+    {
+      "case": "matmul-scalar",
+      "status": "converted",
+      "c_lines": 2086,
+      "source_sha256": "905382e7f5c23277a7f2c2ad0532872d151ea628a5720d174faa43ebe6cc9469",
+      "header": "03_manual_passes/buddy_four/matmul-scalar/mini_mlir.h",
+      "header_sha256": "e3b5244230e34ec87b5e453b7957690d7914ec13baffeeee209f9ac0a7cba11e",
+      "all_stage_exit_codes": {
+        "native_syntax": 0,
+        "frama_conversion": 0,
+        "frama_c_readback": 0
+      },
+      "summary": "review/validation/original-mini-reproduction/matmul-scalar/summary.json"
+    },
+    {
+      "case": "lower-ime",
+      "status": "converted",
+      "c_lines": 1192,
+      "source_sha256": "d6378ffc3e9b83dac80ad1f3239f247b7180ab898af1239793f443eb25b50600",
+      "header": "03_manual_passes/buddy_four/lower-ime/mini_mlir.h",
+      "header_sha256": "9c2872b0032711de188369d65592e836f7c524f0161ba4983e2d272d2025ede3",
+      "all_stage_exit_codes": {
+        "native_syntax": 0,
+        "frama_conversion": 0,
+        "frama_c_readback": 0
+      },
+      "summary": "review/validation/original-mini-reproduction/lower-ime/summary.json"
+    },
+    {
+      "case": "silu-fusion",
+      "status": "converted",
+      "c_lines": 3027,
+      "source_sha256": "e249124108bd5def7b0c227ece4b7e28c3bd34ddbdcb8cd3c1dc9c2d8987c6a3",
+      "header": "03_manual_passes/buddy_four/silu-fusion/mini_mlir.h",
+      "header_sha256": "477887a8e05dab9b99ea9e80ecb4bed992dda51309093af2718468c2f1073490",
+      "all_stage_exit_codes": {
+        "native_syntax": 0,
+        "frama_conversion": 0,
+        "frama_c_readback": 0
+      },
+      "summary": "review/validation/original-mini-reproduction/silu-fusion/summary.json"
+    }
+  ],
+  "readme_two_stage_flow": {
+    "status": "passed",
+    "frontend_status": "native_checked",
+    "original_mini_conversion_status": "converted",
+    "c_lines": 1859,
+    "frontend_output_equals_packaged_snapshot": true,
+    "summary": "review/validation/original-mini-reproduction/readme-reshape-v1/summary.json"
+  },
+  "reproduction_script_sha256": "ae3c944bdab9f2eea1838eb70995cfde0c7b005221e2a7cf46db554f0b70123d"
+}

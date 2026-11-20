@@ -1,3 +1,12 @@
-__pycache__/
+**/__pycache__/
 *.pyc
-.DS_Store
+**/build/
+**/build-*/
+/results/
+/review/before-adaptation/
+/review/validation/
+*.tar.gz
+*.tar.gz.sha256
+/review/before-disable-constructor/
+/review/before-original-mini-reproduction/
+**/legacy_build/

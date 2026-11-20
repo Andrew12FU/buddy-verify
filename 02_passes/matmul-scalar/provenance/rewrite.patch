@@ -1,0 +1,93 @@
+--- /home/ce/Desktop/BuddyCompiler/buddy-mlir-v0.0.4-git/midend/lib/Conversion/GraphRedundancyElimination/SimplifyTosaMatmulScalar.cpp
++++ /home/ce/Desktop/BuddyCompiler/audits/remaining-rules-generalization-20261120-031609/verified/matmul-scalar/rewritten.cpp
+@@ -36,7 +36,8 @@
+ 
+ using namespace mlir;
+ 
+-namespace {
++namespace SimplifyTosaMatmulScalar_anonymousNamespace_01 {} using namespace SimplifyTosaMatmulScalar_anonymousNamespace_01;
++namespace SimplifyTosaMatmulScalar_anonymousNamespace_01 {
+ 
+ // Match tosa.matmul with K == 1 and J == 1; replace with tosa.mul
+ struct ReplaceScalarLikeMatmul : public OpRewritePattern<tosa::MatMulOp> {
+@@ -47,18 +48,27 @@
+     auto lhsTy = dyn_cast<RankedTensorType>(op.getA().getType());
+     auto rhsTy = dyn_cast<RankedTensorType>(op.getB().getType());
+     auto outTy = dyn_cast<RankedTensorType>(op.getType());
+-    if (!lhsTy || !rhsTy || !outTy)
++    {
++      bool guardFailed = (!lhsTy || !rhsTy || !outTy);
++      if (guardFailed)
+       return failure();
++    }
+ 
+-    if (lhsTy.getRank() < 2 || rhsTy.getRank() < 2 || outTy.getRank() < 2)
++    {
++      bool guardFailed1 = (lhsTy.getRank() < 2 || rhsTy.getRank() < 2 || outTy.getRank() < 2);
++      if (guardFailed1)
+       return failure();
++    }
+ 
+     // Require same number of batch dims.
+     int64_t lhsRank = lhsTy.getRank();
+     int64_t rhsRank = rhsTy.getRank();
+     int64_t outRank = outTy.getRank();
+-    if (lhsRank != rhsRank || lhsRank != outRank)
++    {
++      bool guardFailed2 = (lhsRank != rhsRank || lhsRank != outRank);
++      if (guardFailed2)
+       return failure();
++    }
+     int64_t batchRank = lhsRank - 2;
+ 
+     // Check last-2 dims: lhs [..., I, K], rhs [..., K, J], out [..., I, J]
+@@ -74,22 +84,34 @@
+     int64_t I_out = outShape[outRank - 2];
+ 
+     // Static shape only for now to be conservative.
+-    if (ShapedType::isDynamic(I) || ShapedType::isDynamic(K_lhs) ||
++    {
++      bool guardFailed3 = (ShapedType::isDynamic(I) || ShapedType::isDynamic(K_lhs) ||
+         ShapedType::isDynamic(K_rhs) || ShapedType::isDynamic(J) ||
+-        ShapedType::isDynamic(I_out) || ShapedType::isDynamic(J_out))
++        ShapedType::isDynamic(I_out) || ShapedType::isDynamic(J_out));
++      if (guardFailed3)
+       return failure();
++    }
+ 
+-    if (K_lhs != 1 || K_rhs != 1 || J != 1)
++    {
++      bool guardFailed4 = (K_lhs != 1 || K_rhs != 1 || J != 1);
++      if (guardFailed4)
+       return failure();
+-    if (I_out != I || J_out != 1)
++    }
++    {
++      bool guardFailed5 = (I_out != I || J_out != 1);
++      if (guardFailed5)
+       return failure();
++    }
+ 
+     // Batch dims must match exactly (no broadcast in tosa.matmul).
+     for (int64_t i = 0; i < batchRank; ++i) {
+       int64_t a = lhsShape[i], b = rhsShape[i], c = outShape[i];
+-      if (ShapedType::isDynamic(a) || ShapedType::isDynamic(b) ||
+-          ShapedType::isDynamic(c))
++      {
++        bool guardFailed6 = (ShapedType::isDynamic(a) || ShapedType::isDynamic(b) ||
++          ShapedType::isDynamic(c));
++        if (guardFailed6)
+         return failure();
++      }
+       if (!(a == b && b == c))
+         return failure();
+     }
+@@ -140,7 +162,7 @@
+ namespace mlir {
+ namespace buddy {
+ void registerSimplifyTosaMatmulScalarPass() {
+-  PassRegistration<SimplifyTosaMatmulScalarPass>();
++  PassRegistration<SimplifyTosaMatmulScalar_anonymousNamespace_01::SimplifyTosaMatmulScalarPass>();
+ }
+ } // namespace buddy
+ } // namespace mlir
